@@ -1,0 +1,44 @@
+.lateral {
+	height: 100% !important;
+	background-color: #eff8ff !important;
+	border-right: .1em #ddeeff solid;
+}
+.container {
+	margin: 0;
+	padding: 0;
+}
+.bs-sidenav li.active {
+	background-color: #ceeeff;
+}
+.bs-sidenav li a:hover {
+	background-color: #53b8e0 !important;
+	border-bottom: .1em #42a7e0 solid;
+	color: #FFF;
+	height: 2.8em;
+}
+.navbar-fixed-top {
+	background-color: #1c4166;
+	border-bottom: #0b3066 solid .1em;
+}
+.navbar-fixed-top a {
+	color: #FFF;
+}
+.navbar-nav>li.active {
+	background-color: #2399d3 !important;
+}
+.container>.navbar-header>.navbar-brand {
+	color: #FFF;
+}
+nav.bs-navbar-collapse * {
+	color: #dbfaff !important;
+}
+nav.bs-navbar-collapse *:hover {
+	color: #FFF !important;
+}
+.all {
+	margin-left: 14.5em;
+	margin-top: 2em;
+}
+.logo {
+	margin-left: 2em;
+}
