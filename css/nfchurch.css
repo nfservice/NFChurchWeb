@@ -42,3 +42,29 @@ nav.bs-navbar-collapse *:hover {
 .logo {
 	margin-left: 2em;
 }
+.sexo {
+	width: 10em;
+}
+.lefts {
+	float: left;
+	margin-right: .5em;
+}
+.nascimento {
+	width: 90%;
+	overflow: hidden;
+}
+.naturalidade {
+	width: 20em;
+}
+.tipo-membro {
+	width: 11em;
+}
+#toTop {
+	width: 4.2em;
+	position:fixed; /* this is the magic */
+	bottom: 1.5em !important; /* together with this to put the div at the bottom*/
+	right: 1.5em !important;
+}
+.empresa {
+	width: 70em;
+}
