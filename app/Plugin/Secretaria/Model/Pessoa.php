@@ -1,3 +1,4 @@
 <?php
-class PessoaModel extends SecretariaAppModel {
+class Pessoa extends SecretariaAppModel {
+	public $belongsTo = array('Secretaria.Estado', 'Secretaria.Profissao');
 }
