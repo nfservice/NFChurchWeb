@@ -45,6 +45,18 @@
     //  prefetch: '../data/countries.json',                                         
     //  limit: 10                                                                   
     //});
+
+    $(function() {
+      // Evento de clique do elemento: ul#menu li.parent > a
+      $('ul#menu li.parent > a').click(function() {
+        // Expande ou retrai o elemento ul.sub-menu dentro do elemento pai (ul#menu li.parent)
+        $('ul.sub-menu', $(this).parent()).slideToggle('fast', function() {
+          // Depois de expandir ou retrair, troca a classe 'aberto' do <a> clicado       
+          $(this).parent().toggleClass('aberto');
+        });
+      return false;
+      });
+    });
   </script>
 </head>
 <body style="margin-top: 3.6em;">
@@ -68,16 +80,22 @@
           <li><a href="#">Customize</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Sair</a></li>
+          <li><a href="#">Sair</a></li> 
         </ul>
       </nav>
     </div>
   </header>
   <div class="container col-md-12">
     <div class="bs-sidebar hidden-print affix lateral" role="complementary">
-      <ul class="nav bs-sidenav">
+      <ul id="menu" class="nav bs-sidenav">
         <li class="active"><a href="#overview"><span class="glyphicon glyphicon-book"></span> Biblioteca</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-briefcase"></span> Secretaria</a></li>
+        <li class="parent"><a href="#"><span class="glyphicon glyphicon-briefcase"></span> Secretaria</a>
+          <ul class="sub-menu">
+            <li><a href="#" title="">Membros</a></li>  
+            <li><a href="#" title="">Outros</a></li>
+            <li><a href="#" title="">Outro item de teste</a></li>
+          </ul>
+        </li>
         <li><a href="#"><span class="glyphicon glyphicon-usd"></span> Financeiro</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-folder-close"></span> RH</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Gerenciar Membros</a></li>
