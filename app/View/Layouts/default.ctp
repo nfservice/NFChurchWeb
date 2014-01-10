@@ -89,19 +89,35 @@
   <div class="container col-md-12">
     <div class="bs-sidebar hidden-print affix lateral" role="complementary">
       <ul id="menu" class="nav bs-sidenav">
-        <li class="active"><a href="#overview"><span class="glyphicon glyphicon-book"></span> Biblioteca</a></li>
         <li class="parent"><a href="#"><span class="glyphicon glyphicon-briefcase"></span> Secretaria</a>
           <ul class="sub-menu">
-            <li><?php echo $this->Html->link('Membros', array('plugin' => 'secretaria', 'controller' => 'pessoas', 'action' => 'add'));?></li>
-            <li><a href="#" title="">Outros</a></li>
-            <li><a href="#" title="">Outro item de teste</a></li>
+            <li><?php echo $this->Html->link('Cadastros', array('plugin' => 'secretaria', 'controller' => 'pessoas', 'action' => 'add'));?></li>
+            <li><?php echo $this->Html->link('Relatórios', array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'membros'));?></li>
           </ul>
         </li>
-        <li><a href="#"><span class="glyphicon glyphicon-usd"></span> Financeiro</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-folder-close"></span> RH</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Gerenciar Membros</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-bell"></span> Utilitários</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-star"></span> EBD</a></li>
+        <li class="parent"><a href="#"><span class="glyphicon glyphicon-book"></span> Financeiro</a>
+          <ul class="sub-menu">
+            <li><?php echo $this->Html->link('Lançamentos', array('plugin' => 'financeiro', 'controller' => 'controle', 'action' => 'visualizar'));?></li>
+            <li><?php echo $this->Html->link('Cadastros', array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'teste'));?></li>
+            <li><?php echo $this->Html->link('Relatórios', array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'teste'));?></li>
+            <li><?php echo $this->Html->link('Gráficos', array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'teste'));?></li>
+          </ul>
+        </li>
+        <li><a href="#"><span class="glyphicon glyphicon-usd"></span> Biblioteca</a></li>
+        <li class="parent"><a href="#"><span class="glyphicon glyphicon-folder-close"></span> RH</a>
+          <ul class="sub-menu">
+            <li><?php echo $this->Html->link('Cadastros', array('plugin' => 'financeiro', 'controller' => 'controle', 'action' => 'teste'));?></li>
+            <li><?php echo $this->Html->link('Relatórios', array('plugin' => 'financeiro', 'controller' => 'controle', 'action' => 'teste'));?></li>
+          </ul>
+        </li>
+        <li class="parent"><a href="#"><span class="glyphicon glyphicon-star"></span> EBD</a>
+          <ul class="sub-menu">
+            <li><?php echo $this->Html->link('Classes', array('plugin' => 'financeiro', 'controller' => 'controle', 'action' => 'teste'));?></li>
+            <li><?php echo $this->Html->link('Professores', array('plugin' => 'financeiro', 'controller' => 'controle', 'action' => 'teste'));?></li>
+            <li><?php echo $this->Html->link('Alunos', array('plugin' => 'financeiro', 'controller' => 'controle', 'action' => 'teste'));?></li>
+            <li><?php echo $this->Html->link('Relatórios', array('plugin' => 'financeiro', 'controller' => 'controle', 'action' => 'teste'));?></li>
+          </ul>
+        </li>
         <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Relatórios e Gráficos</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-tower"></span> Patrimônios</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-comment"></span> Mensagens</a></li>

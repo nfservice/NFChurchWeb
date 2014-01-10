@@ -45,14 +45,14 @@ nav.bs-navbar-collapse *:hover {
 
 ul#menu li.parent > a {
 	background: transparent url('../img/down.gif') right center no-repeat;
-}                   
+}
 
 ul#menu li.aberto > a {
 	background: transparent url('../img/up.gif') right center no-repeat;
 	text-decoration: none;
 	background-color: #24b2d6 !important;
 	color: #FFF;
-}                   
+}
 
 ul#menu li ul.sub-menu {
   	display: none;
@@ -63,16 +63,18 @@ ul#menu li ul.sub-menu li {
 	margin-left: -2.90em;
 	background-color: #FFF !important;
 	text-align: left;
-}         
+	padding-top: .5em;
+	padding-left: .5em;
+}
 
 ul#menu li ul.sub-menu li a, ul#menu li ul.sub-menu li a:active, ul#menu li ul.sub-menu li a:visited {
-	padding-left: 15px;
+	padding-left: 1em;
 	width: 100%;
 }
 ul#menu li ul.sub-menu li a:hover {
-	padding-left: 15px;
+	padding-left: 1em;
 	background-color: transparent !important;
 	color: #24b2d6;
 	text-decoration: none;
-	border-bottom: none;;
+	border-bottom: none;
 }
