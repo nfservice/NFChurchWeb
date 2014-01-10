@@ -43,32 +43,19 @@
 
   echo $this->Form->input('profissao_id', array('label' => 'Profissão', 'class' => 'form-control col-md-6', 'required', 'div' => array('class' => 'form-group col-md-6'), 'options' => array($profissoes), 'default' => '0'));
   echo $this->Form->input('empresa', array('label' => 'Empresa', 'class' => 'form-control col-md-6', 'required', 'div' => array('class' => 'form-group col-md-6')));
+
+  echo $this->Form->input('databatismo', array('type' => 'text', 'label' => 'Data de Batismo', 'class' => 'form-control col-md-2 datepicker', 'required', 'div' => array('class' => 'form-group col-md-2', 'style' => 'border-bottom:3px !important;')));
+  echo $this->Form->input('igrejabatismo', array('label' => 'Igreja Batismo', 'class' => 'form-control col-md-6', 'placeholder' => 'Nome da igreja que foi batizado', 'required', 'div' => array('class' => 'form-group col-md-5')));
+  echo $this->Form->input('pastorbatismo', array('label' => 'Pastor que Batizou', 'class' => 'form-control col-md-6', 'placeholder' => 'Nome do Pastor que batizou', 'required', 'div' => array('class' => 'form-group col-md-5')));
+
+  echo $this->Form->input('ultimaigreja', array('label' => 'Ultima Igreja que frequentou', 'class' => 'form-control col-md-6', 'placeholder' => 'Nome da Igreja que Frequentou', 'required', 'div' => array('class' => 'form-group col-md-6')));
+
+  echo $this->Form->input('cargo_id', array('type' => 'text', 'label' => 'Cargo na Igreja', 'class' => 'form-control col-md-6', 'placeholder' => 'Cargo que tinha na Igreja', 'required', 'div' => array('class' => 'form-group col-md-6')));
+
+  echo $this->Form->input('igrejasanteriores', array('label' => 'Igrejas que já frequentou', 'class' => 'form-control', 'placeholder' => 'Nome das igrejas que já frequentou (pulando linhas)', 'required', 'div' => array('class' => 'form-group', 'style' => 'padding: 0 1em')));
 ?>
-  <div class="form-group col-md-6">
-    <label for="databatismo">Data de Batismo</label>
-    <input id="databatismo" name="databatismo" class="form-control" placeholder="00/00/0000">
-  </div>
-  <div class="form-group col-md-6">
-    <label for="igrejabatismo">Igreja Batismo</label>
-    <input id="igrejabatismo" name="igrejabatismo" class="form-control" placeholder="Nome da igreja que foi batizado">
-  </div>
-  <div class="form-group col-md-6">
-    <label for="pastorbatismo">Pastor que Batizou</label>
-    <input id="pastorbatismo" name="pastorbatismo" class="form-control" placeholder="Nome do Pastor que batizou">
-  </div>
-  <div class="form-group col-md-6">
-    <label for="ultimaigreja">Ultima igreja que frequentou</label>
-    <input id="ultimaigreja" name="ultimaigreja" class="form-control" placeholder="Nome da Igreja que frequentou">
-  </div>
-  <div class="form-group" style="padding: 0 1em;">
-    <label for="igrejasanteriores">Igrejas que já frequentou</label>
-    <textarea name="igrejasanteriores" id="igrejasanteriores" class="form-control" placeholder="Nome das igrejas que já frequentou (pulando linhas)"></textarea>
-  </div>
-  <div class="form-group col-md-12">
-    <label for="cargoId">Cargo na igreja</label>
-    <input id="cargoId" name="cargoId" class="form-control" placeholder="Cargo que tinha na igreja">
-  </div>
   <div class="form-group col-md-6">
     <button type="submit" class="btn btn-primary">Cadastrar nova pessoa</button>
   </div>
-<?php echo $this->Form->end() ?><!-- /form -->
+<?php echo $this->Form->end(); ?>
+<!-- /form -->
