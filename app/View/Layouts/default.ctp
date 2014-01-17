@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap -->
   <?php 
-    echo $this->Html->css(array('bootstrap.min', 'nfchurch', 'datepicker'));
-    echo $this->Html->script(array('jquery.js', 'bootstrap.js', 'bootstrap-datepicker.js'));
+    echo $this->Html->css(array('bootstrap.min', 'datepicker', 'nfchurch'));
+    echo $this->Html->script(array('jquery', 'bootstrap', 'bootstrap-datepicker', 'jquery.autocomplete', 'jquery.mockjax', 'countries', 'demo'));
   ?>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,14 +29,9 @@
         }
       });
       //funcao de click do to-top
-      var voares = 0;
       $('#toTop').click(function() {
         $('body,html').animate({scrollTop:0},800);
         //console.debug(voares);
-        voares++;
-        if (voares >= 2) {
-          $("#voar").text('Subir');
-        }
       }); 
     });
 
@@ -127,7 +122,7 @@
       <?php echo $this->fetch('content'); ?>
     </div><!-- /all -->
   </div>
-  <div class="btn btn-info" id="toTop"><span id="voar">Voar</span></div>
+  <div class="btn btn-info" id="toTop"><span id="voar">Ao Topo</span></div>
   <div id="myModal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
