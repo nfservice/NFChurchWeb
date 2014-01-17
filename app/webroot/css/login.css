@@ -1,0 +1,21 @@
+body {
+	background-image: url('../img/bg_login.jpg') !important;
+	background-size: 100%;
+}
+
+.login_box {
+	background: rgba(200, 200, 220, .3);
+	width: 50em;
+	margin: 0 auto;
+	padding: 1.5em;
+	margin-top: 3em;
+	border-radius: 1em;
+}
+.login_box h1 {
+	color: #baecff;
+	text-shadow: 1px 2px 3px #5C5C5C;
+}
+
+.br {
+	margin: .50em 0;
+}
