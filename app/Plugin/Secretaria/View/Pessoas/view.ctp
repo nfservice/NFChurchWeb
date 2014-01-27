@@ -1,260 +1,76 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>NFCHURCH - Home</title>
-  <meta charset="utf8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Bootstrap -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/nfchurch.css" rel="stylesheet">
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-  <![endif]-->
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.min.js"></script>
-  <script type="text/javascript">
-    $(function() {
-      //evento de to-top do layout
-      $(window).scroll(function() {
-        if($(this).scrollTop() != 0) {
-          $('#toTop').fadeIn();
-        } else {
-          $('#toTop').fadeOut();
-        }
-      });
-      //funcao de click do to-top
-      var voares = 0;
-      $('#toTop').click(function() {
-        $('body,html').animate({scrollTop:0},800);
-        //console.debug(voares);
-        voares++;
-        if (voares >= 2) {
-          $("#voar").text('Subir');
-        }
-      }); 
-    });
+<script>
+public function addParente(){
+  
+}
 
-    //auto-complete de profissoes
-    //$('.typeahead .profissao').typeahead({                                
-    //  name: 'profissao',                                                          
-    //  prefetch: '../data/countries.json',                                         
-    //  limit: 10                                                                   
-    //});
-  </script>
-</head>
-<body style="margin-top: 3.6em;">
-  <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav col-md-12" role="banner">
-    <div class="container logo">
-      <div class="navbar-header">
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-          <span class="sr-only">Navegação de Jesus</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a href="#" class="navbar-brand">NFCHURCH</a>
-      </div>
-      <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home page</a></li>
-          <li><a href="#">Minha conta</a></li>
-          <li><a href="#">Components</a></li>
-          <li><a href="#">JavaScript</a></li>
-          <li><a href="#">Customize</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Sair</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <div class="container col-md-12">
-    <div class="bs-sidebar hidden-print affix lateral" role="complementary">
-      <ul class="nav bs-sidenav">
-        <li class="active"><a href="#overview"><span class="glyphicon glyphicon-book"></span> Biblioteca</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-briefcase"></span> Secretaria</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-usd"></span> Financeiro</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-folder-close"></span> RH</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Gerenciar Membros</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-bell"></span> Utilitários</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-star"></span> EBD</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Relatórios e Gráficos</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-tower"></span> Patrimônios</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-comment"></span> Mensagens</a></li>
-      </ul>
-    </div>
-    <div class="all col-md-11"><!-- all -->
-      <ol class="breadcrumb"><!-- breadcrumb -->
-        <li><a href="#">Início</a></li>
-        <li><a href="#">Gerenciar Membros</a></li>
-        <li class="active">Cadastro de Membros</li>
-      </ol><!-- /breadcrumb -->
-      <h2>Cadastro de Membro</h2>
-      <form role="form"><!-- form -->
-        <div class="form-group col-md-12">
-          <label for="nome">Nome do Membro</label>
-          <input type="text" class="form-control" id="nome" placeholder="Nome do Membro" required="required">
-        </div>
-        <div class="form-group col-md-12">
-          <label for="email">Email Pessoal</label>
-          <input name="email" type="email" class="form-control col-md-12" id="email" placeholder="Entre com seu e-mail" required="required">
-        </div>
-        <div class="nascimento">
-          <div class="form-group col-md-3">
-            <label for="tipo">Tipo de Membro</label>
-            <select name="tipo" id="tipo" class="form-control">
-              <option selected="selected">Selecione</option>
-              <option>Membro</option>
-              <option>Visitante</option>
-              <option>Parente</option>
-            </select>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="sexo">Sexo</label>
-            <select name="sexo" id="sexo" class="form-control">
-              <option selected="selected">Selecione</option>
-              <option>Masculino</option>
-              <option>Feminino</option>
-            </select>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="datanascimento">Data de Nascimento</label>
-            <input id="datanascimento" name="datanascimento" class="form-control" value="03/08/1990">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="estado">Estado</label>
-            <select name="estado" id="estado" class="form-control">
-              <option>AC</option>
-              <option>AL</option>
-              <option>AM</option>
-              <option>BA</option>
-              <option>CE</option>
-              <option>DF</option>
-              <option>ES</option>
-              <option>GO</option>
-              <option>MA</option>
-              <option>MG</option>
-              <option>MS</option>
-              <option>MT</option>
-              <option>PA</option>
-              <option>PB</option>
-              <option>PE</option>
-              <option>PI</option>
-              <option>PR</option>
-              <option>RJ</option>
-              <option>RN</option>
-              <option>RO</option>
-              <option>RR</option>
-              <option>RS</option>
-              <option>SC</option>
-              <option>SE</option>
-              <option>SP</option>
-              <option>TO</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="naturalidade">Naturalidade</label>
-          <input id="naturalidade" name="naturalidade" class="form-control" placeholder="Ex: Brasileiro">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="estadocivil">Estado Civil</label>
-          <select name="estadocivil" id="estadocivil" class="form-control">
-            <option>Solteiro</option>
-            <option>Casado</option>
-            <option>Viuvo</option>
-            <option>Desquitado</option>
-          </select>
-        </div>
-        <div class="form-group col-md-3">
-          <label for="rg">RG</label>
-          <input id="rg" name="rg" class="form-control" placeholder="00.000.000-0">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="cpf">CPF</label>
-          <input id="cpf" name="cpf" class="form-control" placeholder="000.000.000-00">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="fone">Telefone</label>
-          <input id="fone" name="fone" class="form-control" placeholder="(00) 0000-0000">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="cel">Celular</label>
-          <input id="cel" name="cel" class="form-control" placeholder="(00) 00000-0000">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="escolaridade">Escolaridade</label>
-          <select name="escolaridade" id="escolaridade" class="form-control">
-            <option>Ensino Superior</option>
-            <option>Ensino Médio Completo</option>
-            <option>Ensino Médio Incompleto</option>
-            <option>Ensino Fundamental Completo</option>
-            <option>Ensino Fundamental Incompleto</option>
-          </select>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="profissao">Profissão</label>
-          <input id="profissao" name="profissao" class="form-control profissao">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="empresa">Empresa</label>
-          <input id="empresa" name="empresa" class="form-control" placeholder="Nome da Empresa">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="databatismo">Data de Batismo</label>
-          <input id="databatismo" name="databatismo" class="form-control" placeholder="00/00/0000">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="igrejabatismo">Igreja Batismo</label>
-          <input id="igrejabatismo" name="igrejabatismo" class="form-control" placeholder="Nome da igreja que foi batizado">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="pastorbatismo">Pastor que Batizou</label>
-          <input id="pastorbatismo" name="pastorbatismo" class="form-control" placeholder="Nome do Pastor que batizou">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="ultimaigreja">Ultima igreja que frequentou</label>
-          <input id="ultimaigreja" name="ultimaigreja" class="form-control" placeholder="Nome da Igreja que frequentou">
-        </div>
-        <div class="form-group" style="padding: 0 1em;">
-          <label for="igrejasanteriores">Igrejas que já frequentou</label>
-          <textarea name="igrejasanteriores" id="igrejasanteriores" class="form-control" placeholder="Nome das igrejas que já frequentou (pulando linhas)"></textarea>
-        </div>
-        <div class="form-group col-md-12">
-          <label for="cargoId">Cargo na igreja</label>
-          <input id="cargoId" name="cargoId" class="form-control" placeholder="Cargo que tinha na igreja">
-        </div>
-        <div class="form-group col-md-6">
-          <button type="submit" class="btn btn-primary">Cadastrar nova pessoa</button>
-        </div>
-      </form><!-- /form -->
-    </div><!-- /all -->
+public function removeParente(){
+  cont--;
+    $("#anotacao"+codlinha).fadeOut(1000, function(){$("#anotacao"+codlinha).remove();});
+}
+
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+      language: "pt-BR"
+    }).on('changeDate', function(ev){
+      $('.datepicker').datepicker('hide');
+    });
+  });
+</script>
+
+<ol class="breadcrumb"><!-- breadcrumb -->
+  <li><a href="#">Início</a></li>
+  <li><a href="#">Secretaria</a></li>
+  <li><a href="#">Gerenciar Pessoas</a></li>
+  <li class="active">Cadastro de Pessoa</li>
+</ol><!-- /breadcrumb -->
+<h2>Cadastro de Membro</h2>
+<!-- form -->
+<?php echo $this->Form->create('Pessoa', array('role' => 'form')); 
+  //echo $this->Form->input('tipo_id', array('label' => 'Tipo de Membro' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => array('0' => 'Selecione', '1' => 'Membro', '2' => 'Visitante', '3' => 'Parente')));
+  echo $this->Form->input('datamembro', array('type' => 'text', 'label' => 'Tornou-se Membro em:' ,'class' => 'form-control datepicker', 'required', 'div' => array('class' => 'form-group col-md-4'), 'data-date-format' => 'dd/mm/yyyy', 'disabled')); 
+  echo $this->Form->input('nome', array('label' => 'Nome da Pessoa' ,'placeholder' => 'Nome da Pessoa', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-8'), 'disabled'));
+  echo $this->Form->input('email', array('label' => 'Email Pessoal' ,'placeholder' => 'Entre com seu email', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-9'), 'disabled'));
+  echo $this->Form->input('sexo', array('label' => 'Sexo' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-3'), 'options' => array('0' => 'Selecione', '1' => 'Masculino', '2' => 'Feminino'), 'disabled'));
+?>
+<div class="nascimento">
+  <?php 
+    echo $this->Form->input('datanascimento', array('type' => 'text', 'label' => 'Data de Nascimento' ,'class' => 'form-control datepicker', 'required', 'div' => array('class' => 'form-group col-md-4'), 'data-date-format' => 'dd/mm/yyyy', 'disabled')); 
+
+    echo $this->Form->input('estado_id', array('label' => 'Estado' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => array($estados), 'disabled'));
+    echo $this->Form->input('naturalidade', array('label' => 'Naturalidade' ,'placeholder' => 'Ex: Brasileiro', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'disabled'));
+  ?>
+</div>
+<?php 
+  
+  echo $this->Form->input('estadocivil', array('label' => 'Estado Civil' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => array('0' => 'Solteiro', '1' => 'Casado', '2' => 'Viuvo', '3' => 'Desquitado'), 'disabled')); 
+
+  echo $this->Form->input('rg', array('label' => 'RG' ,'placeholder' => '00.000.000-0', 'class' => 'form-control col-md-3', 'required', 'div' => array('class' => 'form-group col-md-4'), 'disabled'));
+  echo $this->Form->input('cpf', array('label' => 'CPF' ,'placeholder' => '000.000.000-00', 'class' => 'form-control col-md-3', 'required', 'div' => array('class' => 'form-group col-md-4'), 'disabled'));
+
+  echo $this->Form->input('fone', array('label' => 'Telefone', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'disabled'));
+  echo $this->Form->input('cel', array('label' => 'Celular', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'disabled'));
+
+  echo $this->Form->input('escolaridade', array('label' => 'Escolaridade' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => array('0' => 'Selecione', '1' => 'Ensino Superior', '2' => 'Ensino Médio Completo', '3' => 'Ensino Médio Incompleto', '4' => 'Ensino Fundamental Completo', '5' => 'Ensino Fundamental Incompleto'), 'disabled')); 
+
+  echo $this->Form->input('Relacionamento.0.nome', array('label' => 'Parente', 'class' => 'form-control', 'placeholder' => 'Nome Parente', 'required', 'div' => array('class' => 'form-group col-md-8'), 'disabled'));
+  echo $this->Form->input('Relacionamento.0.tipo', array('label' => 'Tipo:', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-
+    group col-md-2'), 'options' => array('0' => 'Filho', '1' => 'Filha', '2' => 'Marido', '3' => 'Esposa'), 'disabled'));
+  
+  echo $this->Form->input('profissao_id', array('label' => 'Profissão', 'id' => 'autocomplete', 'class' => 'form-control col-md-6', 'required', 'options' => $profissoes, 'div' => array('class' => 'form-group col-md-6'), 'disabled'));
+  echo $this->Form->input('empresa', array('label' => 'Empresa', 'class' => 'form-control col-md-6', 'required', 'div' => array('class' => 'form-group col-md-6'), 'disabled'));
+
+  echo $this->Form->input('databatismo', array('type' => 'text', 'label' => 'Data de Batismo', 'class' => 'form-control col-md-2 datepicker', 'required', 'div' => array('class' => 'form-group col-md-2', 'style' => 'border-bottom:3px !important;'), 'disabled'));
+  echo $this->Form->input('igrejabatismo', array('label' => 'Igreja Batismo', 'class' => 'form-control col-md-6', 'placeholder' => 'Nome da igreja que foi batizado', 'required', 'div' => array('class' => 'form-group col-md-5'), 'disabled'));
+  echo $this->Form->input('pastorbatismo', array('label' => 'Pastor que Batizou', 'class' => 'form-control col-md-6', 'placeholder' => 'Nome do Pastor que batizou', 'required', 'div' => array('class' => 'form-group col-md-5'), 'disabled'));
+
+  echo $this->Form->input('ultimaigreja', array('label' => 'Ultima Igreja que frequentou', 'class' => 'form-control col-md-6', 'placeholder' => 'Nome da Igreja que Frequentou', 'required', 'div' => array('class' => 'form-group col-md-6'), 'disabled'));
+
+  echo $this->Form->input('cargo_id', array('label' => 'Cargo na Igreja', 'class' => 'form-control col-md-6', 'placeholder' => 'Cargo que tinha na Igreja', 'required', 'options' => $cargos, 'div' => array('class' => 'form-group col-md-6'), 'disabled'));
+
+  echo $this->Form->input('igrejasanteriores', array('label' => 'Igrejas que já frequentou', 'class' => 'form-control', 'placeholder' => 'Nome das igrejas que já frequentou (pulando linhas)', 'required', 'div' => array('class' => 'form-group', 'style' => 'padding: 0 1em'), 'disabled'));
+?>
+  <div class="form-group col-md-6">
+    <?php echo $this->Form->input($this->Html->link('Voltar', array('plugin' => 'secretaria', 'controller' => 'pessoas', 'action' => 'index')), array('type' => 'button', 'label' => false)); ?>
   </div>
-  <div class="btn btn-info" id="toTop"><span id="voar">Voar</span></div>
-  <div id="myModal" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Cadastrar Nova Profissão</h4>
-        </div>
-        <div class="modal-body">
-          <div class="form-group col-md-12">
-            <label for="novaProfissao">Nova Profissão</label>
-            <input id="novaProfissao" name="novaProfissao" class="form-control" placeholder="Digite a nova profissão">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-</body>
-</html>
+<?php echo $this->Form->end(); ?>
+<!-- /form -->

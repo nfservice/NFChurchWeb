@@ -86,6 +86,7 @@
       <ul id="menu" class="nav bs-sidenav">
         <li class="parent"><a href="#"><span class="glyphicon glyphicon-briefcase"></span> Secretaria</a>
           <ul class="sub-menu">
+            <li><?php echo $this->Html->link('Pessoas', array('plugin' => 'secretaria', 'controller' => 'pessoas', 'action' => 'index'));?></li>
             <li><?php echo $this->Html->link('Cadastros', array('plugin' => 'secretaria', 'controller' => 'pessoas', 'action' => 'add'));?></li>
             <li><?php echo $this->Html->link('Relatórios', array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'membros'));?></li>
           </ul>

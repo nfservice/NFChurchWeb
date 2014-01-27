@@ -1,6 +1,6 @@
 <?php 
 
-	Class User extends AppModel{
+	class User extends AppModel{
 		public $name = 'User';
 	    public $validate = array(
 	        'username' => array(
