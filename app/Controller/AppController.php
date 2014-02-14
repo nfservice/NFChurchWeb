@@ -35,5 +35,6 @@ class AppController extends Controller {
 
     public function beforeFilter() {
     	//$this->Auth->allow(array('display', 'index', 'add'));
+    	$this->Session->write('choosed', '1');
 	}
 }

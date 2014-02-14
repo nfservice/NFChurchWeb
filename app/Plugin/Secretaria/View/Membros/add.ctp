@@ -3,7 +3,7 @@
 var cont = 0;
   function addParente(){
     cont++;
-    $('#parente').append('<div id="parente'+cont+'"><input type="hidden" name="data[Relacionamento]['+cont+'][pessoa_id]" id="Relacionamento'+cont+'PessoaId"><div class="form-group col-md-8"><select name="data[Relacionamento]['+cont+'][pessoa2_id]" class="form-control" placeholder="Nome Parente" required="required" id="Relacionamento'+cont+'Pessoa2Id"><option value="8">Bruno</option></select></div><div class="form-group col-md-2"><select name="data[Relacionamento]['+cont+'][tiporelacionamento_id]" class="form-control" required="required" id="Relacionamento'+cont+'TiporelacionamentoId"><option value="1">Marido</option><option value="2">Esposa</option><option value="3">Filho</option><option value="4">Filha</option></select></div><a href="javascript:;" onclick="removeParente('+cont+')"><span class="glyphicon glyphicon-remove">Remover</span></a></div>');
+    $('#parente').append('<div id="parente'+cont+'"><input type="hidden" name="data[Relacionamento]['+cont+'][membro_id]" id="Relacionamento'+cont+'PessoaId"><div class="form-group col-md-8"><label for="Relacionamento'+cont+'Pessoa2Id">Parente</label><select name="data[Relacionamento]['+cont+'][membro2_id]" class="form-control" placeholder="Nome Parente" required="required" id="Relacionamento'+cont+'Pessoa2Id"><option value="8">Bruno</option></select></div><div class="form-group col-md-2"><label for="Relacionamento'+cont+'Pessoa2Id">Tipo</label><select name="data[Relacionamento]['+cont+'][tiporelacionamento_id]" class="form-control" required="required" id="Relacionamento'+cont+'TiporelacionamentoId"><option value="1">Marido</option><option value="2">Esposa</option><option value="3">Filho</option><option value="4">Filha</option></select></div><a href="javascript:;" onclick="removeParente('+cont+')"><span class="glyphicon glyphicon-remove">Remover</span></a></div>');
   }
 
   function removeParente(id){
@@ -14,15 +14,15 @@ var cont = 0;
 <ol class="breadcrumb"><!-- breadcrumb -->
   <li><a href="#">Início</a></li>
   <li><a href="#">Secretaria</a></li>
-  <li><a href="#">Gerenciar Pessoas</a></li>
-  <li class="active">Cadastro de Pessoa</li>
+  <li><a href="#">Gerenciar Membros</a></li>
+  <li class="active">Cadastro de Membro</li>
 </ol><!-- /breadcrumb -->
 <h2>Cadastro de Membro</h2>
 <!-- form -->
-<?php echo $this->Form->create('Pessoa', array('role' => 'form')); 
+<?php echo $this->Form->create('Membro', array('role' => 'form')); 
   //echo $this->Form->input('tipo_id', array('label' => 'Tipo de Membro' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => array('0' => 'Selecione', '1' => 'Membro', '2' => 'Visitante', '3' => 'Parente')));
   echo $this->Form->input('datamembro', array('type' => 'text', 'label' => 'Tornou-se Membro em:' ,'class' => 'form-control datepicker', 'required', 'div' => array('class' => 'form-group col-md-4'), 'data-date-format' => 'dd/mm/yyyy')); 
-  echo $this->Form->input('nome', array('label' => 'Nome da Pessoa' ,'placeholder' => 'Nome da Pessoa', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-8')));
+  echo $this->Form->input('nome', array('label' => 'Nome da Membro' ,'placeholder' => 'Nome da Membro', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-8')));
   echo $this->Form->input('email', array('label' => 'Email Pessoal' ,'placeholder' => 'Entre com seu email', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-9')));
   echo $this->Form->input('sexo', array('label' => 'Sexo' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-3'), 'options' => array('0' => 'Selecione', '1' => 'Masculino', '2' => 'Feminino')));
 ?>
@@ -45,11 +45,12 @@ var cont = 0;
   echo $this->Form->input('cel', array('label' => 'Celular', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4')));
 
   echo $this->Form->input('escolaridade', array('label' => 'Escolaridade' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => array('0' => 'Selecione', '1' => 'Ensino Superior', '2' => 'Ensino Médio Completo', '3' => 'Ensino Médio Incompleto', '4' => 'Ensino Fundamental Completo', '5' => 'Ensino Fundamental Incompleto'))); 
+  echo $this->Form->input('tipo', array('type' => 'hidden', 'value' => '0'));
   ?> 
   <div id="parente">
   <?php
-  echo $this->Form->input('Relacionamento.0.pessoa_id', array('type' => 'hidden'));
-  echo $this->Form->input('Relacionamento.0.pessoa2_id', array('label' => 'Parente', 'class' => 'form-control', 'placeholder' => 'Nome Parente', 'required', 'div' => array('class' => 'form-group col-md-8'), 'options' => $parentes));
+  echo $this->Form->input('Relacionamento.0.membro_id', array('type' => 'hidden'));
+  echo $this->Form->input('Relacionamento.0.membro2_id', array('label' => 'Parente', 'class' => 'form-control', 'placeholder' => 'Nome Parente', 'required', 'div' => array('class' => 'form-group col-md-8'), 'options' => $parentes));
   echo $this->Form->input('Relacionamento.0.tiporelacionamento_id', array('label' => 'Tipo:', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-2'), 'options' => $relacionamentos));
   ?>
   </div>
@@ -73,7 +74,7 @@ var cont = 0;
   echo $this->Form->input('igrejasanteriores', array('label' => 'Igrejas que já frequentou', 'class' => 'form-control', 'placeholder' => 'Nome das igrejas que já frequentou (pulando linhas)', 'required', 'div' => array('class' => 'form-group', 'style' => 'padding: 0 1em')));
 ?>
   <div class="form-group col-md-6">
-    <button type="submit" class="btn btn-primary">Cadastrar nova pessoa</button>
+    <button type="submit" class="btn btn-primary">Cadastrar nova membro</button>
   </div>
 <?php echo $this->Form->end(); ?>
 <!-- /form -->
