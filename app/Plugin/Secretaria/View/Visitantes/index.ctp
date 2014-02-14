@@ -7,10 +7,8 @@
 <?php echo $this->Form->create(array('Qestionario')); ?>
 <h4>Filtrar por:</h4>
 <select name="tipo" onChange="TrocaFitro(this.value,this.options[this.selectedIndex].innerHTML);">
-	<option value="razaosocial">Razão Social</option>
-	<option value="nomefantasia">Nome Fantasia</option>
-	<option value="cpfcnpj">CPF</option>
-	<option value="cpfcnpj">CNPJ</option>
+	<option value="nome">Nome</option>
+	<option value="CPF">CPF</option>
 	<option value="telefone">Telefone</option>
 </select>
 <div id="normal">
@@ -22,9 +20,6 @@
 	<tr>
 		<th>
 			Nome:
-		</th>
-		<th>
-			CPF:
 		</th>
 		<th>
 			Telefone:
@@ -40,9 +35,6 @@
 		<tr>
 			<td>
 				<?php echo $visitante['Visitante']['nome']; ?>
-			</td>
-			<td>
-				<?php echo $visitante['Visitante']['cpf']; ?>
 			</td>
 			<td>
 				<?php echo $visitante['Visitante']['fone']; ?>

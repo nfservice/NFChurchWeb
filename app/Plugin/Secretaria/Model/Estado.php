@@ -1,3 +1,4 @@
 <?php
-class Estado extends SecretariaAppModel {
-}
+	class Estado extends SecretariaAppModel{
+		
+	}

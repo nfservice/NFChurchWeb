@@ -11,7 +11,7 @@ class MembrosController extends SecretariaAppController {
 	public function add()
 	{
 		$this->Membro->create();
-		if($this->request->is('post')){
+		if($this->request->is('post') || $this->request->is('put')){
 			$this->request->data['Membro']['datamembro'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['datamembro'])));
 			$this->request->data['Membro']['datanascimento'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['datanascimento'])));
 			$this->request->data['Membro']['databatismo'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['databatismo'])));
