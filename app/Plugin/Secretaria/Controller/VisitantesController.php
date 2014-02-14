@@ -4,7 +4,7 @@
 			$conditions = array();
 			$conditions['Visitante.tipo ='] = 2;
 			$this->set('visitantes', $this->paginate(null, $conditions));
-			$this->layout ='';
+			//
 		}
 		public function add(){
 			$this->loadModel('Estado');
@@ -23,7 +23,7 @@
 			}
 			$estados = $this->Estado->find('list', array('fields' => array('codibge', 'sigla')));
 			$this->set('estados', $estados);
-			$this->layout ='';
+			//
 		}
 		public function edit($id = null){
 			
@@ -47,7 +47,7 @@
 				$estados = $this->Estado->find('list', array('fields' => array('codibge', 'sigla')));
 				$this->set('estados', $estados);
 			}
-			$this->layout ='';
+			//
 		}
 		public function view($id = null){
 			$this->Visitante->id = $id;
@@ -58,7 +58,7 @@
 			$this->loadModel('Estado');
 			$estados = $this->Estado->find('list', array('fields' => array('codibge', 'sigla')));
 			$this->set('estados', $estados);
-			$this->layout = '';
+			//$this->layout = '';
 		}
 		public function delete($id = null)
 	{

@@ -5,7 +5,7 @@ class MembrosController extends SecretariaAppController {
 		$conditions = array();
 		$conditions['Membro.tipo ='] = 0;
 		$this->set('membros', $this->paginate(null, $conditions));
-		$this->layout ='';
+		
 	}
 
 	public function add()
