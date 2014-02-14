@@ -4,7 +4,7 @@
 		<?php echo $this->Html->link('Novo Visitante', array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'add')); ?>
 	</h3>
 </div>
-<?php echo $this->Form->create(array('Qestionario')); ?>
+<?php echo $this->Form->create(array('Pesquisa')); ?>
 <h4>Filtrar por:</h4>
 <select name="tipo" onChange="TrocaFitro(this.value,this.options[this.selectedIndex].innerHTML);">
 	<option value="nome">Nome</option>
@@ -16,7 +16,7 @@
 	<input type="submit" style="margin-left:20px;" name="submit" value="Pesquisar"/>
 </div>	
 <?php echo $this->Form->end(); ?>
-<table>
+<table class="table">
 	<tr>
 		<th>
 			Nome:

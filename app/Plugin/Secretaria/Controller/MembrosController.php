@@ -3,7 +3,7 @@ class MembrosController extends SecretariaAppController {
 
 	public function index(){
 		$conditions = array();
-		$conditions['Membro.tipo ='] = 0;
+		$conditions['Membro.tipo ='] = 1;
 		$this->set('membros', $this->paginate(null, $conditions));
 		
 	}
@@ -38,7 +38,7 @@ class MembrosController extends SecretariaAppController {
 			$this->set('cargos', $cargos);
 			$this->set('estados', $estados);
 			$this->set('profissoes', $profissoes);
-			$this->layout = '';
+			
 		}
 	
 	}
@@ -103,7 +103,7 @@ class MembrosController extends SecretariaAppController {
 			$this->request->data['Membro']['datamembro'] = implode('/', array_reverse(explode('-', $this->request->data['Membro']['datamembro'])));
 			$this->request->data['Membro']['datanascimento'] = implode('/', array_reverse(explode('-', $this->request->data['Membro']['datanascimento'])));
 			$this->request->data['Membro']['databatismo'] = implode('/', array_reverse(explode('-', $this->request->data['Membro']['databatismo'])));
-			$this->layout = '';
+			
 			/**
 			Fim Tratando datas para a view.
 			**/
@@ -147,7 +147,7 @@ class MembrosController extends SecretariaAppController {
 		$this->request->data['Membro']['datamembro'] = implode('/', array_reverse(explode('-', $this->request->data['Membro']['datamembro'])));
 		$this->request->data['Membro']['datanascimento'] = implode('/', array_reverse(explode('-', $this->request->data['Membro']['datanascimento'])));
 		$this->request->data['Membro']['databatismo'] = implode('/', array_reverse(explode('-', $this->request->data['Membro']['databatismo'])));
-		$this->layout = '';
+		
 	}
 
 	public function delete($id = null)

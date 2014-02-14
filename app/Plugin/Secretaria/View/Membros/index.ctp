@@ -4,7 +4,19 @@
 		<?php echo $this->Html->link('Novo Membro', array('plugin' => 'secretaria', 'controller' => 'membros', 'action' => 'add')); ?>
 	</h3>
 </div>
-<table>
+<?php echo $this->Form->create(array('Pesquisa')); ?>
+	<h4>Filtrar por:</h4>
+	<select name="tipo" onChange="TrocaFitro(this.value,this.options[this.selectedIndex].innerHTML);">
+		<option value="nome">Nome</option>
+		<option value="CPF">CPF</option>
+		<option value="telefone">Telefone</option>
+	</select>
+	<div id="normal">
+		<input type="text" size="50" id="texto" name="razaosocial" placeholder="Filtrar:"/>
+		<input type="submit" style="margin-left:20px;" name="submit" value="Pesquisar"/>
+	</div>	
+<?php echo $this->Form->end(); ?>
+<table class="table">
 	<tr>
 		<th>
 			Nome:
