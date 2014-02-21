@@ -26,6 +26,8 @@
 			//
 		}
 		public function edit($id = null){
+
+			$this->layout = false;
 			
 			$this->Visitante->id = $id;
 			if (!$this->Visitante->exists()) {

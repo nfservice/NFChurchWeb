@@ -25,6 +25,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
 </head>
 <body>
     <section id="container">
@@ -190,7 +191,7 @@
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
                     <li>
-                        <a class="active" href="index-2.html">
+                        <a class="active" href="<?php echo $this->Html->url('/'); ?>">
                             <i class="fa fa-dashboard"></i>
                             <span>Painel Inicial</span>
                         </a>
@@ -201,8 +202,8 @@
                             <span>Secretaria</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="">Cadastros</a></li>
-                            <li><a href="">Relatórios</a></li>
+                            <li><a class="ajaxload" href="javascript:;" >Cadastros</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('controller' => 'secretaria', 'action' => 'relatorios')); ?>">Relatórios</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -533,7 +534,7 @@
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
 <?php 
-    echo $this->Html->script(array('lib/jquery', '../css/assets/jquery-ui/jquery-ui-1.10.1.custom.min', '../css/bs3/js/bootstrap.min', 'accordion-menu/jquery.dcjqaccordion.2.7', 'scrollTo/jquery.scrollTo.min', 'nicescroll/jquery.nicescroll', '../css/assets/jQuery-slimScroll-1.3.0/jquery.slimscroll', '../css/assets/skycons/skycons', '../css/assets/jquery.scrollTo/jquery.scrollTo', '../css/assets/calendar/clndr', '../css/assets/calendar/moment-2.2.1', 'calendar/evnt.calendar.init', '../css/assets/jvector-map/jquery-jvectormap-1.2.2.min', '../css/assets/jvector-map/jquery-jvectormap-us-lcc-en', '../css/assets/gauge/gauge', '../css/assets/css3clock/js/script', '../css/assets/easypiechart/jquery.easypiechart', '../css/assets/easypiechart/jquery.easypiechart', '../css/assets/sparkline/jquery.sparkline', '../css/assets/morris-chart/morris', '../css/assets/morris-chart/raphael-min', '../css/assets/flot-chart/jquery.flot', '../css/assets/flot-chart/jquery.flot.tooltip.min', '../css/assets/flot-chart/jquery.flot.resize', '../css/assets/flot-chart/jquery.flot.pie.resize', '../css/assets/flot-chart/jquery.flot.animator.min', '../css/assets/flot-chart/jquery.flot.growraf', 'dashboard', 'custom-select/jquery.customSelect.min', 'scripts', 'http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js', 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'));
+    echo $this->Html->script(array('lib/jquery', '../css/assets/jquery-ui/jquery-ui-1.10.1.custom.min', '../css/bs3/js/bootstrap.min', 'accordion-menu/jquery.dcjqaccordion.2.7', 'scrollTo/jquery.scrollTo.min', 'nicescroll/jquery.nicescroll', '../css/assets/jQuery-slimScroll-1.3.0/jquery.slimscroll', '../css/assets/skycons/skycons', '../css/assets/jquery.scrollTo/jquery.scrollTo', '../css/assets/calendar/clndr', '../css/assets/calendar/moment-2.2.1', 'calendar/evnt.calendar.init', '../css/assets/jvector-map/jquery-jvectormap-1.2.2.min', '../css/assets/jvector-map/jquery-jvectormap-us-lcc-en', '../css/assets/gauge/gauge', '../css/assets/css3clock/js/script', '../css/assets/easypiechart/jquery.easypiechart', '../css/assets/easypiechart/jquery.easypiechart', '../css/assets/sparkline/jquery.sparkline', '../css/assets/morris-chart/morris', '../css/assets/morris-chart/raphael-min', '../css/assets/flot-chart/jquery.flot', '../css/assets/flot-chart/jquery.flot.tooltip.min', '../css/assets/flot-chart/jquery.flot.resize', '../css/assets/flot-chart/jquery.flot.pie.resize', '../css/assets/flot-chart/jquery.flot.animator.min', '../css/assets/flot-chart/jquery.flot.growraf', 'dashboard', 'custom-select/jquery.customSelect.min', 'http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js', 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js', 'scripts'));
 ?>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <!--script for this page-->
