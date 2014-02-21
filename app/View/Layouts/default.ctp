@@ -10,11 +10,11 @@
     <!--Core CSS -->
     <?php 
         //array com os cores css
-    echo $this->Html->css(array('bootstrap.min', '../assets/jquery-ui/jquery-ui-1.10.1.custom.min', 'bootstrap-reset', '../assets/font-awesome/css/font-awesome', '../assets/jvector-map/jquery-jvectormap-1.2.2', 'clndr'));
+    echo $this->Html->css(array('bootstrap.min', 'assets/jquery-ui/jquery-ui-1.10.1.custom.min', 'bootstrap-reset', 'assets/font-awesome/css/font-awesome', 'assets/jvector-map/jquery-jvectormap-1.2.2', 'clndr', 'nfchurch'));
         //clock css
-    echo $this->Html->css('../assets/css3clock/css/style');
+    echo $this->Html->css('assets/css3clock/css/style');
         //Morris Chart CSS
-    echo $this->Html->css('../assets/morris-chart/morris');
+    echo $this->Html->css('assets/morris-chart/morris');
         //custom styles for this template
     echo $this->Html->css(array('style', 'style-responsive'));
     ?>
@@ -34,7 +34,7 @@
             <div class="brand">
 
                 <a href="index-2.html" class="logo">
-                    <img src="images/logo.png" alt="">
+                    <?php echo $this->Html->image('../images/logo.png', array('alt' => 'NFCHURCH - SISTEMA DE GESTÃO PARA EMPRESAS')); ?>
                 </a>
                 <div class="sidebar-toggle-box">
                     <div class="fa fa-bars"></div>
@@ -46,73 +46,7 @@
                 <!--  notification start -->
                 <ul class="nav top-menu">
                     <!-- settings start -->
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="fa fa-tasks"></i>
-                            <span class="badge bg-success">8</span>
-                        </a>
-                        <ul class="dropdown-menu extended tasks-bar">
-                            <li>
-                                <p class="">Você tem 8 Tarefas</p>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="task-info clearfix">
-                                        <div class="desc pull-left">
-                                            <h5>Target Sell</h5>
-                                            <p>25% , Deadline  12 June’13</p>
-                                        </div>
-                                        <span class="notification-pie-chart pull-right" data-percent="45">
-                                            <span class="percent"></span>
-                                        </span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="task-info clearfix">
-                                        <div class="desc pull-left">
-                                            <h5>Product Delivery</h5>
-                                            <p>45% , Deadline  12 June’13</p>
-                                        </div>
-                                        <span class="notification-pie-chart pull-right" data-percent="78">
-                                            <span class="percent"></span>
-                                        </span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="task-info clearfix">
-                                        <div class="desc pull-left">
-                                            <h5>Payment collection</h5>
-                                            <p>87% , Deadline  12 June’13</p>
-                                        </div>
-                                        <span class="notification-pie-chart pull-right" data-percent="60">
-                                            <span class="percent"></span>
-                                        </span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="task-info clearfix">
-                                        <div class="desc pull-left">
-                                            <h5>Target Sell</h5>
-                                            <p>33% , Deadline  12 June’13</p>
-                                        </div>
-                                        <span class="notification-pie-chart pull-right" data-percent="90">
-                                            <span class="percent"></span>
-                                        </span>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="external">
-                                <a href="#">Ver todas as Tarefas</a>
-                            </li>
-                        </ul>
-                    </li>
+                    
                     <!-- settings end -->
                     <!-- inbox dropdown start-->
                     <li id="header_inbox_bar" class="dropdown">
@@ -126,7 +60,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="photo"><img alt="avatar" src="images/avatar-mini.jpg"></span>
+                                    <span class="photo"><?php echo $this->Html->image('../images/avatar-mini.jpg'); ?></span>
                                     <span class="subject">
                                         <span class="from">Jonathan Smith</span>
                                         <span class="time">Just now</span>
@@ -138,7 +72,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="photo"><img alt="avatar" src="images/avatar-mini-2.jpg"></span>
+                                    <span class="photo"><?php echo $this->Html->image('../images/avatar-mini-2.jpg'); ?></span>
                                     <span class="subject">
                                         <span class="from">Jane Doe</span>
                                         <span class="time">2 min ago</span>
@@ -150,7 +84,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="photo"><img alt="avatar" src="images/avatar-mini-3.jpg"></span>
+                                    <span class="photo"><?php echo $this->Html->image('../images/avatar-mini-3.jpg'); ?></span>
                                     <span class="subject">
                                         <span class="from">Tasi sam</span>
                                         <span class="time">2 days ago</span>
@@ -162,7 +96,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="photo"><img alt="avatar" src="images/avatar-mini.jpg"></span>
+                                    <span class="photo"><?php echo $this->Html->image('../images/avatar-mini-4.jpg'); ?></span>
                                     <span class="subject">
                                         <span class="from">Mr. Perfect</span>
                                         <span class="time">2 hour ago</span>
@@ -342,6 +276,7 @@
         <section id="main-content">
             <section class="wrapper">
                 <?php echo $this->fetch('content'); ?>
+            </section>
         </section>
     </section>
     <!--main content end-->
@@ -597,45 +532,10 @@
 </section>
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
-<script src="js/lib/jquery.js"></script>
-<script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
-<script src="bs3/js/bootstrap.min.js"></script>
-<script src="js/accordion-menu/jquery.dcjqaccordion.2.7.js"></script>
-<script src="js/scrollTo/jquery.scrollTo.min.js"></script>
-<script src="js/nicescroll/jquery.nicescroll.js" type="text/javascript"></script>
+<?php 
+    echo $this->Html->script(array('lib/jquery', '../css/assets/jquery-ui/jquery-ui-1.10.1.custom.min', '../css/bs3/js/bootstrap.min', 'accordion-menu/jquery.dcjqaccordion.2.7', 'scrollTo/jquery.scrollTo.min', 'nicescroll/jquery.nicescroll', '../css/assets/jQuery-slimScroll-1.3.0/jquery.slimscroll', '../css/assets/skycons/skycons', '../css/assets/jquery.scrollTo/jquery.scrollTo', '../css/assets/calendar/clndr', '../css/assets/calendar/moment-2.2.1', 'calendar/evnt.calendar.init', '../css/assets/jvector-map/jquery-jvectormap-1.2.2.min', '../css/assets/jvector-map/jquery-jvectormap-us-lcc-en', '../css/assets/gauge/gauge', '../css/assets/css3clock/js/script', '../css/assets/easypiechart/jquery.easypiechart', '../css/assets/easypiechart/jquery.easypiechart', '../css/assets/sparkline/jquery.sparkline', '../css/assets/morris-chart/morris', '../css/assets/morris-chart/raphael-min', '../css/assets/flot-chart/jquery.flot', '../css/assets/flot-chart/jquery.flot.tooltip.min', '../css/assets/flot-chart/jquery.flot.resize', '../css/assets/flot-chart/jquery.flot.pie.resize', '../css/assets/flot-chart/jquery.flot.animator.min', '../css/assets/flot-chart/jquery.flot.growraf', 'dashboard', 'custom-select/jquery.customSelect.min', 'scripts', 'http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js', 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'));
+?>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
-<script src="assets/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-<script src="assets/skycons/skycons.js"></script>
-<script src="assets/jquery.scrollTo/jquery.scrollTo.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<script src="assets/calendar/clndr.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-<script src="assets/calendar/moment-2.2.1.js"></script>
-<script src="js/calendar/evnt.calendar.init.js"></script>
-<script src="assets/jvector-map/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="assets/jvector-map/jquery-jvectormap-us-lcc-en.js"></script>
-<script src="assets/gauge/gauge.js"></script>
-<!--clock init-->
-<script src="assets/css3clock/js/script.js"></script>
-<!--Easy Pie Chart-->
-<script src="assets/easypiechart/jquery.easypiechart.js"></script>
-<!--Sparkline Chart-->
-<script src="assets/sparkline/jquery.sparkline.js"></script>
-<!--Morris Chart-->
-<script src="assets/morris-chart/morris.js"></script>
-<script src="assets/morris-chart/raphael-min.js"></script>
-<!--jQuery Flot Chart-->
-<script src="assets/flot-chart/jquery.flot.js"></script>
-<script src="assets/flot-chart/jquery.flot.tooltip.min.js"></script>
-<script src="assets/flot-chart/jquery.flot.resize.js"></script>
-<script src="assets/flot-chart/jquery.flot.pie.resize.js"></script>
-<script src="assets/flot-chart/jquery.flot.animator.min.js"></script>
-<script src="assets/flot-chart/jquery.flot.growraf.js"></script>
-<script src="js/dashboard.js"></script>
-<script src="js/custom-select/jquery.customSelect.min.js" ></script>
-<!--common script init for all pages-->
-<script src="js/scripts.js"></script>
-
 <!--script for this page-->
 </body>
 </html>
