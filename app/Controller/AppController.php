@@ -31,10 +31,27 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	public $components = array('Session');
+	public $components = array(
+	    'Session',
+	    'Auth' => array(
+	        'loginAction' => array(
+	            'plugin' => '',
+	            'controller' => 'pages',
+	            'action' => 'home'
+	        ),
+	        'loginRedirect' => '/',
+	        'logoutRedirect' => '/',
+	        'authenticate' => array(
+	            'all' => array('userModel' => 'User'),
+	            'Facebook.Oauth'
+	        )
+	    )
+	);
+
+	public $helpers = array('Facebook.Facebook');
 
     public function beforeFilter() {
-    	//$this->Auth->allow(array('display', 'index', 'add'));
+    	$this->Auth->allow(array('login', 'logout', 'teste'));
     	$this->Session->write('choosed', '1');
 	}
 }

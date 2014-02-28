@@ -1,0 +1,46 @@
+<<<<<<< HEAD
+<div class="users form">
+<?php echo $this->Session->flash('auth'); ?>
+<?php echo $this->Form->create('User');?>
+<?php 
+	echo $this->Html->css(array('bootstrap.min', 'nfchurch', 'datepicker'));
+    echo $this->Html->script(array('jquery.js', 'bootstrap.js', 'bootstrap-datepicker.js'));
+?>
+    <fieldset class="col-md-7">
+        <legend><?php echo __(''); ?></legend>
+        <?php echo $this->Form->input('username', array('label' => 'Email', 'class' => 'col-md-6 form-control'));
+        echo $this->Form->input('password', array('label' => 'Senha', 'class' => 'col-md-6 form-control'));
+        echo $this->Form->end(__('Login', array('style' => 'margin-top:10px')));
+    ?>
+    </fieldset>
+
+</div>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NFCHURCH</title>
+	<?php echo $this->Html->css(array('bootstrap.min', 'nfchurch', 'login')); ?>
+	<?php echo $this->Html->script(array('jquery.js', 'bootstrap.js', 'bootstrap-datepicker.js')); ?>
+</head>
+<body>
+	<div class="login_box">
+		<h1>Bem vindo ao sistema NFCHURCH</h1>
+		<h5>"Aqui uma passagem da bíblia"</h5>
+		<?php
+
+		echo $this->Session->flash('auth');
+		echo $this->Form->create('User', array('role' => 'form'));		
+
+		echo $this->Form->input('username', array('label' => false, 'class' => 'col-md-8 form-control br', 'div' => false));
+
+		echo $this->Form->input('password', array('label' => false, 'class' => 'col-md-8 form-control br', 'div' => false));
+
+		//echo $this->Form->input('password', array('label' => 'Senha', 'class' => 'col-md-6 form-control'));
+		echo $this->Form->end(__('Login', array('class' => 'btn btn-primary', 'type' => 'button')));
+
+		?>
+	</div>
+</body>
+</html>
+>>>>>>> 45eaffbff645962746f41c2127d51a3afb5fc4fb
