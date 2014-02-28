@@ -2,6 +2,8 @@
 	class ProfissaosController extends SecretariaAppController{
 		public function index(){
 
+			$this->layout = false;
+
 			$conditions = array();
 			unset($this->request->data['submit']);
 			if (!empty($this->request->data['filtro'])) {;
@@ -11,6 +13,9 @@
 		}
 
 		public function add(){
+
+			$this->layout = false;
+
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$this->Profissao->create();
 				if ($this->Profissao->saveAll($this->request->data)) {
@@ -23,6 +28,9 @@
 		}
 
 		public function view($id = null){
+
+			$this->layout = false;
+
 			$this->Profissao->id = $id;
 			if (!empty($this->Profissao->id)) {
 				$this->request->data = $this->Profissao->read(null, $id);
@@ -32,6 +40,9 @@
 		}
 
 		public function edit($id = null){
+
+			$this->layout = false;
+
 			$this->Profissao->id = $id;
 			if (empty($this->Profissao->id)) {
 				throw new Exception("Profissão Inexistente");
@@ -55,6 +66,9 @@
 		}
 
 		public function delete(){
+
+			$this->layout = false;
+			
 			if (!empty($this->request->data['Profissao'])) {
 				foreach ($this->request->data['Profissao'] as $idProfissao) {
 					$this->Profissao->delete($idProfissao);

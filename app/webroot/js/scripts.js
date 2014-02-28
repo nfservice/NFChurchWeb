@@ -286,3 +286,6 @@ var Script = function () {
 //    });
 }();
 
+function ajaxload(url) {
+    $(".wrapper").load(url);
+}
