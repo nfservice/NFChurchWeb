@@ -1,12 +1,14 @@
 <?php
 	class VisitantesController extends SecretariaAppController{
 		public function index(){
+			$this->layout = false;
 			$conditions = array();
 			$conditions['Visitante.tipo ='] = 2;
 			$this->set('visitantes', $this->paginate(null, $conditions));
 			//
 		}
 		public function add(){
+			$this->layout = false;
 			$this->loadModel('Estado');
 			if ($this->request->is('post') || $this->request->is('put')) {
 				if (!empty($this->request->data['Visitante']['datanascimento'])) {
@@ -51,7 +53,9 @@
 			}
 			//
 		}
-		public function view($id = null){
+		public function view($id = null)
+		{
+			$this->layout = false;
 			$this->Visitante->id = $id;
 			if (!$this->Visitante->exists()) {
 				throw new NotFoundException(__('Visitante inválido.'));	
@@ -63,20 +67,21 @@
 			//$this->layout = '';
 		}
 		public function delete($id = null)
-	{
-		if (!$this->request->is('post') || $this->request->is('put')) {
-			throw new MethodNotAllowedException();
-		}
-		$this->request->data = $this->Visitante->read(null, $id);
-		$this->Visitante->id = $id;
-		if (!$this->Visitante->exists()) {
-			throw new NotFoundException(__('Visitante inválido.'));
-		}
-		if ($this->Visitante->delete()) {
-			$this->Session->setFlash(__('Visitante deletado com sucesso.'));
+		{
+			$this->layout = false;
+			if (!$this->request->is('post') || $this->request->is('put')) {
+				throw new MethodNotAllowedException();
+			}
+			$this->request->data = $this->Visitante->read(null, $id);
+			$this->Visitante->id = $id;
+			if (!$this->Visitante->exists()) {
+				throw new NotFoundException(__('Visitante inválido.'));
+			}
+			if ($this->Visitante->delete()) {
+				$this->Session->setFlash(__('Visitante deletado com sucesso.'));
+				$this->redirect(array('action' => 'index'));
+			}
+			$this->Session->setFlash(__('O Visitante não pôde ser deletado.'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('O Visitante não pôde ser deletado.'));
-		$this->redirect(array('action' => 'index'));
-	}
 	}

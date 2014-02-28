@@ -4,12 +4,23 @@
 	});
 	$(".habilita_campos").on('click', function(){
 		$("input, select, textarea, radio, checkbox").removeAttr('disabled');
-		$("#futuro-salvar").attr('class', 'btn-primary').attr('data-toggle', 'modal').attr('href', '#confirmar').html('Salvar dados');
+		//$("#futuro-salvar").attr('class', 'btn btn-primary').attr('data-toggle', 'modal').removeAttr('id').attr('href', '#confirmar').html('Salvar dados');
+		$("#futuro-salvar").remove("#futuro-salvar");
+		$("#salvar-dados").removeAttr("style");
 
 		return false;
 	});
 </script>
+
+
+
+
 <div class="col-lg-12">
+	<ul class="breadcrumb">
+		<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#">Secretaria</a></li>
+		<li class="active">Visitantes</li>
+	</ul>
 	<?php echo $this->Form->create('Visitante', array('role' => 'form', 'class' => 'desable-form')); ?>
 	<section class="panel">
 		<header class="panel-heading">Editar o visitante <b><?php echo $this->request->data['Visitante']['nome']; ?></b></header>
@@ -37,6 +48,7 @@
 				echo $this->Form->input('Endereco.estado_id', arraY('label' => 'Estado', 'options' => $estados, 'class' => 'form-control', 'class' => 'form-control', 'div' => array('class' => 'col-md-6')));
 				?>
 			</div>
+
 		</div>
 	</section>
 	<div class="modal fade" id="confirmar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -44,28 +56,30 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Modal Tittle</h4>
+					<h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> Confirme as alterações dos dados</h4>
 				</div>
 				<div class="modal-body">
 
-					Body goes here...
+					Tem certeza de que quer salvar as alterações nesse cadastro?
 
 				</div>
 				<div class="modal-footer">
-					<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-					<button class="btn btn-warning" type="button"> Confirm</button>
+					<button data-dismiss="modal" class="btn btn-default" type="button">Não quero mais salvar</button>
+					<input class="btn btn-warning" type="submit" value="Sim, quero salvar"> 
 				</div>
 			</div>
 		</div>
 	</div>
 	<?php
-		echo $this->Form->input('Voltar', array('type' => 'button', 'label' => false, 'class' => 'btn btn-info', 'onclick' => 'ajaxload(\'/nfchurch/secretaria/visitantes/\');', 'div' => array('class' => 'col-md-1')));
+	echo $this->Form->input('Voltar', array('type' => 'button', 'label' => false, 'class' => 'btn btn-info', 'onclick' => 'ajaxload(\'/nfchurch/secretaria/visitantes/\');', 'div' => array('class' => 'col-md-1')));
 	?>
 	<div class="col-md-1">
 		<a class="btn btn-warning habilita_campos" id="futuro-salvar">Habilitar Edição</a>
+		<a class="btn btn-primary" id="salvar-dados" data-toggle="modal" href="#confirmar" style="display:none">Salvar alterações</a>
 	</div>
+	
 	<?php
-		echo $this->Form->end();
+	echo $this->Form->end();
 	?>
 
 </div>

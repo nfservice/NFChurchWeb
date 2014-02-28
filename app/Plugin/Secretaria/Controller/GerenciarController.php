@@ -1,7 +1,7 @@
 <?php
 	class GerenciarController extends SecretariaAppController{
 		public function index(){
-
+			$this->layout = false;
 		}
 
 		public function add(){

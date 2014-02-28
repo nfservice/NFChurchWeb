@@ -11,12 +11,15 @@
     <?php 
         //array com os cores css
     echo $this->Html->css(array('bootstrap.min', 'assets/jquery-ui/jquery-ui-1.10.1.custom.min', 'bootstrap-reset', 'assets/font-awesome/css/font-awesome', 'assets/jvector-map/jquery-jvectormap-1.2.2', 'clndr', 'nfchurch'));
+
         //clock css
     echo $this->Html->css('assets/css3clock/css/style');
         //Morris Chart CSS
     echo $this->Html->css('assets/morris-chart/morris');
         //custom styles for this template
     echo $this->Html->css(array('style', 'style-responsive'));
+
+    echo $this->Html->script('lib/jquery');
     ?>
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="js/ie8/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -164,7 +167,7 @@
                     <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" src="images/avatar1_small.jpg">
+                            <?php echo $this->Html->image('default_large.png', array('width' => 33)); ?>
                             <span class="username">Nome do Usuário Fics</span>
                             <b class="caret"></b>
                         </a>
@@ -175,11 +178,6 @@
                         </ul>
                     </li>
                     <!-- user login dropdown end -->
-                    <li>
-                        <div class="toggle-right-box">
-                            <div class="fa fa-bars"></div>
-                        </div>
-                    </li>
                 </ul>
                 <!--search & user info end-->
             </div>
@@ -202,8 +200,9 @@
                             <span>Secretaria</span>
                         </a>
                         <ul class="sub">
-                            <li><a class="ajaxload" href="javascript:;" >Cadastros</a></li>
-                            <li><a href="<?php echo $this->Html->url(array('controller' => 'secretaria', 'action' => 'relatorios')); ?>">Relatórios</a></li>
+                            <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'index')); ?>');" href="javascript:;" >Visitantes</a></li>
+                            <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'profissaos', 'action' => 'index')); ?>');">Profissões</a></li>
+                            <li><a onclick="<?php echo $this->Html->url(array('controller' => 'secretaria', 'action' => 'relatorios')); ?> href="javascript:;"">Relatórios</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -281,260 +280,11 @@
         </section>
     </section>
     <!--main content end-->
-    <!--right sidebar start-->
-    <div class="right-sidebar">
-        <div class="search-row">
-            <input type="text" placeholder="Procurar" class="form-control">
-        </div>
-        <ul class="right-side-accordion">
-            <li class="widget-collapsible">
-                <a href="#" class="head widget-head red-bg active clearfix">
-                    <span class="pull-left">work progress (5)</span>
-                    <span class="pull-right widget-collapse"><i class="ico-minus"></i></span>
-                </a>
-                <ul class="widget-container">
-                    <li>
-                        <div class="prog-row side-mini-stat clearfix">
-                            <div class="side-graph-info">
-                                <h4>Target sell</h4>
-                                <p>
-                                    25%, Deadline 12 june 13
-                                </p>
-                            </div>
-                            <div class="side-mini-graph">
-                                <div class="target-sell">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="prog-row side-mini-stat">
-                            <div class="side-graph-info">
-                                <h4>product delivery</h4>
-                                <p>
-                                    55%, Deadline 12 june 13
-                                </p>
-                            </div>
-                            <div class="side-mini-graph">
-                                <div class="p-delivery">
-                                    <div class="sparkline" data-type="bar" data-resize="true" data-height="30" data-width="90%" data-bar-color="#39b7ab" data-bar-width="5" data-data="[200,135,667,333,526,996,564,123,890,564,455]">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="prog-row side-mini-stat">
-                            <div class="side-graph-info payment-info">
-                                <h4>payment collection</h4>
-                                <p>
-                                    25%, Deadline 12 june 13
-                                </p>
-                            </div>
-                            <div class="side-mini-graph">
-                                <div class="p-collection">
-                                  <span class="pc-epie-chart" data-percent="45">
-                                      <span class="percent"></span>
-                                  </span>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="prog-row side-mini-stat">
-                        <div class="side-graph-info">
-                            <h4>delivery pending</h4>
-                            <p>
-                                44%, Deadline 12 june 13
-                            </p>
-                        </div>
-                        <div class="side-mini-graph">
-                            <div class="d-pending">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="prog-row side-mini-stat">
-                        <div class="col-md-12">
-                            <h4>total progress</h4>
-                            <p>
-                                50%, Deadline 12 june 13
-                            </p>
-                            <div class="progress progress-xs mtop10">
-                                <div style="width: 50%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-info">
-                                    <span class="sr-only">50% Complete</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </li>
-        <li class="widget-collapsible">
-            <a href="#" class="head widget-head terques-bg active clearfix">
-                <span class="pull-left">contact online (5)</span>
-                <span class="pull-right widget-collapse"><i class="ico-minus"></i></span>
-            </a>
-            <ul class="widget-container">
-                <li>
-                    <div class="prog-row">
-                        <div class="user-thumb">
-                            <a href="#"><img src="images/avatar1_small.jpg" alt=""></a>
-                        </div>
-                        <div class="user-details">
-                            <h4><a href="#">Jonathan Smith</a></h4>
-                            <p>
-                                Work for fun
-                            </p>
-                        </div>
-                        <div class="user-status text-danger">
-                            <i class="fa fa-comments-o"></i>
-                        </div>
-                    </div>
-                    <div class="prog-row">
-                        <div class="user-thumb">
-                            <a href="#"><img src="images/avatar1.jpg" alt=""></a>
-                        </div>
-                        <div class="user-details">
-                            <h4><a href="#">Anjelina Joe</a></h4>
-                            <p>
-                                Available
-                            </p>
-                        </div>
-                        <div class="user-status text-success">
-                            <i class="fa fa-comments-o"></i>
-                        </div>
-                    </div>
-                    <div class="prog-row">
-                        <div class="user-thumb">
-                            <a href="#"><img src="images/chat-avatar2.jpg" alt=""></a>
-                        </div>
-                        <div class="user-details">
-                            <h4><a href="#">Jhone Doe</a></h4>
-                            <p>
-                                Away from Desk
-                            </p>
-                        </div>
-                        <div class="user-status text-warning">
-                            <i class="fa fa-comments-o"></i>
-                        </div>
-                    </div>
-                    <div class="prog-row">
-                        <div class="user-thumb">
-                            <a href="#"><img src="images/avatar1_small.jpg" alt=""></a>
-                        </div>
-                        <div class="user-details">
-                            <h4><a href="#">Mark Henry</a></h4>
-                            <p>
-                                working
-                            </p>
-                        </div>
-                        <div class="user-status text-info">
-                            <i class="fa fa-comments-o"></i>
-                        </div>
-                    </div>
-                    <div class="prog-row">
-                        <div class="user-thumb">
-                            <a href="#"><img src="images/avatar1.jpg" alt=""></a>
-                        </div>
-                        <div class="user-details">
-                            <h4><a href="#">Shila Jones</a></h4>
-                            <p>
-                                Work for fun
-                            </p>
-                        </div>
-                        <div class="user-status text-danger">
-                            <i class="fa fa-comments-o"></i>
-                        </div>
-                    </div>
-                    <p class="text-center">
-                        <a href="#" class="view-btn">View all Contacts</a>
-                    </p>
-                </li>
-            </ul>
-        </li>
-        <li class="widget-collapsible">
-            <a href="#" class="head widget-head purple-bg active">
-                <span class="pull-left"> recent activity (3)</span>
-                <span class="pull-right widget-collapse"><i class="ico-minus"></i></span>
-            </a>
-            <ul class="widget-container">
-                <li>
-                    <div class="prog-row">
-                        <div class="user-thumb rsn-activity">
-                            <i class="fa fa-clock-o"></i>
-                        </div>
-                        <div class="rsn-details ">
-                            <p class="text-muted">
-                                just now
-                            </p>
-                            <p>
-                                <a href="#">John Sinna </a>Purchased new equipments for zonal office setup
-                            </p>
-                        </div>
-                    </div>
-                    <div class="prog-row">
-                        <div class="user-thumb rsn-activity">
-                            <i class="fa fa-clock-o"></i>
-                        </div>
-                        <div class="rsn-details ">
-                            <p class="text-muted">
-                                2 min ago
-                            </p>
-                            <p>
-                                <a href="#">Sumon </a>Purchased new equipments for zonal office setup
-                            </p>
-                        </div>
-                    </div>
-                    <div class="prog-row">
-                        <div class="user-thumb rsn-activity">
-                            <i class="fa fa-clock-o"></i>
-                        </div>
-                        <div class="rsn-details ">
-                            <p class="text-muted">
-                                1 day ago
-                            </p>
-                            <p>
-                                <a href="#">Mosaddek </a>Purchased new equipments for zonal office setup
-                            </p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </li>
-        <li class="widget-collapsible">
-            <a href="#" class="head widget-head yellow-bg active">
-                <span class="pull-left"> shipment status</span>
-                <span class="pull-right widget-collapse"><i class="ico-minus"></i></span>
-            </a>
-            <ul class="widget-container">
-                <li>
-                    <div class="col-md-12">
-                        <div class="prog-row">
-                            <p>
-                                Full sleeve baby wear (SL: 17665)
-                            </p>
-                            <div class="progress progress-xs mtop10">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                    <span class="sr-only">40% Complete</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="prog-row">
-                            <p>
-                                Full sleeve baby wear (SL: 17665)
-                            </p>
-                            <div class="progress progress-xs mtop10">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                    <span class="sr-only">70% Completed</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</div>
-<!--right sidebar end-->
 </section>
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
 <?php 
-    echo $this->Html->script(array('lib/jquery', '../css/assets/jquery-ui/jquery-ui-1.10.1.custom.min', '../css/bs3/js/bootstrap.min', 'accordion-menu/jquery.dcjqaccordion.2.7', 'scrollTo/jquery.scrollTo.min', 'nicescroll/jquery.nicescroll', '../css/assets/jQuery-slimScroll-1.3.0/jquery.slimscroll', '../css/assets/skycons/skycons', '../css/assets/jquery.scrollTo/jquery.scrollTo', '../css/assets/calendar/clndr', '../css/assets/calendar/moment-2.2.1', 'calendar/evnt.calendar.init', '../css/assets/jvector-map/jquery-jvectormap-1.2.2.min', '../css/assets/jvector-map/jquery-jvectormap-us-lcc-en', '../css/assets/gauge/gauge', '../css/assets/css3clock/js/script', '../css/assets/easypiechart/jquery.easypiechart', '../css/assets/easypiechart/jquery.easypiechart', '../css/assets/sparkline/jquery.sparkline', '../css/assets/morris-chart/morris', '../css/assets/morris-chart/raphael-min', '../css/assets/flot-chart/jquery.flot', '../css/assets/flot-chart/jquery.flot.tooltip.min', '../css/assets/flot-chart/jquery.flot.resize', '../css/assets/flot-chart/jquery.flot.pie.resize', '../css/assets/flot-chart/jquery.flot.animator.min', '../css/assets/flot-chart/jquery.flot.growraf', 'dashboard', 'custom-select/jquery.customSelect.min', 'http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js', 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js', 'scripts'));
+    echo $this->Html->script(array('../css/assets/jquery-ui/jquery-ui-1.10.1.custom.min', '../css/bs3/js/bootstrap.min', 'accordion-menu/jquery.dcjqaccordion.2.7', 'scrollTo/jquery.scrollTo.min', 'nicescroll/jquery.nicescroll', '../css/assets/jQuery-slimScroll-1.3.0/jquery.slimscroll', '../css/assets/skycons/skycons', '../css/assets/jquery.scrollTo/jquery.scrollTo', '../css/assets/calendar/clndr', '../css/assets/calendar/moment-2.2.1', 'calendar/evnt.calendar.init', '../css/assets/jvector-map/jquery-jvectormap-1.2.2.min', '../css/assets/jvector-map/jquery-jvectormap-us-lcc-en', '../css/assets/gauge/gauge', '../css/assets/css3clock/js/script', '../css/assets/easypiechart/jquery.easypiechart', '../css/assets/easypiechart/jquery.easypiechart', '../css/assets/sparkline/jquery.sparkline', '../css/assets/morris-chart/morris', '../css/assets/morris-chart/raphael-min', '../css/assets/flot-chart/jquery.flot', '../css/assets/flot-chart/jquery.flot.tooltip.min', '../css/assets/flot-chart/jquery.flot.resize', '../css/assets/flot-chart/jquery.flot.pie.resize', '../css/assets/flot-chart/jquery.flot.animator.min', '../css/assets/flot-chart/jquery.flot.growraf', 'dashboard', 'custom-select/jquery.customSelect.min', 'http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js', 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js', 'scripts'));
 ?>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <!--script for this page-->
