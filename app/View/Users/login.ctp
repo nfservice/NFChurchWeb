@@ -41,25 +41,11 @@ gt;
                 <input type="checkbox" value="remember-me"> Lembre para mim
                 <span class="pull-right">
                     <a data-toggle="modal" href="#myModal"> Esqueci minha senha</a>
-
+                    <?php 
+                      echo $this->Html->link('Facebook Login', $fb_login_url) . ' | '; ?>
                 </span>
             </label>
             <button class="btn btn-lg btn-login btn-block" type="submit">Entrar</button>
-            <?php
-              // The text of the link
-              $label = "Facebook Login!";
-
-              // The same options as HtmlHelper::link()
-              $options = array(
-                  'class' => 'btn',
-                  'id' => 'facebook'
-              );
-
-              // The permissions we need from the user
-              $permissions = array('email','user_photos');
-
-              echo $this->Facebook->loginButton($label, $options, $permissions);
-            ?>
             <div class="registration">
                 Desenvolvido por
                 <a class="" target="_blank" href="https://www.nfservice.com.br">
