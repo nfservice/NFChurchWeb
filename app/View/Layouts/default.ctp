@@ -10,16 +10,39 @@
     <!--Core CSS -->
     <?php 
         //array com os cores css
-    echo $this->Html->css(array('bootstrap.min', 'assets/jquery-ui/jquery-ui-1.10.1.custom.min', 'bootstrap-reset', 'assets/font-awesome/css/font-awesome', 'assets/jvector-map/jquery-jvectormap-1.2.2', 'clndr', 'nfchurch'));
+    echo $this->Html->css(array(
+        'bootstrap.min', 
+        'assets/jquery-ui/jquery-ui-1.10.1.custom.min', 
+        'bootstrap-reset', 
+        'assets/font-awesome/css/font-awesome', 
+        'assets/jvector-map/jquery-jvectormap-1.2.2', 
+        'clndr',
+        'assets/morris-chart/morris.css',
+        'style',
+        'style-responsive.css',
+        'nfchurch'
+        ));
 
-        //clock css
     echo $this->Html->css('assets/css3clock/css/style');
         //Morris Chart CSS
     echo $this->Html->css('assets/morris-chart/morris');
-        //custom styles for this template
-    echo $this->Html->css(array('style', 'style-responsive'));
 
-    echo $this->Html->script('lib/jquery');
+    echo $this->Html->script(array('lib/jquery', 'bootstrap.min.js'));
+
+    echo $this->Html->css(array(
+        'assets/bootstrap-switch-master/build/css/bootstrap3/bootstrap-switch.css',
+        'assets/bootstrap-fileupload/bootstrap-fileupload.css',
+        'assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css',
+        'assets/bootstrap-datepicker/css/datepicker.css',
+        'assets/bootstrap-timepicker/compiled/timepicker.css',
+        'assets/bootstrap-colorpicker/css/colorpicker.css',
+        'assets/bootstrap-daterangepicker/daterangepicker-bs3.css',
+        'assets/bootstrap-datetimepicker/css/datetimepicker.css',
+        'assets/jquery-multi-select/css/multi-select.css',
+        'assets/jquery-tags-input/jquery.tagsinput.css',
+        'pace.css'
+        ));
+    
     ?>
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="js/ie8/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -283,8 +306,79 @@
 </section>
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
-<?php 
-    echo $this->Html->script(array('../css/assets/jquery-ui/jquery-ui-1.10.1.custom.min', '../css/bs3/js/bootstrap.min', 'accordion-menu/jquery.dcjqaccordion.2.7', 'scrollTo/jquery.scrollTo.min', 'nicescroll/jquery.nicescroll', '../css/assets/jQuery-slimScroll-1.3.0/jquery.slimscroll', '../css/assets/skycons/skycons', '../css/assets/jquery.scrollTo/jquery.scrollTo', '../css/assets/calendar/clndr', '../css/assets/calendar/moment-2.2.1', 'calendar/evnt.calendar.init', '../css/assets/jvector-map/jquery-jvectormap-1.2.2.min', '../css/assets/jvector-map/jquery-jvectormap-us-lcc-en', '../css/assets/gauge/gauge', '../css/assets/css3clock/js/script', '../css/assets/easypiechart/jquery.easypiechart', '../css/assets/easypiechart/jquery.easypiechart', '../css/assets/sparkline/jquery.sparkline', '../css/assets/morris-chart/morris', '../css/assets/morris-chart/raphael-min', '../css/assets/flot-chart/jquery.flot', '../css/assets/flot-chart/jquery.flot.tooltip.min', '../css/assets/flot-chart/jquery.flot.resize', '../css/assets/flot-chart/jquery.flot.pie.resize', '../css/assets/flot-chart/jquery.flot.animator.min', '../css/assets/flot-chart/jquery.flot.growraf', 'dashboard', 'custom-select/jquery.customSelect.min', 'http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js', 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js', 'scripts'));
+<?php
+
+    /*
+     * Responsável por carregar todos os scripts js básicos do site
+     * Todo script que não for específico por alguma coisa, carregar aqui
+     */
+    echo $this->Html->script(array(
+        /*'lib/jquery.js',
+        '../css/assets/jquery-ui/jquery-ui-1.10.1.custom.min.js',
+        'bootstrap.min.js',
+        'accordion-menu/jquery.dcjqaccordion.2.7.js',
+        'scrollTo/jquery.scrollTo.min.js',
+        'nicescroll/jquery.nicescroll.js',
+        '../css/assets/jQuery-slimScroll-1.3.0/jquery.slimscroll.js',
+        '../css/assets/skycons/skycons',
+        '../css/assets/jquery.scrollTo/jquery.scrollTo.js',
+        'jquery.easing.min.js',
+        '../css/assets/calendar/clndr',
+        '../css/assets/calendar/moment-2.2.1',
+        'calendar/evnt.calendar.init',
+        '../css/assets/jvector-map/jquery-jvectormap-1.2.2.min',
+        '../css/assets/jvector-map/jquery-jvectormap-us-lcc-en',
+        '../css/assets/gauge/gauge',
+        '../css/assets/css3clock/js/script',
+        '../css/assets/sparkline/jquery.sparkline.js', 
+        '../css/assets/morris-chart/morris',
+        '../css/assets/morris-chart/raphael-min',
+        '../css/assets/flot-chart/jquery.flot.js',
+        '../css/assets/flot-chart/jquery.flot.tooltip.min.js',
+        '../css/assets/flot-chart/jquery.flot.resize.js',
+        '../css/assets/flot-chart/jquery.flot.pie.resize.js',
+        '../css/assets/flot-chart/jquery.flot.animator.min',
+        '../css/assets/flot-chart/jquery.flot.growraf',
+        'dashboard',*/
+        'custom-select/jquery.customSelect.min',
+        '../css/assets/gritter/js/jquery.gritter.js',
+        'toggle-button/toggle-init.js',
+        'accordion-menu/jquery.dcjqaccordion.2.7',
+        'scrollTo/jquery.scrollTo.min',
+        'nicescroll/jquery.nicescroll',
+        'accordion-menu/jquery.dcjqaccordion.2.7.js', 
+        '../css/assets/jquery-ui/jquery-ui-1.10.1.custom.min',
+        '../css/assets/jQuery-slimScroll-1.3.0/jquery.slimscroll', 
+        '../css/assets/jquery.scrollTo/jquery.scrollTo', 
+        '../css/assets/bootstrap-inputmask/bootstrap-inputmask.min.js', 
+        '../css/assets/jquery-tags-input/jquery.tagsinput.js',
+        'jquery.form.js',
+        'scripts',
+        '../css/assets/sparkline/jquery.sparkline',
+        '../css/assets/easypiechart/jquery.easypiechart.js',
+        '../css/assets/bootstrap-switch-master/build/js/bootstrap-switch.js',
+        '../css/assets/fuelux/js/spinner.min.js',
+        '../css/assets/bootstrap-fileupload/bootstrap-fileupload.js',
+        '../css/assets/bootstrap-wysihtml5/wysihtml5-0.3.0.js',
+        '../css/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.js',
+        '../css/assets/bootstrap-datepicker/js/bootstrap-datepicker.js',
+        '../css/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js',
+        '../css/assets/bootstrap-daterangepicker/moment.min.js',
+        '../css/assets/bootstrap-daterangepicker/daterangepicker.js',
+        '../css/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js',
+        '../css/assets/bootstrap-timepicker/js/bootstrap-timepicker.js',
+        '../css/assets/jquery-multi-select/js/jquery.multi-select.js',
+        '../css/assets/jquery-multi-select/js/jquery.quicksearch.js',
+        'gritter/gritter.js',
+        'advanced-form/advanced-form.js',
+        'underscore-min.js',
+        'pace.js',
+        'underscore-min.map',
+        '../css/assets/flot-chart/jquery.flot', 
+        '../css/assets/flot-chart/jquery.flot.tooltip.min', 
+        '../css/assets/flot-chart/jquery.flot.resize', 
+        '../css/assets/flot-chart/jquery.flot.pie.resize'
+        ));
 ?>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <!--script for this page-->

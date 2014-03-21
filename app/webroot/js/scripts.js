@@ -286,6 +286,83 @@ var Script = function () {
 //    });
 }();
 
-function ajaxload(url) {
-    $(".wrapper").load(url);
+//função que faz marcar todos os checkbox dentro de uma div
+function MarcarTodos(div, checked){
+    console.debug(div);
+    if(checked){
+        $('#'+div+' input[type=checkbox]').attr('checked', 'checked');
+    }else{
+        $('#'+div+' input[type=checkbox]').removeAttr('checked');
+    }
 }
+
+    /*
+     * Função que faz carregar a div de load no na view para carregar outra página
+     */
+
+     //pace
+    paceOptions = {
+        elements: true
+    };
+
+function ajaxload(url) {
+    //$(".wrapper").html('<div class="load-div"><h2 class="loading">Carregando...</h2><div class="progress progress-striped active progress-sm"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"><span class="sr-only">Carregando...</span></div></div></div>');
+
+    /* 
+     * Função que faz a barra de progresso entrar em ação
+     * Depois que a barra de progresso entrar em ação, faz com que carregue uma view na div ".wrapper"
+     */
+
+    $(".wrapper").html(''); // Apaga todo o HTML da div ".wrapper"
+    setTimeout(function(){
+        $(".wrapper").load(url, function() {
+            Pace.start();
+            $('form').ajaxForm({ 
+                success: function(data) { 
+                    return false;
+                } 
+            }), Pace.stop();
+        })
+    }, 300);
+}
+
+$(document).ready(function() {
+    /* 
+     * Para ativar a função em algum elemento, coloque a classe "menuRoll" sobre a mesma
+     * Se não funcionar, verifique a classe que verifica se aquele elemento já chegou no TOP. Obrigado
+     * Se não funcionar ainda, esquece, vai pro google.
+     */
+
+    //verifica o tamanho da janela do navegador/dispositivo do cliente
+    var windowMax = $(document).width();
+    if (windowMax > 765) {
+
+        //cria a função que cria o box flutuante de opções
+        var stickyNaves = function() {  
+            var scrollTop = $(window).scrollTop();
+            var topCss = $(".brand").css("height");
+            topCss = topCss.replace('px', '');
+            var novoTopCss = parseInt(topCss) - 20;
+
+            if (scrollTop > novoTopCss) {
+
+                var cssAdd = $(".breadcrumb").css("width");
+                var marginActive = (topCss * -1) + 20;
+                marginActive = marginActive + 'px';                   
+                $('.menuRoll').addClass('navBares').css("width", cssAdd).css("margin-top", marginActive);
+
+                var heightFix = $(".menuRoll").css("height");
+                $('.menuRollNext').css("margin-top", heightFix);
+            } else {  
+                $('.menuRoll').removeClass('navBares').removeAttr('style');
+                $('.menuRollNext').css("margin-top", 0);
+            }
+        };
+
+        stickyNaves();  
+
+        $(window).scroll(function() {  
+            stickyNaves();  
+        });
+    }   
+});

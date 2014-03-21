@@ -32,7 +32,7 @@ App::uses('Controller', 'Controller');
  */
 App::import('Vendor', 'Facebook', array('file' => 'facebook-php/src/facebook.php'));
 class AppController extends Controller {
-	public $components = array('Auth', 'Session');
+	public $components = array(/*'Auth', */'Session');
 
 	public $fb_url;
 
@@ -41,13 +41,13 @@ class AppController extends Controller {
 	        'appId'     =>  '266658286843599',
 	        'secret'    =>  '970cebae1c0f9a6b7bfd15cc6912d12d'
 	    ));
-    	$this->Auth->allow(array('login', 'logout', 'teste', 'index'));
+    	//$this->Auth->allow(array('login', 'logout', 'teste', 'index'));
     	$this->Session->write('choosed', '1');
 	}
 
 	public function beforeRender() {
 		$this->fb_url = $this->Facebook->getLoginUrl(array('scope' => 'read_stream, friends_likes, email', 'display' => 'page','redirect_uri' => Router::url(array('controller' => 'users', 'action' => 'login'), true)));
 	    $this->set('fb_login_url', $this->fb_url);
-	    $this->set('user', $this->Auth->user());
+	    //$this->set('user', $this->Auth->user());
 	}
 }
