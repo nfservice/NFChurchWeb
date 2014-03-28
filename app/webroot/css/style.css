@@ -5290,3 +5290,10 @@ div.tagsinput span.tag {
     color:#fff !important;
     font-size: 12px;
 }
+
+.navBares {
+    position: fixed;
+    z-index: 99;
+    -webkit-box-shadow: 0 0 10px 2px rgba(120,120,120,.5);
+    box-shadow: 0 0 10px 2px rgba(120,120,120,.5);
+}

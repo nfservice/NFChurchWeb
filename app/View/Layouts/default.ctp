@@ -11,7 +11,7 @@
     <?php 
         //array com os cores css
     echo $this->Html->css(array(
-        'bootstrap.min', 
+        'bootstrap', 
         'assets/jquery-ui/jquery-ui-1.10.1.custom.min', 
         'bootstrap-reset', 
         'assets/font-awesome/css/font-awesome', 
@@ -313,7 +313,7 @@
      * Todo script que não for específico por alguma coisa, carregar aqui
      */
     echo $this->Html->script(array(
-        /*'lib/jquery.js',
+        'lib/jquery.js',
         '../css/assets/jquery-ui/jquery-ui-1.10.1.custom.min.js',
         'bootstrap.min.js',
         'accordion-menu/jquery.dcjqaccordion.2.7.js',
@@ -339,7 +339,7 @@
         '../css/assets/flot-chart/jquery.flot.pie.resize.js',
         '../css/assets/flot-chart/jquery.flot.animator.min',
         '../css/assets/flot-chart/jquery.flot.growraf',
-        'dashboard',*/
+        'dashboard',
         'custom-select/jquery.customSelect.min',
         '../css/assets/gritter/js/jquery.gritter.js',
         'toggle-button/toggle-init.js',
@@ -352,7 +352,6 @@
         '../css/assets/jquery.scrollTo/jquery.scrollTo', 
         '../css/assets/bootstrap-inputmask/bootstrap-inputmask.min.js', 
         '../css/assets/jquery-tags-input/jquery.tagsinput.js',
-        'jquery.form.js',
         'scripts',
         '../css/assets/sparkline/jquery.sparkline',
         '../css/assets/easypiechart/jquery.easypiechart.js',
@@ -377,7 +376,8 @@
         '../css/assets/flot-chart/jquery.flot', 
         '../css/assets/flot-chart/jquery.flot.tooltip.min', 
         '../css/assets/flot-chart/jquery.flot.resize', 
-        '../css/assets/flot-chart/jquery.flot.pie.resize'
+        '../css/assets/flot-chart/jquery.flot.pie.resize',
+        'jquery.form.js'
         ));
 ?>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->

@@ -2,10 +2,14 @@
 	class VisitantesController extends SecretariaAppController{
 		public function index(){
 			$this->layout = false;
+			
+			$this->loadModel('Estado');
+			$estados = $this->Estado->find('list', array('fields' => array('codibge', 'sigla')));
+			$this->set('estados', $estados);
+
 			$conditions = array();
 			$conditions['Visitante.tipo ='] = 2;
 			$this->set('visitantes', $this->paginate(null, $conditions));
-			//
 		}
 		public function add(){
 			$this->layout = false;

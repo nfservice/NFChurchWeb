@@ -1,31 +1,55 @@
-<div class="col-lg-12">
+<script type="text/javascript">
+	$("#addNewUser").on('click', function(){
+		$.get("<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'add')); ?>", function(data) {
+			$("#ModalAddNewUser .modal-body").html(data);
+			jQuery.noConflict();
+			$("#ModalAddNewUser").modal("show");
+		});
+
+		return false;
+	});
+</script>
+
+<div class="col-md-12">		
+	<!--breadcrumbs start -->
 	<ul class="breadcrumb">
 		<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
 		<li><a href="#">Secretaria</a></li>
 		<li class="active">Visitantes</li>
 	</ul>
+	<!--breadcrumbs end -->
+</div>
+<div class="col-md-12">
+	<div class="panel menuRoll">
+		<div class="panel-body row">
+			<!-- form -->
+
+			<?php echo $this->Form->create(array('action' => 'index', 'role' => 'form')); ?>
+			<div class="form-group col-md-3">
+				<a class="btn btn-success form-control" id="addNewUser"><i class="fa fa-plus"></i> Adicionar Visitante</a>
+			</div>
+			<div class="form-group col-md-3">
+				<a href="<?php echo $this->Html->url(array('action' => 'add')); ?>" class="btn btn-danger form-control"><i class="fa fa-trash-o"></i> Apagar</a>
+			</div>
+			<div class="form-group col-md-6">
+				<div class="input-group m-bot15">
+					<input type="text" class="form-control" id="texto" name="username" placeholder="Pesquise aqui">
+					<span class="input-group-btn">
+						<input class="btn btn-success" type="submit" value="Buscar">
+					</span>
+				</div>
+			</div>
+			<!-- end form -->
+			<?php echo $this->Form->end(); ?>
+		</div>
+	</div>
+</div>
+<div class="col-lg-12 menuRollNext">
 	<section class="panel">
 		<header class="panel-heading">
 			Gerenciar Visitantes
 		</header>
 		<div class="panel-body">
-			<?php echo $this->Form->create(array('Pesquisa', 'role' => 'form')); ?>
-			<div class="col-md-2">
-				<div class="row">
-					<button type="button" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'add')); ?>');" class="btn btn-primary"><i class="fa fa-plus"></i> Novo Visitante</button>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="input-group m-bot15">
-					<input type="text" size="50" id="texto" name="filtro" placeholder="Filtre aqui" class="form-control">
-					<span class="input-group-btn">
-						<button class="btn btn-success" type="button">Pesquisar!</button>
-					</span>
-				</div>
-			</div>
-			<?php echo $this->Form->end(); ?>
-
-
 			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
@@ -46,4 +70,24 @@
 			</table>
 		</div>
 	</section>
-</div>
+
+	<!-- Modal -->
+	
+	<div class="modal fade" id="ModalAddNewUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Adicionar novo Visitante</h4>
+				</div>
+				<div class="modal-body">
+
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+    <!-- modal -->
