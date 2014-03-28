@@ -35,13 +35,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($membros as $membro) { ?>
-					<tr class="tr-visitantes-click" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => '', 'controller' => 'users', 'action' => 'edit', $membro['Membro']['id'])); ?>');">
-						<td><?php echo $membro['Membro']['nome']; ?></td>
-						<td><?php echo $membro['Membro']['email']; ?></td>
-						<td><?php echo $membro['Membro']['rg']; ?></td>
-						<td><?php echo $membro['Membro']['cpf']; ?></td>
-						<td><?php echo $membro['Membro']['fone']; ?></td>
+					<?php foreach ($users as $user) { ?>
+					<tr class="tr-visitantes-click" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => '', 'controller' => 'users', 'action' => 'edit', $user['User']['id'])); ?>');">
+						<td><?php echo $user['User']['nome']; ?></td>
+						<td><?php echo $user['User']['username']; ?></td>
+						<td><?php echo $user['User']['telefone']; ?></td>
 					</tr>
 					<?php } ?>
 				</tbody>

@@ -30,4 +30,26 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+	public function beforeFind($queryData){
+		//Carrega Componentes de Sessão Cake
+		App::uses('CakeSession', 'Model/Datasource');
+		$choosed = CakeSession::read('choosed');
+		//Verifica se o campo church_id existe na model e se $choosed não é vazio
+		if($this->hasField('church_id') && !empty($choosed))
+		{
+			//seta o church_id para pesquisa na model
+			$queryData['conditions'][$this->name.'.church_id']  = $choosed;
+		}
+		//retorna dados da pesquisa
+		return $queryData;
+	}
+
+	public function beforeSave($options = array()){
+		//Carrega Componentes de Sessão Cake
+	    App::uses('CakeSession', 'Model/Datasource');
+		$choosed = CakeSession::read('choosed');
+		//seta o campo curch_id com o valor de $choosed para ser salvo
+	    $this->data[$this->name]['church_id'] = $choosed;
+	    return true;
+	}
 }
