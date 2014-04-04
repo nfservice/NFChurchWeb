@@ -22,7 +22,7 @@
 				$this->Visitante->create();
 				if ($this->Visitante->saveAll($this->request->data)) {
 					$this->Session->setFlash('Visitante Cadastrado Com Sucesso');
-					$this->redirect(array('action' => 'index'));
+					//$this->redirect(array('action' => 'index'));
 				} else {
 					$this->Session->setFlash('Não Foi Possível Cadastrar o Visitante');
 				}
@@ -45,7 +45,7 @@
 				}
 				if ($this->Visitante->saveAll($this->request->data)) {
 					$this->Session->setFlash('Visitante Editado Com Sucesso!');
-					$this->redirect(array('action' => 'index'));
+					//$this->redirect(array('action' => 'index'));
 				} else {
 					$this->Session->setFlash('Impossivel Editar o Visitante');
 				}

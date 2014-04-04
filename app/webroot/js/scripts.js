@@ -50,10 +50,7 @@ $(function() {
         $(window).scroll(function() {  
             stickyNaves();  
         });
-    } 
-
-
-
+    }
 });
 
 
@@ -329,38 +326,85 @@ var Script = function () {
 }();
 
 //função que faz marcar todos os checkbox dentro de uma div
-function MarcarTodos(div, checked){
-    console.debug(div);
-    if(checked){
+function MarcarTodos(div, checked)
+{
+
+    /*
+     * Função que faz selecionar todos os checkbox de uma vez e deschecar
+     */
+    if (checked == true) {
         $('#'+div+' input[type=checkbox]').attr('checked', 'checked');
-    }else{
+    } else {
         $('#'+div+' input[type=checkbox]').removeAttr('checked');
     }
 }
 
+function ajaxload(url) 
+{
 
-function ajaxload(url) {
-/*
- * Função que faz carregar a div de load no na view para carregar outra página
- */
-
-//$(".wrapper").html('<div class="load-div"><h2 class="loading">Carregando...</h2><div class="progress progress-striped active progress-sm"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"><span class="sr-only">Carregando...</span></div></div></div>');
-
-/* 
- * Função que faz a barra de progresso entrar em ação
- * Depois que a barra de progresso entrar em ação, faz com que carregue uma view na div ".wrapper"
- */
-
+    /* 
+     * Função que faz a barra de progresso entrar em ação
+     * Depois que a barra de progresso entrar em ação, faz com que carregue uma view na div ".wrapper"
+     */
     $(".wrapper").html(''); // Apaga todo o HTML da div ".wrapper"
     setTimeout(function(){
         $(".wrapper").load(url, function() {
-            Pace.start();
-            $('form').ajaxForm({ 
-                success: function(data) { 
-                    return false;
-                } 
-            }), Pace.stop();
+            Pace.start(), Pace.stop();
         })
-    }, 300);
+    }, 300);    
+}
 
+function modalLoad(url)
+{
+
+    /*
+     * Defino as variáveis de destino para a página ser carregada dentro do Modal
+     * Obrigado.
+     */
+    $.get(url, function(data) {
+        $("#myModal .modal-body").html(data);
+        
+        jQuery.noConflict();
+        $("#myModal").modal("show");
+
+        $(".desable-form input, .desable-form select, .desable-form textarea, .desable-form radio, .desable-form checkbox").attr('disabled','disabled');
+    //});
+    $(".habilita_campos").on('click', function(){
+        $("input, select, textarea, radio, checkbox").removeAttr('disabled');
+        //$("#futuro-salvar").attr('class', 'btn btn-primary').attr('data-toggle', 'modal').removeAttr('id').attr('href', '#confirmar').html('Salvar dados');
+        $("#futuro-salvar").remove("#futuro-salvar");
+        $("#salvar-dados").removeAttr("style");
+    });
+
+
+        /*
+         * Script que salva o form via ajax com requisição POST
+         * Não usamos o proprio do jquery pelo fato dele não mandar a requisição que o CakePHP precisa
+         * 
+         */
+        $(".formModal").on('submit', function(e)
+        {
+            var postData = $(this).serializeArray();
+            var formURL = $(this).attr("action");
+            $.ajax(
+            {
+                url : formURL,
+                type: "POST",
+                data : postData,
+                success:function(data, textStatus, jqXHR) 
+                {
+                    $(".modal-backdrop").remove();
+                    $("#myModal").modal("hide");
+                    e.stopPropagation();
+                },
+                error: function(jqXHR, textStatus, errorThrown) 
+                {
+                    //if fails      
+                }
+            });
+            e.preventDefault(); //STOP default action
+        });
+    });
+
+    return false;   
 }

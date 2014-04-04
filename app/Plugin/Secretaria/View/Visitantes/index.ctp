@@ -1,13 +1,5 @@
 <script type="text/javascript">
-	$("#addNewUser").on('click', function(){
-		$.get("<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'add')); ?>", function(data) {
-			$("#ModalAddNewUser .modal-body").html(data);
-			jQuery.noConflict();
-			$("#ModalAddNewUser").modal("show");
-		});
-
-		return false;
-	});
+	
 </script>
 
 <div class="col-md-12">		
@@ -22,11 +14,11 @@
 <div class="col-md-12">
 	<div class="panel menuRoll">
 		<div class="panel-body row">
+			
 			<!-- form -->
-
 			<?php echo $this->Form->create(array('action' => 'index', 'role' => 'form')); ?>
 			<div class="form-group col-md-3">
-				<a class="btn btn-success form-control" id="addNewUser"><i class="fa fa-plus"></i> Adicionar Visitante</a>
+				<a class="btn btn-success form-control btnModal" onclick="modalLoad('secretaria/visitantes/add');"><i class="fa fa-plus"></i> Adicionar Visitante</a>
 			</div>
 			<div class="form-group col-md-3">
 				<a href="<?php echo $this->Html->url(array('action' => 'add')); ?>" class="btn btn-danger form-control"><i class="fa fa-trash-o"></i> Apagar</a>
@@ -50,9 +42,10 @@
 			Gerenciar Visitantes
 		</header>
 		<div class="panel-body">
-			<table class="table table-striped table-bordered">
+			<table class="table table-striped table-bordered" id="tabelaVsitante">
 				<thead>
 					<tr>
+						<th><input type="checkbox" onclick="MarcarTodos('tabelaVsitante', this.checked);"></th>	
 						<th>Nome</th>
 						<th>Telefone</th>
 						<th>E-mail</th>
@@ -60,10 +53,11 @@
 				</thead>
 				<tbody>
 					<?php foreach ($visitantes as $visitante) { ?>
-					<tr class="tr-visitantes-click" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');">
-						<td><?php echo $visitante['Visitante']['nome']; ?></td>
-						<td><?php echo $visitante['Visitante']['fone']; ?></td>
-						<td><?php echo $visitante['Visitante']['email']; ?></td>
+					<tr class="tr-visitantes-click">
+						<td><input type="checkbox" value="<?php echo $visitante['Visitante']['id']; ?>"></td>
+						<td class="btnModal" onclick="modalLoad('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['nome']; ?></td>
+						<td class="btnModal" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['fone']; ?></td>
+						<td class="btnModal" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['email']; ?></td>
 					</tr>
 					<?php } ?>
 				</tbody>
@@ -71,9 +65,8 @@
 		</div>
 	</section>
 
-	<!-- Modal -->
-	
-	<div class="modal fade" id="ModalAddNewUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<!-- Modal -->	
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 		<div class="modal-dialog">
 			<div class="modal-content">
