@@ -37,6 +37,7 @@ class AppController extends Controller {
 	public $fb_url;
 
     public function beforeFilter() {
+    	$this->layout = false;
 	    $this->Facebook = new Facebook(array(
 	        'appId'     =>  '266658286843599',
 	        'secret'    =>  '970cebae1c0f9a6b7bfd15cc6912d12d'
