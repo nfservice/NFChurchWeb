@@ -40,7 +40,7 @@
         'assets/bootstrap-datetimepicker/css/datetimepicker.css',
         'assets/jquery-multi-select/css/multi-select.css',
         'assets/jquery-tags-input/jquery.tagsinput.css',
-        'pace.css'
+        'pace.css',
         ));
     
     ?>
@@ -51,6 +51,10 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+        //var urlApagaRegChecked = 'eae';
+        var urlApagaRegChecked = "<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'delete')); ?>";
+    </script>
 
 </head>
 <body>

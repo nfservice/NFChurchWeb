@@ -5978,6 +5978,10 @@ button.close {
   overflow: hidden;
 }
 
+.modal-open .modal,.btn:focus{
+    outline: none !important;
+}
+
 .modal {
   position: fixed;
   top: 0;

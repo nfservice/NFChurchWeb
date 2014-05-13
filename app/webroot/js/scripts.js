@@ -339,13 +339,15 @@ function MarcarTodos(div, checked)
     }
 }
 
-function ajaxload(url) 
+var urlLoc;
+function ajaxload(url)
 {
 
     /* 
      * Função que faz a barra de progresso entrar em ação
      * Depois que a barra de progresso entrar em ação, faz com que carregue uma view na div ".wrapper"
      */
+    urlLoc = url;
     $(".wrapper").html(''); // Apaga todo o HTML da div ".wrapper"
     setTimeout(function(){
         $(".wrapper").load(url, function() {
@@ -368,14 +370,13 @@ function modalLoad(url)
         $("#myModal").modal("show");
 
         $(".desable-form input, .desable-form select, .desable-form textarea, .desable-form radio, .desable-form checkbox").attr('disabled','disabled');
-    //});
-    $(".habilita_campos").on('click', function(){
-        $("input, select, textarea, radio, checkbox").removeAttr('disabled');
-        //$("#futuro-salvar").attr('class', 'btn btn-primary').attr('data-toggle', 'modal').removeAttr('id').attr('href', '#confirmar').html('Salvar dados');
-        $("#futuro-salvar").remove("#futuro-salvar");
-        $("#salvar-dados").removeAttr("style");
-    });
 
+        $(".habilita_campos").on('click', function(){
+            $("input, select, textarea, radio, checkbox").removeAttr('disabled');
+            //$("#futuro-salvar").attr('class', 'btn btn-primary').attr('data-toggle', 'modal').removeAttr('id').attr('href', '#confirmar').html('Salvar dados');
+            $("#futuro-salvar").remove("#futuro-salvar");
+            $("#salvar-dados").removeAttr("style");
+        });
 
         /*
          * Script que salva o form via ajax com requisição POST
@@ -396,6 +397,7 @@ function modalLoad(url)
                     $(".modal-backdrop").remove();
                     $("#myModal").modal("hide");
                     e.stopPropagation();
+                    ajaxload(urlLoc);
                 },
                 error: function(jqXHR, textStatus, errorThrown) 
                 {

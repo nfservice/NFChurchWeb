@@ -1,6 +1,4 @@
-<script type="text/javascript">
-	
-</script>
+<?php echo $this->Html->script('index'); ?>
 
 <div class="col-md-12">		
 	<!--breadcrumbs start -->
@@ -21,7 +19,7 @@
 				<a class="btn btn-success form-control btnModal" onclick="modalLoad('secretaria/visitantes/add');"><i class="fa fa-plus"></i> Adicionar Visitante</a>
 			</div>
 			<div class="form-group col-md-3">
-				<a href="<?php echo $this->Html->url(array('action' => 'add')); ?>" class="btn btn-danger form-control"><i class="fa fa-trash-o"></i> Apagar</a>
+				<a href="javascript:;" class="btn btn-danger form-control" id="apagar"><i class="fa fa-trash-o"></i> Apagar</a>
 			</div>
 			<div class="form-group col-md-6">
 				<div class="input-group m-bot15">
@@ -66,7 +64,7 @@
 	</section>
 
 	<!-- Modal -->	
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
 
 		<div class="modal-dialog">
 			<div class="modal-content">

@@ -73,7 +73,7 @@
 		public function delete($id = null)
 		{
 			$this->layout = false;
-			if (!$this->request->is('post') || $this->request->is('put')) {
+			if (!$this->request->is('post') || empty($id)) {
 				throw new MethodNotAllowedException();
 			}
 			$this->request->data = $this->Visitante->read(null, $id);
