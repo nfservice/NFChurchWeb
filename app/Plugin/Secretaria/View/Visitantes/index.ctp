@@ -6,7 +6,7 @@
 		<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
 		<li><a href="#">Secretaria</a></li>
 		<li class="active">Visitantes</li>
-	</ul>
+	</ul> 
 	<!--breadcrumbs end -->
 </div>
 <div class="col-md-12">
@@ -19,7 +19,7 @@
 				<a class="btn btn-success form-control btnModal" onclick="modalLoad('secretaria/visitantes/add');"><i class="fa fa-plus"></i> Adicionar Visitante</a>
 			</div>
 			<div class="form-group col-md-3">
-				<a href="javascript:;" class="btn btn-danger form-control" id="apagar"><i class="fa fa-trash-o"></i> Apagar</a>
+				<a href="javascript:;" class="btn btn-danger form-control" data-toggle="modal" data-target="#confirmacaoExclusao"><i class="fa fa-trash-o"></i> Apagar</a>
 			</div>
 			<div class="form-group col-md-6">
 				<div class="input-group m-bot15">
@@ -51,7 +51,7 @@
 				</thead>
 				<tbody>
 					<?php foreach ($visitantes as $visitante) { ?>
-					<tr class="tr-visitantes-click">
+					<tr class="tr-visitantes-click" id="<?php echo 'dados_' . $visitante['Visitante']['id']; ?>">
 						<td><input type="checkbox" value="<?php echo $visitante['Visitante']['id']; ?>"></td>
 						<td class="btnModal" onclick="modalLoad('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['nome']; ?></td>
 						<td class="btnModal" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['fone']; ?></td>
@@ -80,5 +80,26 @@
 			</div>
 		</div>
 	</div>
-	
+    <!-- modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmacaoExclusao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Confirmação de exclusão.</h4>
+                </div>
+                <div class="modal-body" id="modalapagar">
+
+                    Deseja realmente excluir os visitantes selecionados?
+
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                    <button class="btn btn-warning" type="button" id="apagar"> Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- modal -->
