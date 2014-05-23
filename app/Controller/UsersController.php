@@ -61,6 +61,7 @@
 
 	    public function index()
 	    {
+	    	$this->layout = false;
 	    	//verifica se foi feito algum filtro	    	
 	    	if (!empty($this->request->data['filtro']))
 	    	{
@@ -88,6 +89,7 @@
 
 	    public function add()
 	    {
+	    	$this->layout = false;
 	    	if ($this->request->is('post') || $this->request->is('put'))
 	    	{
 	    		//requisições Put e Post, Cria novo registro e tenta salvar
@@ -107,6 +109,7 @@
 
 	    public function edit($id = null)
 	    {
+	    	$this->layout = false;
 
 	    	if (!empty($id))
 	    	{
@@ -143,6 +146,7 @@
 
 	    public function delete($id = null)
 	    {
+	    	$this->layout = false;
 	    	$this->autoRender = false;
 	    	//verificando metodo de requisição
 			if (!$this->request->is('post'))
