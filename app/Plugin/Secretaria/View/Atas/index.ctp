@@ -41,7 +41,7 @@
 			} else { ?>
 				<tr>
 					<td cellspacing="100%" cellpadding="100%" colspan="3" align="center">
-						<?php echo "Você Ainda Não Cadastrou Nenhum Cargo!"; ?>
+						<?php echo "Você Ainda Não Cadastrou Nenhua Ata!"; ?>
 					</td>
 				</tr>
 			<?php } ?>

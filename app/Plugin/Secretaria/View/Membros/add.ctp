@@ -9,6 +9,14 @@ var cont = 0;
   function removeParente(id){
       $("#parente"+id).remove();
   }
+  function addCargo(){
+    cont++;
+    $('#parente').append('<div id="parente'+cont+'"><input type="hidden" name="data[Relacionamento]['+cont+'][membro_id]" id="Relacionamento'+cont+'PessoaId"><div class="form-group col-md-8"><label for="Relacionamento'+cont+'Pessoa2Id">Parente</label><select name="data[Relacionamento]['+cont+'][membro2_id]" class="form-control" placeholder="Nome Parente" required="required" id="Relacionamento'+cont+'Pessoa2Id"><option value="8">Bruno</option></select></div><div class="form-group col-md-2"><label for="Relacionamento'+cont+'Pessoa2Id">Tipo</label><select name="data[Relacionamento]['+cont+'][tiporelacionamento_id]" class="form-control" required="required" id="Relacionamento'+cont+'TiporelacionamentoId"><option value="1">Marido</option><option value="2">Esposa</option><option value="3">Filho</option><option value="4">Filha</option></select></div><a href="javascript:;" onclick="removeParente('+cont+')"><span class="glyphicon glyphicon-remove">Remover</span></a></div>');
+  }
+
+  function removeCargo(id){
+      $("#parente"+id).remove();
+  }
 </script>
 
 <ol class="breadcrumb"><!-- breadcrumb -->
@@ -69,7 +77,7 @@ var cont = 0;
 
   echo $this->Form->input('ultimaigreja', array('label' => 'Ultima Igreja que frequentou', 'class' => 'form-control col-md-6', 'placeholder' => 'Nome da Igreja que Frequentou', 'required', 'div' => array('class' => 'form-group col-md-6')));
 
-  echo $this->Form->input('cargo_id', array('label' => 'Cargo na Igreja', 'class' => 'form-control col-md-6', 'placeholder' => 'Cargo que tinha na Igreja', 'required', 'options' => $cargos, 'div' => array('class' => 'form-group col-md-6')));
+  echo $this->Form->input('MembroCargo.0.cargo_id', array('label' => 'Cargo na Igreja', 'class' => 'form-control col-md-6', 'placeholder' => 'Cargo que tinha na Igreja', 'required', 'options' => $cargos, 'div' => array('class' => 'form-group col-md-6')));
 
   echo $this->Form->input('igrejasanteriores', array('label' => 'Igrejas que já frequentou', 'class' => 'form-control', 'placeholder' => 'Nome das igrejas que já frequentou (pulando linhas)', 'required', 'div' => array('class' => 'form-group', 'style' => 'padding: 0 1em')));
 ?>
