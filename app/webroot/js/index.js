@@ -1,9 +1,12 @@
 $("#apagar").on('click', function() {
     $('input[type="checkbox"]:checked').each(function(){
+        console.debug('ta caindo seu bosta');
         apagaRegistrosChecked($(this).val());
-        $("#confirmacaoExclusao").modal("hide");
     });
     $("#modalapagar").html('Visitante removido com sucesso!');
+    setTimeout(function() {
+        $("#confirmacaoExclusao").modal("hide");
+    }, 1500);
 });
 
 function apagaRegistrosChecked(valor) {

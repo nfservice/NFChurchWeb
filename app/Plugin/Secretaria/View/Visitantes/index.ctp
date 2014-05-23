@@ -8,7 +8,7 @@
 		<li class="active">Visitantes</li>
 	</ul> 
 	<!--breadcrumbs end -->
-</div>
+</div> 
 <div class="col-md-12">
 	<div class="panel menuRoll">
 		<div class="panel-body row">
@@ -40,10 +40,10 @@
 			Gerenciar Visitantes
 		</header>
 		<div class="panel-body">
-			<table class="table table-striped table-bordered" id="tabelaVsitante">
+			<table class="table table-striped table-bordered" id="tableData">
 				<thead>
 					<tr>
-						<th><input type="checkbox" onclick="MarcarTodos('tabelaVsitante', this.checked);"></th>	
+						<th><input type="checkbox" onclick="MarcarTodos('tableData', this.checked);"></th>	
 						<th>Nome</th>
 						<th>Telefone</th>
 						<th>E-mail</th>

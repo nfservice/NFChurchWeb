@@ -65,19 +65,26 @@
 			}
 		}
 
-		public function delete(){
+		public function delete($id = null)
+		{
+			$this->autoRender = false;
 
 			$this->layout = false;
-			
-			if (!empty($this->request->data['Profissao'])) {
-				foreach ($this->request->data['Profissao'] as $idProfissao) {
-					$this->Profissao->delete($idProfissao);
-				}
-				$this->Session->setFlash('Registros Apagados com Sucesso');
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash('Nenhum Registro selecionado para Deletar');
+			if (!$this->request->is('post') || empty($id)) {
+				throw new MethodNotAllowedException();
+			}
+
+			$this->request->data = $this->Profissao->read(null, $id);
+			$this->Profissao->id = $id;
+
+			if (!$this->Profissao->exists()) {
+				throw new NotFoundException(__('Profissao inválido.'));
+			}
+			if ($this->Profissao->delete()) {
+				$this->Session->setFlash(__('Profissao deletado com sucesso.'));
 				$this->redirect(array('action' => 'index'));
 			}
+			$this->Session->setFlash(__('O Profissao não pôde ser deletado.'));
+			$this->redirect(array('action' => 'index'));
 		}
 	}
