@@ -30,11 +30,14 @@ class MembrosController extends SecretariaAppController {
 	public function add()
 	{
 		$this->Membro->create();
+		$this->layout = false;
 		if($this->request->is('post') || $this->request->is('put')){
 			$this->request->data['Membro']['datamembro'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['datamembro'])));
 			$this->request->data['Membro']['datanascimento'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['datanascimento'])));
 			$this->request->data['Membro']['databatismo'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['databatismo'])));
 			$this->request->data['Membro']['tipo'] = '1';
+			var_dump($this->request->data);
+			die();
 			if($this->Membro->saveAll($this->request->data['Membro'])){
 				foreach ($this->request->data['Relacionamento'] as $key => $value) {
 					$this->request->data['Relacionamento'][$key]['membro_id'] = $this->Membro->id;

@@ -1,9 +1,7 @@
 <?php
 	class AtasController extends SecretariaAppController{
 		public function index(){
-
 			$this->layout = false;
-
 			$conditions = array();
 			unset($this->request->data['submit']);
 			if (!empty($this->request->data['filtro'])) {
@@ -19,47 +17,37 @@
 		}
 
 		public function add(){
-
 			$this->layout = false;
-
 			if ($this->request->is('post') || $this->request->is('put')) {
-				var_dump(WWW_ROOT);
-				var_dump($this->request->data['Ata']['files']);
-				die();
-				$this->Ata->create();
+				if (!is_dir(WWW_ROOT.'files/ata/'.$this->Session->read('choosed'))) {
+					umask(0);
+					mkdir(WWW_ROOT.'files/ata/'.$this->Session->read('choosed').'/', 0777);
+				}
 				if (!empty($this->request->data['Ata']['data'])) {
 					$this->request->data['Ata']['data'] = implode('-', array_reverse(explode('/', $this->request->data['Ata']['data'])));
 				}
+				$this->Ata->create();
 				if ($this->Ata->saveAll($this->request->data)) {
 					echo 'Ata Cadastrada Com Sucesso';
+					$i = 0;
+					foreach ($this->request->data['Ata']['files'] as $file) {
+						$this->Ata->AtaArquivo->create();
+						$salvar['AtaArquivo']['nome'] = $file['name'];
+						$salvar['AtaArquivo']['dataupload'] = date('Y-m-d');
+						$salvar['AtaArquivo']['ata_id'] = $this->Ata->id;
+						$this->Ata->AtaArquivo->save($salvar);
+						move_uploaded_file($this->request->data['Ata']['files'][$i]['tmp_name'], WWW_ROOT.'files/ata/'.$this->Session->read('choosed').'/'.$this->Ata->AtaArquivo->id);
+						$i++;
+					}
 				} else {
 					echo 'Não Foi Possível Cadastrar a Ata';
 				}
+				$this->redirect(array('action' => 'index'));
 			}
-
-
-			// Nas versões do PHP anteriores a 4.1.0, deve ser usado $HTTP_POST_FILES
-			// ao invés de $_FILES.
-			/*
-			$uploaddir = '/var/www/uploads/';
-			$uploadfile = $uploaddir . $_FILES['userfile']['name'];
-			if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploaddir . $_FILES['userfile']['name'])) {
-			    print "O arquivo é valido e foi carregado com sucesso. Aqui esta alguma informação:\n";
-			    print_r($_FILES);
-			} else {
-			    print "Possivel ataque de upload! Aqui esta alguma informação:\n";
-			    print_r($_FILES);
-			}
-			*/
-			
-			
-
 		}
 
 		public function edit($id = null){
-
 			$this->layout = false;
-
 			$this->Ata->id = $id;
 			if ($this->request->is('post')||($this->request->is('put'))) {
 				if (!empty($this->request->data['Ata']['data'])) {
@@ -67,13 +55,14 @@
 				}
 				if (!$this->Ata->exists()) {
 					echo "Ata Inexistente";
-				} elseif (!empty($this->Cargo->id)) {
-					if ($this->Cargo->saveAll($this->request->data)) {
+				} elseif (!empty($this->Ata->id)) {
+					if ($this->Ata->save($this->request->data)) {
 						echo 'Ata Cadastrada Com Sucesso';
 					} else {
 						echo 'Não Foi Possível Cadastrar a Ata';
 					}			
 				}
+				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->request->data = $this->Ata->read(null, $id);
 				$this->request->data['Ata']['data'] = implode('/', array_reverse(explode('-', $this->request->data['Ata']['data'])));
