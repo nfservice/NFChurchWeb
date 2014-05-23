@@ -291,6 +291,7 @@ ul.sidebar-menu li a.active i {
 }
 /*main content*/
 #main-content {
+    margin-left:240px;
     -webkit-transition:all .3s ease-in-out;
     -moz-transition:all .3s ease-in-out;
     -o-transition:all .3s ease-in-out;
@@ -318,6 +319,7 @@ ul.sidebar-menu li a.active i {
     box-shadow:1px 0 3px rgba(0,0,0,.15);
 }
 .wrapper {
+    margin-top:80px;
     display:inline-block;
     padding:15px;
     width:100%;
