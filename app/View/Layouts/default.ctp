@@ -194,14 +194,21 @@
                     <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <?php echo $this->Html->image('default_large.png', array('width' => 33)); ?>
-                            <span class="username">Nome do Usuário Fics</span>
+                            <?php 
+                                $profile = FULL_BASE_URL.$this->webroot.'files/profile/'.$this->Session->read('User.id').'.jpg';
+                                if (!file_exists(WWW_ROOT.'files/profile/'.$this->Session->read('User.id').'.jpg')) {
+                                    echo $this->Html->image('default_large.png', array('width' => 33));
+                                } else {
+                                    echo $this->Html->image($profile, array('width' => 33));
+                                }
+                            ?>
+                            <span class="username"><?php echo $this->Session->read('User.nome'); ?></span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
                             <li><a href="#"><i class=" fa fa-suitcase"></i>Perfil</a></li>
                             <li><a href="#"><i class="fa fa-cog"></i> Configurações</a></li>
-                            <li><a href="login.html"><i class="fa fa-key"></i> Sair</a></li>
+                            <li><a href="<?php echo $this->Html->url(array('plugin' => '', 'controller' => 'users', 'action' => 'logout')); ?>"><i class="fa fa-key"></i> Sair</a></li>
                         </ul>
                     </li>
                     <!-- user login dropdown end -->

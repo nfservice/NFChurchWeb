@@ -30,25 +30,21 @@ App::uses('Controller', 'Controller');
  * @package		app.Controller
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-App::import('Vendor', 'Facebook', array('file' => 'facebook-php/src/facebook.php'));
 class AppController extends Controller {
-	public $components = array(/*'Auth', */'Session');
-
-	public $fb_url;
+	public $components = array(
+		'Session',
+        'Auth'
+    );
 
     public function beforeFilter() {
+    	umask(0);
     	//$this->layout = false;
-	    $this->Facebook = new Facebook(array(
-	        'appId'     =>  '266658286843599',
-	        'secret'    =>  '970cebae1c0f9a6b7bfd15cc6912d12d'
-	    ));
-    	//$this->Auth->allow(array('login', 'logout', 'teste', 'index'));
+    	$this->Auth->allow(array('login', 'logout', 'teste', 'fblogin'));
     	$this->Session->write('choosed', '1');
-	}
 
-	public function beforeRender() {
-		$this->fb_url = $this->Facebook->getLoginUrl(array('scope' => 'read_stream, friends_likes, email', 'display' => 'page','redirect_uri' => Router::url(array('controller' => 'users', 'action' => 'login'), true)));
-	    $this->set('fb_login_url', $this->fb_url);
-	    //$this->set('user', $this->Auth->user());
+    	$this->loadModel('User');
+    	$user = $this->User->read(null, $this->Session->read('Auth.User.id'));
+    	
+    	$this->Session->write('User', $user['User']);
 	}
 }
