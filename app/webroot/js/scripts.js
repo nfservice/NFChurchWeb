@@ -1,5 +1,22 @@
 //left side accordion
 $(function() {
+    //Substitui mais de uma ocorrencia em uma string
+    String.prototype.replaceAll = function(de, para){
+        var str = this;
+        var pos = str.indexOf(de);
+        while (pos > -1){
+            str = str.replace(de, para);
+            pos = str.indexOf(de);
+        }
+        return (str);
+    }
+
+    jQuery.fn.outerHTML = function(s) {
+        return (s)
+        ? this.before(s).remove()
+        : jQuery("<p>").append(this.eq(0).clone()).html();
+    }
+
     $('#nav-accordion').dcAccordion({
         eventType: 'click',
         autoClose: true,
