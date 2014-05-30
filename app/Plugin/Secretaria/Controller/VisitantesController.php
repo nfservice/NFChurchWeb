@@ -1,18 +1,18 @@
 <?php
 	class VisitantesController extends SecretariaAppController{
-		public function index(){
+		public function beforeRender(){
 			$this->layout = false;
-			
+		}
+		public function index(){
 			$this->loadModel('Estado');
 			$estados = $this->Estado->find('list', array('fields' => array('codibge', 'sigla')));
 			$this->set('estados', $estados);
 
 			$conditions = array();
-			$conditions['Visitante.tipo ='] = 2;
+			$conditions['Visitante.tipo ='] = 'Visitante';
 			$this->set('visitantes', $this->paginate(null, $conditions));
 		}
 		public function add(){
-			$this->layout = false;
 			$this->loadModel('Estado');
 			if ($this->request->is('post') || $this->request->is('put')) {
 				if (!empty($this->request->data['Visitante']['datanascimento'])) {
@@ -32,9 +32,6 @@
 			//
 		}
 		public function edit($id = null){
-
-			$this->layout = false;
-			
 			$this->Visitante->id = $id;
 			if (!$this->Visitante->exists()) {
 				throw new NotFoundException(__('Visitante inválido.'));
@@ -59,7 +56,6 @@
 		}
 		public function view($id = null)
 		{
-			$this->layout = false;
 			$this->Visitante->id = $id;
 			if (!$this->Visitante->exists()) {
 				throw new NotFoundException(__('Visitante inválido.'));	
@@ -72,7 +68,6 @@
 		}
 		public function delete($id = null)
 		{
-			$this->layout = false;
 			if (!$this->request->is('post') || empty($id)) {
 				throw new MethodNotAllowedException();
 			}

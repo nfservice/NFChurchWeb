@@ -1,9 +1,9 @@
 <?php
 	class CargosController extends SecretariaAppController{
-		public function index(){
-
+		public function beforeRender(){
 			$this->layout = false;
-
+		}
+		public function index(){
 			$conditions = array();
 			unset($this->request->data['submit']);
 			if (!empty($this->request->data['filtro'])) {;
@@ -13,9 +13,6 @@
 		}
 
 		public function add(){
-
-			$this->layout = false;
-
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$this->Cargo->create();
 				if ($this->Cargo->saveAll($this->request->data)) {
@@ -27,9 +24,6 @@
 		}
 
 		public function edit($id = null){
-
-			$this->layout = false;
-
 			$this->Cargo->id = $id;
 			if ($this->request->is('post')||($this->request->is('put'))) {
 				if (!$this->Cargo->exists()) {
@@ -47,7 +41,6 @@
 		}
 
 		public function delete(){
-			$this->layout = false;
 			$this->autoRender = false;
 			if (!empty($this->request->data['Cargo'])) {
 				$save = 0;

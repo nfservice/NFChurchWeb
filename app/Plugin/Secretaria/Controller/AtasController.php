@@ -1,7 +1,10 @@
 <?php
 	class AtasController extends SecretariaAppController{
-		public function index(){
+		public function beforeRender(){
 			$this->layout = false;
+		}
+		public function index(){
+			
 			$conditions = array();
 			unset($this->request->data['submit']);
 			if (!empty($this->request->data['filtro'])) {
@@ -17,7 +20,7 @@
 		}
 
 		public function add(){
-			$this->layout = false;
+			
 			if ($this->request->is('post') || $this->request->is('put')) {
 				if (!is_dir(WWW_ROOT.'files/ata/'.$this->Session->read('choosed'))) {
 					umask(0);
@@ -43,12 +46,21 @@
 					echo 'Não Foi Possível Cadastrar a Ata';
 				}
 				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->loadModel('Secretaria.Membro');
+				$this->loadModel('Secretaria.Cargo');
+
+				$this->set('membros', $this->Membro->find('list', array('conditions' => array('Membro.church_id' => $this->Session->read('choosed')), 'fields' => array('id', 'nome'))));
+				$this->set('cargos', $this->Cargo->find('list', array('conditions' => array('Cargo.church_id' => $this->Session->read('choosed')), 'fields' => array('id', 'nome'))));
 			}
 		}
 
 		public function edit($id = null){
-			$this->layout = false;
+			
 			$this->Ata->id = $id;
+			if (!$this->Ata->exists()) {
+				throw new NotFoundException(__('Ata inválida.'));
+			}
 			if ($this->request->is('post')||($this->request->is('put'))) {
 				if (!empty($this->request->data['Ata']['data'])) {
 					$this->request->data['Ata']['data'] = implode('-', array_reverse(explode('/', $this->request->data['Ata']['data'])));
@@ -56,21 +68,28 @@
 				if (!$this->Ata->exists()) {
 					echo "Ata Inexistente";
 				} elseif (!empty($this->Ata->id)) {
-					if ($this->Ata->save($this->request->data)) {
-						echo 'Ata Cadastrada Com Sucesso';
+					if ($this->Ata->saveAll($this->request->data)) {
+						echo 'Ata Editada Com Sucesso';
 					} else {
-						echo 'Não Foi Possível Cadastrar a Ata';
+						echo 'Não Foi Possível Editar a Ata';
 					}			
 				}
 				$this->redirect(array('action' => 'index'));
 			} else {
+
 				$this->request->data = $this->Ata->read(null, $id);
 				$this->request->data['Ata']['data'] = implode('/', array_reverse(explode('-', $this->request->data['Ata']['data'])));
+
+				$this->loadModel('Secretaria.Membro');
+				$this->loadModel('Secretaria.Cargo');
+
+				$this->set('membros', $this->Membro->find('list', array('conditions' => array('Membro.church_id' => $this->Session->read('choosed')), 'fields' => array('id', 'nome'))));
+				$this->set('cargos', $this->Cargo->find('list', array('conditions' => array('Cargo.church_id' => $this->Session->read('choosed')), 'fields' => array('id', 'nome'))));
 			}
 		}
 
 		public function delete(){
-			$this->layout = false;
+			
 			$this->autoRender = false;
 			if (!empty($this->request->data['Ata'])) {
 				$save = 0;

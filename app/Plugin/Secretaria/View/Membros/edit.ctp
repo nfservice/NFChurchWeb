@@ -83,9 +83,13 @@
   echo $this->Form->input('pastorbatismo', array('label' => 'Pastor que Batizou', 'class' => 'form-control col-md-6', 'placeholder' => 'Nome do Pastor que batizou', 'required', 'div' => array('class' => 'form-group col-md-5')));
 
   echo $this->Form->input('ultimaigreja', array('label' => 'Ultima Igreja que frequentou', 'class' => 'form-control col-md-6', 'placeholder' => 'Nome da Igreja que Frequentou', 'required', 'div' => array('class' => 'form-group col-md-6')));
-
-  echo $this->Form->input('cargo_id', array('label' => 'Cargo na Igreja', 'class' => 'form-control col-md-6', 'placeholder' => 'Cargo que tinha na Igreja', 'required', 'options' => $cargos, 'div' => array('class' => 'form-group col-md-6')));
-
+  if (!empty($this->request->data['Movimentacaoata'])) {
+    $i = 0;
+    echo '<p>Cargos:</p>';
+    foreach ($this->request->data['Movimentacaoata'] as $movimentacaoata) {
+      echo $this->Form->input('cargo'.$i, array('label' => false,'value' => $cargos[$movimentacaoata['cargo_id']], 'class' => 'form-control col-md-6', 'readonly', 'div' => array('class' => 'form-group col-md-6')));    
+    }
+  }
   echo $this->Form->input('igrejasanteriores', array('label' => 'Igrejas que já frequentou', 'class' => 'form-control', 'placeholder' => 'Nome das igrejas que já frequentou (pulando linhas)', 'required', 'div' => array('class' => 'form-group', 'style' => 'padding: 0 1em')));
 ?>
   <div class="form-group col-md-6">

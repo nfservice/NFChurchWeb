@@ -1,10 +1,9 @@
 <?php
 class MembrosController extends SecretariaAppController {
-
-	public function index()
-    {
-    	$this->layout = false;
-    	
+	public function beforeRender(){
+		$this->layout = false;
+	}
+	public function index() {
     	//verifica se foi feito algum filtro	    	
     	if (!empty($this->request->data['filtro']))
     	{
@@ -18,11 +17,13 @@ class MembrosController extends SecretariaAppController {
     				$conditions['OR']['User.'.$key.' LIKE '] = '%'.$this->request->data['filtro'].'%';
     			}
     		}
+    		
     	}
     	else
     	{
     		$conditions = array();
     	}
+    	$conditions['Membro.tipo'] = 'Membro';
     	//busca todos os regsitros desta igreja
     	$membros = $this->Membro->find('all', array('conditions' => $conditions));
     	//seta registros para a view
@@ -32,7 +33,6 @@ class MembrosController extends SecretariaAppController {
 	public function add()
 	{
 		$this->Membro->create();
-		$this->layout = false;
 		if($this->request->is('post') || $this->request->is('put')){
 			$this->request->data['Membro']['datamembro'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['datamembro'])));
 			$this->request->data['Membro']['datanascimento'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['datanascimento'])));
@@ -51,7 +51,7 @@ class MembrosController extends SecretariaAppController {
 		} else {
 			$estados = $this->Membro->Estado->find('list', array('fields' => array('codibge', 'nome')));
 			$profissoes = $this->Membro->Profissao->find('list', array('fields' => array('id', 'descricao')));
-			$cargos = $this->Membro->Cargo->find('list', array('fields' => array('id', 'descricao')));
+			$cargos = $this->Membro->Cargo->find('list', array('fields' => array('id', 'nome')));
 			$parentes = $this->Membro->find('list', array('fields' => array('id', 'nome')));
 			$this->loadModel('Secretaria.Tiporelacionamento');
 			$relacionamentos = $this->Tiporelacionamento->find('list', array('fields' => array('id', 'descricao')));
@@ -74,7 +74,7 @@ class MembrosController extends SecretariaAppController {
 		**/
 		$this->Membro->id = $id;
 		if (!$this->Membro->exists()) {
-			throw new NotFoundException(__('Membro inválida.'));
+			throw new NotFoundException(__('Membro inválidó.'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			/*
@@ -104,7 +104,7 @@ class MembrosController extends SecretariaAppController {
 			$this->request->data = $this->Membro->read(null, $id);
 			$estados = $this->Membro->Estado->find('list', array('fields' => array('codibge', 'nome')));
 			$profissoes = $this->Membro->Profissao->find('list', array('fields' => array('id', 'descricao')));
-			$cargos = $this->Membro->Cargo->find('list', array('fields' => array('id', 'descricao')));
+			$cargos = $this->Membro->Cargo->find('list', array('fields' => array('id', 'nome')));
 			$parentes = $this->Membro->find('list', array('fields' => array('id', 'nome')));
 			$relacionamentos = $this->Tiporelacionamento->find('list', array('fields' => array('id', 'descricao')));
 			$escolaridades = $this->Membro->Escolaridade->find('list', array('conditions' => array('Escolaridade.church_id' => $this->Session->read('choosed')), 'fields' => array('id', 'descricao')));
@@ -136,7 +136,6 @@ class MembrosController extends SecretariaAppController {
 	}
 
 	public function delete(){
-		$this->layout = false;
 		$this->autoRender = false;
 		if (!empty($this->request->data['Membro'])) {
 			$save = 0;
