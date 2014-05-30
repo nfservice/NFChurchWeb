@@ -33,13 +33,13 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 	public $components = array(
 		'Session',
-        //'Auth'
+        'Auth'
     );
 
     public function beforeFilter() {
     	umask(0);
     	//$this->layout = false;
-    	//$this->Auth->allow(array('login', 'logout', 'teste', 'fblogin'));
+    	$this->Auth->allow(array('login', 'logout', 'teste', 'fblogin'));
     	$this->Session->write('choosed', '1');
 
     	$this->loadModel('User');
