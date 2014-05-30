@@ -3,6 +3,8 @@ class MembrosController extends SecretariaAppController {
 
 	public function index()
     {
+    	$this->layout = false;
+    	
     	//verifica se foi feito algum filtro	    	
     	if (!empty($this->request->data['filtro']))
     	{

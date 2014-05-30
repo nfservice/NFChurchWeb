@@ -235,8 +235,10 @@
                         </a>
                         <ul class="sub">
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => '', 'controller' => 'users', 'action' => 'index')); ?>');" href="javascript:;" >Usuários</a></li>
+                            <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'membros', 'action' => 'index')); ?>');" href="javascript:;" >Membros</a></li>
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'index')); ?>');" href="javascript:;" >Visitantes</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'profissaos', 'action' => 'index')); ?>');">Profissões</a></li>
+                            <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'cargos', 'action' => 'index')); ?>');">Cargos</a></li>
                             <li><a onclick="<?php echo $this->Html->url(array('controller' => 'secretaria', 'action' => 'relatorios')); ?> href="javascript:;"">Relatórios</a></li>
                         </ul>
                     </li>
@@ -389,7 +391,8 @@
         '../css/assets/flot-chart/jquery.flot.tooltip.min', 
         '../css/assets/flot-chart/jquery.flot.resize', 
         '../css/assets/flot-chart/jquery.flot.pie.resize',
-        'jquery.form.js'
+        'jquery.form.js',
+        'jquery.validate'
         ));
 ?>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->

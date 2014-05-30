@@ -30,7 +30,7 @@
 		public function view($id = null){
 
 			$this->layout = false;
-
+ 
 			$this->Profissao->id = $id;
 			if (!empty($this->Profissao->id)) {
 				$this->request->data = $this->Profissao->read(null, $id);

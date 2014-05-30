@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	var urlApagaRegChecked = '<?php echo $this->Html->url(array("action" => "delete")); ?>';
+	var urlApagaRegChecked = '<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "profissaos", "action" => "delete")); ?>';
 </script>
 <?php echo $this->Html->script('index'); ?>
 <div class="col-md-12">
@@ -17,7 +17,7 @@
 			<!-- form -->
 			<?php echo $this->Form->create(array('Pesquisa' ,'action' => 'index', 'role' => 'form')); ?>
 			<div class="form-group col-md-3">
-				<a class="btn btn-success form-control btnModal" onclick="modalLoad('<?php echo $this->Html->url(array("action" => "add")); ?>');"><i class="fa fa-plus"></i> Adicionar Profissão</a>
+				<a class="btn btn-success form-control btnModal" onclick="modalLoad('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "profissaos", "action" => "add")); ?>');"><i class="fa fa-plus"></i> Adicionar Profissão</a>
 			</div>
 			<div class="form-group col-md-3">
 				<a href="javascript:;" class="btn btn-danger form-control" data-toggle="modal" data-target="#confirmacaoExclusao"><i class="fa fa-trash-o"></i> Apagar</a>
@@ -78,7 +78,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Adicionar novo Visitante</h4>
+					<h4 class="modal-title">Editar</h4>
 				</div>
 				<div class="modal-body">
 

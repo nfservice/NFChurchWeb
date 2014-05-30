@@ -161,17 +161,17 @@ class UsersController extends AppController {
     	if ($this->request->is('post') || $this->request->is('put'))
     	{
     		//Requisição Put ou Post tenta salvar alterações no registro
-    		if ($this->User->saveAll($this->request->data))
+    		if ($this->User->save($this->request->data))
     		{
     			//retorno Json
-				json_encode('Alterações Salvas Com Sucesso!');
-				$this->redirect(array('action' => 'index'));
+				//json_encode('Alterações Salvas Com Sucesso!');
+				//$this->redirect(array('action' => 'index'));
 			}
 			else
 			{
 				//retorno Json
-				json_encode('Impossível Salvar Alterações');
-				$this->redirect(array('action' => 'index'));
+				//json_encode('Impossível Salvar Alterações');
+				//$this->redirect(array('action' => 'index'));
 			}
     	}
     	else

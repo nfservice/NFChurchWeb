@@ -377,6 +377,9 @@ function modalLoad(url)
             $("#futuro-salvar").remove("#futuro-salvar");
             $("#salvar-dados").removeAttr("style");
         });
+        $(".nao-salvar").on('click', function() {
+            $("#confirmar").modal('hide');
+        });
 
         /*
          * Script que salva o form via ajax com requisição POST
@@ -409,4 +412,24 @@ function modalLoad(url)
     });
 
     return false;   
+}
+
+function validaForm() {
+    $('form').validate({
+        highlight: function(element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function(error, element) {
+            if(element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
 }
