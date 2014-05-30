@@ -1,0 +1,3 @@
+[submodule "app/Plugin/Facebook"]
+	path = app/Plugin/Facebook
+	url = https://github.com/webtechnick/CakePHP-Facebook-Plugin.git
