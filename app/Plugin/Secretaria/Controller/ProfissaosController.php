@@ -40,13 +40,10 @@
 		}
 
 		public function edit($id = null){
-
 			$this->layout = false;
-
 			$this->Profissao->id = $id;
 			if (empty($this->Profissao->id)) {
-				throw new Exception("Profissão Inexistente");
-				
+				throw new Exception("Profissão Inexistente");				
 			}
 			if ($this->request->is('post')||($this->request->is('put'))) {
 				if (!$this->Profissao->exists()) {
@@ -54,8 +51,7 @@
 				}
 				if (!empty($this->Profissao->id)) {
 					if ($this->Profissao->saveAll($this->request->data)) {
-						$this->Session->setFlash('Profissão Cadastrada Com Sucesso');
-						$this->redirect(array('action' => 'index'));
+						$this->Session->setFlash('Profissão Alterada Com Sucesso');
 					} else {
 						$this->Session->setFlash('Não Foi Possível Cadastrar a Profissão');
 					}			
@@ -68,7 +64,6 @@
 		public function delete($id = null)
 		{
 			$this->autoRender = false;
-
 			$this->layout = false;
 			if (!$this->request->is('post') || empty($id)) {
 				throw new MethodNotAllowedException();
@@ -82,9 +77,7 @@
 			}
 			if ($this->Profissao->delete()) {
 				$this->Session->setFlash(__('Profissao deletado com sucesso.'));
-				$this->redirect(array('action' => 'index'));
 			}
 			$this->Session->setFlash(__('O Profissao não pôde ser deletado.'));
-			$this->redirect(array('action' => 'index'));
 		}
 	}

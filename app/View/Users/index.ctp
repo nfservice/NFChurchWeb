@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	var urlApagaRegChecked = '<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "profissaos", "action" => "delete")); ?>';
+	var urlApagaRegChecked = '<?php echo $this->Html->url(array("plugin" => "", "controller" => "users", "action" => "delete")); ?>';
 </script>
 <?php echo $this->Html->script('index'); ?>
 
@@ -16,10 +16,10 @@
 			
 			<!-- form -->
 			<?php echo $this->Form->create(array('Pesquisa' ,'action' => 'index', 'role' => 'form')); ?>
-			<div class="form-group col-md-3">
-				<a class="btn btn-success form-control btnModal" onclick="modalLoad('<?php echo $this->Html->url(array("controller" => "users", "action" => "add")); ?>');"><i class="fa fa-plus"></i> Adicionar Profissão</a>
+			<div class="form-group col-md-4">
+				<a class="btn btn-success form-control btnModal" onclick="modalLoad('<?php echo $this->Html->url(array("controller" => "users", "action" => "add")); ?>');"><i class="fa fa-plus"></i> Adicionar Usuário</a>
 			</div>
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-2">
 				<a href="javascript:;" class="btn btn-danger form-control" data-toggle="modal" data-target="#confirmacaoExclusao"><i class="fa fa-trash-o"></i> Apagar</a>
 			</div>
 			<div class="form-group col-md-6">

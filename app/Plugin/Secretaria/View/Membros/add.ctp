@@ -1,4 +1,3 @@
-<?php echo $this->Html->script('jquery'); ?>
 <script>
 var cont = 0;
   function addParente(){
@@ -18,16 +17,9 @@ var cont = 0;
       $("#parente"+id).remove();
   }
 </script>
-
-<ol class="breadcrumb"><!-- breadcrumb -->
-  <li><a href="#">Início</a></li>
-  <li><a href="#">Secretaria</a></li>
-  <li><a href="#">Gerenciar Membros</a></li>
-  <li class="active">Cadastro de Membro</li>
-</ol><!-- /breadcrumb -->
-<h2>Cadastro de Membro</h2>
+<div class="col-md-12">
 <!-- form -->
-<?php echo $this->Form->create('Membro', array('role' => 'form')); 
+<?php echo $this->Form->create('Membro', array('role' => 'form', 'class' => 'formModal')); 
   //echo $this->Form->input('tipo_id', array('label' => 'Tipo de Membro' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => array('0' => 'Selecione', '1' => 'Membro', '2' => 'Visitante', '3' => 'Parente')));
   echo $this->Form->input('datamembro', array('type' => 'text', 'label' => 'Tornou-se Membro em:' ,'class' => 'form-control datepicker', 'required', 'div' => array('class' => 'form-group col-md-4'), 'data-date-format' => 'dd/mm/yyyy')); 
   echo $this->Form->input('nome', array('label' => 'Nome da Membro' ,'placeholder' => 'Nome da Membro', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-8')));
@@ -81,8 +73,12 @@ var cont = 0;
 
   echo $this->Form->input('igrejasanteriores', array('label' => 'Igrejas que já frequentou', 'class' => 'form-control', 'placeholder' => 'Nome das igrejas que já frequentou (pulando linhas)', 'required', 'div' => array('class' => 'form-group', 'style' => 'padding: 0 1em')));
 ?>
-  <div class="form-group col-md-6">
-    <button type="submit" class="btn btn-primary">Cadastrar nova membro</button>
-  </div>
-<?php echo $this->Form->end(); ?>
-<!-- /form -->
+  <div class="form-group col-md-2">
+      <button data-dismiss="modal" class="btn btn-default form-control" type="button">Cancelar</button>
+    </div>
+  <?php
+    //echo $this->Form->input($this->Html->link('Voltar', array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'index')), array('type' => 'button', 'label' => false, 'class' => 'btn btn-cancel', 'div' => array('class' => 'form-group col-md-1')));
+    echo $this->Form->input('Salvar Cargo', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-4')));
+    echo $this->Form->end(); 
+  ?>
+</div>

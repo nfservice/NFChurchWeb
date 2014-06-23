@@ -6,9 +6,8 @@
 	<ul class="breadcrumb">
 		<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
 		<li><a href="#">Secretaria</a></li>
-		<li><a href="#">Profissões</a></li>
 		<li class="active">Gerenciar Profissões</li>
-	</ul>
+	</ul> 
 </div>
 <div class="col-md-12">
 	<div class="panel menuRoll">
@@ -16,10 +15,10 @@
 			
 			<!-- form -->
 			<?php echo $this->Form->create(array('Pesquisa' ,'action' => 'index', 'role' => 'form')); ?>
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-4">
 				<a class="btn btn-success form-control btnModal" onclick="modalLoad('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "profissaos", "action" => "add")); ?>');"><i class="fa fa-plus"></i> Adicionar Profissão</a>
 			</div>
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-2">
 				<a href="javascript:;" class="btn btn-danger form-control" data-toggle="modal" data-target="#confirmacaoExclusao"><i class="fa fa-trash-o"></i> Apagar</a>
 			</div>
 			<div class="form-group col-md-6">

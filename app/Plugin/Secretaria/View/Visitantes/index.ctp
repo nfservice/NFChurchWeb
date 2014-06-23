@@ -1,6 +1,9 @@
+<script type="text/javascript">
+	var urlApagaRegChecked = '<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "visitantes", "action" => "delete")); ?>';
+</script>
 <?php echo $this->Html->script('index'); ?>
 
-<div class="col-md-12">		
+<div class="col-md-12">
 	<!--breadcrumbs start -->
 	<ul class="breadcrumb">
 		<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
@@ -15,10 +18,10 @@
 			
 			<!-- form -->
 			<?php echo $this->Form->create(array('action' => 'index', 'role' => 'form')); ?>
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-4">
 				<a class="btn btn-success form-control btnModal" onclick="modalLoad('secretaria/visitantes/add');"><i class="fa fa-plus"></i> Adicionar Visitante</a>
 			</div>
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-2">
 				<a href="javascript:;" class="btn btn-danger form-control" data-toggle="modal" data-target="#confirmacaoExclusao"><i class="fa fa-trash-o"></i> Apagar</a>
 			</div>
 			<div class="form-group col-md-6">
@@ -62,6 +65,7 @@
 			</table>
 		</div>
 	</section>
+</div>
 
 	<!-- Modal -->	
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">

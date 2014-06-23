@@ -235,6 +235,7 @@
                         </a>
                         <ul class="sub">
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => '', 'controller' => 'users', 'action' => 'index')); ?>');" href="javascript:;" >Usuários</a></li>
+                            <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'atas', 'action' => 'index')); ?>');" href="javascript:;" >Atas</a></li>
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'membros', 'action' => 'index')); ?>');" href="javascript:;" >Membros</a></li>
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'index')); ?>');" href="javascript:;" >Visitantes</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'profissaos', 'action' => 'index')); ?>');">Profissões</a></li>
@@ -391,11 +392,11 @@
         '../css/assets/flot-chart/jquery.flot.tooltip.min', 
         '../css/assets/flot-chart/jquery.flot.resize', 
         '../css/assets/flot-chart/jquery.flot.pie.resize',
-        'jquery.form.js',
-        'jquery.validate'
+        'jquery.form.js'
         ));
 ?>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <!--script for this page-->
+<a href="javascript:;" onclick="ajaxload(urlLoc);" style="display: none;" id="linkatual"></a>
 </body>
 </html>
