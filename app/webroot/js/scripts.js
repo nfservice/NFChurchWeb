@@ -36,8 +36,8 @@ $(function() {
      */
 
     //verifica o tamanho da janela do navegador/dispositivo do cliente
-    var windowMax = $(document).width();   
-
+    var windowMax = $(document).width();
+    
     if (windowMax > 765) {
 
         //cria a função que cria o box flutuante de opções
@@ -45,18 +45,17 @@ $(function() {
             var scrollTop = $(window).scrollTop();
             var topCss = $(".brand").css("height");
             topCss = topCss.replace('px', '');
-            var novoTopCss = parseInt(topCss) - 30;
+            var novoTopCss = parseInt(topCss) - 20;
 
             if (scrollTop > novoTopCss) {
 
                 var cssAdd = $(".breadcrumb").css("width");
                 var marginActive = (topCss * -1) + 20;
-                marginActive = marginActive + 'px';
+                marginActive = marginActive + 'px';                   
                 $('.menuRoll').addClass('navBares').css("width", cssAdd).css("margin-top", marginActive);
 
                 var heightFix = $(".menuRoll").css("height");
                 $('.menuRollNext').css("margin-top", heightFix);
-
             } else {  
                 $('.menuRoll').removeClass('navBares').removeAttr('style');
                 $('.menuRollNext').css("margin-top", 0);
@@ -66,7 +65,7 @@ $(function() {
         stickyNaves();  
 
         $(window).scroll(function() {  
-            stickyNaves(); 
+            stickyNaves();  
         });
     }
 });
@@ -351,9 +350,9 @@ function MarcarTodos(div, checked)
      * Função que faz selecionar todos os checkbox de uma vez e deschecar
      */
     if (checked == true) {
-        $('#'+div+' input[type=checkbox]').prop('checked', true);
+        $('#'+div+' input[type=checkbox]').attr('checked', 'checked');
     } else {
-        $('#'+div+' input[type=checkbox]').prop('checked', false);
+        $('#'+div+' input[type=checkbox]').removeAttr('checked');
     }
 }
 
@@ -365,15 +364,11 @@ function ajaxload(url)
      * Função que faz a barra de progresso entrar em ação
      * Depois que a barra de progresso entrar em ação, faz com que carregue uma view na div ".wrapper"
      */
-
-    $(".wrapper").removeAttr('style');
     urlLoc = url;
     $(".wrapper").html(''); // Apaga todo o HTML da div ".wrapper"
     setTimeout(function(){
         $(".wrapper").load(url, function() {
             Pace.start(), Pace.stop();
-            var minHeight = $(".wrapper").css("height");
-            $(".wrapper").css("min-height", minHeight);
         })
     }, 300);    
 }
@@ -387,24 +382,17 @@ function modalLoad(url)
      */
     $.get(url, function(data) {
         $("#myModal .modal-body").html(data);
-
         
         jQuery.noConflict();
         $("#myModal").modal("show");
-        $(".datepicker").css('margin-top', '0px !important');
 
         $(".desable-form input, .desable-form select, .desable-form textarea, .desable-form radio, .desable-form checkbox").attr('disabled','disabled');
 
         $(".habilita_campos").on('click', function(){
             $("input, select, textarea, radio, checkbox").removeAttr('disabled');
             //$("#futuro-salvar").attr('class', 'btn btn-primary').attr('data-toggle', 'modal').removeAttr('id').attr('href', '#confirmar').html('Salvar dados');
-            $("#futuro-salvar").remove();
-            $(".habilita_campos").remove();
-            $("#msg_block").remove();
+            $("#futuro-salvar").remove("#futuro-salvar");
             $("#salvar-dados").removeAttr("style");
-            $("#salvar-dados").on('click', function() {
-                $('#myModal').animate({ scrollTop: 0 }, 'slow');
-            });
         });
         $(".nao-salvar").on('click', function() {
             $("#confirmar").modal('hide');
@@ -425,22 +413,15 @@ function modalLoad(url)
                 type: "POST",
                 data : postData,
                 success:function(data, textStatus, jqXHR) 
-                {   
-                    if ($("#password").val() == $("#repassword").val()) {
-                        $('#confirmar').modal('hide');
-                        $("#myModal").modal("hide");
-                        $('body').removeClass('modal-open');
-                        $('.modal-backdrop').remove();                    
-                        
-                        e.stopPropagation();
-                        ajaxload(urlLoc);
-                    } else {
-                        alert("Senha não confere, \nfavor digite novamente!");
-                    }
+                {
+                    $(".modal-backdrop").remove();
+                    $("#myModal").modal("hide");
+                    e.stopPropagation();
+                    ajaxload(urlLoc);
                 },
                 error: function(jqXHR, textStatus, errorThrown) 
                 {
-                    console.debug('erro do brunaos');
+                    //if fails      
                 }
             });
             e.preventDefault(); //STOP default action
@@ -448,4 +429,47 @@ function modalLoad(url)
     });
 
     return false;   
+}
+
+function validaForm() {
+    $('form').validate({
+        highlight: function(element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function(error, element) {
+            if(element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+}
+
+function getEnderecoProspeccao(cep, id) {
+    if(cep !== ""){
+        $.getScript("https://www.nfservice.com.br/sistema/clientefornecedor/cep/"+cep, function(){
+                if (resultadoCEP["resultado"]) {
+                    $('body').removeClass('loading');
+                    $("#Endereco"+id+"Logradouro").val(unescape(resultadoCEP["tipo_logradouro"]) + " " + unescape(resultadoCEP["logradouro"]));
+                    $("#Endereco"+id+"Logradouro").parent().removeClass('error').removeClass('required').find('div.error-message').remove();
+                    $("#Endereco"+id+"Bairro").val(unescape(resultadoCEP["bairro"]));
+                    $("#Endereco"+id+"Bairro").parent().removeClass('error').removeClass('required').find('div.error-message').remove();
+                    $("#Endereco"+id+"Cidade").val(unescape(resultadoCEP["cidade"]));
+                    $("#Endereco"+id+"Cidade").parent().removeClass('error').removeClass('required').find('div.error-message').remove();
+                    var arg =unescape(resultadoCEP["uf"]);
+                    //$("#Endereco0EstadoId > option").each(function(){
+                    //  if($(this).text()==arg) $(this).parent("select").val($(this).val())
+                    //})
+                    $("#Endereco0EstadoId").val(unescape(resultadoCEP["uf"]));
+                    $("#Endereco0EstadoId").parent().removeClass('error').removeClass('required').find('div.error-message').remove();
+                    $("#Endereco"+id+"Numero").focus();
+                }   
+        });
+    }
 }
