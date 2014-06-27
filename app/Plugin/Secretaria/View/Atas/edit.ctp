@@ -1,5 +1,3 @@
-<?php echo $this->Html->script(array('jquery', 'scripts')); ?>
-<h1>Editar Ata</h1>
 <?php
 	echo $this->Form->create('Ata');
 	echo $this->Form->input('id', array('type' => 'hidden'));

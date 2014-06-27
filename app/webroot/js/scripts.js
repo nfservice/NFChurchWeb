@@ -36,8 +36,8 @@ $(function() {
      */
 
     //verifica o tamanho da janela do navegador/dispositivo do cliente
-    var windowMax = $(document).width();
-    
+    var windowMax = $(document).width();   
+
     if (windowMax > 765) {
 
         //cria a função que cria o box flutuante de opções
@@ -45,17 +45,18 @@ $(function() {
             var scrollTop = $(window).scrollTop();
             var topCss = $(".brand").css("height");
             topCss = topCss.replace('px', '');
-            var novoTopCss = parseInt(topCss) - 20;
+            var novoTopCss = parseInt(topCss) - 30;
 
             if (scrollTop > novoTopCss) {
 
                 var cssAdd = $(".breadcrumb").css("width");
                 var marginActive = (topCss * -1) + 20;
-                marginActive = marginActive + 'px';                   
+                marginActive = marginActive + 'px';
                 $('.menuRoll').addClass('navBares').css("width", cssAdd).css("margin-top", marginActive);
 
                 var heightFix = $(".menuRoll").css("height");
                 $('.menuRollNext').css("margin-top", heightFix);
+
             } else {  
                 $('.menuRoll').removeClass('navBares').removeAttr('style');
                 $('.menuRollNext').css("margin-top", 0);
@@ -65,7 +66,7 @@ $(function() {
         stickyNaves();  
 
         $(window).scroll(function() {  
-            stickyNaves();  
+            stickyNaves(); 
         });
     }
 });
@@ -350,9 +351,9 @@ function MarcarTodos(div, checked)
      * Função que faz selecionar todos os checkbox de uma vez e deschecar
      */
     if (checked == true) {
-        $('#'+div+' input[type=checkbox]').attr('checked', 'checked');
+        $('#'+div+' input[type=checkbox]').prop('checked', true);
     } else {
-        $('#'+div+' input[type=checkbox]').removeAttr('checked');
+        $('#'+div+' input[type=checkbox]').prop('checked', false);
     }
 }
 
@@ -364,15 +365,20 @@ function ajaxload(url)
      * Função que faz a barra de progresso entrar em ação
      * Depois que a barra de progresso entrar em ação, faz com que carregue uma view na div ".wrapper"
      */
+
+    $(".wrapper").removeAttr('style');
     urlLoc = url;
     $(".wrapper").html(''); // Apaga todo o HTML da div ".wrapper"
     setTimeout(function(){
         $(".wrapper").load(url, function() {
             Pace.start(), Pace.stop();
+            var minHeight = $(".wrapper").css("height");
+            $(".wrapper").css("min-height", minHeight);
         })
     }, 300);    
-}
+};
 
+var url_target;
 function modalLoad(url)
 {
 
@@ -380,19 +386,33 @@ function modalLoad(url)
      * Defino as variáveis de destino para a página ser carregada dentro do Modal
      * Obrigado.
      */
+
+    //defini o caminho onde vai pegar os inputs de ADD
+    url_target = url;
+
     $.get(url, function(data) {
         $("#myModal .modal-body").html(data);
+
         
         jQuery.noConflict();
         $("#myModal").modal("show");
+        $(".datepicker").css('margin-top', '0px !important');
 
         $(".desable-form input, .desable-form select, .desable-form textarea, .desable-form radio, .desable-form checkbox").attr('disabled','disabled');
+
+
 
         $(".habilita_campos").on('click', function(){
             $("input, select, textarea, radio, checkbox").removeAttr('disabled');
             //$("#futuro-salvar").attr('class', 'btn btn-primary').attr('data-toggle', 'modal').removeAttr('id').attr('href', '#confirmar').html('Salvar dados');
-            $("#futuro-salvar").remove("#futuro-salvar");
+            $("#futuro-salvar").remove();
+            $(".habilita_campos").remove();
+            $("#msg_block").remove();
             $("#salvar-dados").removeAttr("style");
+            $("#salvar-dados").on('click', function() {
+                $('#myModal').animate({ scrollTop: 0 }, 'slow');
+            });
+            $(".disabled").removeClass("disabled");
         });
         $(".nao-salvar").on('click', function() {
             $("#confirmar").modal('hide');
@@ -413,15 +433,22 @@ function modalLoad(url)
                 type: "POST",
                 data : postData,
                 success:function(data, textStatus, jqXHR) 
-                {
-                    $(".modal-backdrop").remove();
-                    $("#myModal").modal("hide");
-                    e.stopPropagation();
-                    ajaxload(urlLoc);
+                {   
+                    if ($("#password").val() == $("#repassword").val()) {
+                        $('#confirmar').modal('hide');
+                        $("#myModal").modal("hide");
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();                    
+                        
+                        e.stopPropagation();
+                        ajaxload(urlLoc);
+                    } else {
+                        alert("Senha não confere, \nfavor digite novamente!");
+                    }
                 },
                 error: function(jqXHR, textStatus, errorThrown) 
                 {
-                    //if fails      
+                    console.debug('erro do brunaos');
                 }
             });
             e.preventDefault(); //STOP default action
@@ -429,47 +456,67 @@ function modalLoad(url)
     });
 
     return false;   
-}
+};
 
-function validaForm() {
-    $('form').validate({
-        highlight: function(element) {
-            $(element).closest('.form-group').addClass('has-error');
-        },
-        unhighlight: function(element) {
-            $(element).closest('.form-group').removeClass('has-error');
-        },
-        errorElement: 'span',
-        errorClass: 'help-block',
-        errorPlacement: function(error, element) {
-            if(element.parent('.input-group').length) {
-                error.insertAfter(element.parent());
-            } else {
-                error.insertAfter(element);
-            }
-        }
-    });
-}
 
-function getEnderecoProspeccao(cep, id) {
-    if(cep !== ""){
-        $.getScript("https://www.nfservice.com.br/sistema/clientefornecedor/cep/"+cep, function(){
-                if (resultadoCEP["resultado"]) {
-                    $('body').removeClass('loading');
-                    $("#Endereco"+id+"Logradouro").val(unescape(resultadoCEP["tipo_logradouro"]) + " " + unescape(resultadoCEP["logradouro"]));
-                    $("#Endereco"+id+"Logradouro").parent().removeClass('error').removeClass('required').find('div.error-message').remove();
-                    $("#Endereco"+id+"Bairro").val(unescape(resultadoCEP["bairro"]));
-                    $("#Endereco"+id+"Bairro").parent().removeClass('error').removeClass('required').find('div.error-message').remove();
-                    $("#Endereco"+id+"Cidade").val(unescape(resultadoCEP["cidade"]));
-                    $("#Endereco"+id+"Cidade").parent().removeClass('error').removeClass('required').find('div.error-message').remove();
-                    var arg =unescape(resultadoCEP["uf"]);
-                    //$("#Endereco0EstadoId > option").each(function(){
-                    //  if($(this).text()==arg) $(this).parent("select").val($(this).val())
-                    //})
-                    $("#Endereco0EstadoId").val(unescape(resultadoCEP["uf"]));
-                    $("#Endereco0EstadoId").parent().removeClass('error').removeClass('required').find('div.error-message').remove();
-                    $("#Endereco"+id+"Numero").focus();
-                }   
+function modalLoadAdd(url, id_item)
+{
+
+    /*
+     * Defino as variáveis de destino para a página ser carregada dentro do Modal
+     * Obrigado.
+     */
+    $.get(url, function(data) {
+        $("#add_item .modal-body").html(data);
+
+        $('html, body, #myModal').animate({scrollTop : 0}, 800);
+
+        //salvar_dados
+        jQuery.noConflict();
+        $("#add_item").modal("show");
+
+        $('.fecha-modal').css("display", "hidden");
+
+        $('.fecha-modal').html('<button class="btn btn-default form-control nao-salvar" type="button">Fechar</button>');
+
+        $(".nao-salvar").on('click', function() {
+            $("#add_item").modal('hide');
         });
-    }
+
+        /*
+         * Script que salva o form via ajax com requisição POST
+         * Não usamos o proprio do jquery pelo fato dele não mandar a requisição que o CakePHP precisa
+         * 
+         */
+        $(".formModal").on('submit', function(e)
+        {
+            var postData = $(this).serializeArray();
+            var formURL = $(this).attr("action");
+            $.ajax(
+            {
+                url : formURL,
+                type: "POST",
+                data : postData,
+                success:function(data, textStatus, jqXHR) 
+                {
+                    atualizaItem(id_item, url_target);
+                    $("#add_item").modal("hide");
+                    e.stopPropagation();
+                },
+                error: function(jqXHR, textStatus, errorThrown) 
+                {
+                    console.debug('erro do brunaos');
+                }
+            });
+            e.preventDefault(); //STOP default action
+        });
+    });
+
+    return false;   
+};
+
+function atualizaItem(item, target) 
+{
+    $("#"+item).load(target+"  #"+item+" option");
+    console.debug(item);
 }

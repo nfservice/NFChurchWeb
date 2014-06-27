@@ -1,4 +1,4 @@
-<?php 
+<?php
 	echo $this->Form->create(array('Visitante', 'role' => 'form', 'class' => 'formModal'));
 	echo $this->Form->input('nome', array('label' => 'Nome:', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6'), 'required' => 'required'));
 	echo $this->Form->input('sexo', array('label' => 'Sexo:', 'options' => array('0' => 'Selecione', '1' => 'Masculino', '2' => 'Feminino'), 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-3'), 'required' => 'required'));
@@ -18,11 +18,11 @@
 	echo $this->Form->input('Endereco.cidade', array('type' => 'text', 'label' => 'Cidade', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-3'), 'required' => 'required'));
 	echo $this->Form->input('Endereco.estado_id', array('label' => 'Estado', 'options' => $estados, 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4'), 'required' => 'required')); 
 	?>
-	<div class="form-group col-md-2">
+	<div class="form-group col-md-2 fecha-modal">
 		<button data-dismiss="modal" class="btn btn-default form-control" type="button">Cancelar</button>
 	</div>
 	<?php
 	//echo $this->Form->input($this->Html->link('Voltar', array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'index')), array('type' => 'button', 'label' => false, 'class' => 'btn btn-cancel', 'div' => array('class' => 'form-group col-md-1')));
-	echo $this->Form->input('Salvar Visitante', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-2')));
+	echo $this->Form->input('Salvar Visitante', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-4')));
 	echo $this->Form->end();
 ?>

@@ -329,8 +329,8 @@
      */
     echo $this->Html->script(array(
         'lib/jquery.js',
-        '../css/assets/jquery-ui/jquery-ui-1.10.1.custom.min.js',
         'bootstrap.min.js',
+        '../css/assets/jquery-ui/jquery-ui-1.10.1.custom.min.js',        
         'accordion-menu/jquery.dcjqaccordion.2.7.js',
         'scrollTo/jquery.scrollTo.min.js',
         'nicescroll/jquery.nicescroll.js',
