@@ -521,5 +521,27 @@ function modalLoadAdd(url, atualizar_para, atualizar_de)
 function atualizaItem(target, atualizar_para, atualizar_de) 
 {
     $("#"+atualizar_para).load(target+"  #"+atualizar_de+" option");
-    console.debug(atualizar_para);
+}
+
+function removeParente(id) {
+    $("#"+id).remove();
+}
+
+function apagaRelacionamento(campo, div) {
+    var valor = $("#"+campo).val();
+
+    $.ajax(
+    {
+        url : '/secretaria/membros/desvincular/'+id,
+        type: "POST",
+        data : {id: valor},
+        success:function(data, textStatus, jqXHR) 
+        {
+            $("#"+div).remove();
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            console.debug('erro do brunaos');
+        }
+    });
 }

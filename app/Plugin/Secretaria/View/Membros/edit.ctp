@@ -9,10 +9,6 @@
         relacionamento = relacionamento.replaceAll('Relacionamento0TiporelacionamentoId','Relacionamento'+cont+'TiporelacionamentoId').replaceAll('data[Relacionamento][0][tiporelacionamento_id]','data[Relacionamento]['+ cont+'][tiporelacionamento_id]');
         $('#parente').append('<div id="'+cont+'" class="col-md-12"><input type="hidden" name="data[Relacionamento]['+cont+'][membro_id]" id="Relacionamento'+cont+'PessoaId" value="<?php echo $this->request->data['Membro']['id'] ?>"><div class="form-group col-md-8">'+membro+'</div><div class="col-md-1 form-group"><a href="javascript:;" class="form-control btn btn-primary" onclick="modalLoadAdd(\'<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "visitantes", "action" => "add")); ?>\', \'Relacionamento'+cont+'Membro2Id\', \'Relacionamento0Membro2Id\');" data-toggle="tooltip" data-placement="top" title="Adicionar Parente" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a></div><div class="form-group col-md-2">'+relacionamento+'</div><div class="col-md-1" style="margin-top: 22px !important"><a href="javascript:;" onclick="removeParente('+cont+')" class="btn btn-danger form-control"><i class="fa fa-trash-o"></i></a></div></div>');
     }
-
-    function removeParente(id){
-        $("#"+id).remove();
-    }
 </script> 
 
 <div class="col-md-12">
@@ -60,7 +56,11 @@
                 <?php 
                     echo $this->Form->input('Relacionamento.'.$i.'.id', array('type' => 'hidden', 'value' => $relacionamento['id']));
                     echo $this->Form->input('Relacionamento.'.$i.'.membro2_id', array('label' => 'Parente', 'class' => 'form-control', 'placeholder' => 'Nome Parente', 'required', 'div' => array('class' => 'form-group col-md-8'), 'options' => $parentes, 'default' => $relacionamento['membro2_id']));
-                    echo $this->Form->input('Relacionamento.'.$i.'.tiporelacionamento_id', array('label' => 'Tipo:', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => $relacionamentos, 'default' => $relacionamento['tiporelacionamento_id']));
+                    echo $this->Form->input('Relacionamento.'.$i.'.tiporelacionamento_id', array('label' => 'Tipo:', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-3'), 'options' => $relacionamentos, 'default' => $relacionamento['tiporelacionamento_id'])); ?>
+                    <div class="form-group col-md-1">
+                        <a href="javascript:;" class="form-control btn btn-danger disabled" onclick="apagaRelacionamento('Relacionamento<?php echo $i; ?>Id', '<?php echo $i; ?>');" data-toggle="tooltip" data-placement="top" title="Remover Parente" style="margin-top:22px;" role="button"><i class="fa fa-trash-o"></i></a>
+                    </div>
+                    <?php
                     $i++; 
                 ?>
                 </div>
