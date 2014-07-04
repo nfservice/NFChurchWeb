@@ -38,12 +38,11 @@ class MembrosController extends SecretariaAppController {
 			$this->request->data['Membro']['datanascimento'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['datanascimento'])));
 			$this->request->data['Membro']['databatismo'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['databatismo'])));
 			$this->request->data['Membro']['tipo'] = '1';
-			var_dump($this->request->data);
-			die();
 			if($this->Membro->saveAll($this->request->data['Membro'])){
 				foreach ($this->request->data['Relacionamento'] as $key => $value) {
 					$this->request->data['Relacionamento'][$key]['membro_id'] = $this->Membro->id;
 				}
+				$this->Membro->Relacionamento->saveAll($this->request->data['Relacionamento']);
 				json_encode('Membro Salvo com Sucesso!');
 			}else{
 				json_encode('Membro Não Salvo!');
