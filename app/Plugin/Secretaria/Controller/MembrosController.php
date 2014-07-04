@@ -102,7 +102,7 @@ class MembrosController extends SecretariaAppController {
 			**/
 			$this->request->data = $this->Membro->read(null, $id);
 			$estados = $this->Membro->Estado->find('list', array('fields' => array('codibge', 'nome')));
-			$profissoes = $this->Membro->Profissao->find('list', array('fields' => array('id', 'descricao')));
+			$profissoes = $this->Membro->Profissao->find('list', array('fields' => array('id', 'nome')));
 			$cargos = $this->Membro->Cargo->find('list', array('fields' => array('id', 'nome')));
 			$parentes = $this->Membro->find('list', array('fields' => array('id', 'nome')));
 			$relacionamentos = $this->Tiporelacionamento->find('list', array('fields' => array('id', 'descricao')));

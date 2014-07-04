@@ -459,12 +459,15 @@ function modalLoad(url)
 };
 
 
-function modalLoadAdd(url, id_item)
+function modalLoadAdd(url, atualizar_para, atualizar_de)
 {
 
     /*
      * Defino as variáveis de destino para a página ser carregada dentro do Modal
      * Obrigado.
+     * @var atualizar_para: é o destino do conteudo
+     * @var atualizar_de: é o objeto que o script vai acessar para pegar os dados
+     * @var url: é o caminho que do conteudo que vai ser incluso no body do modal
      */
     $.get(url, function(data) {
         $("#add_item .modal-body").html(data);
@@ -499,11 +502,11 @@ function modalLoadAdd(url, id_item)
                 data : postData,
                 success:function(data, textStatus, jqXHR) 
                 {
-                    atualizaItem(id_item, url_target);
+                    atualizaItem(url_target, atualizar_para, atualizar_de);
                     $("#add_item").modal("hide");
                     e.stopPropagation();
                 },
-                error: function(jqXHR, textStatus, errorThrown) 
+                error: function(jqXHR, textStatus, errorThrown)
                 {
                     console.debug('erro do brunaos');
                 }
@@ -515,8 +518,8 @@ function modalLoadAdd(url, id_item)
     return false;   
 };
 
-function atualizaItem(item, target) 
+function atualizaItem(target, atualizar_para, atualizar_de) 
 {
-    $("#"+item).load(target+"  #"+item+" option");
-    console.debug(item);
+    $("#"+atualizar_para).load(target+"  #"+atualizar_de+" option");
+    console.debug(atualizar_para);
 }
