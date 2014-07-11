@@ -527,12 +527,12 @@ function removeParente(id) {
     $("#"+id).remove();
 }
 
-function apagaRelacionamento(campo, div) {
+function apagaRelacionamento(campo, div, url) {
     var valor = $("#"+campo).val();
 
     $.ajax(
     {
-        url : '/secretaria/membros/desvincular/'+id,
+        url : url+'/'+valor,
         type: "POST",
         data : {id: valor},
         success:function(data, textStatus, jqXHR) 

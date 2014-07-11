@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
     var cont;
     function addParente(){    
         cont = $('#parente').children().last().attr('id');
@@ -58,7 +58,7 @@
                     echo $this->Form->input('Relacionamento.'.$i.'.membro2_id', array('label' => 'Parente', 'class' => 'form-control', 'placeholder' => 'Nome Parente', 'required', 'div' => array('class' => 'form-group col-md-8'), 'options' => $parentes, 'default' => $relacionamento['membro2_id']));
                     echo $this->Form->input('Relacionamento.'.$i.'.tiporelacionamento_id', array('label' => 'Tipo:', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-3'), 'options' => $relacionamentos, 'default' => $relacionamento['tiporelacionamento_id'])); ?>
                     <div class="form-group col-md-1">
-                        <a href="javascript:;" class="form-control btn btn-danger disabled" onclick="apagaRelacionamento('Relacionamento<?php echo $i; ?>Id', '<?php echo $i; ?>');" data-toggle="tooltip" data-placement="top" title="Remover Parente" style="margin-top:22px;" role="button"><i class="fa fa-trash-o"></i></a>
+                        <a href="javascript:;" class="form-control btn btn-danger disabled" onclick="apagaRelacionamento('Relacionamento<?php echo $i; ?>Id', '<?php echo $i; ?>', '<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'membros', 'action' => 'desvincular')); ?>');" data-toggle="tooltip" data-placement="top" title="Remover Parente" style="margin-top:22px;" role="button"><i class="fa fa-trash-o"></i></a>
                     </div>
                     <?php
                     $i++; 
