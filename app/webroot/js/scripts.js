@@ -11,11 +11,9 @@ $(function() {
         return (str);
     }
 
-    jQuery.fn.outerHTML = function(s) {
-        return (s)
-        ? this.before(s).remove()
-        : jQuery("<p>").append(this.eq(0).clone()).html();
-    }
+    $.fn.outerHTML = function() {
+        return this[0].outerHTML || $(this).wrap('<div/>').parent().html() || this;
+    };
 
     $('#nav-accordion').dcAccordion({
         eventType: 'click',

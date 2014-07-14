@@ -134,23 +134,19 @@ class MembrosController extends SecretariaAppController {
 		}
 	}
 
-	public function delete(){
-		$this->autoRender = false;
-		if (!empty($this->request->data['Membro'])) {
-			$save = 0;
-			$unsave = 0;
-			foreach ($this->request->data['Membro'] as $idMembro) {
-				$this->Membro->id = $idMembro;
-				if ($this->Membro->exists()) {
-					$save++;
-					$this->Membro->delete($idMembro);
-				} else {
-					$unsave++;
-				}
-			}
-			echo $save.' Registros Apagados com Sucesso. E '.$unsave.' não Apagados';
-		} else {
-			echo 'Nenhum Registro selecionado para Deletar';
+	public function delete($id = null){
+		if (!$this->request->is('post') || empty($id)) {
+			throw new MethodNotAllowedException();
 		}
+		$this->request->data = $this->Membro->read(null, $id);
+		$this->Membro->id = $id;
+		if (!$this->Membro->exists()) {
+			throw new NotFoundException(__('Membro inválido.'));
+		}
+		if ($this->Membro->delete()) {
+			$this->Session->setFlash(__('Membro deletado com sucesso.'));
+			$this->redirect(array('action' => 'index'));
+		}
+		$this->Session->setFlash(__('O Membro não pôde ser deletado.'));
 	}
 }

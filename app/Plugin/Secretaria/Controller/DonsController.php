@@ -40,23 +40,19 @@
 			}
 		}
 
-		public function delete(){
-			$this->autoRender = false;
-			if (!empty($this->request->data['Don'])) {
-				$save = 0;
-				$unsave = 0;
-				foreach ($this->request->data['Don'] as $idDon) {
-					$this->Don->id = $idDon;
-					if ($this->Don->exists()) {
-						$save++;
-						$this->Don->delete($idDon);
-					} else {
-						$unsave++;
-					}
-				}
-				echo $save.' Registros Apagados com Sucesso. E '.$unsave.' não Apagados';
-			} else {
-				echo 'Nenhum Registro selecionado para Deletar';
+		public function delete($id = null){
+			if (!$this->request->is('post') || empty($id)) {
+				throw new MethodNotAllowedException();
 			}
+			$this->request->data = $this->Don->read(null, $id);
+			$this->Don->id = $id;
+			if (!$this->Don->exists()) {
+				throw new NotFoundException(__('Don inválido.'));
+			}
+			if ($this->Don->delete()) {
+				$this->Session->setFlash(__('Don deletada com sucesso.'));
+				$this->redirect(array('action' => 'index'));
+			}
+			$this->Session->setFlash(__('A Don não pôde ser deletada.'));
 		}
 	}

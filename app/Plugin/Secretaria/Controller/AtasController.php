@@ -88,24 +88,19 @@
 			}
 		}
 
-		public function delete(){
-			
-			$this->autoRender = false;
-			if (!empty($this->request->data['Ata'])) {
-				$save = 0;
-				$unsave = 0;
-				foreach ($this->request->data['Ata'] as $idAta) {
-					$this->Ata->id = $idAta;
-					if ($this->Ata->exists()) {
-						$save++;
-						$this->Ata->delete($idAta);
-					} else {
-						$unsave++;
-					}
-				}
-				echo $save.' Registros Apagados com Sucesso. E '.$unsave.' não Apagados';
-			} else {
-				echo 'Nenhum Registro selecionado para Deletar';
+		public function delete($id = null){
+			if (!$this->request->is('post') || empty($id)) {
+				throw new MethodNotAllowedException();
 			}
+			$this->request->data = $this->Ata->read(null, $id);
+			$this->Ata->id = $id;
+			if (!$this->Ata->exists()) {
+				throw new NotFoundException(__('Ata inválida.'));
+			}
+			if ($this->Ata->delete()) {
+				$this->Session->setFlash(__('Ata deletada com sucesso.'));
+				$this->redirect(array('action' => 'index'));
+			}
+			$this->Session->setFlash(__('A Ata não pôde ser deletada.'));
 		}
 	}

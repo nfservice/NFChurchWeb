@@ -40,23 +40,19 @@
 			}
 		}
 
-		public function delete(){
-			$this->autoRender = false;
-			if (!empty($this->request->data['Cargo'])) {
-				$save = 0;
-				$unsave = 0;
-				foreach ($this->request->data['Cargo'] as $idCargo) {
-					$this->Cargo->id = $idCargo;
-					if ($this->Cargo->exists()) {
-						$save++;
-						$this->Cargo->delete($idCargo);
-					} else {
-						$unsave++;
-					}
-				}
-				echo $save.' Registros Apagados com Sucesso. E '.$unsave.' não Apagados';
-			} else {
-				echo 'Nenhum Registro selecionado para Deletar';
+		public function delete($id = null){
+			if (!$this->request->is('post') || empty($id)) {
+				throw new MethodNotAllowedException();
 			}
+			$this->request->data = $this->Cargo->read(null, $id);
+			$this->Cargo->id = $id;
+			if (!$this->Cargo->exists()) {
+				throw new NotFoundException(__('Cargo inválido.'));
+			}
+			if ($this->Cargo->delete()) {
+				$this->Session->setFlash(__('Cargo deletado com sucesso.'));
+				$this->redirect(array('action' => 'index'));
+			}
+			$this->Session->setFlash(__('O Cargo não pôde ser deletado.'));
 		}
 	}

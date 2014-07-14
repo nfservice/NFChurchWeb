@@ -91,24 +91,19 @@
 			}
 		}
 
-		public function delete(){
-			
-			$this->autoRender = false;
-			if (!empty($this->request->data['Congregacao'])) {
-				$save = 0;
-				$unsave = 0;
-				foreach ($this->request->data['Congregacao'] as $idCong) {
-					$this->Congregacao->id = $idCong;
-					if ($this->Congregacao->exists()) {
-						$save++;
-						$this->Congregacao->delete($idCong);
-					} else {
-						$unsave++;
-					}
-				}
-				echo $save.' Registros Apagados com Sucesso. E '.$unsave.' não Apagados';
-			} else {
-				echo 'Nenhum Registro selecionado para Deletar';
+		public function delete($id = null){
+			if (!$this->request->is('post') || empty($id)) {
+				throw new MethodNotAllowedException();
 			}
+			$this->request->data = $this->Congregacao->read(null, $id);
+			$this->Congregacao->id = $id;
+			if (!$this->Congregacao->exists()) {
+				throw new NotFoundException(__('Congregacao inválida.'));
+			}
+			if ($this->Congregacao->delete()) {
+				$this->Session->setFlash(__('Congregacao deletada com sucesso.'));
+				$this->redirect(array('action' => 'index'));
+			}
+			$this->Session->setFlash(__('A Congregacao não pôde ser deletada.'));
 		}
 	}
