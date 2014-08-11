@@ -237,6 +237,7 @@
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => '', 'controller' => 'users', 'action' => 'index')); ?>');" href="javascript:;" >Usuários</a></li>
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'atas', 'action' => 'index')); ?>');" href="javascript:;" >Atas</a></li>
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'membros', 'action' => 'index')); ?>');" href="javascript:;" >Membros</a></li>
+                            <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'congregacaos', 'action' => 'index')); ?>');" href="javascript:;" >Congregações</a></li>
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'index')); ?>');" href="javascript:;" >Visitantes</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'profissaos', 'action' => 'index')); ?>');">Profissões</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'cargos', 'action' => 'index')); ?>');">Cargos</a></li>
@@ -368,6 +369,7 @@
         '../css/assets/bootstrap-inputmask/bootstrap-inputmask.min.js', 
         '../css/assets/jquery-tags-input/jquery.tagsinput.js',
         'scripts',
+        'mask',
         '../css/assets/sparkline/jquery.sparkline',
         '../css/assets/easypiechart/jquery.easypiechart.js',
         '../css/assets/bootstrap-switch-master/build/js/bootstrap-switch.js',

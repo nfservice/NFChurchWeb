@@ -10,31 +10,10 @@
 		<li class="active">Gerenciar Usuários</li>
 	</ul>
 </div>
-<div class="col-md-12">
-	<div class="panel menuRoll">
-		<div class="panel-body row">
-			
-			<!-- form -->
-			<?php echo $this->Form->create(array('Pesquisa' ,'action' => 'index', 'role' => 'form')); ?>
-			<div class="form-group col-md-4">
-				<a class="btn btn-success form-control btnModal" onclick="modalLoad('<?php echo $this->Html->url(array("controller" => "users", "action" => "add")); ?>');"><i class="fa fa-plus"></i> Adicionar Usuário</a>
-			</div>
-			<div class="form-group col-md-2">
-				<a href="javascript:;" class="btn btn-danger form-control" data-toggle="modal" data-target="#confirmacaoExclusao"><i class="fa fa-trash-o"></i> Apagar</a>
-			</div>
-			<div class="form-group col-md-6">
-				<div class="input-group m-bot15">
-					<input type="text" class="form-control" id="texto" name="username" placeholder="Pesquise aqui">
-					<span class="input-group-btn">
-						<input class="btn btn-success" type="submit" value="Buscar">
-					</span>
-				</div>
-			</div>
-			<!-- end form -->
-			<?php echo $this->Form->end(); ?>
-		</div>
-	</div>
-</div>
+<?php 
+	// form flutuante (menuRoll)
+	echo $this->element('menuRoll');
+?>
 <div class="col-md-12"> 
 	<section class="panel">
 		<header class="panel-heading">
@@ -65,43 +44,11 @@
 	</section>
 </div>
 
-<!-- Modal -->	
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+<?php 
+	// modal de edit dos cadastros
+	echo $this->element('modal/modalEdit');
 
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Editar</h4>
-			</div>
-			<div class="modal-body">
+	// modal de confirmação de exclusão dos cadastros
+	echo $this->element('modal/modalExcluir');
+?>
 
-			</div>
-			<div class="modal-footer">
-			</div>
-		</div>
-	</div>
-</div>
-<!-- modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="confirmacaoExclusao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Confirmação de exclusão.</h4>
-            </div>
-            <div class="modal-body" id="modalapagar">
-
-                Deseja realmente excluir o(s) Usuário(s) selecionados?
-
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
-                <button class="btn btn-warning" type="button" id="apagar"> Excluir</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- modal -->

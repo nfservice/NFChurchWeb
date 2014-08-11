@@ -1,4 +1,3 @@
-<?php echo $this->Html->script(array('jquery', 'mask'));?>
 <script>
 	var cont = '<?php echo count($this->request->data['Contato']) - 1; ?>';
 	var next = '<?php echo count($this->request->data['Contato']); ?>';

@@ -4,11 +4,10 @@
 <?php 
 
     echo $this->Form->create(array('User', 'role' => 'form', 'class' => 'desable-form formModal'));
-    ?>
-    <div class="alert alert-warning" id="msg_block">    
-        <p><button type="button" class="btn btn-success habilita_campos" id="futuro-salvar"><i class="fa fa-unlock"></i></button> Clique no cadeado ao lado para desbloquear os campos do formulário</p>
-    </div>
-    <?php
+    
+    // cadeado para desbloquear o form
+    echo $this->element('desbloquearForm');
+
     echo $this->Form->input('nome', array('type' => 'text', 'label' => 'Nome Completo:', 'class' => 'form-control', 'placeholder' => 'Nome Completo', 'div' => array('class' => 'form-group col-md-6'), 'required'));
     echo $this->Form->input('id', array('type' => 'hidden'));
     echo $this->Form->input('username', array('type' => 'text', 'label' => 'Seu E-mail:', 'class' => 'form-control', 'placeholder' => 'Digite seu E-mail', 'div' => array('class' => 'form-group col-md-6'), 'required')); 
@@ -19,30 +18,14 @@
     echo $this->Form->input('cpf', array('type' => 'text', 'class' => 'form-control', 'label' => 'CPF:', 'placeholder' => 'CPF', 'div' => array('class' => 'form-group col-md-8'), 'required')); ?>
 
     <?php // echo $this->Form->input('Salvar Visitante', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-2'))); ?>
-    <div class="modal fade over-hidden" id="confirmar" tabindex="-1" data-keyboard="false" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content shadowModal">
-                <div class="modal-header">
-                    <h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> Confirme as alterações dos dados</h4>
-                </div>
-                <div class="modal-body">
+    
+    <?php
 
-                    Tem certeza de que quer salvar as alterações nesse cadastro?
+        // modal com confirmação de alteração de cadastro
+        echo $this->element('modal/controleForm');
 
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-default nao-salvar" type="button">Não quero mais salvar</button>
-                    <input class="btn btn-warning" type="submit" value="Sim, quero salvar">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="form-group col-md-2">
-        <button data-dismiss="modal" class="btn btn-default form-control" type="button">Fechar</button>    
-    </div>
-    <div class="form-group col-md-4">
-        <a class="btn btn-warning habilita_campos form-control" id="futuro-salvar">Habilitar Edição</a>
-        <a class="btn btn-primary form-control" id="salvar-dados" data-toggle="modal" href="#confirmar" style="display:none">Salvar alterações</a>
-    </div>
-    <?php 
-    echo $this->Form->end(); ?>
+        // botoões do formulário
+        echo $this->element('botoesForm');
+
+        echo $this->Form->end(); 
+    ?>

@@ -2,6 +2,7 @@
     var cont;
     function addParente(){    
         cont = $('#parente').children().last().attr('id');
+        console.debug(cont);
         cont++;
         membro = $('#Relacionamento0Membro2Id').parent().clone().html();
         membro = membro.replaceAll('Relacionamento0Membro2Id','Relacionamento'+cont+'Membro2Id').replaceAll('data[Relacionamento][0][membro2_id]','data[Relacionamento]['+ cont+'][membro2_id]');
@@ -112,31 +113,17 @@
             </div>
         </div>
     </div>
-    <div class="form-group col-md-2">
-        <button data-dismiss="modal" class="btn btn-default form-control" type="button">Fechar</button> 
-    </div>
-    <div class="form-group col-md-4">
-        <a class="btn btn-warning habilita_campos form-control" id="futuro-salvar">Habilitar Edição</a>
-        <a class="btn btn-primary form-control" id="salvar-dados" data-toggle="modal" href="#confirmar" style="display:none">Salvar alterações</a>
-    </div>
-    <?php 
-        echo $this->Form->end();
+    <?php
+
+        // modal com confirmação de alteração de cadastro
+        echo $this->element('modal/controleForm');
+
+        // botoões do formulário
+        echo $this->element('botoesForm');
     ?>
 <!-- /form -->
 </div>
 
 
-<div class="modal fade over-hidden" id="add_item" tabindex="-1" data-keyboard="false" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content shadowModal">
-            <div class="modal-header">
-                <h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> Adicionar</h4>
-            </div>
-            <div class="modal-body">
-                
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
+<?php echo $this->element('modal/modalAddItem'); ?>
+<?php echo $this->Form->end(); ?>

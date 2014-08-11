@@ -1,59 +1,62 @@
-<h1>Congregações</h1>
-<?php
-	echo $this->Form->input($this->Html->link('Nova', array('plugin' => 'secretaria', 'controller' => 'congregacaos', 'action' => 'add')), array('type' => 'button', 'label' => false));
-	echo $this->Form->input($this->Html->link('Deletar', array('plugin' => 'secretaria', 'controller' => 'congregacaos', 'action' => 'delete')), array('type' => 'button', 'label' => false));
-	
-	echo $this->Form->create(array('Pesquisa')); ?>
-		<input type="text" size="50" id="texto" name="filtro" placeholder="Filtre aqui" class="form-control">
-		<input type="submit" class="btn btn-success" type="button" value="Pesquisar!">
-	<?php echo $this->Form->end(); ?>
-					
-	<?php echo $this->Form->create(null, array('action' => 'delete')); ?>
-		<table class="table table-bordered table-striped table-condensed">
-			<tr>
-				<th>
-					<!-- preparar função para selecionar todos os checkbox-->
-					<?php echo $this->Form->checkbox('setAll', array('hiddenField' => false, 'class' => 'toDelete')); ?>
-				</th>
-				<th>
-					Nome:
-				</th>
-				<th>
-					E-mail:
-				</th>
-				<th>
-					Telefone:
-				</th>
-			</tr >
-			<?php if (!empty($congregacaos)) {
-				$i=0;
-				foreach ($congregacaos as $congregacao) { ?>
-					<tr class="tr-visitantes-click" onclick="ajaxload(<?php echo $this->Html->url('/'); ?>);">
-						<td>
-							<?php echo $this->Form->checkbox('set-'.$congregacao['Congregacao']['id'], array('hiddenField' => false, 'class' => 'toDelete', 'value' => $congregacao['Congregacao']['id'])); ?>
-						</td>
-						<td>
-							<?php echo $congregacao['Congregacao']['nome']; ?>
-						</td>
-						<td>
+<script type="text/javascript">
+	var urlApagaRegChecked = '<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "congregacao", "action" => "delete")); ?>';
+</script>
+<?php echo $this->Html->script('index'); ?>
+<div class="col-md-12">		 
+	<!--breadcrumbs start -->
+	<ul class="breadcrumb">
+		<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#">Secretaria</a></li>
+		<li class="active">Membros</li>
+	</ul>
+	<!--breadcrumbs end -->
+</div>
 
-							<?php
-							$congregacao['Congregacao']['telefone'] = '('.substr($congregacao['Congregacao']['telefone'], 0, 2).') '.substr($congregacao['Congregacao']['telefone'], 2, -4).'-'.substr($congregacao['Congregacao']['telefone'], -4);
-							echo $congregacao['Congregacao']['telefone']; ?>
-						</td>
-						<td>
-							<?php echo $this->Html->link('Editar', array('action' => 'edit', $congregacao['Congregacao']['id'])); ?>
+<?php 
+	// form flutuante (menuRoll)
+	echo $this->element('menuRoll');
+?>
+<div class="col-lg-12 menuRollNext">
+	<section class="panel">
+		<header class="panel-heading">
+			Gerenciar membros
+		</header>
+		<div class="panel-body">
+			<table class="table table-bordered table-striped table-condensed" id="tableData">
+				<tr>
+					<th class="col-md-1"><input type="checkbox" onclick="MarcarTodos('tableData', this.checked);"></th>
+					<th>Congregação:</th>
+					<th>Telefone:</th>
+					<th>E-mail:</th>
+				</tr >
+				<?php if (!empty($congregacaos)) {
+					$i=0;
+					foreach ($congregacaos as $congregacao) { ?>
+						<tr class="tr-visitantes-click" id="<?php echo 'dados_' . $congregacao['Congregacao']['id']; ?>">
+							<td><input type="checkbox" value="<?php echo $congregacao['Congregacao']['id']; ?>"></td>
+							<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $congregacao['Congregacao']['id'])); ?>');"><?php echo $congregacao['Congregacao']['nome']; ?></td>
+							<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $congregacao['Congregacao']['id'])); ?>');"><?php $congregacao['Congregacao']['telefone'] = '('.substr($congregacao['Congregacao']['telefone'], 0, 2).') '.substr($congregacao['Congregacao']['telefone'], 2, -4).'-'.substr($congregacao['Congregacao']['telefone'], -4);
+								echo $congregacao['Congregacao']['telefone']; ?></td>
+							<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $congregacao['Congregacao']['id'])); ?>');"><?php echo $congregacao['Congregacao']['email']; ?></td>
+						</tr>
+						<?php $i++;
+					}
+				} else { ?>
+					<tr>
+						<td cellspacing="100%" cellpadding="100%" colspan="3" align="center">
+							<?php echo "Você Ainda Não Cadastrou Nenhuma Congregação!"; ?>
 						</td>
 					</tr>
-					<?php $i++;
-				}
-			} else { ?>
-				<tr>
-					<td cellspacing="100%" cellpadding="100%" colspan="3" align="center">
-						<?php echo "Você Ainda Não Cadastrou Nenhuma Congregação!"; ?>
-					</td>
-				</tr>
-			<?php } ?>
-		</table>
-		<input type="submit" value="apagar todos selecionados">
-	<?php echo $this->Form->end(); ?>
+				<?php } ?>
+			</table>
+		</div>
+	</section>
+</div>
+
+<?php 
+	// modal de edit dos cadastros
+	echo $this->element('modal/modalEdit');
+
+	// modal de confirmação de exclusão dos cadastros
+	echo $this->element('modal/modalExcluir');
+?>

@@ -57,7 +57,12 @@
     </div>
   
     <?php
-        echo $this->Form->input('profissao_id', array('label' => 'Profissão', 'id' => 'autocomplete', 'class' => 'form-control', 'required', 'options' => $profissoes, 'div' => array('class' => 'form-group col-md-6')));
+            echo $this->Form->input('profissao_id', array('label' => 'Profissão', 'id' => 'autocomplete', 'class' => 'form-control', 'required', 'options' => $profissoes, 'div' => array('class' => 'form-group col-md-5')));
+        ?>
+        <div class="form-group col-md-1">
+            <a href="javascript:;" class="form-control btn btn-primary" onclick="modalLoadAdd('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "profissaos", "action" => "add")); ?>', 'autocomplete', 'autocomplete');" data-toggle="tooltip" data-placement="top" title="Adicionar Profissão" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a>
+        </div>
+        <?php
         echo $this->Form->input('empresa', array('label' => 'Empresa', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-6')));
 
         echo $this->Form->input('databatismo', array('type' => 'text', 'label' => 'Data de Batismo', 'class' => 'form-control datepicker', 'required', 'div' => array('class' => 'form-group col-md-3')));
@@ -76,6 +81,9 @@
     <?php
         //echo $this->Form->input($this->Html->link('Voltar', array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'index')), array('type' => 'button', 'label' => false, 'class' => 'btn btn-cancel', 'div' => array('class' => 'form-group col-md-1')));
         echo $this->Form->input('Salvar Membro', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-4')));
-        echo $this->Form->end(); 
+        
+        echo $this->Form->end();
+
+        echo $this->element('modal/modalAddItem');
     ?>
 </div>
