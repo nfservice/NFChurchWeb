@@ -107,3 +107,12 @@ CakeLog::config('error', array(
 ));
 
 CakePlugin::loadAll();
+
+spl_autoload_register(function($class) {
+    foreach(App::path('Vendor') as $base) {
+        $path = $base . str_replace('\\', DS, $class) . '.php';
+        if (file_exists($path)) {
+            return include $path;
+        }
+    }
+});
