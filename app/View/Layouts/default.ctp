@@ -22,7 +22,6 @@
         'style-responsive.css',
         'select2',
         'multi-select',
-        'bootstrap.min.css',
         'nfchurch'
         ));
 
