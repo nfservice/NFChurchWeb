@@ -20,6 +20,9 @@
         'assets/morris-chart/morris.css',
         'style',
         'style-responsive.css',
+        'select2',
+        'multi-select',
+        'bootstrap.min.css',
         'nfchurch'
         ));
 
@@ -27,7 +30,7 @@
         //Morris Chart CSS
     echo $this->Html->css('assets/morris-chart/morris');
 
-    echo $this->Html->script(array('lib/jquery', 'bootstrap.min.js'));
+    echo $this->Html->script(array('jquery', 'mask.js', 'bootstrap.min.js'));
 
     echo $this->Html->css(array(
         'assets/bootstrap-switch-master/build/css/bootstrap3/bootstrap-switch.css',
@@ -242,6 +245,7 @@
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'index')); ?>');" href="javascript:;" >Visitantes</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'profissaos', 'action' => 'index')); ?>');">Profissões</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'cargos', 'action' => 'index')); ?>');">Cargos</a></li>
+                            <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'calendarios', 'action' => 'add')); ?>');">Calendario</a></li>
                             <li><a onclick="<?php echo $this->Html->url(array('controller' => 'secretaria', 'action' => 'relatorios')); ?> href="javascript:;"">Relatórios</a></li>
                         </ul>
                     </li>
@@ -370,7 +374,6 @@
         '../css/assets/bootstrap-inputmask/bootstrap-inputmask.min.js', 
         '../css/assets/jquery-tags-input/jquery.tagsinput.js',
         'scripts',
-        'mask',
         '../css/assets/sparkline/jquery.sparkline',
         '../css/assets/easypiechart/jquery.easypiechart.js',
         '../css/assets/bootstrap-switch-master/build/js/bootstrap-switch.js',
@@ -384,18 +387,21 @@
         '../css/assets/bootstrap-daterangepicker/daterangepicker.js',
         '../css/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js',
         '../css/assets/bootstrap-timepicker/js/bootstrap-timepicker.js',
-        '../css/assets/jquery-multi-select/js/jquery.multi-select.js',
-        '../css/assets/jquery-multi-select/js/jquery.quicksearch.js',
         'gritter/gritter.js',
-        'advanced-form/advanced-form.js',
-        'underscore-min.js',
         'pace.js',
-        'underscore-min.map',
         '../css/assets/flot-chart/jquery.flot', 
         '../css/assets/flot-chart/jquery.flot.tooltip.min', 
         '../css/assets/flot-chart/jquery.flot.resize', 
         '../css/assets/flot-chart/jquery.flot.pie.resize',
-        'jquery.form.js'
+        'jquery.form.js',
+        'select2',
+        'select-init',
+        'bootstrap-switch.js',
+        '../css/assets/jquery-multi-select/js/jquery.multi-select.js',
+        '../css/assets/jquery-multi-select/js/jquery.quicksearch.js',
+        'underscore-min.js',
+        //'underscore-min.map.js',
+        'advanced-form/advanced-form.js',
         ));
 ?>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->

@@ -98,7 +98,7 @@ $(function() {
             },
             colors: ["#87cfcb", "#48a9a7"]
         };
-        var plot = $.plot($("#daily-visit-chart"), data, options);
+        //var plot = $.plot($("#daily-visit-chart"), data, options);
     }
 });
 

@@ -203,11 +203,11 @@ var Script = function () {
     });
 
 
-    $(function() {
+    //$(function() {
 
-        var datatPie = [30,50];
+        //var datatPie = [30,50];
 // DONUT
-        $.plot($(".target-sell"), datatPie,
+        /*$.plot($(".target-sell"), datatPie,
             {
                 series: {
                     pie: {
@@ -238,8 +238,8 @@ var Script = function () {
                 },
 
                 colors: ["#ff6d60", "#cbcdd9"]
-            });
-    });
+            });*/
+    //});
 
     $(function() {
         $('.pc-epie-chart').easyPieChart({
@@ -373,9 +373,48 @@ function ajaxload(url)
             var minHeight = $(".wrapper").css("height");
             $(".wrapper").css("min-height", minHeight);
         })
-    }, 300);    
-};
+    }, 300);
 
+    multiSelect();
+};
+function multiSelect()
+{
+    $('.multi-select').multiSelect({
+      selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='try \"12\"'>",
+      selectionHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='try \"4\"'>",
+      afterInit: function(ms){
+        var that = this,
+            $selectableSearch = that.$selectableUl.prev(),
+            $selectionSearch = that.$selectionUl.prev(),
+            selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
+            selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
+
+        that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+        .on('keydown', function(e){
+          if (e.which === 40){
+            that.$selectableUl.focus();
+            return false;
+          }
+        });
+
+        that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+        .on('keydown', function(e){
+          if (e.which == 40){
+            that.$selectionUl.focus();
+            return false;
+          }
+        });
+      },
+      afterSelect: function(){
+        this.qs1.cache();
+        this.qs2.cache();
+      },
+      afterDeselect: function(){
+        this.qs1.cache();
+        this.qs2.cache();
+      }
+    });
+}
 var url_target;
 function modalLoad(url)
 {
