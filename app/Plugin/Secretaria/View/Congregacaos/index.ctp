@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	var urlApagaRegChecked = '<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "congregacao", "action" => "delete")); ?>';
+	var urlApagaRegChecked = '<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "congregacaos", "action" => "delete")); ?>';
 </script>
 <?php echo $this->Html->script('index'); ?>
 <div class="col-md-12">		 

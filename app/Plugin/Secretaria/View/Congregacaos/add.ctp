@@ -1,4 +1,3 @@
-<?php echo $this->Html->script(array('jquery', 'mask'));?>
 <script>
 	var cont = 0;
 	var next = 1;
@@ -68,41 +67,48 @@
 	});
 </script>
 <h1>Nova Congregação</h1>
+<?php echo $this->Form->create('Congregacao', array('role' => 'form', 'class' => 'formModal')); ?>
+<div class="row">
 	<?php
-		echo $this->Form->create('Congregacao');
-		echo $this->Form->input('nome', array('label' => 'Nome: ', 'type' => 'text'));
-		echo $this->Form->input('cnpj', array('label' => 'Cnpj: ', 'type' => 'text', 'class' => 'cnpj'));
-		echo $this->Form->input('email', array('label' => 'E-mail: ', 'type' => 'text'));
-		echo $this->Form->input('telefone', array('label' => 'Telefone', 'type' => 'text', 'class' => 'telefone'));
+		echo $this->Form->input('nome', array('label' => 'Nome: ', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-8')));
+		echo $this->Form->input('cnpj', array('label' => 'Cnpj: ', 'type' => 'text', 'class' => 'cnpj', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4')));
+		echo $this->Form->input('email', array('label' => 'E-mail: ', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
+		echo $this->Form->input('telefone', array('label' => 'Telefone', 'type' => 'text', 'class' => 'telefone', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
 	?>
+</div>
 	<h3>Endereço:</h3>
+	<div class="row">
 	<?php
-		echo $this->Form->input('CongregacaoEndereco.0.cep', array('label' => 'Cep: ', 'type' => 'text', 'onKeyUp' => 'if(this.value.replace("-","").replaceAll("_","").length == 8){getEnderecoProspeccao(this.value, 0);}', 'class' => 'cep'));
-		echo $this->Form->input('CongregacaoEndereco.0.logradouro', array('label' => 'Logradouro: ', 'type' => 'text'));
-		echo $this->Form->input('CongregacaoEndereco.0.numero', array('label' => 'Número: ', 'type' => 'text'));
-		echo $this->Form->input('CongregacaoEndereco.0.complemento', array('label' => 'Complemento:', 'type' => 'text'));
-		echo $this->Form->input('CongregacaoEndereco.0.bairro', array('label' => 'Bairro:', 'type' => 'text'));
-		echo $this->Form->input('CongregacaoEndereco.0.cidade', array('label' => 'Cidade:', 'type' => 'text'));
-		echo $this->Form->input('CongregacaoEndereco.0.estado_id', array('label' => 'Estado:', 'options' => $estados));
+		echo $this->Form->input('CongregacaoEndereco.0.cep', array('label' => 'Cep: ', 'type' => 'text', 'onKeyUp' => 'if(this.value.replace("-","").replaceAll("_","").length == 8){getEnderecoProspeccao(this.value, 0);}', 'class' => 'cep', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-2')));
+		echo $this->Form->input('CongregacaoEndereco.0.logradouro', array('label' => 'Logradouro: ', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-8')));
+		echo $this->Form->input('CongregacaoEndereco.0.numero', array('label' => 'Número: ', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-2')));
+		echo $this->Form->input('CongregacaoEndereco.0.complemento', array('label' => 'Complemento:', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
+		echo $this->Form->input('CongregacaoEndereco.0.bairro', array('label' => 'Bairro:', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
+		echo $this->Form->input('CongregacaoEndereco.0.cidade', array('label' => 'Cidade:', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-8')));
+		echo $this->Form->input('CongregacaoEndereco.0.estado_id', array('label' => 'Estado:', 'options' => $estados, 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4')));
 	?>
-	<h3>Contatos:</h3>
-	<div id="all">
-		<div id="contato0">
-			<?php
-				echo $this->Form->input('Contato.0.church_id', array('type' => 'hidden', 'value' => $this->Session->read('choosed')));
-				echo $this->Form->input('Contato.0.user_id', array('type' => 'hidden'));
-				echo $this->Form->input('Contato.0.nome', array('label' => 'Nome:', 'type' => 'text'));
-				echo $this->Form->input('Contato.0.email', array('label' => 'E-mail:'));
-				echo $this->Form->input('Contato.0.telefone', array('label' => 'Telefone:', 'class' => 'telefone'));
-			?>
-			<div id="remove0">
-				
-			</div>
-			<br>
+</div>
+<h3>Contatos:</h3>
+<div class="row">
+<div id="all">
+	<div id="contato0">
+		<?php
+			echo $this->Form->input('Contato.0.church_id', array('type' => 'hidden', 'value' => $this->Session->read('choosed')));
+			echo $this->Form->input('Contato.0.user_id', array('type' => 'hidden'));
+			echo $this->Form->input('Contato.0.nome', array('label' => 'Nome:', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4')));
+			echo $this->Form->input('Contato.0.email', array('label' => 'E-mail:', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4')));
+			echo $this->Form->input('Contato.0.telefone', array('label' => 'Telefone:', 'class' => 'telefone', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4')));
+		?>
+		<div id="remove0">
+			
 		</div>
+		<br>
 	</div>
-<?php
-	echo $this->Html->link('Adicionar', 'javascript:;', array('onclick' => 'addContato()'));
-	echo $this->Form->input($this->Html->link('Voltar', array('plugin' => 'secretaria', 'controller' => 'congregacaos', 'action' => 'index')), array('type' => 'button', 'label' => false));
-	echo $this->Form->end('Salvar');
+</div>
+<div class="form-group col-md-2">
+    <button data-dismiss="modal" class="btn btn-default form-control" type="button">Cancelar</button>
+</div>
+<?php echo $this->Form->input('Salvar Congregação', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-3')));
 ?>
+</div>
+<?php echo $this->Form->end(); ?>
