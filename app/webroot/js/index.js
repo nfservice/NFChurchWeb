@@ -1,9 +1,14 @@
 $("#apagar").on('click', function() {
-    $('input[type="checkbox"]:checked').each(function(){
+	$("#confirmacaoExclusao").modal();
+	var countremov = $('input[type="checkbox"]:checked').length-1;
+    $('input[type="checkbox"]:checked').each(function(i){
         apagaRegistrosChecked($(this).val());
-    });
-    $("#modalapagar").html('Registro removido com sucesso!');
-    $("#confirmacaoExclusao").modal("hide");
+
+        if (i == countremov) {
+        	$("#modalapagar").html('Registro removido com sucesso!');
+    		$("#confirmacaoExclusao").modal("hide");
+        }
+    });   
 });
 
 function apagaRegistrosChecked(valor) {
@@ -17,4 +22,3 @@ function apagaRegistrosChecked(valor) {
         }
     });
 }
-

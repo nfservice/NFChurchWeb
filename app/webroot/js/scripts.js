@@ -476,7 +476,7 @@ function modalLoad(url)
             var postData = $(this).serializeArray();
             var formURL = $(this).attr("action");
 
-            var form = document.getElementById('AtaAddForm');
+            var form = $('.formModal')[0];
             var formData = new FormData(form);
 
             $.ajax(
