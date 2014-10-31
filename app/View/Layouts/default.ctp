@@ -43,7 +43,7 @@
         'assets/jquery-multi-select/css/multi-select.css',
         'assets/jquery-tags-input/jquery.tagsinput.css',
         'pace.css',
-        ));
+    ));
     
     ?>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">

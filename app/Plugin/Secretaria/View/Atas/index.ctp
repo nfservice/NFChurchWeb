@@ -20,7 +20,7 @@
 <div class="col-lg-12 menuRollNext">
 	<section class="panel">
 		<header class="panel-heading">
-			Gerenciar Cargos
+			Gerenciar Atas
 		</header>
 		<div class="panel-body">
 			
@@ -28,8 +28,8 @@
 				<tr>
 					<!-- CAMPO QUE CHECA TODOS OS CHECKBOX -->
 					<th class="col-md-1"><input type="checkbox" onclick="MarcarTodos('tableData', this.checked);"></th>
-					<th>Cargo:</th>
-					<th>Descrição</th>
+					<th>Ata:</th>
+					<th>Data</th>
 				</tr>
 				<?php if (!empty($atas)) {
 					$i=0;

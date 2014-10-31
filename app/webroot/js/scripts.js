@@ -415,6 +415,16 @@ function multiSelect()
       }
     });
 }
+
+// Variable to store your files
+var files;
+ 
+// Grab the files and set them to our variable
+function prepareUpload(event)
+{
+  files = event.target.files;
+}
+
 var url_target;
 function modalLoad(url)
 {
@@ -434,6 +444,7 @@ function modalLoad(url)
         jQuery.noConflict();
         $("#myModal").modal("show");
         $(".datepicker").css('margin-top', '0px !important');
+        $('input[type=file]').on('change', prepareUpload);
 
         $(".desable-form input, .desable-form select, .desable-form textarea, .desable-form radio, .desable-form checkbox").attr('disabled','disabled');
 
@@ -464,11 +475,17 @@ function modalLoad(url)
         {
             var postData = $(this).serializeArray();
             var formURL = $(this).attr("action");
+
+            var form = document.getElementById('AtaAddForm');
+            var formData = new FormData(form);
+
             $.ajax(
             {
                 url : formURL,
                 type: "POST",
-                data : postData,
+                data : formData,
+                processData: false, // Don't process the files
+                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
                 success:function(data, textStatus, jqXHR) 
                 {   
                     if ($("#password").val() == $("#repassword").val()) {

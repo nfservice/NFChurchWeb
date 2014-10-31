@@ -12,8 +12,8 @@
 	<div class="col-md-12 form-group">
 		<h4>Arquivos da Ata:</h4>
 		<?php
-		foreach ($this->request->data['AtaArquivo'] as $file) {
-			echo $this->Html->link($file['nome'], DS.'files'.DS.'ata'.DS.$this->Session->read('choosed').DS.$file['id'], array('download', 'class' => 'btn btn-success'));
+		foreach ($this->request->data['AtaArquivo'] as $key => $file) {
+			echo $this->Html->link($file['nome'], array('action' => 'download', $file['id'], $this->request->data['Ata']['id'].'-'.$key), array('download', 'class' => 'btn btn-success'));
 			echo '<br/><br />';
 			//$html->link('pdf', $this->webroot('files'.DS.'ata'.DS.$this->Session->read('choosed').DS.$file['id']);
 		}

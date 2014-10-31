@@ -22,28 +22,34 @@
 		public function add(){
 			
 			if ($this->request->is('post') || $this->request->is('put')) {
-				if (!is_dir(WWW_ROOT.'files/ata/'.$this->Session->read('choosed'))) {
-					umask(0);
-					mkdir(WWW_ROOT.'files/ata/'.$this->Session->read('choosed').'/', 0777);
-				}
 				if (!empty($this->request->data['Ata']['data'])) {
 					$this->request->data['Ata']['data'] = implode('-', array_reverse(explode('/', $this->request->data['Ata']['data'])));
 				}
 				$this->Ata->create();
+
+				$folder = WWW_ROOT.'files/ata/'.$this->Session->read('choosed').'/';
+				if (!is_dir($folder)) {
+					mkdir($folder, 0777, true);
+				}
+
+				$this->request->data['AtaArquivo'] = array();
+				foreach ($this->request->data['Ata']['files'] as $key => $file) {
+					$this->request->data['AtaArquivo'][$key] = array(
+						'nome' => $file['name'],
+						'dataupload' => date('Y-m-d')
+					);
+				}
+
 				if ($this->Ata->saveAll($this->request->data)) {
-					echo 'Ata Cadastrada Com Sucesso';
-					$i = 0;
-					foreach ($this->request->data['Ata']['files'] as $file) {
-						$this->Ata->AtaArquivo->create();
-						$salvar['AtaArquivo']['nome'] = $file['name'];
-						$salvar['AtaArquivo']['dataupload'] = date('Y-m-d');
-						$salvar['AtaArquivo']['ata_id'] = $this->Ata->id;
-						$this->Ata->AtaArquivo->save($salvar);
-						move_uploaded_file($this->request->data['Ata']['files'][$i]['tmp_name'], WWW_ROOT.'files/ata/'.$this->Session->read('choosed').'/'.$this->Ata->AtaArquivo->id);
-						$i++;
+					echo 'Ata cadastrada com sucesso!';
+
+					foreach ($this->request->data['Ata']['files'] as $key => $file) {
+						move_uploaded_file($this->request->data['Ata']['files'][$key]['tmp_name'], $folder.$this->Ata->id.'-'.$key);
 					}
+
+					$i = 0;					
 				} else {
-					echo 'Não Foi Possível Cadastrar a Ata';
+					echo 'Não foi possível cadastrar a ata.';
 				}
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -102,5 +108,12 @@
 				$this->redirect(array('action' => 'index'));
 			}
 			$this->Session->setFlash(__('A Ata não pôde ser deletada.'));
+		}
+
+		public function download($arquivo_id, $name) {
+			$arquivo = $this->Ata->AtaArquivo->read(null, $arquivo_id);
+
+			header("Content-disposition: attachment; filename=".$arquivo['AtaArquivo']['nome']);
+			readfile(WWW_ROOT.'files/ata/'.$this->Session->read('choosed').'/'.$name);
 		}
 	}
