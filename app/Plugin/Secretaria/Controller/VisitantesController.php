@@ -8,6 +8,8 @@
 			$estados = $this->Estado->find('list', array('fields' => array('codibge', 'sigla')));
 			$this->set('estados', $estados);
 
+			$this->Visitante->recursive = -1;
+
 			$conditions = array();
 			$conditions['Visitante.tipo ='] = 'Visitante';
 			$this->set('visitantes', $this->paginate(null, $conditions));

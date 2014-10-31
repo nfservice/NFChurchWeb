@@ -14,5 +14,5 @@
     <div class="form-group col-md-2">
         <button data-dismiss="modal" class="btn btn-default form-control" type="button">Cancelar</button>
     </div>
-    <?php echo $this->Form->input('Salvar Visitante', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-3')));
+    <?php echo $this->Form->input('Salvar Usuário', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-3')));
     echo $this->Form->end(); ?>
