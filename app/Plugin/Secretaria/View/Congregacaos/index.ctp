@@ -7,7 +7,7 @@
 	<ul class="breadcrumb">
 		<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
 		<li><a href="#">Secretaria</a></li>
-		<li class="active">Membros</li>
+		<li class="active">Congregações</li>
 	</ul>
 	<!--breadcrumbs end -->
 </div>
@@ -19,7 +19,7 @@
 <div class="col-lg-12 menuRollNext">
 	<section class="panel">
 		<header class="panel-heading">
-			Gerenciar membros
+			Gerenciar congregações
 		</header>
 		<div class="panel-body">
 			<table class="table table-bordered table-striped table-condensed" id="tableData">

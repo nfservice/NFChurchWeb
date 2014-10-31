@@ -64,9 +64,7 @@
 		}
 	}
 </script>
-<h1>Editar Congregação</h1>
 	<?php echo $this->Form->create('Congregacao', array('role' => 'form', 'class' => 'formModal')); ?>
-	<div class="row">
 		<?php
 			echo $this->Form->input('id', array('type' => 'hidden'));
 			echo $this->Form->input('nome', array('label' => 'Nome: ', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-8')));
@@ -74,9 +72,6 @@
 			echo $this->Form->input('email', array('label' => 'E-mail: ', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
 			echo $this->Form->input('telefone', array('label' => 'Telefone', 'type' => 'text', 'class' => 'telefone', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
 		?>
-	</div>
-	<h3>Endereço:</h3>
-	<div class="row">
 	<?php
 		echo $this->Form->input('CongregacaoEndereco.0.id', array('type' => 'hidden'));
 		echo $this->Form->input('CongregacaoEndereco.0.cep', array('label' => 'Cep: ', 'type' => 'text', 'onKeyUp' => 'if(this.value.replace("-","").replaceAll("_","").length == 8){getEnderecoProspeccao(this.value, 0);}', 'class' => 'cep', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-2')));
@@ -87,9 +82,6 @@
 		echo $this->Form->input('CongregacaoEndereco.0.cidade', array('label' => 'Cidade:', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-8')));
 		echo $this->Form->input('CongregacaoEndereco.0.estado_id', array('label' => 'Estado:', 'options' => $estados, 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4')));
 	?>
-	</div>
-	<h3>Contatos:</h3>
-	<div class="row">
 		<div id="all">
 			<?php
 				$i = 0;
@@ -121,5 +113,4 @@
 		</div>
 		<?php echo $this->Form->input('Salvar Congregação', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-3')));
 		?>
-	</div>
 	<?php echo $this->Form->end(); ?>
