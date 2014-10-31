@@ -22,8 +22,8 @@
 		foreach ($this->request->data['Movimentacaoata'] as $movimentacao) {
 			echo '<div id="movimentacao'.$i.'">';
 			echo $this->Form->input('Movimentacaoata.'.$i.'.id', array('type' => 'hidden', 'value' => $movimentacao['id']));
-			echo $this->Form->input('Movimentacaoata.'.$i.'.membro_id', array('label' => 'Membro:', 'options' => $membros, 'value' => $movimentacao['membro_id']));
-			echo $this->Form->input('Movimentacaoata.'.$i.'.cargo_id', array('label' => 'Cargo:', 'options' => $cargos, 'value' => $movimentacao['cargo_id']));
+			echo $this->Form->input('Movimentacaoata.'.$i.'.membro_id', array('label' => 'Membro:', 'options' => $membros, 'value' => $movimentacao['membro_id'], 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
+			echo $this->Form->input('Movimentacaoata.'.$i.'.cargo_id', array('label' => 'Cargo:', 'options' => $cargos, 'value' => $movimentacao['cargo_id'], 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-5')));
 			echo '</div>';
 			$i++;
 		}
