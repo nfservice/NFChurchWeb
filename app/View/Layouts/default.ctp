@@ -192,9 +192,9 @@
             <div class="top-nav clearfix">
                 <!--search & user info start-->
                 <ul class="nav pull-right top-menu">
-                    <li>
+                    <!--<li>
                         <input type="text" class="form-control search" placeholder=" Procurar">
-                    </li>
+                    </li>-->
                     <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -210,8 +210,8 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
-                            <li><a href="#"><i class=" fa fa-suitcase"></i>Perfil</a></li>
-                            <li><a href="#"><i class="fa fa-cog"></i> Configurações</a></li>
+                            <!--<li><a href="#"><i class=" fa fa-suitcase"></i>Perfil</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i> Configurações</a></li>-->
                             <li><a href="<?php echo $this->Html->url(array('plugin' => '', 'controller' => 'users', 'action' => 'logout')); ?>"><i class="fa fa-key"></i> Sair</a></li>
                         </ul>
                     </li>
