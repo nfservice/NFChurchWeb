@@ -2,7 +2,7 @@ $(window).bind('popstate', function(event) {
     // if the event has our history data on it, load the page fragment with AJAX
     var state = event.originalEvent.state;
     if (state) {
-        ajaxload(state);
+        ajaxload(state, '1');
     }
 });
 //left side accordion
@@ -375,7 +375,7 @@ function MarcarTodos(div, checked)
 }
 
 var urlLoc;
-function ajaxload(url)
+function ajaxload(url, dont)
 {
 
     /* 
@@ -391,7 +391,9 @@ function ajaxload(url)
 
     urlhistory = protocol+'//'+host+url;
 
-    history.pushState(urlhistory, "TESTE", urlhistory);
+    if (dont != '1') {
+        history.pushState(urlhistory, "TESTE", urlhistory);
+    }
 
     $(".wrapper").removeAttr('style');
     urlLoc = url;
