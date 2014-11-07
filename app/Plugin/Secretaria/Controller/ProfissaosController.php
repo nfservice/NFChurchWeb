@@ -3,9 +3,20 @@
 		public function index(){
 			$conditions = array();
 			unset($this->request->data['submit']);
-			if (!empty($this->request->data['filtro'])) {;
-				$conditions['Profissao.descricao LIKE'] = '%'.$this->request->data['filtro'].'%';
-			}
+			if (!empty($this->request->data['filtro']))
+	    	{
+	    		//condições para pesquisa
+	    		//campos para não entrar na pesquisa
+	    		$excludes = array('id', 'sexo', 'estado_id', 'estadocivil', 'escolaridade', 'profissao_id', 'igrejasanteriores', 'created', 'modified', 'uid', 'church_id', 'user_id', 'tipo');
+	    		//pega campos da model
+	    		$fields = $this->Profissao->schema();
+	    		foreach ($fields as $key => $value) {
+	    			if (!in_array($key, $excludes)) {
+	    				$conditions['OR']['Profissao.'.$key.' LIKE '] = '%'.$this->request->data['filtro'].'%';
+	    			}
+	    		}
+	    		
+	    	}
 			$this->set('profissaos', $this->paginate(null, $conditions));
 		}
 

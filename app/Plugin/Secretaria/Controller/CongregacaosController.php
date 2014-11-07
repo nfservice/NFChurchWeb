@@ -3,15 +3,20 @@
 		public function index(){
 			$conditions = array();
 			unset($this->request->data['submit']);
-			if (!empty($this->request->data['filtro'])) {
-				$pattern = '/\d{2}\/\d{2}\/\d{4}/';
-				preg_match($pattern, $this->request->data['filtro'], $matches);
-				if (!empty($matches)) {
-					$conditions['Congregacao.data LIKE'] = '%'.implode('-', array_reverse(explode('/', $this->request->data['filtro']))).'%';
-				} else {
-					$conditions['Congregacao.num LIKE'] = '%'.$this->request->data['filtro'].'%';
-				}
-			}
+			if (!empty($this->request->data['filtro']))
+	    	{
+	    		//condições para pesquisa
+	    		//campos para não entrar na pesquisa
+	    		$excludes = array('id', 'sexo', 'estado_id', 'estadocivil', 'escolaridade', 'profissao_id', 'igrejasanteriores', 'created', 'modified', 'uid', 'church_id', 'user_id', 'tipo');
+	    		//pega campos da model
+	    		$fields = $this->Congregacao->schema();
+	    		foreach ($fields as $key => $value) {
+	    			if (!in_array($key, $excludes)) {
+	    				$conditions['OR']['Congregacao.'.$key.' LIKE '] = '%'.$this->request->data['filtro'].'%';
+	    			}
+	    		}
+	    		
+	    	}
 			$this->set('congregacaos', $this->paginate(null, $conditions));
 		}
 

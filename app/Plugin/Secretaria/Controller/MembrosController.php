@@ -8,10 +8,10 @@ class MembrosController extends SecretariaAppController {
     		//campos para não entrar na pesquisa
     		$excludes = array('id', 'sexo', 'estado_id', 'estadocivil', 'escolaridade', 'profissao_id', 'igrejasanteriores', 'created', 'modified', 'uid', 'church_id', 'user_id', 'tipo');
     		//pega campos da model
-    		$fields = $this->User->schema();
+    		$fields = $this->Membro->schema();
     		foreach ($fields as $key => $value) {
     			if (!in_array($key, $excludes)) {
-    				$conditions['OR']['User.'.$key.' LIKE '] = '%'.$this->request->data['filtro'].'%';
+    				$conditions['OR']['Membro.'.$key.' LIKE '] = '%'.$this->request->data['filtro'].'%';
     			}
     		}
     		

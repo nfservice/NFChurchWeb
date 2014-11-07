@@ -9,6 +9,21 @@
 
 			$conditions = array();
 			$conditions['Visitante.tipo ='] = 'Visitante';
+			unset($this->request->data['submit']);
+			if (!empty($this->request->data['filtro']))
+	    	{
+	    		//condições para pesquisa
+	    		//campos para não entrar na pesquisa
+	    		$excludes = array('id', 'sexo', 'estado_id', 'estadocivil', 'escolaridade', 'profissao_id', 'igrejasanteriores', 'created', 'modified', 'uid', 'church_id', 'user_id', 'tipo');
+	    		//pega campos da model
+	    		$fields = $this->Visitante->schema();
+	    		foreach ($fields as $key => $value) {
+	    			if (!in_array($key, $excludes)) {
+	    				$conditions['OR']['Visitante.'.$key.' LIKE '] = '%'.$this->request->data['filtro'].'%';
+	    			}
+	    		}
+	    		
+	    	}
 			$this->set('visitantes', $this->paginate(null, $conditions));
 		}
 		public function add(){

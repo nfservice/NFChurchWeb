@@ -12,7 +12,7 @@
 			</div>
 			<div class="form-group col-md-6">
 				<div class="input-group m-bot15">
-					<input type="text" class="form-control" id="texto" name="username" placeholder="Pesquise aqui">
+					<input type="text" class="form-control" id="texto" name="filtro" placeholder="Pesquise aqui">
 					<span class="input-group-btn">
 						<input class="btn btn-success" type="submit" value="Buscar">
 					</span>
