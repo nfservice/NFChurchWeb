@@ -15,7 +15,7 @@
 				if ($this->Don->saveAll($this->request->data)) {
 					echo 'Dom cadastrado com sucesso!';
 				} else {
-					echo 'Não Foi Possível Cadastrar o Dom';
+					echo 'Não foi possível cadastrar o Dom';
 				}
 			}
 		}

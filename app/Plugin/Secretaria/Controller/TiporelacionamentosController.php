@@ -15,7 +15,7 @@
 				if ($this->Tiporelacionamento->saveAll($this->request->data)) {
 					echo 'Relacionamento cadastrado com sucesso!';
 				} else {
-					echo 'Não Foi Possível Cadastrar o Relacionamento';
+					echo 'Não foi possível cadastrar o Relacionamento';
 				}
 			}
 		}
@@ -29,7 +29,7 @@
 					if ($this->Tiporelacionamento->saveAll($this->request->data)) {
 						echo 'Relacionamento cadastrado com sucesso!';
 					} else {
-						echo 'Não Foi Possível Cadastrar o Relacionamento';
+						echo 'Não foi possível cadastrar o Relacionamento';
 					}			
 				}
 			} else {

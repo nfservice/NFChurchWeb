@@ -15,9 +15,9 @@
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$this->Escolaridade->create();
 				if ($this->Escolaridade->saveAll($this->request->data)) {
-					echo 'Escolaridade Cadastrada Com Sucesso';
+					echo 'Escolaridade cadastrada com sucesso!';
 				} else {
-					echo 'Não Foi Possível Cadastrar a Escolaridade';
+					echo 'Não foi possível cadastrar a Escolaridade';
 				}
 			}
 		}
@@ -30,9 +30,9 @@
 					echo "Escolaridade inexistente";
 				} elseif (!empty($this->Escolaridade->id)) {
 					if ($this->Escolaridade->saveAll($this->request->data)) {
-						echo 'Escolaridade Cadastrada Com Sucesso';
+						echo 'Escolaridade cadastrada com sucesso!';
 					} else {
-						echo 'Não Foi Possível Cadastrar a Escolaridade';
+						echo 'Não foi possível cadastrar a Escolaridade';
 					}			
 				}
 			} else {

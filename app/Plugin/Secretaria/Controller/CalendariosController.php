@@ -56,10 +56,10 @@
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$this->Profissao->create();
 				if ($this->Profissao->saveAll($this->request->data)) {
-					$this->Session->setFlash('Profissão Cadastrada Com Sucesso');
+					$this->Session->setFlash('Profissão cadastrada com sucesso!');
 					$this->redirect(array('action' => 'index'));
 				} else {
-					$this->Session->setFlash('Não Foi Possível Cadastrar a Profissão');
+					$this->Session->setFlash('Não foi possível cadastrar a Profissão');
 				}
 			} else {
 				$membros = $this->MembroCargo->find('list', array(
@@ -85,7 +85,7 @@
 					if ($this->Profissao->saveAll($this->request->data)) {
 						$this->Session->setFlash('Profissão Alterada Com Sucesso');
 					} else {
-						$this->Session->setFlash('Não Foi Possível Cadastrar a Profissão');
+						$this->Session->setFlash('Não foi possível cadastrar a Profissão');
 					}			
 				}
 			} else {

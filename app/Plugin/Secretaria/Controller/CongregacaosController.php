@@ -40,9 +40,9 @@
 				}
 				$this->Congregacao->create();
 				if ($this->Congregacao->saveAll($this->request->data)) {
-					echo 'Congregação Cadastrada Com Sucesso';
+					echo 'Congregação cadastrada com sucesso!';
 				} else {
-					echo 'Não Foi Possível Cadastrar a Congregação';
+					echo 'Não foi possível cadastrar a Congregação';
 				}
 				$this->redirect(array('action' => 'index'));
 			}

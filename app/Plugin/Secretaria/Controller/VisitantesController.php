@@ -38,7 +38,7 @@
 					$this->Session->setFlash('Visitante cadastrado com sucesso!');
 					//$this->redirect(array('action' => 'index'));
 				} else {
-					$this->Session->setFlash('Não Foi Possível Cadastrar o Visitante');
+					$this->Session->setFlash('Não foi possível cadastrar o Visitante');
 				}
 			}
 			$estados = $this->Estado->find('list', array('fields' => array('codibge', 'sigla')));
