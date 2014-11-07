@@ -504,8 +504,9 @@ function modalLoad(url)
             $("#confirmar").modal('hide');
         });
 
-        $('input[name*=telefone], input[name*=celular]').mask('(99) 9999-9999?9');
+        $('input[name*=telefone], input[name*=celular], input[name*=fone], input[name*=cel]').mask('(99) 9999-9999?9');
         $('input[name*=cpf]').mask('999.999.999-99');
+        $('input[name*=nasc]').mask('99/99/9999');
 
         /*
          * Script que salva o form via ajax com requisição POST
