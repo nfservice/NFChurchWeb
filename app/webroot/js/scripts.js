@@ -372,16 +372,15 @@ function ajaxload(url)
             Pace.start(), Pace.stop();
             var minHeight = $(".wrapper").css("height");
             $(".wrapper").css("min-height", minHeight);
+            multiSelect();
         })
     }, 300);
-
-    multiSelect();
 };
 function multiSelect()
 {
     $('.multi-select').multiSelect({
-      selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='try \"12\"'>",
-      selectionHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='try \"4\"'>",
+      selectableHeader: "<input type='text' class='form-control' autocomplete='off'>",
+      selectionHeader: "<input type='text' class='form-control' autocomplete='off'>",
       afterInit: function(ms){
         var that = this,
             $selectableSearch = that.$selectableUl.prev(),
@@ -441,15 +440,12 @@ function modalLoad(url)
         $("#myModal .modal-body").html(data);
 
         
-        jQuery.noConflict();
+        //jQuery.noConflict();
         $("#myModal").modal("show");
         $(".datepicker").css('margin-top', '0px !important');
         $('input[type=file]').on('change', prepareUpload);
 
         $(".desable-form input, .desable-form select, .desable-form textarea, .desable-form radio, .desable-form checkbox").attr('disabled','disabled');
-
-
-
         $(".habilita_campos").on('click', function(){
             $("input, select, textarea, radio, checkbox").removeAttr('disabled');
             //$("#futuro-salvar").attr('class', 'btn btn-primary').attr('data-toggle', 'modal').removeAttr('id').attr('href', '#confirmar').html('Salvar dados');
@@ -471,6 +467,8 @@ function modalLoad(url)
          * Não usamos o proprio do jquery pelo fato dele não mandar a requisição que o CakePHP precisa
          * 
          */
+
+
         $(".formModal").on('submit', function(e)
         {
             var postData = $(this).serializeArray();
@@ -529,7 +527,7 @@ function modalLoadAdd(url, atualizar_para, atualizar_de)
         $('html, body, #myModal').animate({scrollTop : 0}, 800);
 
         //salvar_dados
-        jQuery.noConflict();
+        //jQuery.noConflict();
         $("#add_item").modal("show");
 
         $('.fecha-modal').css("display", "hidden");
@@ -568,6 +566,7 @@ function modalLoadAdd(url, atualizar_para, atualizar_de)
             e.preventDefault(); //STOP default action
         });
     });
+    
 
     return false;   
 };

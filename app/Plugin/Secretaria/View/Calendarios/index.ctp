@@ -1,56 +1,76 @@
-<h1>Novo Evento</h1>
-<?php
-	echo $this->Form->input($this->Html->link('Novo', array('plugin' => 'secretaria', 'controller' => 'calendarios', 'action' => 'add')), array('type' => 'button', 'label' => false));
-	echo $this->Form->input($this->Html->link('Deletar', array('plugin' => 'secretaria', 'controller' => 'calendarios', 'action' => 'delete')), array('type' => 'button', 'label' => false));
-	
-	echo $this->Form->create(array('Pesquisa')); ?>
-		<input type="text" size="50" id="texto" name="filtro" placeholder="Filtre aqui" class="form-control">
-		<input type="submit" class="btn btn-success" type="button" value="Pesquisar!">
-	<?php echo $this->Form->end(); ?>
-					
-	<?php echo $this->Form->create(null, array('action' => 'delete')); ?>
-		<table class="table table-bordered table-striped table-condensed">
-			<tr>
-				<th>
-					<!-- preparar função para selecionar todos os checkbox-->
-					<?php echo $this->Form->checkbox('setAll', array('hiddenField' => false, 'class' => 'toDelete')); ?>
-				</th>
-				<th>
-					Inicio:
-				</th>
-				<th>
-					Término:
-				</th>
-				<th>
-					Facebook:
-				</th>
-			</tr >
-			<?php if (!empty($eventos)) {
-				$i=0;
-				foreach ($eventos as $evento) { ?>
-					<tr class="tr-visitantes-click" onclick="ajaxload(<?php echo $this->Html->url('/'); ?>);">
-						<td>
-							<?php echo $this->Form->checkbox('set-'.$evento['Calendario']['id'], array('hiddenField' => false, 'class' => 'toDelete', 'value' => $evento['Calendario']['id'])); ?>
-						</td>
-						<td>
-							<?php echo $evento['Calendario']['datainicio']; ?>
-						</td>
-						<td>
-						<?php echo $evento['Calendario']['datafim']; ?>
-						</td>
-						<td>
-							<?php echo $this->Html->link('Editar', array('action' => 'edit', $evento['Calendario']['id'])); ?>
-						</td>
-					</tr>
-					<?php $i++;
-				}
-			} else { ?>
-				<tr>
-					<td cellspacing="100%" cellpadding="100%" colspan="3" align="center">
-						<?php echo "Você Ainda Não Cadastrou Nenhum Evento!"; ?>
-					</td>
-				</tr>
-			<?php } ?>
-		</table>
-		<input type="submit" value="apagar todos selecionados">
-	<?php echo $this->Form->end(); ?>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Calendário
+                <span class="tools pull-right">
+                    <a href="javascript:modalLoad('<?php echo $this->Html->url(array('action' => 'add')); ?>');;" class="fa fa-plus"></a>
+                    <a href="javascript:;" class="fa fa-cog"></a>
+                    <a href="javascript:;" class="fa fa-times"></a>
+                 </span>
+            </header>
+            <div class="panel-body">
+                <!-- page start-->
+                <div class="row">
+                    <aside class="col-lg-12">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div id="calendar" class="has-toolbar"></div>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+                <!-- page end-->
+            </div>
+        </section>
+    </div>
+</div>
+<?php echo $this->element('modal/modalEdit'); ?>
+<script type="text/javascript">
+    $('#calendar').fullCalendar({
+        // put your options and callbacks here
+        header: {
+            left: 'prevYear,prev,next,nextYear, today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay',
+        },
+        buttonText:{
+            prev:     '&lsaquo;', // <
+            next:     '&rsaquo;', // >
+            prevYear: '&laquo;',  // <<
+            nextYear: '&raquo;',  // >>
+            today:    'Hoje',
+            month:    'Mês',
+            week:     'Semana',
+            day:      'Dia'
+        },
+
+        dayNamesShort:['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+        monthNamesShort:['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+
+        dayNames:['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+        monthNames:['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+
+        eventClick: function(calEvent, jsEvent, view) {
+            //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+            //alert('View: ' + view.name);
+            modalLoad('<?php echo $this->Html->url(array('action' => 'edit')); ?>');
+            // change the border color just for fun
+        },
+        events: [
+            {
+                id: '1',
+                title:  'My Event',
+                start:  '2014-10-31T14:30:00',
+                allDay: false
+            },
+            {
+                id: '2',
+                title: 'Click for Google',
+                start:  '2014-10-30T14:30:00',
+                allDay: false
+            }
+        ],
+        timeFormat: 'H(:mm)' // uppercase H for 24-hour clock
+    });
+</script>

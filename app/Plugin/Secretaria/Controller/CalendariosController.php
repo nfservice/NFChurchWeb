@@ -14,13 +14,11 @@
 			$this->loadModel('User');
 			$this->loadModel('Secretaria.Cargo');
 			$users = $this->User->find('all', array(
-				'limit' => '15',
 				'conditions' => array('User.username LIKE' => '%'.$query .'%','User.church_id' => $this->Session->read('choosed')),
 				'fields' => array( 'id', 'username')
 				)
 			);
 			$cargos = $this->Cargo->find('all', array(
-				'limit' => '15',
 				'conditions' => array('Cargo.nome LIKE' => '%'.$query .'%','Cargo.church_id' => $this->Session->read('choosed')),
 				'fields' => array('id', 'nome')
 				)
@@ -57,6 +55,7 @@
 		}
 
 		public function add(){
+			$this->loadModel('MembroCargo');
 
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$this->Profissao->create();
@@ -67,17 +66,9 @@
 					$this->Session->setFlash('Não Foi Possível Cadastrar a Profissão');
 				}
 			} else {
-				$this->loadModel('User');
-				$this->set('users', $this->User->find(
-						'list', array(
-							'conditions' => array(
-								'User.church_id' => $this->Session->read('choosed'),
-								'User.facebook_id !=' => 'null'
-								),
-							'fields' => array(
-								'User.id',
-								'User.nome'
-							)
+				$membros = $this->MembroCargo->find('list', array(
+					'conditions' => array(
+						'MembroCargo.group_id' => $this->Session->read('choosed'),
 						)
 					)
 				);
