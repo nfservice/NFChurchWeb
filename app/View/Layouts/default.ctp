@@ -402,6 +402,7 @@
         //'underscore-min.map.js',
         'advanced-form/advanced-form.js',
         'calendar/external-dragging-calendar.js',
+        'mask',
         'scripts',
         ));
 ?>

@@ -504,6 +504,9 @@ function modalLoad(url)
             $("#confirmar").modal('hide');
         });
 
+        $('input[name*=telefone], input[name*=celular]').mask('(99) 9999-9999?9');
+        $('input[name*=cpf]').mask('999.999.999-99');
+
         /*
          * Script que salva o form via ajax com requisição POST
          * Não usamos o proprio do jquery pelo fato dele não mandar a requisição que o CakePHP precisa
