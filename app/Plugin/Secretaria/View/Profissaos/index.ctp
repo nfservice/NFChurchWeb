@@ -16,7 +16,7 @@
 <div class="col-md-12">
 	<section class="panel">
 		<header class="panel-heading">
-			Gerenciamento de Profissões
+			Gerenciar Profissões
 		</header>
 		<div class="panel-body">
 			<table class="table table-bordered table-striped table-condensed" id="tableData">
