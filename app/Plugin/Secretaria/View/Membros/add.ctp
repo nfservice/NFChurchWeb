@@ -20,7 +20,7 @@
     <?php echo $this->Form->create('Membro', array('role' => 'form', 'class' => 'formModal')); 
         //echo $this->Form->input('tipo_id', array('label' => 'Tipo de Membro' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => array('0' => 'Selecione', '1' => 'Membro', '2' => 'Visitante', '3' => 'Parente')));
         echo $this->Form->input('datamembro', array('type' => 'text', 'label' => 'Tornou-se Membro em:' ,'class' => 'form-control datepicker', 'required', 'div' => array('class' => 'form-group col-md-4'), 'data-date-format' => 'dd/mm/yyyy')); 
-        echo $this->Form->input('nome', array('label' => 'Nome da Membro' ,'placeholder' => 'Nome da Membro', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-8')));
+        echo $this->Form->input('nome', array('label' => 'Nome do Membro' ,'placeholder' => 'Nome do Membro', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-8')));
         echo $this->Form->input('email', array('label' => 'Email Pessoal' ,'placeholder' => 'Entre com seu email', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-9')));
         echo $this->Form->input('sexo', array('label' => 'Sexo' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-3'), 'options' => array('0' => 'Selecione', '1' => 'Masculino', '2' => 'Feminino')));
     ?>
@@ -57,14 +57,14 @@
     </div>
   
     <?php
-            echo $this->Form->input('profissao_id', array('label' => 'Profissão', 'id' => 'autocomplete', 'class' => 'form-control', 'required', 'options' => $profissoes, 'div' => array('class' => 'form-group col-md-5')));
-        ?>
+        echo $this->Form->input('profissao_id', array('label' => 'Profissão', 'id' => 'autocomplete', 'class' => 'form-control', 'required', 'options' => $profissoes, 'div' => array('class' => 'form-group col-md-5')));
+    ?>
         <div class="form-group col-md-1">
             <a href="javascript:;" class="form-control btn btn-primary" onclick="modalLoadAdd('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "profissaos", "action" => "add")); ?>', 'autocomplete', 'autocomplete');" data-toggle="tooltip" data-placement="top" title="Adicionar Profissão" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a>
         </div>
-        <?php
+    <?php
         echo $this->Form->input('empresa', array('label' => 'Empresa', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-6')));
-
+        
         echo $this->Form->input('databatismo', array('type' => 'text', 'label' => 'Data de Batismo', 'class' => 'form-control datepicker', 'required', 'div' => array('class' => 'form-group col-md-3')));
         echo $this->Form->input('igrejabatismo', array('label' => 'Igreja Batismo', 'class' => 'form-control', 'placeholder' => 'Nome da igreja que foi batizado', 'required', 'div' => array('class' => 'form-group col-md-4')));
         echo $this->Form->input('pastorbatismo', array('label' => 'Pastor que Batizou', 'class' => 'form-control', 'placeholder' => 'Nome do Pastor que batizou', 'required', 'div' => array('class' => 'form-group col-md-5')));

@@ -5307,3 +5307,7 @@ div.tagsinput span.tag {
     -webkit-box-shadow: 0 0 10px 2px rgba(120,120,120,.5);
     box-shadow: 0 0 10px 2px rgba(120,120,120,.5);
 }
+
+.de-sub li a {
+    padding-left: 65px !important;
+}

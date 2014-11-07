@@ -246,7 +246,17 @@
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'profissaos', 'action' => 'index')); ?>');">Profissões</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'cargos', 'action' => 'index')); ?>');">Cargos</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'calendarios', 'action' => 'index')); ?>');">Calendario</a></li>
-                            <li><a onclick="<?php echo $this->Html->url(array('controller' => 'secretaria', 'action' => 'relatorios')); ?> href="javascript:;"">Relatórios</a></li>
+                            <li><a href="javascript:;">
+                                    <i class="fa fa-bar-chart"></i>
+                                    <span>Relatórios</span>
+                                </a>
+                                <ul class="sub de-sub">
+                                    <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'membros')); ?>');" href="javascript:;">Membros</a></li>
+                                    <li><a href="">Cadastros</a></li>
+                                    <li><a href="">Relatórios</a></li>
+                                    <li><a href="">Gráficos</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li class="sub-menu">
