@@ -226,7 +226,7 @@ class UsersController extends AppController {
 		$this->User->id = $id;
 		if (!$this->User->exists())
 		{
-			json_encode('Usuário Inexistente!');
+			json_encode('Usuário inexistente!');
 		}
 		//excluindo usuário
 		if ($this->User->delete())

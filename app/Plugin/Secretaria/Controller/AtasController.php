@@ -69,7 +69,7 @@
 					$this->request->data['Ata']['data'] = implode('-', array_reverse(explode('/', $this->request->data['Ata']['data'])));
 				}
 				if (!$this->Ata->exists()) {
-					echo "Ata Inexistente";
+					echo "Ata inexistente";
 				} elseif (!empty($this->Ata->id)) {
 					if ($this->Ata->saveAll($this->request->data)) {
 						echo 'Ata Editada Com Sucesso';

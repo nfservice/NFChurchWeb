@@ -13,7 +13,7 @@
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$this->Tiporelacionamento->create();
 				if ($this->Tiporelacionamento->saveAll($this->request->data)) {
-					echo 'Relacionamento Cadastrado Com Sucesso';
+					echo 'Relacionamento cadastrado com sucesso!';
 				} else {
 					echo 'Não Foi Possível Cadastrar o Relacionamento';
 				}
@@ -24,10 +24,10 @@
 			$this->Tiporelacionamento->id = $id;
 			if ($this->request->is('post')||($this->request->is('put'))) {
 				if (!$this->Tiporelacionamento->exists()) {
-					echo "Relacionamento Inexistente";
+					echo "Relacionamento inexistente";
 				} elseif (!empty($this->Tiporelacionamento->id)) {
 					if ($this->Tiporelacionamento->saveAll($this->request->data)) {
-						echo 'Relacionamento Cadastrado Com Sucesso';
+						echo 'Relacionamento cadastrado com sucesso!';
 					} else {
 						echo 'Não Foi Possível Cadastrar o Relacionamento';
 					}			

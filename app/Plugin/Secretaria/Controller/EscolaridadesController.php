@@ -27,7 +27,7 @@
 			$this->Escolaridade->id = $id;
 			if ($this->request->is('post')||($this->request->is('put'))) {
 				if (!$this->Escolaridade->exists()) {
-					echo "Escolaridade Inexistente";
+					echo "Escolaridade inexistente";
 				} elseif (!empty($this->Escolaridade->id)) {
 					if ($this->Escolaridade->saveAll($this->request->data)) {
 						echo 'Escolaridade Cadastrada Com Sucesso';

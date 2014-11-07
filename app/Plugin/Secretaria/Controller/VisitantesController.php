@@ -35,7 +35,7 @@
 
 				$this->Visitante->create();
 				if ($this->Visitante->saveAll($this->request->data)) {
-					$this->Session->setFlash('Visitante Cadastrado Com Sucesso');
+					$this->Session->setFlash('Visitante cadastrado com sucesso!');
 					//$this->redirect(array('action' => 'index'));
 				} else {
 					$this->Session->setFlash('Não Foi Possível Cadastrar o Visitante');

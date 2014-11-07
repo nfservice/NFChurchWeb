@@ -37,18 +37,18 @@
 			if (!empty($this->Profissao->id)) {
 				$this->request->data = $this->Profissao->read(null, $id);
 			} else {
-				throw new Exception("Profissão Inexistente");
+				throw new Exception("Profissão inexistente");
 			}
 		}
 
 		public function edit($id = null){
 			$this->Profissao->id = $id;
 			if (empty($this->Profissao->id)) {
-				throw new Exception("Profissão Inexistente");				
+				throw new Exception("Profissão inexistente");				
 			}
 			if ($this->request->is('post')||($this->request->is('put'))) {
 				if (!$this->Profissao->exists()) {
-					throw new Exception("Profissão Inexistente");
+					throw new Exception("Profissão inexistente");
 				}
 				if (!empty($this->Profissao->id)) {
 					if ($this->Profissao->saveAll($this->request->data)) {

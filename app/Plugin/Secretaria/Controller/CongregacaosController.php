@@ -74,7 +74,7 @@
 					$i++;
 				}
 				if (!$this->Congregacao->exists()) {
-					echo "Congregação Inexistente";
+					echo "Congregação inexistente";
 				} elseif (!empty($this->Congregacao->id)) {
 					$this->Congregacao->Contato->deleteAll(array('Contato.congregacao_id' => $this->Congregacao->id), false);
 					$this->Congregacao->CongregacaoEndereco->deleteAll(array('CongregacaoEndereco.congregacao_id' => $this->Congregacao->id), false);

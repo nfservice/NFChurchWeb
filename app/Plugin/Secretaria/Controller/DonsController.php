@@ -13,7 +13,7 @@
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$this->Don->create();
 				if ($this->Don->saveAll($this->request->data)) {
-					echo 'Dom Cadastrado Com Sucesso';
+					echo 'Dom cadastrado com sucesso!';
 				} else {
 					echo 'Não Foi Possível Cadastrar o Dom';
 				}
@@ -24,7 +24,7 @@
 			$this->Don->id = $id;
 			if ($this->request->is('post')||($this->request->is('put'))) {
 				if (!$this->Don->exists()) {
-					echo "Dom Inexistente";
+					echo "Dom inexistente";
 				} elseif (!empty($this->Don->id)) {
 					if ($this->Don->saveAll($this->request->data)) {
 						echo 'Dom Editado Com Sucesso';

@@ -24,9 +24,9 @@
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$this->Cargo->create();
 				if ($this->Cargo->saveAll($this->request->data)) {
-					echo 'Cargo Cadastrado Com Sucesso';
+					echo 'Cargo cadastrado com sucesso!';
 				} else {
-					echo 'Não Foi Possível Cadastrar o Cargo';
+					echo 'Não foi possível cadastrar o Cargo';
 				}
 			}
 		}
@@ -35,12 +35,12 @@
 			$this->Cargo->id = $id;
 			if ($this->request->is('post')||($this->request->is('put'))) {
 				if (!$this->Cargo->exists()) {
-					echo "Cargo Inexistente";
+					echo "Cargo inexistente";
 				} elseif (!empty($this->Cargo->id)) {
 					if ($this->Cargo->saveAll($this->request->data)) {
-						echo 'Cargo Cadastrado Com Sucesso';
+						echo 'Cargo cadastrado com sucesso!';
 					} else {
-						echo 'Não Foi Possível Cadastrar o Cargo';
+						echo 'Não foi possível cadastrar o Cargo';
 					}			
 				}
 			} else {
