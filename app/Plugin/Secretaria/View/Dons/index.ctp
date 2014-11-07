@@ -35,7 +35,7 @@
 			} else { ?>
 				<tr>
 					<td cellspacing="100%" cellpadding="100%" colspan="3" align="center">
-						<?php echo "Você Ainda Não Cadastrou Nenhum Dom!"; ?>
+						<?php echo "Você ainda não cadastrou nenhum Dom!"; ?>
 					</td>
 				</tr>
 			<?php } ?>
