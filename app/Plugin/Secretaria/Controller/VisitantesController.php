@@ -1,8 +1,5 @@
 <?php
 	class VisitantesController extends SecretariaAppController{
-		public function beforeRender(){
-			$this->layout = false;
-		}
 		public function index(){
 			$this->loadModel('Estado');
 			$estados = $this->Estado->find('list', array('fields' => array('codibge', 'sigla')));

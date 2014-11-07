@@ -38,7 +38,9 @@ class AppController extends Controller {
 
     public function beforeFilter() {
     	umask(0);
-    	//$this->layout = false;
+        if ($this->request->isAjax()) {
+            $this->layout = false;
+        }
     	$this->Auth->allow(array('login', 'logout', 'teste', 'fblogin'));
     	$this->Session->write('choosed', '1');
 

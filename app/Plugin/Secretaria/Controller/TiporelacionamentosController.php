@@ -1,9 +1,6 @@
 <?php
 	class TiporelacionamentosController extends SecretariaAppController{
 		public function index(){
-
-			$this->layout = false;
-
 			$conditions = array();
 			unset($this->request->data['submit']);
 			if (!empty($this->request->data['filtro'])) {;
@@ -13,9 +10,6 @@
 		}
 
 		public function add(){
-
-			$this->layout = false;
-
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$this->Tiporelacionamento->create();
 				if ($this->Tiporelacionamento->saveAll($this->request->data)) {
@@ -27,9 +21,6 @@
 		}
 
 		public function edit($id = null){
-
-			$this->layout = false;
-
 			$this->Tiporelacionamento->id = $id;
 			if ($this->request->is('post')||($this->request->is('put'))) {
 				if (!$this->Tiporelacionamento->exists()) {
@@ -47,7 +38,6 @@
 		}
 
 		public function delete(){
-			$this->layout = false;
 			$this->autoRender = false;
 			if (!empty($this->request->data['Tiporelacionamento'])) {
 				$save = 0;

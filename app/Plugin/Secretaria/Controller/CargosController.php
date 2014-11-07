@@ -1,8 +1,5 @@
 <?php
 	class CargosController extends SecretariaAppController{
-		public function beforeRender(){
-			$this->layout = false;
-		}
 		public function index(){
 			$conditions = array();
 			unset($this->request->data['submit']);

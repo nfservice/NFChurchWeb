@@ -2,8 +2,6 @@
 	class EscolaridadesController extends SecretariaAppController{
 		public function index(){
 
-			$this->layout = false;
-
 			$conditions = array();
 			unset($this->request->data['submit']);
 			if (!empty($this->request->data['filtro'])) {;
@@ -13,8 +11,6 @@
 		}
 
 		public function add(){
-
-			$this->layout = false;
 
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$this->Escolaridade->create();
@@ -27,8 +23,6 @@
 		}
 
 		public function edit($id = null){
-
-			$this->layout = false;
 
 			$this->Escolaridade->id = $id;
 			if ($this->request->is('post')||($this->request->is('put'))) {
@@ -47,7 +41,6 @@
 		}
 
 		public function delete(){
-			$this->layout = false;
 			$this->autoRender = false;
 			if (!empty($this->request->data['Escolaridade'])) {
 				$save = 0;

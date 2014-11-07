@@ -1,5 +1,24 @@
+$(window).bind('popstate', function(event) {
+    // if the event has our history data on it, load the page fragment with AJAX
+    var state = event.originalEvent.state;
+    if (state) {
+        ajaxload(state);
+    }
+});
 //left side accordion
 $(function() {
+    $("#apagar").on('click', function() {
+        $("#confirmacaoExclusao").modal();
+        var countremov = $('input[type="checkbox"]:checked').length-1;
+        $('input[type="checkbox"]:checked').each(function(i){
+            apagaRegistrosChecked($(this).val());
+
+            if (i == countremov) {
+                $("#modalapagar").html('Registro removido com sucesso!');
+                $("#confirmacaoExclusao").modal("hide");
+            }
+        });   
+    });
     //Substitui mais de uma ocorrencia em uma string
     String.prototype.replaceAll = function(de, para){
         var str = this;
@@ -364,6 +383,16 @@ function ajaxload(url)
      * Depois que a barra de progresso entrar em ação, faz com que carregue uma view na div ".wrapper"
      */
 
+    pathArray = window.location.href.split( '/' );
+    protocol = pathArray[0];
+    host = pathArray[2];
+
+    url = url.replace(protocol+'//'+host, '');
+
+    urlhistory = protocol+'//'+host+url;
+
+    history.pushState(urlhistory, "TESTE", urlhistory);
+
     $(".wrapper").removeAttr('style');
     urlLoc = url;
     $(".wrapper").html(''); // Apaga todo o HTML da div ".wrapper"
@@ -373,6 +402,19 @@ function ajaxload(url)
             var minHeight = $(".wrapper").css("height");
             $(".wrapper").css("min-height", minHeight);
             multiSelect();
+
+            $("#apagar").on('click', function() {
+                $("#confirmacaoExclusao").modal();
+                var countremov = $('input[type="checkbox"]:checked').length-1;
+                $('input[type="checkbox"]:checked').each(function(i){
+                    apagaRegistrosChecked($(this).val());
+
+                    if (i == countremov) {
+                        $("#modalapagar").html('Registro removido com sucesso!');
+                        $("#confirmacaoExclusao").modal("hide");
+                    }
+                });   
+            });
         })
     }, 300);
 };
@@ -438,8 +480,6 @@ function modalLoad(url)
 
     $.get(url, function(data) {
         $("#myModal .modal-body").html(data);
-
-        
         //jQuery.noConflict();
         $("#myModal").modal("show");
         $(".datepicker").css('margin-top', '0px !important');
@@ -471,38 +511,38 @@ function modalLoad(url)
 
         $(".formModal").on('submit', function(e)
         {
-            var postData = $(this).serializeArray();
-            var formURL = $(this).attr("action");
+            if ($("#UserPassword").val() == $("#UserRepassword").val()) {
+                var postData = $(this).serializeArray();
+                var formURL = $(this).attr("action");
 
-            var form = $('.formModal')[0];
-            var formData = new FormData(form);
-
-            $.ajax(
-            {
-                url : formURL,
-                type: "POST",
-                data : formData,
-                processData: false, // Don't process the files
-                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-                success:function(data, textStatus, jqXHR) 
-                {   
-                    if ($("#password").val() == $("#repassword").val()) {
+                var form = $('.formModal')[0];
+                var formData = new FormData(form);
+                
+                $.ajax(
+                {
+                    url : formURL,
+                    type: "POST",
+                    data : formData,
+                    processData: false, // Don't process the files
+                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                    success:function(data, textStatus, jqXHR) 
+                    {                       
                         $('#confirmar').modal('hide');
                         $("#myModal").modal("hide");
                         $('body').removeClass('modal-open');
                         $('.modal-backdrop').remove();                    
                         
                         e.stopPropagation();
-                        ajaxload(urlLoc);
-                    } else {
-                        alert("Senha não confere, \nfavor digite novamente!");
+                        ajaxload(urlLoc);                    
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) 
+                    {
+                        console.debug('Criar nova Action!!!!!!!!11onze');
                     }
-                },
-                error: function(jqXHR, textStatus, errorThrown) 
-                {
-                    console.debug('Criar nova Action!!!!!!!!11onze');
-                }
-            });
+                });
+            } else {
+                alert("Senha não confere, \nfavor digite novamente!");
+            }
             e.preventDefault(); //STOP default action
         });
     });

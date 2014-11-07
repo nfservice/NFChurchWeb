@@ -134,7 +134,6 @@ class UsersController extends AppController {
 
 	public function index()
 	{
-		$this->layout = false;
 		//verifica se foi feito algum filtro			
 		if (!empty($this->request->data['filtro']))
 		{
@@ -162,7 +161,6 @@ class UsersController extends AppController {
 
 	public function add()
 	{
-		$this->layout = false;
 		if ($this->request->is('post') || $this->request->is('put'))
 		{
 			//requisições Put e Post, Cria novo registro e tenta salvar
@@ -182,7 +180,6 @@ class UsersController extends AppController {
 
 	public function edit($id = null)
 	{
-		$this->layout = false;
 
 		if (!empty($id))
 		{
@@ -219,7 +216,6 @@ class UsersController extends AppController {
 
 	public function delete($id = null)
 	{
-		$this->layout = false;
 		$this->autoRender = false;
 		//verificando metodo de requisição
 		if (!$this->request->is('post'))

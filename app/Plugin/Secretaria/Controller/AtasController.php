@@ -1,8 +1,5 @@
 <?php
 	class AtasController extends SecretariaAppController{
-		public function beforeRender(){
-			$this->layout = false;
-		}
 		public function index(){
 			
 			$conditions = array();

@@ -1,4 +1,4 @@
-$(function() {
+/*$(function() {
     // initialize all the inputs
     $('input[type="checkbox"],[type="radio"]').not('#create-switch').bootstrapSwitch();
 
@@ -117,4 +117,4 @@ $(function() {
     $('.radio2').on('switch-change', function () {
         $('.radio2').bootstrapSwitch('toggleRadioStateAllowUncheck', true);
     });
-});
+});*/

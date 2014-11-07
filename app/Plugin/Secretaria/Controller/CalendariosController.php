@@ -1,10 +1,6 @@
 <?php
 	class CalendariosController extends SecretariaAppController{
 
-		public function beforeFilter(){
-			$this->layout = false;
-		}
-
 		public function autoComplete() {
 			$this->layout = 'ajax';
 			$this->autoRender=false;
