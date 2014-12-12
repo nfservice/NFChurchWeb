@@ -95,10 +95,8 @@
 			}
 		}
 
-		public function cargos()
+		public function visitantes()
 		{
-<<<<<<< Updated upstream
-=======
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$this->loadModel('Membro');
 
@@ -146,7 +144,6 @@
 
 		public function cargos() 
 		{
->>>>>>> Stashed changes
 			$this->loadModel('Cargo');
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$cargos = $this->Cargo->find('all');
@@ -160,11 +157,7 @@
 			}
 		}
 
-<<<<<<< Updated upstream
 		public function profissao()
-=======
-		public function profissao() 
->>>>>>> Stashed changes
 		{
 			$this->loadModel('Profissao');
 			if ($this->request->is('post') || $this->request->is('put')) {
@@ -178,7 +171,6 @@
 			}
 		}
 
-<<<<<<< Updated upstream
 		public function eventos()
 		{
 			if ($this->request->is('post') || $this->request->is('put')) {
@@ -206,24 +198,26 @@
 				}
 
 				$eventos = $this->Calendario->find('all', array('conditions' => $conditions));
-=======
+
+				$pdf = new NFPDF();
+				$this->set('pdf', $pdf);
+				$this->response->type('application/pdf');
+				$this->set('eventos', $eventos);
+				$this->render('eventos_result');
+			}
+		}
+
 		public function departamentos() 
 		{
 			$this->loadModel('Departamento');
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$departamentos = $this->Departamento->find('all');
->>>>>>> Stashed changes
 				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
 				$pdf = new NFPDF();
 				$this->set('pdf', $pdf);
 				$this->response->type('application/pdf');
-<<<<<<< Updated upstream
-				$this->set('eventos', $eventos);
-				$this->render('eventos_result');
-=======
 				$this->set('departamentos', $departamentos);
 				$this->render('departamentos_result');
->>>>>>> Stashed changes
 			}
 		}
 	}
