@@ -30,7 +30,7 @@
         //Morris Chart CSS
     echo $this->Html->css('assets/morris-chart/morris');
 
-    //echo $this->Html->script(array('jquery', 'mask.js', 'bootstrap.min.js'));
+    echo $this->Html->script(array('lib/jquery-1.11.1.min.js'));
 
     echo $this->Html->css(array(
         'assets/bootstrap-switch-master/build/css/bootstrap3/bootstrap-switch.css',
@@ -38,14 +38,13 @@
         'assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css',
         'assets/bootstrap-datepicker/css/datepicker.css',
         'assets/bootstrap-timepicker/compiled/timepicker.css',
-        'assets/bootstrap-colorpicker/css/colorpicker.css',
         'assets/bootstrap-daterangepicker/daterangepicker-bs3.css',
         'assets/bootstrap-datetimepicker/css/datetimepicker.css',
         'assets/jquery-multi-select/css/multi-select.css',
         'assets/jquery-tags-input/jquery.tagsinput.css',
+        'assets/bootstrap-colorpicker/css/colorpicker.css',
         'pace.css',
     ));
-    
     ?>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -344,7 +343,6 @@
      * Todo script que não for específico por alguma coisa, carregar aqui
      */
     echo $this->Html->script(array(
-        'lib/jquery-1.11.1.min.js',
         'bootstrap.min.js',
         '../css/assets/jquery-ui/jquery-ui-1.10.1.custom.min.js',        
         'accordion-menu/jquery.dcjqaccordion.2.7.js',
@@ -388,7 +386,6 @@
         '../css/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js',
         '../css/assets/bootstrap-daterangepicker/moment.min.js',
         '../css/assets/bootstrap-daterangepicker/daterangepicker.js',
-        '../css/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js',
         '../css/assets/bootstrap-timepicker/js/bootstrap-timepicker.js',
         'gritter/gritter.js',
         'pace.js', 
@@ -400,6 +397,7 @@
         '../css/assets/jquery-multi-select/js/jquery.quicksearch.js',
         'underscore-min.js',
         //'underscore-min.map.js',
+        '../css/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js',
         'advanced-form/advanced-form.js',
         'calendar/external-dragging-calendar.js',
         'mask',

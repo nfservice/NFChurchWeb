@@ -42,54 +42,78 @@
 
 		public function index(){
 
-			$conditions = array();
-			unset($this->request->data['submit']);
-			if (!empty($this->request->data['filtro'])) {;
-				$conditions['Profissao.descricao LIKE'] = '%'.$this->request->data['filtro'].'%';
-			}
-			$this->set('profissaos', $this->paginate(null, $conditions));
+		}
+
+		public function load_events() {
+			$this->autoRender = false;
+			$eventos = $this->Calendario->find('all', array(
+				'conditions' => array(
+					'Calendario.church_id' => $this->Session->read('choosed'),
+					'OR' => array(
+						array(
+							'Calendario.datainicio BETWEEN ? and ?' => array(
+								$this->request->data['inicio'],
+								$this->request->data['fim']
+							)
+						),
+						array(
+							'? BETWEEN Calendario.datainicio and Calendario.datafim' => array(
+								$this->request->data['inicio'],
+							)	
+						),
+						array(
+							'? BETWEEN Calendario.datainicio and Calendario.datafim' => array(
+								$this->request->data['fim'],
+							)	
+						)
+					)
+					
+				)
+			));
+			echo json_encode($eventos);
 		}
 
 		public function add(){
-			$this->loadModel('MembroCargo');
-
 			if ($this->request->is('post') || $this->request->is('put')) {
-				$this->Profissao->create();
-				if ($this->Profissao->saveAll($this->request->data)) {
-					$this->Session->setFlash('Profissão cadastrada com sucesso!');
+				$datainicio = explode(' ', $this->request->data['Calendario']['datainicio']);
+				$datafim = explode(' ', $this->request->data['Calendario']['datafim']);
+
+				$this->request->data['Calendario']['datainicio'] = implode('-', array_reverse(explode('/', $datainicio[0]))).' '.$datainicio[1];
+				$this->request->data['Calendario']['datafim'] = implode('-', array_reverse(explode('/', $datafim[0]))).' '.$datainicio[1];
+
+				$this->Calendario->create();
+				if ($this->Calendario->saveAll($this->request->data)) {
+					$this->Session->setFlash('Evento salvo com sucesso!');
 					$this->redirect(array('action' => 'index'));
 				} else {
-					$this->Session->setFlash('Não foi possível cadastrar a Profissão');
+					$this->Session->setFlash('Não foi possível salvar o evento!');
 				}
-			} else {
-				$membros = $this->MembroCargo->find('list', array(
-					'conditions' => array(
-						'MembroCargo.group_id' => $this->Session->read('choosed'),
-						)
-					)
-				);
 			}
 		}
 
 		public function edit($id = null){
 
-			$this->Profissao->id = $id;
-			if (empty($this->Profissao->id)) {
-				throw new Exception("Profissão inexistente");				
-			}
-			if ($this->request->is('post')||($this->request->is('put'))) {
-				if (!$this->Profissao->exists()) {
-					throw new Exception("Profissão inexistente");
+			if ($this->request->is('post') || $this->request->is('put')) {
+
+				
+				if (!empty($this->request->data['Calendario']['datafim'])) {
+					$datafim = explode(' ', $this->request->data['Calendario']['datafim']);
+					$this->request->data['Calendario']['datafim'] = implode('-', array_reverse(explode('/', $datafim[0]))).' '.$datafim[1];
 				}
-				if (!empty($this->Profissao->id)) {
-					if ($this->Profissao->saveAll($this->request->data)) {
-						$this->Session->setFlash('Profissão Alterada Com Sucesso');
-					} else {
-						$this->Session->setFlash('Não foi possível cadastrar a Profissão');
-					}			
-				}
+				
+				$datainicio = explode(' ', $this->request->data['Calendario']['datainicio']);
+				$this->request->data['Calendario']['datainicio'] = implode('-', array_reverse(explode('/', $datainicio[0]))).' '.$datainicio[1];
+
+				$this->Calendario->save($this->request->data);
+				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->request->data = $this->Profissao->read(null, $id);		
+				$this->request->data = $this->Calendario->read(null, $id);
+
+				$datainicio = explode(' ', $this->request->data['Calendario']['datainicio']);
+				$datafim = explode(' ', $this->request->data['Calendario']['datafim']);
+
+				$this->request->data['Calendario']['datainicio'] = implode('/', array_reverse(explode('-', $datainicio[0]))).' '.substr($datainicio[1], 0, -3);
+				$this->request->data['Calendario']['datafim'] = implode('/', array_reverse(explode('-', $datafim[0]))).' '.substr($datainicio[1], 0, -3);
 			}
 		}
 

@@ -33,7 +33,7 @@ var Script = function () {
     var m = date.getMonth();
     var y = date.getFullYear();
 
-    $('#calendar').fullCalendar({
+    /*$('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
             center: 'title',
@@ -110,7 +110,7 @@ var Script = function () {
                 url: 'http://google.com/'
             }
         ]
-    });
+    });*/
 
 
 }();

@@ -36,7 +36,6 @@
 
 	var Datetimepicker = function(element, options) {
 		var that = this;
-
 		this.element = $(element);
 		this.language = options.language || this.element.data('date-language') || "en";
 		this.language = this.language in dates ? this.language : "en";
@@ -357,7 +356,7 @@
 		setValue: function() {
 			var formatted = this.getFormattedDate();
 			if (!this.isInput) {
-				if (this.component){
+				if (this.component){					
 					this.element.find('input').val(formatted);
 				}
 				this.element.data('date', formatted);
@@ -438,7 +437,10 @@
 				date = arguments[0];
 				fromArgs = true;
 			} else {
-                date = this.element.data('date') || (this.isInput ? this.element.val() : this.element.find('input').val()) || this.initialDate;
+                date = this.element.data('date') || (this.isInput ? this.element.val() : this.element.find('input').val()) || this.initialDate;                
+				if (typeof date == 'string' || date instanceof String) {
+				  date = date.replace(/^\s+|\s+$/g,'');
+				}
 			}
 
 			if (!date) {
@@ -1514,9 +1516,9 @@
 		},
 		headTemplate: '<thead>'+
 							'<tr>'+
-								'<th class="prev"><i class="icon-angle-left"/></th>'+
+								'<th class="prev"><i class="fa fa-arrow-left"/></th>'+
 								'<th colspan="5" class="switch"></th>'+
-								'<th class="next"><i class="icon-angle-right"/></th>'+
+								'<th class="next"><i class="fa fa-arrow-right"/></th>'+
 							'</tr>'+
 						'</thead>',
 		contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>',

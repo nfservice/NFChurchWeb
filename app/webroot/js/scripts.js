@@ -509,7 +509,7 @@ function modalLoad(url)
         $('input[name*=cnpj]').mask('99.999.999/9999-99');
         $('input[name*=cep]').mask('99999-999');
         $('input[name*=rg]').mask('99.999.999-9');
-        $('input[name*=nasc], input[name*="[data"]').mask('99/99/9999');
+        $('input[name*=nasc], input[name*="[data"]:not(.datetimepicker)').mask('99/99/9999');
 
         /*
          * Script que salva o form via ajax com requisição POST
