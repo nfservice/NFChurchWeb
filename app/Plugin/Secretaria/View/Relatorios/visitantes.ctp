@@ -1,7 +1,7 @@
 <div class="col-lg-12">
     <section class="panel">
         <header class="panel-heading">
-            Relatório de Usuários
+            Relatório de Visitantes
         </header>
         <div class="panel-body">
         	<?php 
