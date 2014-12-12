@@ -97,6 +97,56 @@
 
 		public function cargos()
 		{
+<<<<<<< Updated upstream
+=======
+			if ($this->request->is('post') || $this->request->is('put')) {
+				$this->loadModel('Membro');
+
+				$conditions = array();
+
+				$conditions = array(
+					'Membro.church_id' => $this->Session->read('choosed'),
+					'Membro.tipo' => 'Visitante',
+					);
+
+				if (!empty($this->request->data['Relatorio']['datamembro'])) {
+					$conditions['Membro.datamembro'] = $this->request->data['Relatorio']['datamembro'];
+				}
+				if (!empty($this->request->data['Relatorio']['nome'])) {
+					$conditions['Membro.nome LIKE'] = '%'.$this->request->data['Relatorio']['nome'].'%';
+				}
+				if (!empty($this->request->data['Relatorio']['sexo'])) {
+					$conditions['Membro.sexo'] = $this->request->data['Relatorio']['sexo'];
+				}
+				if (!empty($this->request->data['Relatorio']['estadocivil'])) {
+					$conditions['Membro.estadocivil'] = $this->request->data['Relatorio']['estadocivil'];
+				}
+				if (!empty($this->request->data['Relatorio']['pastorbatismo'])) {
+					$conditions['Membro.pastorbatismo'] = $this->request->data['pastorbatismo'];
+				}
+
+				$membros = $this->Membro->find('all', array('conditions' => array($conditions)));
+
+				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
+				$pdf = new NFPDF();
+				$this->set('pdf', $pdf);
+				$this->response->type('application/pdf');
+
+				$this->set('membros', $membros);
+				$this->render('visitantes_result');
+			} else {
+				$this->loadModel('Escolaridade');
+
+				$escolaridades = array();
+				$escolaridades = $this->Escolaridade->find('list', array('fields' => array('id', 'descricao')));
+
+				$this->set('escolaridades', $escolaridades);
+			}
+		}
+
+		public function cargos() 
+		{
+>>>>>>> Stashed changes
 			$this->loadModel('Cargo');
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$cargos = $this->Cargo->find('all');
@@ -110,7 +160,11 @@
 			}
 		}
 
+<<<<<<< Updated upstream
 		public function profissao()
+=======
+		public function profissao() 
+>>>>>>> Stashed changes
 		{
 			$this->loadModel('Profissao');
 			if ($this->request->is('post') || $this->request->is('put')) {
@@ -124,6 +178,7 @@
 			}
 		}
 
+<<<<<<< Updated upstream
 		public function eventos()
 		{
 			if ($this->request->is('post') || $this->request->is('put')) {
@@ -151,12 +206,24 @@
 				}
 
 				$eventos = $this->Calendario->find('all', array('conditions' => $conditions));
+=======
+		public function departamentos() 
+		{
+			$this->loadModel('Departamento');
+			if ($this->request->is('post') || $this->request->is('put')) {
+				$departamentos = $this->Departamento->find('all');
+>>>>>>> Stashed changes
 				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
 				$pdf = new NFPDF();
 				$this->set('pdf', $pdf);
 				$this->response->type('application/pdf');
+<<<<<<< Updated upstream
 				$this->set('eventos', $eventos);
 				$this->render('eventos_result');
+=======
+				$this->set('departamentos', $departamentos);
+				$this->render('departamentos_result');
+>>>>>>> Stashed changes
 			}
 		}
 	}
