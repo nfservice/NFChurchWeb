@@ -33,7 +33,7 @@
 	foreach ($usuarios as $key => $value) {
 		
 		$pdf->SetFont('Helvetica', '', 8);
-		$pdf->Row(array($value['User']['nome'], $value['User']['username'], $value['User']['telefone'], $value['User']['celular'], $value['User']['cpf']));
+		$pdf->Row(array(utf8_decode($value['User']['nome']), utf8_decode($value['User']['username']), utf8_decode($value['User']['telefone']), utf8_decode($value['User']['celular']), utf8_decode($value['User']['cpf'])));
 	}
 	$pdf->Output();
 ?>
