@@ -15,7 +15,6 @@
 
 				$conditions = array(
 					'Membro.church_id' => $this->Session->read('choosed'),
-					'Membro.tipo' => 'Membro',
 					);
 
 				if (!empty($this->request->data['Relatorio']['datamembro'])) {
@@ -96,54 +95,8 @@
 			}
 		}
 
-		public function visitantes()
+		public function cargos()
 		{
-			if ($this->request->is('post') || $this->request->is('put')) {
-				$this->loadModel('Membro');
-
-				$conditions = array();
-
-				$conditions = array(
-					'Membro.church_id' => $this->Session->read('choosed'),
-					'Membro.tipo' => 'Visitante',
-					);
-
-				if (!empty($this->request->data['Relatorio']['datamembro'])) {
-					$conditions['Membro.datamembro'] = $this->request->data['Relatorio']['datamembro'];
-				}
-				if (!empty($this->request->data['Relatorio']['nome'])) {
-					$conditions['Membro.nome LIKE'] = '%'.$this->request->data['Relatorio']['nome'].'%';
-				}
-				if (!empty($this->request->data['Relatorio']['sexo'])) {
-					$conditions['Membro.sexo'] = $this->request->data['Relatorio']['sexo'];
-				}
-				if (!empty($this->request->data['Relatorio']['estadocivil'])) {
-					$conditions['Membro.estadocivil'] = $this->request->data['Relatorio']['estadocivil'];
-				}
-				if (!empty($this->request->data['Relatorio']['pastorbatismo'])) {
-					$conditions['Membro.pastorbatismo'] = $this->request->data['pastorbatismo'];
-				}
-
-				$membros = $this->Membro->find('all', array('conditions' => array($conditions)));
-
-				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
-				$pdf = new NFPDF();
-				$this->set('pdf', $pdf);
-				$this->response->type('application/pdf');
-
-				$this->set('membros', $membros);
-				$this->render('visitantes_result');
-			} else {
-				$this->loadModel('Escolaridade');
-
-				$escolaridades = array();
-				$escolaridades = $this->Escolaridade->find('list', array('fields' => array('id', 'descricao')));
-
-				$this->set('escolaridades', $escolaridades);
-			}
-		}
-
-		public function cargos() {
 			$this->loadModel('Cargo');
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$cargos = $this->Cargo->find('all');
@@ -157,7 +110,8 @@
 			}
 		}
 
-		public function profissao() {
+		public function profissao()
+		{
 			$this->loadModel('Profissao');
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$profissoes = $this->Profissao->find('all');
@@ -167,6 +121,42 @@
 				$this->response->type('application/pdf');
 				$this->set('profissoes', $profissoes);
 				$this->render('profissao_result');
+			}
+		}
+
+		public function eventos()
+		{
+			if ($this->request->is('post') || $this->request->is('put')) {
+				$this->loadModel('Calendario');
+				
+
+				$conditions['Calendario.church_id'] = $this->Session->read('choosed');
+
+				if (!empty($this->request->data['Relatorio']['datainicio'])) {
+					$datainicio = explode(' ', $this->request->data['Relatorio']['datainicio']);
+					$datainicio[0] = implode('-', array_reverse(explode('/', $datainicio[0])));
+					$this->request->data['Relatorio']['datainicio'] = $datainicio[0].' '.$datainicio[1].':00';
+					$conditions['OR']['Calendario.datainicio'] = $this->request->data['Relatorio']['datainicio'];
+				}
+
+				if (!empty($this->request->data['Relatorio']['datafim'])) {
+					$datafim = explode(' ', $this->request->data['Relatorio']['datafim']);
+					$datafim[0] = implode('-', array_reverse(explode('/', $datafim[0])));
+					$this->request->data['Relatorio']['datafim'] = $datafim[0].' '.$datafim[1].':00';
+					$conditions['OR']['Calendario.datafim'] = $this->request->data['Relatorio']['datafim'];
+				}
+
+				if (!empty($this->request->data['Relatorio']['assunto'])) {
+					$conditions['OR']['Calendario.assunto LIKE'] = '%'.$this->request->data['Relatorio']['assunto'].'%';
+				}
+
+				$eventos = $this->Calendario->find('all', array('conditions' => $conditions));
+				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
+				$pdf = new NFPDF();
+				$this->set('pdf', $pdf);
+				$this->response->type('application/pdf');
+				$this->set('eventos', $eventos);
+				$this->render('eventos_result');
 			}
 		}
 	}
