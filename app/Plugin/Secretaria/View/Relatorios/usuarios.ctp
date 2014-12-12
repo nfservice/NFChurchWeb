@@ -1,13 +1,13 @@
 <div class="col-lg-12">
     <section class="panel">
         <header class="panel-heading">
-            Relatório de Membros
+            Relatório de Usuários
         </header>
         <div class="panel-body">
         	<?php 
 				echo $this->Form->create('Relatorio', array('role' => 'form', 'class' => 'formModal'));
 
-				echo $this->Form->input('datamembro', array('class' => 'form-control datepicker', 'label' => 'Tournou-se membro em:', 'div' => array('class' => 'form-group col-md-4')));
+				echo $this->Form->input('datamembro', array('class' => 'form-control', 'label' => 'Tournou-se membro em:', 'div' => array('class' => 'form-group col-md-4')));
 				echo $this->Form->input('nome', array('class' => 'form-control', 'label' => 'Nome:', 'div' => array('class' => 'form-group col-md-5')));
 				echo $this->Form->input('sexo', array('class' => 'form-control', 'label' => 'Sexo:', 'options' => array('' => 'Selecione', '0' => 'Masculino', '1' => 'Feminino',), 'div' => array('class' => 'form-group col-md-3')));
 				echo $this->Form->input('estadocivil', array('class' => 'form-control', 'label' => 'Estado Civil:', 'options' => array('0' => 'Solteiro', '1' => 'Casado', '2' => 'Viúvo', '3' => 'Desquitado'), 'div' => array('class' => 'form-group col-md-4')));
@@ -18,8 +18,3 @@
         </div>
     </section>
 </div>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$(".datepicker").datepicker();
-	});
-</script>
