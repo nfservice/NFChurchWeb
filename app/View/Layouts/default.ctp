@@ -245,7 +245,7 @@
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'profissaos', 'action' => 'index')); ?>');">Profissões</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'departamentos', 'action' => 'index')); ?>');">Departamentos</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'cargos', 'action' => 'index')); ?>');">Cargos</a></li>
-                            <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'calendarios', 'action' => 'index')); ?>');">Calendario</a></li>
+                            <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'calendarios', 'action' => 'index')); ?>');">Eventos</a></li>
                             <li><a href="javascript:;">
                                     <i class="fa fa-bar-chart"></i>
                                     <span>Relatórios</span>
@@ -256,6 +256,7 @@
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'visitantes')); ?>');" href="javascript:;">Visitantes</a></li>
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'cargos')); ?>');" href="javascript:;">Cargos</a></li>
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'profissao')); ?>');" href="javascript:;">Profissões</a></li>
+                                    <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'eventos')); ?>');" href="javascript:;">Eventos</a></li>
                                 </ul>
                             </li>
                         </ul>

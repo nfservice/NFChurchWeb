@@ -2,7 +2,7 @@
     <div class="col-sm-12 col-md-12">
         <section class="panel">
             <header class="panel-heading">
-                Calendário
+                Eventos
                 <span class="tools pull-right">
                     <a href="javascript:modalLoad('<?php echo $this->Html->url(array('action' => 'add')); ?>');;" class="fa fa-plus"></a>
                     <a href="javascript:;" class="fa fa-cog"></a>
