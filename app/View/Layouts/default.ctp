@@ -290,6 +290,16 @@
                     </li>
                     <li class="sub-menu">
                         <a href="javascript:;">
+                            <i class="fa fa-book"></i>
+                            <span>Biblioteca</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'biblioteca', 'controller' => 'itens', 'action' => 'index')); ?>');" href="javascript:;" >Itens</a></li>
+                            <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'biblioteca', 'controller' => 'itens', 'action' => 'consulta')); ?>');" href="javascript:;" >Consulta</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
                             <i class="fa fa-group"></i>
                             <span>Recursos Humanos</span>
                         </a>
