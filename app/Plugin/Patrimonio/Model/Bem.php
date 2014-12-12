@@ -20,6 +20,7 @@
 		public $hasMany = array(
 			'MovimentacaoBem' => array(
 				'className' => 'Patrimonio.MovimentacaoBem',
+				'dependent' => true,
 				'foreignKey' => 'bem_id',
 			),
 		);
