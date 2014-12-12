@@ -15,6 +15,7 @@
 
 				$conditions = array(
 					'Membro.church_id' => $this->Session->read('choosed'),
+					'Membro.tipo' => 'Membro',
 					);
 
 				if (!empty($this->request->data['Relatorio']['datamembro'])) {
@@ -85,6 +86,53 @@
 
 				$this->set('usuarios', $usuarios);
 				$this->render('usuarios_result');
+			} else {
+				$this->loadModel('Escolaridade');
+
+				$escolaridades = array();
+				$escolaridades = $this->Escolaridade->find('list', array('fields' => array('id', 'descricao')));
+
+				$this->set('escolaridades', $escolaridades);
+			}
+		}
+
+		public function visitantes()
+		{
+			if ($this->request->is('post') || $this->request->is('put')) {
+				$this->loadModel('Membro');
+
+				$conditions = array();
+
+				$conditions = array(
+					'Membro.church_id' => $this->Session->read('choosed'),
+					'Membro.tipo' => 'Visitante',
+					);
+
+				if (!empty($this->request->data['Relatorio']['datamembro'])) {
+					$conditions['Membro.datamembro'] = $this->request->data['Relatorio']['datamembro'];
+				}
+				if (!empty($this->request->data['Relatorio']['nome'])) {
+					$conditions['Membro.nome LIKE'] = '%'.$this->request->data['Relatorio']['nome'].'%';
+				}
+				if (!empty($this->request->data['Relatorio']['sexo'])) {
+					$conditions['Membro.sexo'] = $this->request->data['Relatorio']['sexo'];
+				}
+				if (!empty($this->request->data['Relatorio']['estadocivil'])) {
+					$conditions['Membro.estadocivil'] = $this->request->data['Relatorio']['estadocivil'];
+				}
+				if (!empty($this->request->data['Relatorio']['pastorbatismo'])) {
+					$conditions['Membro.pastorbatismo'] = $this->request->data['pastorbatismo'];
+				}
+
+				$membros = $this->Membro->find('all', array('conditions' => array($conditions)));
+
+				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
+				$pdf = new NFPDF();
+				$this->set('pdf', $pdf);
+				$this->response->type('application/pdf');
+
+				$this->set('membros', $membros);
+				$this->render('visitantes_result');
 			} else {
 				$this->loadModel('Escolaridade');
 

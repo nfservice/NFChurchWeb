@@ -253,6 +253,7 @@
                                 <ul class="sub de-sub">
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'membros')); ?>');" href="javascript:;">Membros</a></li>
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'usuarios')); ?>');" href="javascript:;">Usuários</a></li>
+                                    <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'visitantes')); ?>');" href="javascript:;">Visitantes</a></li>
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'cargos')); ?>');" href="javascript:;">Cargos</a></li>
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'profissao')); ?>');" href="javascript:;">Profissões</a></li>
                                 </ul>
