@@ -10,7 +10,7 @@
 	//Passa parametros para Fonte
 	$pdf->SetFont('Helvetica', 'B', 11);
 	//Topo do relatório
-	$topo = "Relatório de Membros";
+	$topo = "NFCHURCH - GESTÃO PARA IGREJAS \nRelatório de Membros";
 	
 	$pdf->SetAutoPageBreak(true, 15);
 	$pdf->MultiCell(196,7, utf8_decode($topo), 1, 'J', false);
@@ -34,7 +34,7 @@
 	foreach ($membros as $key => $value) {
 		
 		$pdf->SetFont('Helvetica', '', 8);
-		$pdf->Row(array($value['Membro']['nome'], $value['Membro']['email'], $value['Membro']['fone'], $value['Membro']['cel'], $value['Membro']['cpf'], $value['Membro']['datamembro']));
+		$pdf->Row(array(utf8_decode($value['Membro']['nome']), utf8_decode($value['Membro']['email']), utf8_decode($value['Membro']['fone']), utf8_decode($value['Membro']['cel']), utf8_decode($value['Membro']['cpf']), utf8_decode($value['Membro']['datamembro'])));
 	}
 	$pdf->Output();
 ?>
