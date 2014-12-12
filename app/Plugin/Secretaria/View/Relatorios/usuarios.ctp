@@ -7,14 +7,18 @@
         	<?php 
 				echo $this->Form->create('Relatorio', array('role' => 'form', 'class' => 'formModal'));
 
-				echo $this->Form->input('datamembro', array('class' => 'form-control', 'label' => 'Tournou-se membro em:', 'div' => array('class' => 'form-group col-md-4')));
-				echo $this->Form->input('nome', array('class' => 'form-control', 'label' => 'Nome:', 'div' => array('class' => 'form-group col-md-5')));
-				echo $this->Form->input('sexo', array('class' => 'form-control', 'label' => 'Sexo:', 'options' => array('' => 'Selecione', '0' => 'Masculino', '1' => 'Feminino',), 'div' => array('class' => 'form-group col-md-3')));
-				echo $this->Form->input('estadocivil', array('class' => 'form-control', 'label' => 'Estado Civil:', 'options' => array('0' => 'Solteiro', '1' => 'Casado', '2' => 'Viúvo', '3' => 'Desquitado'), 'div' => array('class' => 'form-group col-md-4')));
-				echo $this->Form->input('pastorbatismo', array('class' => 'form-control', 'label' => 'Pastor que Batizou:', 'div' => array('class' => 'form-group col-md-4')));
-				echo $this->Form->input('escolaridade', array('class' => 'form-control', 'label' => 'Escolaridade:', 'options' => $escolaridades, 'empty' => 'Nenhuma', 'div' => array('class' => 'form-group col-md-4')));
+				echo $this->Form->input('username', array('class' => 'form-control', 'label' => 'Usuário:', 'div' => array('class' => 'form-group col-md-6')));
+				echo $this->Form->input('nome', array('class' => 'form-control', 'label' => 'Nome:', 'div' => array('class' => 'form-group col-md-6')));
+				echo $this->Form->input('telefone', array('class' => 'form-control', 'label' => 'Telefone:', 'div' => array('class' => 'form-group col-md-4')));
+				echo $this->Form->input('de', array('class' => 'form-control datepicker', 'label' => 'Cadastrado de:', 'div' => array('class' => 'form-group col-md-4')));
+				echo $this->Form->input('ate', array('class' => 'form-control datepicker', 'label' => 'Cadastrado até:', 'div' => array('class' => 'form-group col-md-4')));
 				echo $this->Form->input('Gerar Relatório', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-4'), 'id' => 'salvar_dados')); 
 			?>
         </div>
     </section>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".datepicker").datepicker();
+	})
+</script>

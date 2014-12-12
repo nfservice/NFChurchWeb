@@ -252,7 +252,7 @@
                                 </a>
                                 <ul class="sub de-sub">
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'membros')); ?>');" href="javascript:;">Membros</a></li>
-                                    <li><a href="">Cadastros</a></li>
+                                    <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'usuarios')); ?>');" href="javascript:;">Usuários</a></li>
                                     <li><a href="">Relatórios</a></li>
                                     <li><a href="">Gráficos</a></li>
                                 </ul>

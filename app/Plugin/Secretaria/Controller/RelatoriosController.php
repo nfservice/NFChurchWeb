@@ -21,7 +21,7 @@
 					$conditions['Membro.datamembro'] = $this->request->data['Relatorio']['datamembro'];
 				}
 				if (!empty($this->request->data['Relatorio']['nome'])) {
-					$conditions['Membro.nome'] = $this->request->data['Relatorio']['nome'];
+					$conditions['Membro.nome LIKE'] = '%'.$this->request->data['Relatorio']['nome'].'%';
 				}
 				if (!empty($this->request->data['Relatorio']['sexo']) or $this->request->data['Relatorio']['sexo'] == 0) {
 					$conditions['Membro.sexo'] = $this->request->data['Relatorio']['sexo'];
@@ -64,10 +64,10 @@
 					);
 
 				if (!empty($this->request->data['Relatorio']['username'])) {
-					$conditions['User.username'] = $this->request->data['Relatorio']['username'];
+					$conditions['User.username LIKE'] = '%'.$this->request->data['Relatorio']['username'].'%';
 				}
 				if (!empty($this->request->data['Relatorio']['nome'])) {
-					$conditions['User.nome'] = $this->request->data['Relatorio']['nome'];
+					$conditions['User.nome LIKE'] = '%'.$this->request->data['Relatorio']['nome'].'%';
 				}
 				if (!empty($this->request->data['Relatorio']['telefone'])) {
 					$conditions['User.telefone'] = $this->request->data['Relatorio']['telefone'];
@@ -77,9 +77,6 @@
 				}
 
 				$usuarios = $this->User->find('all', array('conditions' => array($conditions)));
-
-				var_dump($usuarios);
-				die();
 
 				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
 				$pdf = new NFPDF();
