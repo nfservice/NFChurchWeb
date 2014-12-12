@@ -504,13 +504,6 @@ function modalLoad(url)
             $("#confirmar").modal('hide');
         });
 
-        $('input[name*=telefone], input[name*=celular], input[name*=fone], input[name*=cel]').mask('(99) 9999-9999?9');
-        $('input[name*=cpf]').mask('999.999.999-99');
-        $('input[name*=cnpj]').mask('99.999.999/9999-99');
-        $('input[name*=cep]').mask('99999-999');
-        $('input[name*=rg]').mask('99.999.999-9');
-        $('input[name*=nasc], input[name*="[data"]:not(.datetimepicker)').mask('99/99/9999');
-
         /*
          * Script que salva o form via ajax com requisição POST
          * Não usamos o proprio do jquery pelo fato dele não mandar a requisição que o CakePHP precisa
@@ -587,6 +580,8 @@ function modalLoadAdd(url, atualizar_para, atualizar_de)
             $("#add_item").modal('hide');
         });
 
+        addMasks();
+
         /*
          * Script que salva o form via ajax com requisição POST
          * Não usamos o proprio do jquery pelo fato dele não mandar a requisição que o CakePHP precisa
@@ -646,4 +641,13 @@ function apagaRelacionamento(campo, div, url) {
             console.debug('erro do brunaos');
         }
     });
+}
+
+function addMasks() {
+    $('input[name*=telefone], input[name*=celular], input[name*=fone], input[name*=cel]').mask('(99) 9999-9999?9');
+    $('input[name*=cpf]').mask('999.999.999-99');
+    $('input[name*=cnpj]').mask('99.999.999/9999-99');
+    $('input[name*=cep]').mask('99999-999');
+    $('input[name*=rg]').mask('99.999.999-9');
+    $('input[name*=nasc], input[name*="[data"]:not(.datetimepicker)').mask('99/99/9999');
 }
