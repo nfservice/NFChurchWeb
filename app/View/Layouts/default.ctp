@@ -296,6 +296,14 @@
                         <ul class="sub">
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'biblioteca', 'controller' => 'itens', 'action' => 'index')); ?>');" href="javascript:;" >Itens</a></li>
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'biblioteca', 'controller' => 'itens', 'action' => 'consulta')); ?>');" href="javascript:;" >Consulta</a></li>
+                            <li><a href="javascript:;">
+                                    <i class="fa fa-bar-chart"></i>
+                                    <span>Relatórios</span>
+                                </a>
+                                <ul class="sub de-sub">
+                                    <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'biblioteca', 'controller' => 'relatorios', 'action' => 'itens')); ?>');" href="javascript:;">Itens</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li class="sub-menu">
