@@ -83,7 +83,5 @@
         echo $this->Form->input('Salvar Membro', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-4')));
         
         echo $this->Form->end();
-
-        echo $this->element('modal/modalAddItem');
     ?>
 </div>

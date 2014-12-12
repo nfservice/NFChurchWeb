@@ -123,7 +123,4 @@
     ?>
 <!-- /form -->
 </div>
-
-
-<?php echo $this->element('modal/modalAddItem'); ?>
 <?php echo $this->Form->end(); ?>

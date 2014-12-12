@@ -243,6 +243,7 @@
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'congregacaos', 'action' => 'index')); ?>');" href="javascript:;" >Congregações</a></li>
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'index')); ?>');" href="javascript:;" >Visitantes</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'profissaos', 'action' => 'index')); ?>');">Profissões</a></li>
+                            <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'departamentos', 'action' => 'index')); ?>');">Departamentos</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'cargos', 'action' => 'index')); ?>');">Cargos</a></li>
                             <li><a href="javascript:;" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'calendarios', 'action' => 'index')); ?>');">Calendario</a></li>
                             <li><a href="javascript:;">
@@ -282,10 +283,7 @@
                             <span>Patrimônios</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="basic_table.html">Basic Table</a></li>
-                            <li><a href="responsive_table.html">Responsive Table</a></li>
-                            <li><a href="dynamic_table.html">Dynamic Table</a></li>
-                            <li><a href="editable_table.html">Editable Table</a></li>
+                            <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'patrimonio', 'controller' => 'bens', 'action' => 'index')); ?>');" href="javascript:;" >Bens</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -403,6 +401,8 @@
         'mask',
         'scripts',
         ));
+
+        echo $this->element('modal/modalAddItem');
 ?>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <!--script for this page-->
