@@ -106,11 +106,19 @@
 
 				$this->set('cargos', $cargos);
 				$this->render('cargos_result');
-			} else {
-				$cargos = array();
-				$cargos = $this->Cargo->find('list', array('fields' => array('id', 'nome')));
+			}
+		}
 
-				$this->set('cargos', $cargos);
+		public function profissao() {
+			$this->loadModel('Profissao');
+			if ($this->request->is('post') || $this->request->is('put')) {
+				$profissoes = $this->Profissao->find('all');
+				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
+				$pdf = new NFPDF();
+				$this->set('pdf', $pdf);
+				$this->response->type('application/pdf');
+				$this->set('profissoes', $profissoes);
+				$this->render('profissao_result');
 			}
 		}
 	}
