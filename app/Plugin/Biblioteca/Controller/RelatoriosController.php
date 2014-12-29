@@ -51,14 +51,6 @@
 					$conditions['Item.editora_id'] = $this->request->data['Relatorio']['editora'];
 				}
 
-				
-
-				
-
-				
-
-				
-
 				$itens = $this->Item->find('all', array('conditions' => $conditions));
 
 				$this->layout = 'pdf';

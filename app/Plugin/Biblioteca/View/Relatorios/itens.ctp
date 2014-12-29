@@ -5,7 +5,7 @@
 		</header>
 		<div class="panel-body">
 			<?php 
-				echo $this->Form->create('Relatorio', array('role' => 'form', 'class' => 'formModal'));
+				echo $this->Form->create('Relatorio', array('role' => 'form', 'class' => 'formModal', 'target' => '_blank'));
 
                 echo $this->Form->input('titulo', array('class' => 'form-control', 'label' => 'Nome do Livro:', 'div' => array('class' => 'form-group col-md-4')));
 				echo $this->Form->input('tipo', array('empty' => 'Nenhum', 'class' => 'form-control', 'label' => 'Tipo:', 'div' => array('class' => 'form-group col-md-4')));
