@@ -286,6 +286,14 @@
                         </a>
                         <ul class="sub">
                             <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'patrimonio', 'controller' => 'bens', 'action' => 'index')); ?>');" href="javascript:;" >Bens</a></li>
+                            <li><a href="javascript:;">
+                                    <i class="fa fa-bar-chart"></i>
+                                    <span>Relatórios</span>
+                                </a>
+                                <ul class="sub de-sub">
+                                    <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'patrimonio', 'controller' => 'relatorios', 'action' => 'bens')); ?>');" href="javascript:;">Bens</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li class="sub-menu">
