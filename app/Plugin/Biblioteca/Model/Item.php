@@ -16,4 +16,11 @@
 				'className' => 'Biblioteca.Tipo',
 			)
 		);
+
+		public $hasMany = array(
+			'MovimentacaoItem' => array(
+				'foreignKey' => 'item_id',
+				'className' => 'Biblioteca.MovimentacaoItem'
+			)
+		);
 	}

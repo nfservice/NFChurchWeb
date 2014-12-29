@@ -17,19 +17,10 @@
 
 			$autores = $this->Item->Autor->find('list', array('fields' => array('id', 'nome')));
 			$this->set('autores', $autores);
-			/*
-
-			$congregacoes = $this->Item->Congregacao->find('list', array('fields' => array('id', 'nome')));
-			$this->set('congregacoes', $congregacoes);
-
-			$membros = $this->Item->Membro->find('list', array('fields' => array('id', 'nome'), 'conditions' => array('Membro.tipo' => 'Membro')));
-			$this->set('membros', $membros);
-
-			$departamentos = $this->Item->Departamento->find('list', array('fields' => array('id', 'nome')));
-			$this->set('departamentos', $departamentos);*/
 		}
 
-		public function index(){
+		public function index()
+		{
 			$conditions = array();
 			unset($this->request->data['submit']);
 			if (!empty($this->request->data['filtro']))
@@ -49,7 +40,8 @@
 			$this->set('itens', $this->paginate(null, $conditions));
 		}
 
-		public function add(){
+		public function add()
+		{
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$this->Item->create();
 				if ($this->Item->save($this->request->data)) {
@@ -79,7 +71,8 @@
 			}			
 		}
 
-		public function edit($id = null){
+		public function edit($id = null)
+		{
 			$this->Item->id = $id;
 			if ($this->request->is('post')||($this->request->is('put'))) {
 				if (!$this->Item->exists()) {
@@ -115,7 +108,8 @@
 			}
 		}
 
-		public function delete($id = null){
+		public function delete($id = null)
+		{
 			if (!$this->request->is('post') || empty($id)) {
 				throw new MethodNotAllowedException();
 			}
@@ -129,5 +123,54 @@
 				$this->redirect(array('action' => 'index'));
 			}
 			$this->Session->setFlash(__('O Item não pôde ser deletado.'));
+		}
+
+		public function consulta()
+		{
+
+		}
+
+		public function searchItem($filter) {
+			$this->autoRender = false;
+			$conditions = array(
+				'OR' => array(
+					'Item.isbn' => $filter,
+					'Item.titulo LIKE' => '%'.$filter.'%',
+					'Autor.nome LIKE' => '%'.$filter.'%',					
+				)
+			);
+
+			$itens = $this->Item->find(
+				'all',
+				array(
+					'conditions' => $conditions
+				)
+			);
+
+			echo json_encode($itens);
+		}
+
+		public function emprestimo($id)
+		{
+			$item = $this->Item->read(null, $id);
+		}
+
+		public function historico($id)
+		{
+			$historicos = $this->Item->MovimentacaoItem->find(
+				'all',
+				array(
+					'conditions' => array(
+						'MovimentacaoItem.item_id' => $id
+					),
+					'limit' => 30,
+					'order' => 'MovimentacaoItem.created DESC'
+				)
+			);
+
+			$item = $this->Item->read(null, $id);
+
+			$this->set('item', $item);
+			$this->set('historicos', $historicos);
 		}
 	}
