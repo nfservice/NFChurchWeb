@@ -162,7 +162,7 @@
 			$this->loadModel('Profissao');
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$profissoes = $this->Profissao->find('all');
-				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
+				$this->layout = 'pdf'; //this will use the pdf.ctp layout
 				$pdf = new NFPDF();
 				$this->set('pdf', $pdf);
 				$this->response->type('application/pdf');
@@ -183,22 +183,21 @@
 					$datainicio = explode(' ', $this->request->data['Relatorio']['datainicio']);
 					$datainicio[0] = implode('-', array_reverse(explode('/', $datainicio[0])));
 					$this->request->data['Relatorio']['datainicio'] = $datainicio[0].' '.$datainicio[1].':00';
-					$conditions['OR']['Calendario.datainicio'] = $this->request->data['Relatorio']['datainicio'];
+					$conditions['OR']['Calendario.datainicio >='] = $this->request->data['Relatorio']['datainicio'];
 				}
 
 				if (!empty($this->request->data['Relatorio']['datafim'])) {
 					$datafim = explode(' ', $this->request->data['Relatorio']['datafim']);
 					$datafim[0] = implode('-', array_reverse(explode('/', $datafim[0])));
 					$this->request->data['Relatorio']['datafim'] = $datafim[0].' '.$datafim[1].':00';
-					$conditions['OR']['Calendario.datafim'] = $this->request->data['Relatorio']['datafim'];
+					$conditions['OR']['Calendario.datafim <='] = $this->request->data['Relatorio']['datafim'];
 				}
 
 				if (!empty($this->request->data['Relatorio']['assunto'])) {
 					$conditions['OR']['Calendario.assunto LIKE'] = '%'.$this->request->data['Relatorio']['assunto'].'%';
 				}
-
 				$eventos = $this->Calendario->find('all', array('conditions' => $conditions));
-
+				$this->layout = 'pdf'; //this will use the pdf.ctp layout
 				$pdf = new NFPDF();
 				$this->set('pdf', $pdf);
 				$this->response->type('application/pdf');
