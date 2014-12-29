@@ -47,6 +47,7 @@
 	
 	$pdf->headerFont = array('Helvetica', 'B', 8);
 	$pdf->SetFont('Helvetica', '', 8);
+	
 	foreach ($itens as $key => $value) {
 		$value['MovimentacaoItem']['created'] = explode(' ', $value['MovimentacaoItem']['created']);
 		$value['MovimentacaoItem']['created'] = implode('/', array_reverse(explode('-', $value['MovimentacaoItem']['created'][0])));
