@@ -257,6 +257,8 @@
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'cargos')); ?>');" href="javascript:;">Cargos</a></li>
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'profissao')); ?>');" href="javascript:;">Profissões</a></li>
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'eventos')); ?>');" href="javascript:;">Eventos</a></li>
+                                    <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'departamentos')); ?>');" href="javascript:;">Departamentos</a></li>
+                                    <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'congregacoes')); ?>');" href="javascript:;">Congregações</a></li>
                                 </ul>
                             </li>
                         </ul>

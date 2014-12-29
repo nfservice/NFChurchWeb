@@ -35,7 +35,7 @@
 
 				$membros = $this->Membro->find('all', array('conditions' => array($conditions)));
 
-				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
+				$this->layout = 'pdf'; //this will use the pdf.ctp layout
 				$pdf = new NFPDF();
 				$this->set('pdf', $pdf);
 				$this->response->type('application/pdf');
@@ -78,7 +78,7 @@
 
 				$usuarios = $this->User->find('all', array('conditions' => array($conditions)));
 
-				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
+				$this->layout = 'pdf'; //this will use the pdf.ctp layout
 				$pdf = new NFPDF();
 				$this->set('pdf', $pdf);
 				$this->response->type('application/pdf');
@@ -106,7 +106,6 @@
 					'Membro.church_id' => $this->Session->read('choosed'),
 					'Membro.tipo' => 'Visitante',
 					);
-
 				if (!empty($this->request->data['Relatorio']['datamembro'])) {
 					$conditions['Membro.datamembro'] = $this->request->data['Relatorio']['datamembro'];
 				}
@@ -125,7 +124,7 @@
 
 				$membros = $this->Membro->find('all', array('conditions' => array($conditions)));
 
-				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
+				$this->layout = 'pdf'; //this will use the pdf.ctp layout
 				$pdf = new NFPDF();
 				$this->set('pdf', $pdf);
 				$this->response->type('application/pdf');
@@ -147,7 +146,7 @@
 			$this->loadModel('Cargo');
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$cargos = $this->Cargo->find('all');
-				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
+				$this->layout = 'pdf'; //this will use the pdf.ctp layout
 				$pdf = new NFPDF();
 				$this->set('pdf', $pdf);
 				$this->response->type('application/pdf');
@@ -174,8 +173,7 @@
 		public function eventos()
 		{
 			if ($this->request->is('post') || $this->request->is('put')) {
-				$this->loadModel('Calendario');
-				
+				$this->loadModel('Calendario');				
 
 				$conditions['Calendario.church_id'] = $this->Session->read('choosed');
 
@@ -211,12 +209,55 @@
 			$this->loadModel('Departamento');
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$departamentos = $this->Departamento->find('all');
-				$this->layout = 'pdf'; //this will use the pdf.ctp layout			
+				$this->layout = 'pdf'; //this will use the pdf.ctp layout
 				$pdf = new NFPDF();
 				$this->set('pdf', $pdf);
 				$this->response->type('application/pdf');
 				$this->set('departamentos', $departamentos);
 				$this->render('departamentos_result');
+			}
+		}
+
+		public function congregacoes() 
+		{
+					
+			if ($this->request->is('post') || $this->request->is('put')) {
+				$this->loadModel('Secretaria.Congregacao');
+				if (!empty($this->request->data['Congregacao']['nome'])) {
+					$conditions['Congregacao.nome LIKE'] = '%'.$this->request->data['Congregacao']['nome'].'%';
+				}
+
+				if (!empty($this->request->data['Congregacao']['bairro'])) {
+					$conditions['CongregacaoEndereco.bairro'] = $this->request->data['Congregacao']['bairro'];
+				}
+
+				if (!empty($this->request->data['Congregacao']['cidade'])) {
+					$conditions['CongregacaoEndereco.cidade'] = $this->request->data['Congregacao']['cidade'];
+				}
+
+				if (!empty($this->request->data['Congregacao']['estado'])) {
+					$conditions['CongregacaoEndereco.estado_id'] = $this->request->data['Congregacao']['estado'];
+				}
+
+				if (empty($conditions)) {
+					$congregacoes = $this->Congregacao->CongregacaoEndereco->find('all');
+				} else {
+					$congregacoes = $this->Congregacao->CongregacaoEndereco->find('all', array('conditions' => $conditions));
+				}
+
+				
+
+				$this->layout = 'pdf'; //this will use the pdf.ctp layout
+				$pdf = new NFPDF();
+				$this->set('pdf', $pdf);
+				$this->response->type('application/pdf');
+				$this->set('congregacoes', $congregacoes);
+				$this->render('congregacoes_result');
+			} else {
+				$this->loadModel('Estado');
+
+				$estados = $this->Estado->find('list', array('fields' => array('sigla', 'nome')));
+				$this->set('estados', $estados);
 			}
 		}
 	}

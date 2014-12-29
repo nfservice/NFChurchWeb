@@ -20,6 +20,8 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$(".datepicker").datepicker();
+		$(".datepicker").datepicker({
+			altFormat: "dd-mm-yy"
+		});
 	});
 </script>
