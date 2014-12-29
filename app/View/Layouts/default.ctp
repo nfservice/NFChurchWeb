@@ -83,7 +83,7 @@
                     
                     <!-- settings end -->
                     <!-- inbox dropdown start-->
-                    <li id="header_inbox_bar" class="dropdown">
+                    <!--<li id="header_inbox_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="fa fa-envelope-o"></i>
                             <span class="badge bg-important">4</span>
@@ -144,7 +144,7 @@
                                 <a href="#">Ver Todas as Mensagens</a>
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
                     <!-- inbox dropdown end -->
                     <!-- notification dropdown start-->
                     <li id="header_notification_bar" class="dropdown">
@@ -261,7 +261,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="sub-menu">
+                    <!--<li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-dollar"></i>
                             <span>Financeiro</span>
@@ -278,7 +278,7 @@
                             <i class="fa fa-bullhorn"></i>
                             <span>Ícones para desenvolvimento </span>
                         </a>
-                    </li>
+                    </li>-->
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-sitemap"></i>
@@ -315,7 +315,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="sub-menu">
+                    <!--<li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-group"></i>
                             <span>Recursos Humanos</span>
@@ -334,7 +334,7 @@
                             <i class="fa fa-envelope"></i>
                             <span>Mensagens </span>
                         </a>
-                    </li>
+                    </li>-->
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class=" fa fa-book"></i>

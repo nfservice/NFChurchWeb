@@ -482,6 +482,7 @@ function modalLoad(url)
 
 	$.get(url, function(data) {
 		$("#myModal .modal-body").html(data);
+		addMasks();
 		//jQuery.noConflict();
 		$("#myModal").modal("show");
 		$(".datepicker").css('margin-top', '0px !important');
@@ -528,14 +529,18 @@ function modalLoad(url)
 					processData: false, // Don't process the files
 					contentType: false, // Set content type to false as jQuery will tell the server its a query string request
 					success:function(data, textStatus, jqXHR) 
-					{                       
+					{                
+						if ($('#ItemAssunto').length) {
+							buscaItem($('#ItemAssunto').val());
+						}   
 						$('#confirmar').modal('hide');
 						$("#myModal").modal("hide");
 						$('body').removeClass('modal-open');
 						$('.modal-backdrop').remove();                    
 						
-						e.stopPropagation();
-						ajaxload(urlLoc);                    
+						//e.stopPropagation();
+						ajaxload(urlLoc);
+						
 					},
 					error: function(jqXHR, textStatus, errorThrown) 
 					{
