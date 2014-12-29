@@ -1,7 +1,7 @@
 <div class="col-lg-12">
 	<section class="panel">
 		<header class="panel-heading">
-			Relatório de Items da Biblioteca
+			Relatório de Empréstimos
 		</header>
 		<div class="panel-body">
 			<?php 

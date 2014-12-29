@@ -302,6 +302,7 @@
                                 </a>
                                 <ul class="sub de-sub">
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'biblioteca', 'controller' => 'relatorios', 'action' => 'itens')); ?>');" href="javascript:;">Itens</a></li>
+                                    <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'biblioteca', 'controller' => 'relatorios', 'action' => 'emprestimos')); ?>');" href="javascript:;">Empréstimos</a></li>
                                 </ul>
                             </li>
                         </ul>

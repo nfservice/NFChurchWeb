@@ -6,5 +6,8 @@
 			'Membro' => array(
 				'className' => 'Secretaria.Membro',
 			),
+			'Item' => array(
+				'className' => 'Secretaria.Item',
+			),
 		);
 	}
