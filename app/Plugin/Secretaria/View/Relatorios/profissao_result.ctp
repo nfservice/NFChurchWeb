@@ -10,7 +10,7 @@
 	//Passa parametros para Fonte
 	$pdf->SetFont('Helvetica', 'B', 11);
 	//Topo do relatório
-	$topo = "NFCHURCH - GESTÃO PARA IGREJAS \nRelatório de Profissẽos";
+	$topo = "NFCHURCH - GESTÃO PARA IGREJAS \nRelatório de Profissões";
 	
 	$pdf->SetAutoPageBreak(true, 15);
 	$pdf->MultiCell(196,7, utf8_decode($topo), 1, 'J', false);

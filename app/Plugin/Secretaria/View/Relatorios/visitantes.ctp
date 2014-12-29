@@ -10,13 +10,10 @@
 				echo $this->Form->input('nome', array('class' => 'form-control', 'label' => 'Nome:', 'div' => array('class' => 'form-group col-md-9')));
 				echo $this->Form->input('sexo', array('class' => 'form-control', 'label' => 'Sexo:', 'options' => array('' => 'Selecione', '0' => 'Masculino', '1' => 'Feminino',), 'div' => array('class' => 'form-group col-md-3')));
 				echo $this->Form->input('estadocivil', array('class' => 'form-control', 'label' => 'Estado Civil:', 'options' => array('' => 'Todos', '0' => 'Solteiro', '1' => 'Casado', '2' => 'Viúvo', '3' => 'Desquitado'), 'div' => array('class' => 'form-group col-md-4')));
-				echo $this->Form->input('escolaridade', array('class' => 'form-control', 'label' => 'Escolaridade:', 'options' => $escolaridades, 'empty' => 'Todas', 'div' => array('class' => 'form-group col-md-4')));
-				?>
-				<div class="row col-md-12">
-					<?php 
-						echo $this->Form->input('Gerar Relatório', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-4'), 'id' => 'salvar_dados'));
-					?>
-				</div>
+				echo $this->Form->input('escolaridade', array('class' => 'form-control', 'label' => 'Escolaridade:', 'options' => $escolaridades, 'empty' => 'Todas', 'div' => array('class' => 'form-group col-md-6')));
+				
+				echo $this->Form->input('Gerar Relatório', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-4'), 'id' => 'salvar_dados'));
+			?>
         </div>
     </section>
 </div>
