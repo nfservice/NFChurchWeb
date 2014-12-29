@@ -12,8 +12,8 @@ $(document).ready(function(){
 							'<td>'+item.Item.titulo+' - '+item.Autor.nome+' ('+item.Tipo.nome+')</td>'+
 							'<td>'+item.Item.estoque+'</td>'+
 							'<td>'+
-								'<button onclick="modalLoad(\'emprestar/'+item.Item.id+'\');" class="btn btn-primary">Empréstimo</button> '+
-								'<button onclick="modalLoad(\'devolver/'+item.Item.id+'\');" class="btn btn-success">Devolução</button> '+
+								'<button onclick="modalLoad(\'emprestimo/'+item.Item.id+'\');" class="btn btn-primary">Empréstimo</button> '+
+								'<button onclick="modalLoad(\'devolucao/'+item.Item.id+'\');" class="btn btn-success">Devolução</button> '+
 								'<button onclick="modalLoad(\'historico/'+item.Item.id+'\');" class="btn btn-warning">Histórico</button>'+
 							'</td>'+
 						'</tr>'

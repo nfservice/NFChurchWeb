@@ -539,7 +539,10 @@ function modalLoad(url)
 					},
 					error: function(jqXHR, textStatus, errorThrown) 
 					{
-						console.debug('Criar nova Action!!!!!!!!11onze');
+						console.debug(jqXHR);
+						console.debug(textStatus);
+						console.debug(errorThrown);
+						console.debug('Criar nova Action!!!!!!!!11');
 					}
 				});
 			} else {

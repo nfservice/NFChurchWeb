@@ -152,7 +152,56 @@
 
 		public function emprestimo($id)
 		{
-			$item = $this->Item->read(null, $id);
+			if ($this->request->is('post') || $this->request->is('put')) {
+				$this->Item->MovimentacaoItem->create();
+				$this->Item->MovimentacaoItem->save($this->request->data);
+
+				$item = $this->Item->read(null, $this->request->data['MovimentacaoItem']['item_id']);
+
+				$salvar = array(
+					'id' => $this->request->data['MovimentacaoItem']['item_id'],
+					'estoque' => $item['Item']['estoque']-$this->request->data['MovimentacaoItem']['quantidade']
+				);
+
+				$this->Item->save($salvar);
+			} else {
+				$item = $this->Item->read(null, $id);
+				$membros = $this->Item->MovimentacaoItem->Membro->find('list', array('fields' => array('id', 'nome'), 'order' => 'Membro.nome'));
+
+				$this->set('item', $item);
+				$this->set('membros', $membros);
+			}
+		}
+
+		public function devolucao($id)
+		{
+			if ($this->request->is('post') || $this->request->is('put')) {
+				$this->Item->MovimentacaoItem->save($this->request->data);
+
+				$item = $this->Item->read(null, $this->request->data['MovimentacaoItem']['item_id']);
+
+				$movimentacao = $this->Item->MovimentacaoItem->read(null, $this->request->data['MovimentacaoItem']['id']);
+
+				$salvar = array(
+					'id' => $this->request->data['MovimentacaoItem']['item_id'],
+					'estoque' => $item['Item']['estoque']+$movimentacao['MovimentacaoItem']['quantidade']
+				);
+
+				$this->Item->save($salvar);
+			} else {
+				$item = $this->Item->read(null, $id);
+				$membros = $this->Item->MovimentacaoItem->find('list', array('fields' => array('id', 'membro_id'), 'conditions' => array('MovimentacaoItem.devolvido' => '0'), 'order' => 'id'));
+
+				$this->Item->MovimentacaoItem->Membro->recursive = -1;
+				foreach ($membros as $key => $value) {
+					$membro = $this->Item->MovimentacaoItem->Membro->read(null, $value);
+
+					$membros[$key] = $membro['Membro']['nome'];
+				}
+
+				$this->set('item', $item);
+				$this->set('membros', $membros);
+			}
 		}
 
 		public function historico($id)

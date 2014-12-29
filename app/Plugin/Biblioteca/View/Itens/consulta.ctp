@@ -6,7 +6,7 @@
 		</header>
 		<div class="panel-body">
 			<?php 
-				echo $this->Form->create('Item', array('role' => 'form', 'class' => 'formModal'));
+				echo $this->Form->create('Item', array('role' => 'form'));
 					echo $this->Form->input('assunto', array('class' => 'form-control input-lg', 'autocomplete' => 'off', 'label' => false, 'placeholder' => 'Item a ser pesquisado...', 'div' => array('class' => 'form-group col-md-12')));
 				echo $this->Form->end();
 			?>
