@@ -253,6 +253,7 @@
                                 <ul class="sub de-sub">
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'membros')); ?>');" href="javascript:;">Membros</a></li>
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'mapa_membros')); ?>');" href="javascript:;">Mapa</a></li>
+                                    <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'grafico_membros')); ?>');" href="javascript:;">Gráfico de Novos Membros</a></li>
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'usuarios')); ?>');" href="javascript:;">Usuários</a></li>
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'visitantes')); ?>');" href="javascript:;">Visitantes</a></li>
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'relatorios', 'action' => 'cargos')); ?>');" href="javascript:;">Cargos</a></li>
@@ -394,6 +395,7 @@
         '../css/assets/morris-chart/morris',
         '../css/assets/morris-chart/raphael-min',
         '../css/assets/flot-chart/jquery.flot.js',
+        '../css/assets/flot-chart/jquery.flot.time.js',
         '../css/assets/flot-chart/jquery.flot.tooltip.min.js',
         '../css/assets/flot-chart/jquery.flot.resize.js',
         '../css/assets/flot-chart/jquery.flot.pie.resize.js',

@@ -272,14 +272,43 @@
 				$this->layout = false;
 				if (!empty($this->request->data['Relatorio']['ativo'])) {
 					$conditions['Membro.ativo'] = $this->request->data['Relatorio']['ativo'];
-					$conditions['Membro.tipo'] = 'Membro';
+					$conditions['Membro.tipo'] = 'Membro';					
 				}
+
+				$conditions['Endereco.logradouro !='] = null;
 
 				$this->Membro->all = true;
 
 				$membros = $this->Membro->find('all', array('conditions' => array($conditions)));
 				$this->set('membros', $membros);
 				$this->render('mapa_membros_result');
+			}
+		}
+
+		public function grafico_membros()
+		{
+			if ($this->request->is('post') || $this->request->is('put')) {
+
+				$this->loadModel('Secretaria.Membro');
+
+				$this->request->data['Relatorio']['data_de'] = implode('-', array_reverse(explode('/', $this->request->data['Relatorio']['data_de'])));
+				$this->request->data['Relatorio']['data_ate'] = implode('-', array_reverse(explode('/', $this->request->data['Relatorio']['data_ate'])));
+
+				$this->Membro->virtualFields = array('soma' => 'COUNT(datamembro)', 'mes' => 'MONTH(datamembro)', 'ano' => 'YEAR(datamembro)');
+				$membros = $this->Membro->find(
+					'all',
+					array(
+						'group' => array('MONTH(datamembro)', 'YEAR(datamembro)'),
+						'fields' => array('soma', 'mes', 'ano'),
+						'conditions' => array(
+							'ativo' => '1',
+							'datamembro BETWEEN ? AND ?' => array($this->request->data['Relatorio']['data_de'], $this->request->data['Relatorio']['data_ate'])
+						),
+						'order' => 'datamembro'
+					)
+				);
+				$this->set('membros', $membros);
+				$this->render('grafico_membros_result');
 			}
 		}
 	}
