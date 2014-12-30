@@ -151,10 +151,10 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
                             <i class="fa fa-bell-o"></i>
-                            <span class="badge bg-warning">3</span>
+                            <span class="badge bg-warning"></span>
                         </a>
                         <ul class="dropdown-menu extended notification">
-                            <li>
+                            <!--<li>
                                 <p>Notificações</p>
                             </li>
                             <li>
@@ -180,7 +180,7 @@
                                         <a href="#"> Server #3 overloaded.</a>
                                     </div>
                                 </div>
-                            </li>
+                            </li>-->
 
                         </ul>
                     </li>
@@ -337,7 +337,7 @@
                             <i class="fa fa-envelope"></i>
                             <span>Mensagens </span>
                         </a>
-                    </li>-->
+                    </li>
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class=" fa fa-book"></i>
@@ -349,7 +349,7 @@
                             <li><a href="">Alunos</a></li>
                             <li><a href="">Relatórios</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                 </ul>
                 <!-- sidebar menu end-->
             </div>
