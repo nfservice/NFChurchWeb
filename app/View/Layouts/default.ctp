@@ -436,6 +436,29 @@
 
         echo $this->element('modal/modalAddItem');
 ?>
+
+<script type="text/javascript">
+    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+    $.src='//v2.zopim.com/?1OdtmNOOtpNZPfqQTK1znRpyDbULmjGI';z.t=+new Date;$.
+    type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+    $(document).ready(function(){
+        $(".dropdown-toggle").on('click', function() {
+            $zopim.livechat.window.hide();
+            $('[__jx__id], embed#__zopnetworkswf').style('z-index', '0');
+        });
+    });
+
+    $zopim(function() {
+        <?php 
+            $nomeChat = $this->Session->read('Auth.User.nome').' - '.$this->Session->read('Auth.User.username');
+        ?>
+        $zopim.livechat.setName('NFCHURCH - <?php echo $nomeChat; ?>');
+        $zopim.livechat.setEmail('<?php echo $this->Session->read('Auth.User.username'); ?>');
+    });
+
+</script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <!--script for this page-->
 <a href="javascript:;" onclick="ajaxload(urlLoc);" style="display: none;" id="linkatual"></a>
