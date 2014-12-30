@@ -47,8 +47,8 @@
     <div id="parente">
     <?php
         echo $this->Form->input('Relacionamento.0.membro_id', array('type' => 'hidden'));
-        echo $this->Form->input('Relacionamento.0.membro2_id', array('label' => 'Parente', 'class' => 'form-control', 'placeholder' => 'Nome Parente', 'required', 'div' => array('class' => 'form-group col-md-8'), 'options' => $parentes));
-        echo $this->Form->input('Relacionamento.0.tiporelacionamento_id', array('label' => 'Tipo:', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => $relacionamentos));
+        echo $this->Form->input('Relacionamento.0.membro2_id', array('label' => 'Parente', 'empty' => 'Selecione um membro', 'class' => 'form-control', 'placeholder' => 'Nome Parente', 'required', 'div' => array('class' => 'form-group col-md-8'), 'options' => $parentes));
+        echo $this->Form->input('Relacionamento.0.tiporelacionamento_id', array('label' => 'Tipo:', 'empty' => 'Relacionamento', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => $relacionamentos));
     ?>
     </div>
   
