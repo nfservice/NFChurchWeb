@@ -458,6 +458,12 @@
         $zopim.livechat.setEmail('<?php echo $this->Session->read('Auth.User.username'); ?>');
     });
 
+    $(document).ready(function(){
+        setTimeout(function(){
+            Pace.stop();
+        }, 5000);
+    });
+
 </script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <!--script for this page-->
