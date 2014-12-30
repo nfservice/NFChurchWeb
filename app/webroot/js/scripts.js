@@ -19,6 +19,13 @@ $(function() {
 			}
 		});   
 	});
+
+	$("#confirmacaoExclusao").on('show.bs.modal', function(e){
+		if (!$('input[type="checkbox"]:checked').length) {
+			alert('Selecione o item que deseja excluir.');
+			e.preventDefault();
+		}
+	})
 	//Substitui mais de uma ocorrencia em uma string
 	String.prototype.replaceAll = function(de, para){
 		var str = this;
