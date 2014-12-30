@@ -2,7 +2,7 @@
     <div class="col-sm-12 col-md-12">
         <section class="panel">
             <header class="panel-heading">
-                Eventos
+                Eventos (Clique no evento do calendário para editar)
                 <span class="tools pull-right">
                     <a href="javascript:;" onClick="modalLoad('<?php echo $this->Html->url(array('action' => 'add')); ?>');" class="fa fa-plus"> Adicionar evento</a>
                  </span>
