@@ -62,6 +62,14 @@
 				}
 			} else {
 				$this->request->data = $this->Visitante->read(null, $id);
+
+				$data_nasc = $this->request->data['Visitante']['datanascimento'];
+
+				$data_nasc = explode(' ', $data_nasc);
+				$data_nasc = explode('-', $data_nasc[0]);
+
+				$this->request->data['Visitante']['datanascimento'] = $data_nasc[2]."/".$data_nasc[1]."/".$data_nasc[0];
+
 				$this->loadModel('Estado');
 				$estados = $this->Estado->find('list', array('fields' => array('codibge', 'sigla')));
 				$this->set('estados', $estados);
