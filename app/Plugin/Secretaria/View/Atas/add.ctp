@@ -30,8 +30,8 @@
 			<?php
 			echo $this->Form->input('Movimentacaoata.0.church_id', array('type' => 'hidden', 'value' => $this->Session->read('choosed')));
 			
-			echo $this->Form->input('Movimentacaoata.0.membro_id', array('label' => 'Membro:', 'options' => $membros, 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
-			echo $this->Form->input('Movimentacaoata.0.cargo_id', array('label' => 'Cargo:', 'options' => $cargos, 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-5')));
+			echo $this->Form->input('Movimentacaoata.0.membro_id', array('label' => 'Membro:', 'empty' => 'Selecione um membro', 'options' => $membros, 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
+			echo $this->Form->input('Movimentacaoata.0.cargo_id', array('label' => 'Cargo:', 'empty' => 'Cargo designado', 'options' => $cargos, 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-5')));
 			?>
 			<div id="remove0" class="col-md-1">
 
