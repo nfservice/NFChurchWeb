@@ -4,9 +4,7 @@
             <header class="panel-heading">
                 Eventos
                 <span class="tools pull-right">
-                    <a href="javascript:modalLoad('<?php echo $this->Html->url(array('action' => 'add')); ?>');;" class="fa fa-plus"></a>
-                    <a href="javascript:;" class="fa fa-cog"></a>
-                    <a href="javascript:;" class="fa fa-times"></a>
+                    <a href="javascript:;" onClick="modalLoad('<?php echo $this->Html->url(array('action' => 'add')); ?>');" class="fa fa-plus"> Adicionar evento</a>
                  </span>
             </header>
             <div class="panel-body">
