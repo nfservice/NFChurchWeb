@@ -34,7 +34,7 @@
 </div>
 <div class="row col-md-12 form-group">
     <div class="submit">
-        <input class="btn btn-success form-control" type="submit" value="Gravar Evento">
+        <input class="btn btn-success form-control" type="submit" value="Salvar Evento">
     </div>
 </div>
 <?php
