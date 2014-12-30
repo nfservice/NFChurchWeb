@@ -67,8 +67,8 @@
             <!--logo start-->
             <div class="brand">
 
-                <a href="javascript:;" class="logo">
-                    <?php echo $this->Html->image('../images/logo.png', array('alt' => 'NFCHURCH - SISTEMA DE GESTÃO PARA EMPRESAS')); ?>
+                <a href="javascript:;">
+                    <span class="logo-nf">NFCHURCH</span>
                 </a>
                 <div class="sidebar-toggle-box">
                     <div class="fa fa-bars"></div>
