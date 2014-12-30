@@ -11,6 +11,8 @@ class Membro extends SecretariaAppModel {
 		'Endereco'
 	);
 
+	public $all = false;
+
 	public $hasMany = array(
 		'Secretaria.Relacionamento', 
 		'Secretaria.Movimentacaoata'
@@ -18,7 +20,9 @@ class Membro extends SecretariaAppModel {
 
 	public function beforeFind($queryData){
 		parent::beforeFind($queryData);
-		$conditions['Membro.tipo'] = 'Membro';
+		if (!$this->all) {
+			$conditions['Membro.tipo'] = 'Membro';
+		}
 		//retorna dados da pesquisa
 		return $queryData;
 	}

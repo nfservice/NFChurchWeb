@@ -1,6 +1,7 @@
 <?php
 class MembrosController extends SecretariaAppController {
 	public function index() {
+		$this->Membro->recursive = -1;
     	//verifica se foi feito algum filtro	    	
     	if (!empty($this->request->data['filtro']))
     	{
@@ -35,7 +36,19 @@ class MembrosController extends SecretariaAppController {
 			$this->request->data['Membro']['datanascimento'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['datanascimento'])));
 			$this->request->data['Membro']['databatismo'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['databatismo'])));
 			$this->request->data['Membro']['tipo'] = '1';
-			if($this->Membro->saveAll($this->request->data['Membro'])){
+
+			$address = $this->request->data['Endereco']['logradouro'].', '.$this->request->data['Endereco']['numero'].' - '.$this->request->data['Endereco']['bairro'].' - '.$this->request->data['Endereco']['cidade'].' - SP';
+			$prepAddr = str_replace(' ','+',$address);			 
+			$geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');			 
+			$output = json_decode($geocode);
+			 
+			$lat = $output->results[0]->geometry->location->lat;
+			$long = $output->results[0]->geometry->location->lng;
+
+			$this->request->data['Membro']['latitude'] = $lat;
+			$this->request->data['Membro']['longitude'] = $long;
+
+			if($this->Membro->saveAll($this->request->data)){
 				foreach ($this->request->data['Relacionamento'] as $key => $value) {
 					$this->request->data['Relacionamento'][$key]['membro_id'] = $this->Membro->id;
 				}
@@ -72,7 +85,8 @@ class MembrosController extends SecretariaAppController {
 		if (!$this->Membro->exists()) {
 			throw new NotFoundException(__('Membro inválidó.'));
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+
+		if ($this->request->is('post') || $this->request->is('put')) {			
 			/*
 			Se a requisição for Post trata as datas para realizar o save no Banco de Dados
 			**/
@@ -80,6 +94,18 @@ class MembrosController extends SecretariaAppController {
 			$this->request->data['Membro']['datanascimento'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['datanascimento'])));
 			$this->request->data['Membro']['databatismo'] = implode('-', array_reverse(explode('/', $this->request->data['Membro']['databatismo'])));
 			$this->request->data['Membro']['tipo'] = '1';
+
+			$address = $this->request->data['Endereco']['logradouro'].', '.$this->request->data['Endereco']['numero'].' - '.$this->request->data['Endereco']['bairro'].' - '.$this->request->data['Endereco']['cidade'].' - SP';
+			$prepAddr = str_replace(' ','+',$address);
+			$geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
+			$output = json_decode($geocode);			
+			 
+			$lat = $output->results[0]->geometry->location->lat;
+			$long = $output->results[0]->geometry->location->lng;
+
+			$this->request->data['Membro']['latitude'] = $lat;
+			$this->request->data['Membro']['longitude'] = $long;
+
 			/*
 			Caso salvo com sucesso  Seta o setFlash() e redireciona para a action index.
 			Caso contrario, se mantem na mesma action e seta o setFlash() com mensagem de erro.

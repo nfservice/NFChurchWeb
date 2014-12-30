@@ -34,6 +34,18 @@
 				}
 
 				$this->Visitante->create();
+
+				$address = $this->request->data['Endereco']['logradouro'].', '.$this->request->data['Endereco']['numero'].' - '.$this->request->data['Endereco']['bairro'].' - '.$this->request->data['Endereco']['cidade'].' - SP';
+				$prepAddr = str_replace(' ','+',$address);			 
+				$geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');			 
+				$output = json_decode($geocode);
+				 
+				$lat = $output->results[0]->geometry->location->lat;
+				$long = $output->results[0]->geometry->location->lng;
+
+				$this->request->data['Visitante']['latitude'] = $lat;
+				$this->request->data['Visitante']['longitude'] = $long;
+
 				if ($this->Visitante->saveAll($this->request->data)) {
 					$this->Session->setFlash('Visitante cadastrado com sucesso!');
 					//$this->redirect(array('action' => 'index'));
@@ -54,6 +66,18 @@
 				if (!empty($this->request->data['Visitante']['datanascimento'])) {
 					$this->request->data['Visitante']['datanascimento'] = implode('-', array_reverse(explode('/', $this->request->data['Visitante']['datanascimento'])));
 				}
+
+				$address = $this->request->data['Endereco']['logradouro'].', '.$this->request->data['Endereco']['numero'].' - '.$this->request->data['Endereco']['bairro'].' - '.$this->request->data['Endereco']['cidade'].' - SP';
+				$prepAddr = str_replace(' ','+',$address);
+				$geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');			 
+				$output = json_decode($geocode);
+				 
+				$lat = $output->results[0]->geometry->location->lat;
+				$long = $output->results[0]->geometry->location->lng;
+
+				$this->request->data['Membro']['latitude'] = $lat;
+				$this->request->data['Membro']['longitude'] = $long;
+
 				if ($this->Visitante->saveAll($this->request->data)) {
 					$this->Session->setFlash('Visitante Editado Com Sucesso!');
 					//$this->redirect(array('action' => 'index'));

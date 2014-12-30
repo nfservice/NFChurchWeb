@@ -36,7 +36,6 @@
     <div class="nascimento">
         <?php 
             echo $this->Form->input('datanascimento', array('type' => 'text', 'label' => 'Data de Nascimento' ,'class' => 'form-control datepicker', 'required', 'div' => array('class' => 'form-group col-md-4'), 'data-date-format' => 'dd/mm/yyyy'));
-            echo $this->Form->input('estado_id', array('label' => 'Estado' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => array($estados)));
             echo $this->Form->input('naturalidade', array('label' => 'Naturalidade' ,'placeholder' => 'Ex: Brasileiro', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4')));
         ?>
     </div>
@@ -49,7 +48,7 @@
         echo $this->Form->input('fone', array('label' => 'Telefone', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4')));
         echo $this->Form->input('cel', array('label' => 'Celular', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4')));
 
-        echo $this->Form->input('escolaridade_id', array('label' => 'Escolaridade' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-4'), 'options' => $escolaridades)); 
+        echo $this->Form->input('escolaridade_id', array('label' => 'Escolaridade' ,'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-8'), 'options' => $escolaridades)); 
         echo $this->Form->input('tipo', array('type' => 'hidden', 'value' => '0'));
         echo $this->Form->input('Endereco.cep', array('type' => 'text', 'label' => 'Cep:', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-2'), 'required' => 'required'));
         echo $this->Form->input('Endereco.logradouro', array('type' => 'text', 'label' => 'Logradouro', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6'), 'required' => 'required'));
@@ -66,8 +65,8 @@
                 <div id="<?php echo $i ?>" class="col-md-12">
                 <?php 
                     echo $this->Form->input('Relacionamento.'.$i.'.id', array('type' => 'hidden', 'value' => $relacionamento['id']));
-                    echo $this->Form->input('Relacionamento.'.$i.'.membro2_id', array('label' => 'Parente', 'empty' => 'Selecione', 'class' => 'form-control', 'placeholder' => 'Nome Parente', 'required', 'div' => array('class' => 'form-group col-md-8'), 'options' => $parentes, 'default' => $relacionamento['membro2_id']));
-                    echo $this->Form->input('Relacionamento.'.$i.'.tiporelacionamento_id', array('label' => 'Tipo:', 'empty' => 'Relacionamento', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-3'), 'options' => $relacionamentos, 'default' => $relacionamento['tiporelacionamento_id'])); ?>
+                    echo $this->Form->input('Relacionamento.'.$i.'.membro2_id', array('label' => 'Parente', 'empty' => 'Selecione', 'class' => 'form-control', 'placeholder' => 'Nome Parente', 'div' => array('class' => 'form-group col-md-8'), 'options' => $parentes, 'default' => $relacionamento['membro2_id']));
+                    echo $this->Form->input('Relacionamento.'.$i.'.tiporelacionamento_id', array('label' => 'Tipo:', 'empty' => 'Relacionamento', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-3'), 'options' => $relacionamentos, 'default' => $relacionamento['tiporelacionamento_id'])); ?>
                     <div class="form-group col-md-1">
                         <a href="javascript:;" class="form-control btn btn-danger disabled" onclick="apagaRelacionamento('Relacionamento<?php echo $i; ?>Id', '<?php echo $i; ?>', '<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'membros', 'action' => 'desvincular')); ?>');" data-toggle="tooltip" data-placement="top" title="Remover Parente" style="margin-top:22px;" role="button"><i class="fa fa-trash-o"></i></a>
                     </div>
@@ -83,19 +82,19 @@
         </div>
       
         <?php
-            echo $this->Form->input('profissao_id', array('label' => 'Profissão', 'id' => 'autocomplete', 'class' => 'form-control', 'required', 'options' => $profissoes, 'div' => array('class' => 'form-group col-md-5')));
+            echo $this->Form->input('profissao_id', array('label' => 'Profissão', 'empty' => 'Selecione', 'id' => 'autocomplete', 'class' => 'form-control', 'options' => $profissoes, 'div' => array('class' => 'form-group col-md-5')));
         ?>
         <div class="form-group col-md-1">
             <a href="javascript:;" class="form-control btn btn-primary disabled" onclick="modalLoadAdd('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "profissaos", "action" => "add")); ?>', 'autocomplete', 'autocomplete');" data-toggle="tooltip" data-placement="top" title="Adicionar Profissão" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a>
         </div>
         <?php
-            echo $this->Form->input('empresa', array('label' => 'Empresa', 'class' => 'form-control', 'required', 'div' => array('class' => 'form-group col-md-6')));
+            echo $this->Form->input('empresa', array('label' => 'Empresa', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
 
-            echo $this->Form->input('databatismo', array('type' => 'text', 'label' => 'Data de Batismo', 'class' => 'form-control datepicker', 'required', 'div' => array('class' => 'form-group col-md-2')));
-            echo $this->Form->input('igrejabatismo', array('label' => 'Igreja Batismo', 'class' => 'form-control', 'placeholder' => 'Nome da igreja que foi batizado', 'required', 'div' => array('class' => 'form-group col-md-5')));
-            echo $this->Form->input('pastorbatismo', array('label' => 'Pastor que Batizou', 'class' => 'form-control', 'placeholder' => 'Nome do Pastor que batizou', 'required', 'div' => array('class' => 'form-group col-md-5')));
+            echo $this->Form->input('databatismo', array('type' => 'text', 'label' => 'Data de Batismo', 'class' => 'form-control datepicker', 'div' => array('class' => 'form-group col-md-2')));
+            echo $this->Form->input('igrejabatismo', array('label' => 'Igreja Batismo', 'class' => 'form-control', 'placeholder' => 'Nome da igreja que foi batizado', 'div' => array('class' => 'form-group col-md-5')));
+            echo $this->Form->input('pastorbatismo', array('label' => 'Pastor que Batizou', 'class' => 'form-control', 'placeholder' => 'Nome do Pastor que batizou', 'div' => array('class' => 'form-group col-md-5')));
 
-            echo $this->Form->input('ultimaigreja', array('label' => 'Ultima Igreja que frequentou', 'class' => 'form-control', 'placeholder' => 'Nome da Igreja que Frequentou', 'required', 'div' => array('class' => 'form-group', 'style' => 'padding-right: 15px; padding-left: 15px;')));
+            echo $this->Form->input('ultimaigreja', array('label' => 'Ultima Igreja que frequentou', 'class' => 'form-control', 'placeholder' => 'Nome da Igreja que Frequentou', 'div' => array('class' => 'form-group', 'style' => 'padding-right: 15px; padding-left: 15px;')));
             
             if (!empty($this->request->data['Movimentacaoata'])) {
                 $i = 0;
@@ -105,7 +104,7 @@
                 }
             }            
 
-            echo $this->Form->input('igrejasanteriores', array('label' => 'Igrejas que já frequentou', 'class' => 'form-control', 'placeholder' => 'Nome das igrejas que já frequentou (pulando linhas)', 'required', 'div' => array('class' => 'form-group col-md-12')));
+            echo $this->Form->input('igrejasanteriores', array('label' => 'Igrejas que já frequentou', 'class' => 'form-control', 'placeholder' => 'Nome das igrejas que já frequentou (pulando linhas)', 'div' => array('class' => 'form-group col-md-12')));
         ?>
       <div class="modal fade over-hidden" id="confirmar" tabindex="-1" data-keyboard="false" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
