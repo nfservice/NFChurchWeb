@@ -27,9 +27,9 @@
 	<?php 
 			echo $this->Form->input('num_serie', array('label' => 'Num. Série: ', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-3')));
 			echo $this->Form->input('garantia', array('label' => 'Garantia: ', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-2')));
-			echo $this->Form->input('data_compra', array('label' => 'Data Compra: ', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-2')));
+			echo $this->Form->input('data_compra', array('label' => 'Data Compra: ', 'type' => 'text', 'class' => 'form-control datepicker', 'div' => array('class' => 'form-group col-md-2')));
 			echo $this->Form->input('valor_unitario', array('label' => 'Valor Unit.: ', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-2')));
-			echo $this->Form->input('datacompra', array('label' => 'Data Compra: ', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-2')));
+			echo $this->Form->input('datacompra', array('label' => 'Data Compra: ', 'type' => 'text', 'class' => 'form-control datepicker', 'div' => array('class' => 'form-group col-md-2')));
 			echo $this->Form->input('quantidade', array('label' => 'Qtd.: ', 'type' => 'number', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-1')));
 			echo $this->Form->input('departamento_id', array('label' => 'Departamento', 'empty' => 'Nenhuma', 'id' => 'autocomplete4', 'class' => 'form-control', 'required', 'options' => $departamentos, 'div' => array('class' => 'form-group col-md-2')));
 	?>
@@ -63,3 +63,10 @@
         echo $this->Form->end(); 
     ?>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".datepicker").datepicker({
+			format: "dd/mm/yyyy"
+		});
+	});
+</script>

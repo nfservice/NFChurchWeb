@@ -21,7 +21,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".datepicker").datepicker({
-			altFormat: "dd-mm-yy"
+			format: "dd/mm/yyyy"
 		});
 	});
 </script>

@@ -33,7 +33,7 @@
 					<th>Ações</th>
 				</tr>
 				<?php if (!empty($bens)) {
-					$i=0;
+					$i = 0;
 					foreach ($bens as $bem) { ?>
 						<tr class="tr-visitantes-click" id="<?php echo 'dados_' . $bem['Bem']['id']; ?>">
 							<td><input type="checkbox" value="<?php echo $bem['Bem']['id']; ?>"></td>

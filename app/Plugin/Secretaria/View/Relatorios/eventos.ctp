@@ -36,5 +36,5 @@
                 todayBtn:true,
             }
         );
-	})
+	});
 </script>
