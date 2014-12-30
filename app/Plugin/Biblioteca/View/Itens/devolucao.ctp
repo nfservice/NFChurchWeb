@@ -5,7 +5,7 @@
 
 			echo $this->Form->input('item_id', array('type' => 'hidden', 'value' => $item['Item']['id']));
 			echo $this->Form->input('devolvido', array('type' => 'hidden', 'value' => '1'));
-			echo $this->Form->input('id', array('label' => 'Membro', 'class' => 'form-control', 'required', 'options' => $membros, 'div' => array('class' => 'form-group col-md-12')));
+			echo $this->Form->input('id', array('label' => 'Membro', 'empty' => 'Selecione um membro', 'class' => 'form-control', 'required', 'options' => $membros, 'div' => array('class' => 'form-group col-md-12')));
 
 		echo $this->Form->input('Salvar', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-12')));        
         echo $this->Form->end();
