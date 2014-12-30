@@ -614,7 +614,7 @@ function modalLoadAdd(url, atualizar_para, atualizar_de)
 					} else if ($('[pesquisa]').length) {
 						$('[pesquisa]').submit();
 					}
-					
+
 					atualizaItem(url_target, atualizar_para, atualizar_de);
 					$("#add_item").modal("hide");
 					e.stopPropagation();
@@ -665,6 +665,5 @@ function addMasks() {
 	$('input[name*=cpf]').mask('999.999.999-99');
 	$('input[name*=cnpj]').mask('99.999.999/9999-99');
 	$('input[name*=cep]').mask('99999-999');
-	$('input[name*=rg]').mask('99.999.999-9');
 	$('input[name*=nasc], input[name*="[data"]:not(.datetimepicker)').mask('99/99/9999');
 }
