@@ -20,6 +20,29 @@ $(function() {
 		});   
 	});
 
+	$("form[pesquisa]").on('submit', function(e)
+		{
+			var postData = $(this).serializeArray();
+			var formURL = $(this).attr("action");
+			$.ajax(
+			{
+				url : formURL,
+				type: "POST",
+				data : postData,
+				success:function(data, textStatus, jqXHR) 
+				{
+					$('.wrapper').html(data);
+					Pace.stop();
+					e.stopPropagation();
+				},
+				error: function(jqXHR, textStatus, errorThrown)
+				{
+					console.debug('get error');
+				}
+			});
+			e.preventDefault(); //STOP default action
+		});
+
 	$("#confirmacaoExclusao").on('show.bs.modal', function(e){
 		if (!$('input[type="checkbox"]:checked').length) {
 			alert('Selecione o item que deseja excluir.');
@@ -628,7 +651,7 @@ function modalLoadAdd(url, atualizar_para, atualizar_de)
 				},
 				error: function(jqXHR, textStatus, errorThrown)
 				{
-					console.debug('erro do brunaos');
+					console.debug('get error');
 				}
 			});
 			e.preventDefault(); //STOP default action
@@ -662,7 +685,7 @@ function apagaRelacionamento(campo, div, url) {
 		},
 		error: function(jqXHR, textStatus, errorThrown)
 		{
-			console.debug('erro do brunaos');
+			console.debug('get error');
 		}
 	});
 }
