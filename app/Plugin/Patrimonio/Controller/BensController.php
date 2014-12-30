@@ -41,6 +41,9 @@
 
 		public function add(){
 			if ($this->request->is('post') || $this->request->is('put')) {
+				if (!empty($this->request->data['Bem']['data_compra'])) {
+					$this->request->data['Bem']['data_compra'] = implode('-', array_reverse(explode('/', $this->request->data['Bem']['data_compra'])));
+				}
 				$this->Bem->create();
 				if ($this->Bem->save($this->request->data)) {
 					echo 'Bem cadastrado com sucesso!';
@@ -53,6 +56,9 @@
 		public function edit($id = null){
 			$this->Bem->id = $id;
 			if ($this->request->is('post')||($this->request->is('put'))) {
+				if (!empty($this->request->data['Bem']['data_compra'])) {
+					$this->request->data['Bem']['data_compra'] = implode('-', array_reverse(explode('/', $this->request->data['Bem']['data_compra'])));
+				}
 				if (!$this->Bem->exists()) {
 					echo "Bem inexistente";
 				} elseif (!empty($this->Bem->id)) {
@@ -63,7 +69,10 @@
 					}			
 				}
 			} else {
-				$this->request->data = $this->Bem->read(null, $id);		
+				$this->request->data = $this->Bem->read(null, $id);
+				if (!empty($this->request->data['Bem']['data_compra'])) {
+					$this->request->data['Bem']['data_compra'] = implode('/', array_reverse(explode('-', $this->request->data['Bem']['data_compra'])));
+				}
 			}
 		}
 
