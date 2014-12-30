@@ -260,4 +260,26 @@
 				$this->set('estados', $estados);
 			}
 		}
+
+		public function mapa_membros()
+		{
+			if ($this->request->is('post') || $this->request->is('put')) {
+
+				$this->loadModel('Secretaria.Membro');
+
+				$conditions = array();
+
+				$this->layout = false;
+				if (!empty($this->request->data['Relatorio']['ativo'])) {
+					$conditions['Membro.ativo'] = $this->request->data['Relatorio']['ativo'];
+					$conditions['Membro.tipo'] = 'Membro';
+				}
+
+				$this->Membro->all = true;
+
+				$membros = $this->Membro->find('all', array('conditions' => array($conditions)));
+				$this->set('membros', $membros);
+				$this->render('mapa_membros_result');
+			}
+		}
 	}
