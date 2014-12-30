@@ -130,20 +130,4 @@ class MembrosController extends SecretariaAppController {
 			**/
 		}
 	}
-
-	public function delete($id = null){
-		if (!$this->request->is('post') || empty($id)) {
-			throw new MethodNotAllowedException();
-		}
-		$this->request->data = $this->Membro->read(null, $id);
-		$this->Membro->id = $id;
-		if (!$this->Membro->exists()) {
-			throw new NotFoundException(__('Membro inválido.'));
-		}
-		if ($this->Membro->delete()) {
-			$this->Session->setFlash(__('Membro deletado com sucesso.'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('O Membro não pôde ser deletado.'));
-	}
 }
