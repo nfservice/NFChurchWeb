@@ -294,6 +294,7 @@
                                 </a>
                                 <ul class="sub de-sub">
                                     <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'patrimonio', 'controller' => 'relatorios', 'action' => 'bens')); ?>');" href="javascript:;">Bens</a></li>
+                                    <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'patrimonio', 'controller' => 'relatorios', 'action' => 'movimentacao_bens')); ?>');" href="javascript:;">Movimentação Patrimônio</a></li>
                                 </ul>
                             </li>
                         </ul>
