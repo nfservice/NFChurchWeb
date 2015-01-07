@@ -64,7 +64,7 @@ class MembrosController extends SecretariaAppController {
 			$parentes = $this->Membro->find('list', array('fields' => array('id', 'nome')));
 			$this->loadModel('Secretaria.Tiporelacionamento');
 			$relacionamentos = $this->Tiporelacionamento->find('list', array('fields' => array('id', 'descricao')));
-			$escolaridades = $this->Membro->Escolaridade->find('list', array('conditions' => array('Escolaridade.church_id' => $this->Session->read('choosed')), 'fields' => array('id', 'descricao')));
+			$escolaridades = $this->Membro->Escolaridade->find('list', array('fields' => array('id', 'descricao')));
 			$this->set('escolaridades', $escolaridades);
 			$this->set('relacionamentos', $relacionamentos);
 			$this->set('parentes', $parentes);
@@ -129,7 +129,7 @@ class MembrosController extends SecretariaAppController {
 			$cargos = $this->Membro->Cargo->find('list', array('fields' => array('id', 'nome')));
 			$parentes = $this->Membro->find('list', array('fields' => array('id', 'nome')));
 			$relacionamentos = $this->Tiporelacionamento->find('list', array('fields' => array('id', 'descricao')));
-			$escolaridades = $this->Membro->Escolaridade->find('list', array('conditions' => array('Escolaridade.church_id' => $this->Session->read('choosed')), 'fields' => array('id', 'descricao')));
+			$escolaridades = $this->Membro->Escolaridade->find('list', array('fields' => array('id', 'descricao')));
 			/*
 			Fim Finds em banco de dados
 			**/
