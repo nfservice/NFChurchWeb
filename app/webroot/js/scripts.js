@@ -682,15 +682,12 @@ function modalLoadAdd(url, atualizar_para, atualizar_de)
 				},
 				error: function(jqXHR, textStatus, errorThrown)
 				{
-<<<<<<< Updated upstream
 					console.debug('get error');
-=======
 					console.debug(errorThrown);
 					if (errorThrown == 'Forbidden') {
 						alert('Acesso negado. Consulte o responsável pelas permissões no sistema.');
 					};
 					//console.debug('erro do brunaos');
->>>>>>> Stashed changes
 				}
 			});
 			e.preventDefault(); //STOP default action
