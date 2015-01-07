@@ -50,8 +50,10 @@ class AppModel extends Model {
 		$choosed = CakeSession::read('choosed');
 		$user_id = CakeSession::read('Auth.User.id');
 		//seta o campo curch_id com o valor de $choosed para ser salvo
+		if ($this->name != 'Permission') {
+			$this->data[$this->name]['user_id'] = $user_id;	
+		}
 	    $this->data[$this->name]['church_id'] = $choosed;
-	    $this->data[$this->name]['user_id'] = $user_id;
 	    return true;
 	}
 }

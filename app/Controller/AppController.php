@@ -35,6 +35,9 @@ class AppController extends Controller {
 		'Session',
         'Auth'
     );
+    public $pluginT;
+	public $controllerT;
+	public $actionT;
 
     public function beforeFilter() {
     	umask(0);
@@ -43,6 +46,93 @@ class AppController extends Controller {
         }
     	$this->Auth->allow(array('login', 'logout', 'teste', 'fblogin'));
     	$this->Session->write('choosed', '1');
+
+    	$this->pluginT = array(
+			'Patrimonio' => 'Patrimônio',
+		);
+
+		$this->controllerT = array(
+			'Pages' => 'Inicial',
+			'Users' => 'Usuários',
+			'Relatorios' => 'Relatórios',
+			'TipoBem' => 'Tipo de Bem',
+			'Calendarios' => 'Eventos',
+			'Congregacaos' => 'Congregações',
+			'Escolaridades' => 'Escolaridade',
+			'Profissaos' => 'Profissões',
+			'Tiporelacionamentos' => 'Tipo de Relacionamentos',
+		);
+
+		$this->actionT = array(
+			'add' => 'Cadastrar',							
+			'delete' => 'Deletar',
+			'edit' => 'Editar',						 
+			'index' => 'Home',
+			'view' => 'Visualizar',
+			'movimentacao_bens' => 'Movimentação de Bens',
+		);
+
+        $this->set('pluginT', $this->pluginT);
+		$this->set('controllerT', $this->controllerT);
+		$this->set('actionT', $this->actionT);
+
+        $this->loadModel('Permission');
+		$acesso = $this->request->params;
+
+		//$perm = $this->Group->Branch->find('list', array('conditions' => array('user_id' => $this->Session->read('Auth.User.id')), 'fields' => array('id', 'group_id')));
+
+		$user_id = $this->Session->read('Auth.User.id');
+
+
+		$actionAllow = array(
+			'login',
+			'logout',
+		);
+
+		$controllerAllow = array(
+			'tipo_bem',
+			'departamento',
+			'autores',
+			'categorias',
+			'editoras',
+			'tipos',
+			'tiporelacionamentos',
+			'pages'
+
+		);
+		//if (($acesso['action'] == 'index' || $acesso['action'] == 'cadastrar' || $acesso['action'] == 'editar' || $acesso['action'] == 'visualizar' || $acesso['action'] == 'deletar') && (!empty($this->Session->read('Auth.User.id')))) {
+		if (!empty($user_id) && (!in_array($acesso['action'], $actionAllow)) && (!in_array($acesso['controller'], $controllerAllow))) {
+			if(is_null($acesso['plugin'])){
+				$acesso['plugin'] = '';
+			}
+
+			$id = $this->Session->read('Auth.User.id');
+
+			$plugin = $this->plugin;
+			$controller = $this->name;
+			$action = $acesso['action'];
+
+			if (empty($plugin)) { 
+				$plugin = '';
+			}
+
+			$permissao = $this->Permission->find(
+				'first', 
+				array(
+					'conditions' => array(
+						'controller' => $controller, 
+						'action' => $action, 
+						'plugin' => $plugin, 
+						'user_id' => $id
+					)
+				)
+			);
+
+			if ((empty($permissao))  || ($permissao['Permission']['allowed'] == 0)) {
+				throw new ForbiddenException('Acesso negado. Consulte o responsável pelas permissões no sistema.');
+			}
+		}			   
+
 
     	$this->loadModel('User');
     	$user = $this->User->read(null, $this->Session->read('Auth.User.id'));

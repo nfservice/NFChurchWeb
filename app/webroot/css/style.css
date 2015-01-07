@@ -2787,7 +2787,8 @@ ul.amounts li {
 }
 .panel-heading .nav>li.active>a,.panel-heading .nav>li>a:hover {
     color:#032C40;
-    background:#fff;
+    
+    background:#F6F9e8;
 }
 .panel-heading .nav>li:first-child.active>a,.panel-heading .nav>li:first-child>a:hover {
     border-radius:4px 0 0 0;

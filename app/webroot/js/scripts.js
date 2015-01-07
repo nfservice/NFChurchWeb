@@ -429,7 +429,38 @@ function ajaxload(url, dont)
 	urlLoc = url;
 	$(".wrapper").html(''); // Apaga todo o HTML da div ".wrapper"
 	setTimeout(function(){
-		$(".wrapper").load(url, function() {
+		$.ajax({
+			url: url,
+			success: function(data){
+				$(".wrapper").html(data, function(){
+					console.debug(text);
+					Pace.start(), Pace.stop();
+					var minHeight = $(".wrapper").css("height");
+					$(".wrapper").css("min-height", minHeight);
+					multiSelect();
+
+					$("#apagar").on('click', function() {
+						$("#confirmacaoExclusao").modal();
+						var countremov = $('input[type="checkbox"]:checked').length-1;
+						$('input[type="checkbox"]:checked').each(function(i){
+							apagaRegistrosChecked($(this).val());
+
+							if (i == countremov) {
+								$("#modalapagar").html('Registro removido com sucesso!');
+								$("#confirmacaoExclusao").modal("hide");
+							}
+						});   
+					});
+				});
+				
+			},
+			error: function(data){
+				alert('Acesso negado. Consulte o responsável pelas permissões no sistema');
+			}
+		});
+	});
+		/*$(".wrapper").load(url, function(data, text) {
+			console.debug(text);
 			Pace.start(), Pace.stop();
 			var minHeight = $(".wrapper").css("height");
 			$(".wrapper").css("min-height", minHeight);
@@ -448,8 +479,8 @@ function ajaxload(url, dont)
 				});   
 			});
 		})
-	}, 300);
-};
+	}, 300);*/
+}
 function multiSelect()
 {
 	$('.multi-select').multiSelect({
@@ -651,7 +682,15 @@ function modalLoadAdd(url, atualizar_para, atualizar_de)
 				},
 				error: function(jqXHR, textStatus, errorThrown)
 				{
+<<<<<<< Updated upstream
 					console.debug('get error');
+=======
+					console.debug(errorThrown);
+					if (errorThrown == 'Forbidden') {
+						alert('Acesso negado. Consulte o responsável pelas permissões no sistema.');
+					};
+					//console.debug('erro do brunaos');
+>>>>>>> Stashed changes
 				}
 			});
 			e.preventDefault(); //STOP default action
