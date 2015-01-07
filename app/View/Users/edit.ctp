@@ -110,7 +110,7 @@
                                                 $action = $actionT[$action];
                                             } else {
                                                 $action = ucfirst($action);
-                                            }
+                                            } 
                                             echo $this->Form->input('Permission.'.$cont.'.allowed', array('value' =>  '1', 'label' => $action, 'type' => 'checkbox', 'checked' => $checked));
                                         } else {
                                             echo $this->Form->input('Permission.'.$cont.'.allowed', array('type' => 'hidden', 'div' => false));

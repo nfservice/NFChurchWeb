@@ -11,7 +11,7 @@
     echo $this->Form->input('celular', array('type' => 'text', 'label' => 'Celular', 'class' => 'form-control', 'placeholder' => 'Celular', 'div' => array('class' => 'form-group col-md-4'), 'required'));
     echo $this->Form->input('cpf', array('type' => 'text', 'class' => 'form-control', 'label' => 'CPF:', 'placeholder' => 'CPF', 'div' => array('class' => 'form-group col-md-8'), 'required'));?>
     <div class="col-lg-11"> 
-		<section class="panel">
+		<section class="panel"> 
 			<header class="panel-heading tab-bg-dark-navy-blue ">
 				<ul class="nav nav-tabs">
 					<?php
@@ -92,7 +92,7 @@
 											echo $this->Form->input('Permission.'.$cont.'.plugin', array('value' => $key,'type' => 'hidden'));
 											echo $this->Form->input('Permission.'.$cont.'.controller', array('value' => $controller,'type' => 'hidden'));
 											echo $this->Form->input('Permission.'.$cont.'.action', array('value' => $action, 'type' => 'hidden'));
-											
+
 											if (!empty($actionT[$action])) {
                                                 $action = $actionT[$action];
                                             } else {
