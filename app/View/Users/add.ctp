@@ -92,7 +92,12 @@
 											echo $this->Form->input('Permission.'.$cont.'.plugin', array('value' => $key,'type' => 'hidden'));
 											echo $this->Form->input('Permission.'.$cont.'.controller', array('value' => $controller,'type' => 'hidden'));
 											echo $this->Form->input('Permission.'.$cont.'.action', array('value' => $action, 'type' => 'hidden'));
-										
+											
+											if (!empty($actionT[$action])) {
+                                                $action = $actionT[$action];
+                                            } else {
+                                                $action = ucfirst($action);
+                                            }
 											echo $this->Form->input('Permission.'.$cont.'.allowed', array('value' =>  '1', 'label' => $action, 'type' => 'checkbox'));
 										} else {
 											echo $this->Form->input('Permission.'.$cont.'.allowed', array('type' => 'hidden', 'div' => false));
