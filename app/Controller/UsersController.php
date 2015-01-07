@@ -112,6 +112,20 @@ class UsersController extends AppController {
 							$this->User->save($salvar);
 							$user_id = $this->User->id;
 
+							$this->loadModel('PermissaoPadrao');
+							$permissaoPadrao = $this->PermissaoPadrao->find('all', array('conditions' => array('PermissaoPadrao.church_id' => $membro['Membro']['church_id'])));
+							$permission = array();
+							foreach ($permissaoPadrao as $key => $value) {
+								$permission['Permission'][$key]['user_id'] = $user_id;
+								$permission['Permission'][$key]['plugin'] = $permissaoPadrao[$key]['PermissaoPadrao']['plugin'];
+								$permission['Permission'][$key]['controller'] = $permissaoPadrao[$key]['PermissaoPadrao']['controller'];
+								$permission['Permission'][$key]['action'] = $permissaoPadrao[$key]['PermissaoPadrao']['action'];
+								$permission['Permission'][$key]['allowed'] = $permissaoPadrao[$key]['PermissaoPadrao']['allowed'];
+
+								unset($permissaoPadrao[$key]);
+							}
+							$this->Permission->saveAll($permission);
+
 							$this->Auth->login(array('id' => $this->User->id));
 
 							$ch = curl_init();
@@ -500,7 +514,7 @@ class UsersController extends AppController {
 		//verificando metodo de requisição
 		if (!$this->request->is('post'))
 		{
-			json_encode('Metono Não Permitido');
+			json_encode('Metodo Não Permitido');
 		}
 		//verificando se este $id existe
 		$this->User->id = $id;
@@ -516,6 +530,130 @@ class UsersController extends AppController {
 		else
 		{
 			json_encode('O Usuário não pôde ser deletado');
+		}
+	}
+
+	public function permissao_padrao() {
+		$this->loadModel('PermissaoPadrao');
+		if ($this->request->is('put') || $this->request->is('post')) {
+			$this->PermissaoPadrao->deleteAll(array('church_id' => $this->Session->read('choosed')), false);
+			$existe = array();
+			$corretas = array();
+			foreach ($this->request->data['PermissaoPadrao'] as $key => $permission) {
+				if (!empty($permission['allowed']) && $permission['allowed'] == '1') {
+					if (empty($existe[$permission['plugin'].'-'.$permission['controller'].'-'.$permission['action']])) {
+						$existe[$permission['plugin'].'-'.$permission['controller'].'-'.$permission['action']] = '1';
+						$cascades = $this->cascade($permission['plugin'], $permission['controller'], $permission['action']);
+						foreach ($cascades as $key => $cascade) {
+							if (empty($existe[$cascade['Cascade']['plugin_para'].'-'.$cascade['Cascade']['controller_para'].'-'.$cascade['Cascade']['action_para']])) {
+								$existe[$cascade['Cascade']['plugin_para'].'-'.$cascade['Cascade']['controller_para'].'-'.$cascade['Cascade']['action_para']] = '1';
+								$corretas[] = array(
+									'plugin' => $cascade['Cascade']['plugin_para'],
+									'controller' => $cascade['Cascade']['controller_para'],
+									'action' => $cascade['Cascade']['action_para'],
+									'allowed' => '1',
+								);
+							}
+						}
+					}
+				} else {
+					unset($this->request->data['PermissaoPadrao'][$key]);
+				}
+			}
+			$this->request->data['PermissaoPadrao'] = array_merge($this->request->data['PermissaoPadrao'], $corretas);
+			//Requisição Put ou Post tenta salvar alterações no registro
+			$this->PermissaoPadrao->create();
+			if ($this->PermissaoPadrao->saveAll($this->request->data['PermissaoPadrao'])) {
+				$this->redirect(array('action' => 'permissao_padrao'));
+			}
+		} else {
+			$regex = '/(?<=\tpublic\sfunction\s).{1,50}(?=\()|(?<=\tpublic\sfunction\s).{1,50}(?=\s\()|(?<=\s\s\s\spublic\sfunction\s).{1,50}(?=\()|(?<=\s\s\s\spublic\sfunction\s).{1,50}(?=\s\()|(?<=\spublic\sfunction\s).{1,50}(?=\()|(?<=\spublic\sfunction\s).{1,50}(?=\s\()/';		
+
+			/*----- PEGA ACTIONS DE PLUGINS - CONTROLLER E CONTROLLERS ------- */
+			//Pega caminho dos Plugins dentro do Projeto
+			$path = APP.'Plugin/';
+			$plugins = glob($path.'*') or die("Erro ao acessar " . $path);
+			$completa = array();
+
+			foreach ($plugins as $key => $value) {
+				//Separa o caminho pela chave '/' e inverte a array para que o primeiro valor do array seja o nome do Plugin
+				$inverte = explode('/', $value);
+				$invertida = array_reverse($inverte);
+				//Pega todos os Controllers do Plugin selecionado
+				$controllers = App::objects($invertida[0].'.Controller');
+
+				if ($invertida[0] != 'Contador') {
+					foreach ($controllers as $chave => $valor) {
+						/*A variável $controllers recebe um valor identico a "UsersController"
+							Porém vamos precisar usar o App::import e para isso é preciso separar o "UsersController" em "User" "Controller"		
+						*/
+						//$pass1 = preg_replace("/([a-z])([A-Z])/","\\1 \\2",$controllers[$chave]);
+						//$pass2 = preg_replace("/([A-Z])([A-Z][a-z])/","\\1 \\2",$pass1);
+						$controller = explode('Controller', $controllers[$chave]);
+						
+						if (is_file($path.$invertida[0].'/Controller/'.$controller[0].'Controller.php') && strpos($controller[0], 'App') === false){
+							//Ok, aqui importamos a Controller e todas as actions.
+							$file = file_get_contents($path.$invertida[0].'/Controller/'.$controller[0].'Controller.php');
+							preg_match_all($regex, $file, $actions);
+
+							$actions = $actions[0];
+
+							$actions = array_diff($actions, get_class_methods('AppController'));
+							foreach ($actions as $action) {
+								if (empty($completa[$invertida[0]][$controller[0]])) {
+									$completa[$invertida[0]][$controller[0]] = array();
+								}
+								//$completa[] = array('Plugin' => $invertida[0], 'Controller' => $controller[0], 'Action' => $action);
+								//if ($action == 'index' || $action == 'cadastrar' || $action == 'editar' || $action == 'visualizar' || $action == 'deletar'){
+								if (!in_array($action, $completa[$invertida[0]][$controller[0]])) {
+									$completa[$invertida[0]][$controller[0]][] = $action;
+								}
+							}
+							
+						}
+					}
+				}
+			}
+
+
+			$path1 = APP.'Controller/';
+			$controll = glob($path1.'*') or die("Erro ao acessar " . $path1);
+
+			foreach ($controll as $key1 => $value1) {
+				$inverte1 = explode('/', $value1);
+				$invertida1 = array_reverse($inverte1);
+				$semPhp = explode('.', $invertida1[0]);
+				
+				//$pass1 = preg_replace("/([a-z])([A-Z])/","\\1 \\2",$semPhp[0]);
+				//$pass2 = preg_replace("/([A-Z])([A-Z][a-z])/","\\1 \\2",$pass1);
+				//$controller1 = explode(' ', $pass2);
+
+				$controller1 = explode('Controller', $semPhp[0]);
+		
+				if (is_file($path1.$invertida1[0]) && $controller1[0] != 'App' ) {		   
+					$file = file_get_contents($path1.$invertida1[0]);
+					preg_match_all($regex, $file, $actions1);
+
+					$actions1 = $actions1[0];
+
+					$actions1 = array_diff($actions1, get_class_methods('AppController'));
+					foreach ($actions1 as $action1) {
+						if (empty($completa[''][$controller1[0]])) {
+							$completa[''][$controller1[0]] = array();
+						}
+						//$completa[] = array('Plugin' => '', 'Controller' => $controller1[0], 'Action' => $action1);
+						//if ($action1 == 'index' || $action1 == 'cadastrar' || $action1 == 'editar' || $action1 == 'visualizar' || $action1 == 'deletar'){
+						if (!in_array($action1, $completa[''][$controller1[0]])) {
+							$completa[''][$controller1[0]][] = $action1;
+						}
+					}
+				}
+			}
+			$permissao = $completa;
+			$this->set('permissao', $permissao);
+			$this->PermissaoPadrao->virtualFields = array('permission' => 'CONCAT(plugin, "_", controller, "_", action)');
+			$permissoes = $this->PermissaoPadrao->find('list', array('fields' => array('permission', 'allowed'), 'conditions' => array('PermissaoPadrao.church_id' => $this->Session->read('choosed'))));
+			$this->set('permissoes', $permissoes);	
 		}
 	}
 }

@@ -57,6 +57,7 @@
                             'searchItem',
                             'autoComplete',
                             'load_events',
+                            'cascade'
                         );
                         ksort($permissao);
                         $cont = 0;

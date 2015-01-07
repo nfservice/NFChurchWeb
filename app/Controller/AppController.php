@@ -70,6 +70,7 @@ class AppController extends Controller {
 			'index' => 'Home',
 			'view' => 'Visualizar',
 			'movimentacao_bens' => 'Movimentação de Bens',
+			'permissao_padrao' => 'Permissões Padrão',
 		);
 
         $this->set('pluginT', $this->pluginT);

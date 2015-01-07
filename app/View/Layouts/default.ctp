@@ -234,6 +234,15 @@
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-archive"></i>
+                            <span>Parametros</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => '', 'controller' => 'users', 'action' => 'permissao_padrao')); ?>');" href="javascript:;" >Permissões Padrão</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-archive"></i>
                             <span>Secretaria</span>
                         </a>
                         <ul class="sub">
