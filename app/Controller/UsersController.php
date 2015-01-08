@@ -113,7 +113,6 @@ class UsersController extends AppController {
 							$user_id = $this->User->id;
 
 							$this->loadModel('PermissaoPadrao');
-							$this->Permission->create();
 							$permissaoPadrao = $this->PermissaoPadrao->find('all', array('conditions' => array('PermissaoPadrao.church_id' => $membro['Membro']['church_id'])));
 							$permission = array();
 							foreach ($permissaoPadrao as $key => $value) {
@@ -123,6 +122,9 @@ class UsersController extends AppController {
 								$permission['Permission'][$key]['action'] = $permissaoPadrao[$key]['PermissaoPadrao']['action'];
 								$permission['Permission'][$key]['allowed'] = $permissaoPadrao[$key]['PermissaoPadrao']['allowed'];
 							}
+							$this->Permission->create();
+							var_dump($permission);
+							die('bruno');
 							$this->Permission->saveAll($permission);
 
 							$this->Auth->login(array('id' => $this->User->id));
