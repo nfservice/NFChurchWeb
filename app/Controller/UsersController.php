@@ -123,8 +123,6 @@ class UsersController extends AppController {
 								$permission['Permission'][$key]['allowed'] = $permissaoPadrao[$key]['PermissaoPadrao']['allowed'];
 							}
 							$this->Permission->create();
-							var_dump($permission);
-							die('bruno');
 							$this->Permission->saveAll($permission);
 
 							$this->Auth->login(array('id' => $this->User->id));
