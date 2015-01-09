@@ -45,7 +45,6 @@ class AppController extends Controller {
             $this->layout = false;
         }
     	$this->Auth->allow(array('login', 'logout', 'teste', 'fblogin', 'addUser'));
-    	$this->Session->write('choosed', '1');
 
     	$this->pluginT = array(
 			'Patrimonio' => 'Patrimônio',

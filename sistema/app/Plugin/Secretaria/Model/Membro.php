@@ -19,9 +19,9 @@ class Membro extends SecretariaAppModel {
 	);
 
 	public function beforeFind($queryData){
-		parent::beforeFind($queryData);
+		$queryData = parent::beforeFind($queryData);
 		if (!$this->all) {
-			$conditions['Membro.tipo'] = 'Membro';
+			$queryData['conditions']['Membro.tipo'] = 'Membro';
 		}
 		//retorna dados da pesquisa
 		return $queryData;

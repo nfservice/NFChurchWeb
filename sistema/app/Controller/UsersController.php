@@ -46,6 +46,7 @@ class UsersController extends AppController {
 		// If it is a post request we can assume this is a local login request
 		if ($this->request->isPost()){			
 			if ($this->Auth->login()){
+				$this->Session->write('choosed', $this->Session->read('Auth.User.church_id'));
 				$this->redirect($this->Auth->redirectUrl());
 			} else {
 				$this->Session->setFlash(__('Usuário/Senha inválidos.'));
@@ -464,6 +465,7 @@ class UsersController extends AppController {
 		$this->User->saveAll($salvar);
 		$user = $this->User->read(null, $this->User->id);
 		$this->Auth->login($user['User']);
+		$this->Session->write('choosed', $this->Church->id);
 
 		$this->redirect('/pages/home');
 	}

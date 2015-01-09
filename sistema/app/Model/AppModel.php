@@ -35,8 +35,8 @@ class AppModel extends Model {
 		App::uses('CakeSession', 'Model/Datasource');
 		$choosed = CakeSession::read('choosed');
 		//Verifica se o campo church_id existe na model e se $choosed não é vazio
-		if(($this->hasField('church_id') && !empty($choosed)) && ($this->name != 'User' && !empty($queryData['conditions']['User.id'])))
-		{
+		if(($this->hasField('church_id') && !empty($choosed)) && ($this->name != 'User'))
+		{			
 			//seta o church_id para pesquisa na model
 			$queryData['conditions'][$this->name.'.church_id']  = $choosed;
 		}

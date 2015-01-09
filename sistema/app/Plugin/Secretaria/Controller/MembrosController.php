@@ -21,7 +21,7 @@ class MembrosController extends SecretariaAppController {
     	{
     		$conditions = array();
     	}
-    	$conditions['Membro.tipo'] = 'Membro';
+    	$conditions['Membro.tipo'] = 'Membro';    	
     	//busca todos os regsitros desta igreja
     	$membros = $this->Membro->find('all', array('conditions' => $conditions));
     	//seta registros para a view
