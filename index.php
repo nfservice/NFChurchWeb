@@ -255,7 +255,7 @@
             <h4 class="modal-title" id="myModalLabel">Cadastro NFCHURCH</h4>
           </div>
           <div class="modal-body">
-            <form action="../nfchurch/users/addUser" role="form" method="post">
+            <form action="sistema/users/addUser" role="form" method="post">
                 <div class="form-group">
                     <input type="text" name="data[Church][nome]" class="form-control" required placeholder="Nome da Igreja">
                 </div>
