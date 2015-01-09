@@ -122,8 +122,8 @@ class UsersController extends AppController {
 								$permission['Permission'][$key]['action'] = $permissaoPadrao[$key]['PermissaoPadrao']['action'];
 								$permission['Permission'][$key]['allowed'] = $permissaoPadrao[$key]['PermissaoPadrao']['allowed'];
 							}
-							$this->Permission->create();
-							$this->Permission->saveAll($permission);
+							$this->User->Permission->create();
+							$this->User->Permission->saveAll($permission['Permission']);
 
 							$this->Auth->login(array('id' => $this->User->id));
 
