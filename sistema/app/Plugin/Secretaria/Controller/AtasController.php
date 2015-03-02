@@ -27,7 +27,8 @@
 				$folder = WWW_ROOT.'files/ata/'.$this->Session->read('choosed').'/';
 				if (!is_dir($folder)) {
 					mkdir($folder, 0777, true);
-				}				
+				}
+				die('eae');
 
 				$this->request->data['AtaArquivo'] = array();
 				foreach ($this->request->data['Ata']['files'] as $key => $file) {
@@ -36,8 +37,6 @@
 						'dataupload' => date('Y-m-d')
 					);
 				}
-
-				die('eae');
 
 				if ($this->Ata->saveAll($this->request->data)) {
 					echo 'Ata cadastrada com sucesso!';
