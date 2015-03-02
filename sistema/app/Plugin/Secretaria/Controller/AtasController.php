@@ -19,6 +19,7 @@
 		public function add(){
 			
 			if ($this->request->is('post') || $this->request->is('put')) {
+				die('eae');
 				if (!empty($this->request->data['Ata']['data'])) {
 					$this->request->data['Ata']['data'] = implode('-', array_reverse(explode('/', $this->request->data['Ata']['data'])));
 				}
@@ -27,8 +28,7 @@
 				$folder = WWW_ROOT.'files/ata/'.$this->Session->read('choosed').'/';
 				if (!is_dir($folder)) {
 					mkdir($folder, 0777, true);
-				}
-				die('eae');
+				}				
 
 				$this->request->data['AtaArquivo'] = array();
 				foreach ($this->request->data['Ata']['files'] as $key => $file) {
