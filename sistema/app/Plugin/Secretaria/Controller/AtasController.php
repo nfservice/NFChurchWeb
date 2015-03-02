@@ -37,6 +37,8 @@
 					);
 				}
 
+				die('eae');
+
 				if ($this->Ata->saveAll($this->request->data)) {
 					echo 'Ata cadastrada com sucesso!';
 
