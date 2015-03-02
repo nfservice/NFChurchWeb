@@ -28,6 +28,7 @@
 				if (!is_dir($folder)) {
 					mkdir($folder, 0777, true);
 				}
+				die('eae');
 
 				$this->request->data['AtaArquivo'] = array();
 				foreach ($this->request->data['Ata']['files'] as $key => $file) {
