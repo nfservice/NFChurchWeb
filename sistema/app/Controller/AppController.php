@@ -40,7 +40,6 @@ class AppController extends Controller {
 	public $actionT;
 
     public function beforeFilter() {
-    	die('e');
     	umask(0);
         if ($this->request->isAjax()) {
             $this->layout = false;
