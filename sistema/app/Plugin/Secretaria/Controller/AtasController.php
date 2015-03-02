@@ -19,7 +19,6 @@
 		public function add(){
 			
 			if ($this->request->is('post') || $this->request->is('put')) {
-				die('eae');
 				if (!empty($this->request->data['Ata']['data'])) {
 					$this->request->data['Ata']['data'] = implode('-', array_reverse(explode('/', $this->request->data['Ata']['data'])));
 				}
