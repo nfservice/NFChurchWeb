@@ -40,6 +40,7 @@ class AppController extends Controller {
 	public $actionT;
 
     public function beforeFilter() {
+    	die('e');
     	umask(0);
         if ($this->request->isAjax()) {
             $this->layout = false;
@@ -105,7 +106,6 @@ class AppController extends Controller {
 			if(is_null($acesso['plugin'])){
 				$acesso['plugin'] = '';
 			}
-				die('eae');
 
 			$id = $this->Session->read('Auth.User.id');
 
