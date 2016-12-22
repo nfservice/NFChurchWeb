@@ -10,6 +10,8 @@
 /build
 /dist
 /tags
+app/
+sistema/app/tmp/cache
 
 # OS generated files #
 ######################
