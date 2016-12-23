@@ -549,9 +549,9 @@ function modalLoad(url)
 		$(".datepicker").css('margin-top', '0px !important');
 		$('input[type=file]').on('change', prepareUpload);
 
-		$(".desable-form input, .desable-form select, .desable-form textarea, .desable-form radio, .desable-form checkbox").attr('disabled','disabled');
+		$(".desable-form input, .desable-form select, .desable-form.btns, .desable-form textarea, .desable-form radio, .desable-form checkbox").attr('disabled','disabled');
 		$(".habilita_campos").on('click', function(){
-			$("input, select, textarea, radio, checkbox").removeAttr('disabled');
+			$("input, select, textarea, radio, checkbox .btns").removeAttr('disabled');
 			//$("#futuro-salvar").attr('class', 'btn btn-primary').attr('data-toggle', 'modal').removeAttr('id').attr('href', '#confirmar').html('Salvar dados');
 			$("#futuro-salvar").remove();
 			$(".habilita_campos").remove();
