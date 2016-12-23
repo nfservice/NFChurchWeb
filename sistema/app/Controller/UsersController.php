@@ -33,7 +33,7 @@ class UsersController extends AppController {
 						array(
 							'action_de' => '*',
 						)
-					)					
+					)
 				),
 			)
 		);
@@ -180,7 +180,8 @@ class UsersController extends AppController {
 
 	public function index()
 	{
-		//verifica se foi feito algum filtro			
+		$conditions = ['User.church_id' => $this->Session->read('choosed')];
+		//verifica se foi feito algum filtro
 		if (!empty($this->request->data['filtro']))
 		{
 			//condições para pesquisa
@@ -193,10 +194,6 @@ class UsersController extends AppController {
 					$conditions['OR']['User.'.$key.' LIKE '] = '%'.$this->request->data['filtro'].'%';
 				}
 			}
-		}
-		else
-		{
-			$conditions = array();
 		}
 		//busca todos os regsitros desta igreja
 		$users = $this->User->find('all', array('conditions' => $conditions));
