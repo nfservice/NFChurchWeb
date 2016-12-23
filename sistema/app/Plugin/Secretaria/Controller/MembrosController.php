@@ -47,12 +47,16 @@ class MembrosController extends SecretariaAppController {
 
 			$this->request->data['Membro']['latitude'] = $lat;
 			$this->request->data['Membro']['longitude'] = $long;
-
+			$relacionamentos = $this->request->data['Relacionamento'];
+			unset($this->request->data['Relacionamento']);
 			if($this->Membro->saveAll($this->request->data)){
-				foreach ($this->request->data['Relacionamento'] as $key => $value) {
-					$this->request->data['Relacionamento'][$key]['membro_id'] = $this->Membro->id;
+				foreach ($relacionamentos as $key => $value) {
+					$relacionamentos[$key]['membro_id'] = $this->Membro->id;
+					if (empty($relacionamentos[$key]['membro2_id'])) {
+						unset($relacionamentos[$key]);
+					}
 				}
-				$this->Membro->Relacionamento->saveAll($this->request->data['Relacionamento']);
+				$this->Membro->Relacionamento->saveAll($relacionamentos);
 				json_encode('Membro Salvo com Sucesso!');
 			}else{
 				json_encode('Membro Não Salvo!');
@@ -110,7 +114,16 @@ class MembrosController extends SecretariaAppController {
 			Caso salvo com sucesso  Seta o setFlash() e redireciona para a action index.
 			Caso contrario, se mantem na mesma action e seta o setFlash() com mensagem de erro.
 			**/
-			if ($this->Membro->saveAll($this->request->data)) {				
+			$relacionamentos = $this->request->data['Relacionamento'];
+			unset($this->request->data['Relacionamento']);
+			if($this->Membro->saveAll($this->request->data)){
+				foreach ($relacionamentos as $key => $value) {
+					$relacionamentos[$key]['membro_id'] = $this->Membro->id;
+					if (empty($relacionamentos[$key]['membro2_id'])) {
+						unset($relacionamentos[$key]);
+					}
+				}
+				$this->Membro->Relacionamento->saveAll($relacionamentos);
 				echo 'Membro Salvo com Sucesso!';
 			} else {
 				echo 'Membro Não Salvo!';
@@ -155,5 +168,14 @@ class MembrosController extends SecretariaAppController {
 			Fim Tratando datas para a view.
 			**/
 		}
+	}
+
+	public function desvincular($id = null){
+		$status = false;
+		$this->autoRender = false;
+		if (!empty($id)) {
+			$status = $this->Membro->Relacionamento->delete($id);
+		}
+		return $status;
 	}
 }
