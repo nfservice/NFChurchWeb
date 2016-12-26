@@ -87,6 +87,7 @@ class AppController extends Controller {
 		$actionAllow = array(
 			'login',
 			'logout',
+			'selectAjax'
 		);
 
 		$controllerAllow = array(
