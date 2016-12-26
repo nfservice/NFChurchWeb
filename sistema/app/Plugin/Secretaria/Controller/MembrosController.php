@@ -137,6 +137,7 @@ class MembrosController extends SecretariaAppController {
 			/*
 			Finds em banco de dados
 			**/
+			$this->Membro->recursive = 2;
 			$this->request->data = $this->Membro->read(null, $id);
 			$estados = $this->Membro->Estado->find('list', array('fields' => array('codibge', 'nome')));
 			$profissoes = $this->Membro->Profissao->find('list', array('fields' => array('id', 'nome')));
@@ -165,7 +166,6 @@ class MembrosController extends SecretariaAppController {
 			$this->request->data['Membro']['datamembro'] = implode('/', array_reverse(explode('-', $this->request->data['Membro']['datamembro'])));
 			$this->request->data['Membro']['datanascimento'] = implode('/', array_reverse(explode('-', $this->request->data['Membro']['datanascimento'])));
 			$this->request->data['Membro']['databatismo'] = implode('/', array_reverse(explode('-', $this->request->data['Membro']['databatismo'])));
-			
 			/*
 			Fim Tratando datas para a view.
 			**/
@@ -204,5 +204,25 @@ class MembrosController extends SecretariaAppController {
 		{
 			json_encode('O Membro não pôde ser deletado');
 		}
+	}
+
+	public function selectAjax() {
+		$this->autoRender = false;
+		$conditions = [];
+		$this->Membro->virtualFields = ['name' => 'nome', 'text' => 'nome'];
+		$this->Membro->all = true;
+		$this->Membro->recursive = -1;
+		if (!empty($this->request->query['q'])) {
+			$conditions['Membro.nome LIKE'] = '%'.$this->request->query['q'].'%';
+		}
+		$membros = $this->Membro->find(
+			'all',
+			[
+				'conditions' => $conditions,
+				'fields' => ['id', 'name', 'text'],
+			]
+		);
+		$membros = Set::extract('/Membro/.', $membros);
+		return json_encode(['items' => $membros]);
 	}
 }

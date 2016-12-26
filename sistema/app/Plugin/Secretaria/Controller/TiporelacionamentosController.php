@@ -56,4 +56,22 @@
 				echo 'Nenhum Registro selecionado para Deletar';
 			}
 		}
+
+		public function selectAjax() {
+			$this->autoRender = false;
+			$conditions = [];
+			$this->Tiporelacionamento->virtualFields = ['name' => 'descricao', 'text' => 'descricao'];
+			if (!empty($this->request->query['q'])) {
+				$conditions['Tiporelacionamento.descricao LIKE'] = '%'.$this->request->query['q'].'%';
+			}
+			$relacionamentos = $this->Tiporelacionamento->find(
+				'all',
+				[
+					'conditions' => $conditions,
+					'fields' => ['id', 'name', 'text'],
+				]
+			);
+			$relacionamentos = Set::extract('/Tiporelacionamento/.', $relacionamentos);
+			return json_encode(['items' => $relacionamentos]);
+		}
 	}
