@@ -659,6 +659,7 @@ function modalLoadAdd(url, atualizar_para, atualizar_de)
 		 * Não usamos o proprio do jquery pelo fato dele não mandar a requisição que o CakePHP precisa
 		 * 
 		 */
+		$(".formModal").off();
 		$(".formModal").on('submit', function(e)
 		{
 			var postData = $(this).serializeArray();
@@ -670,12 +671,11 @@ function modalLoadAdd(url, atualizar_para, atualizar_de)
 				data : postData,
 				success:function(data, textStatus, jqXHR) 
 				{
-					if ($('#ItemAssunto').length) {
+					/*if ($('#ItemAssunto').length) {
 						buscaItem($('#ItemAssunto').val());
 					} else if ($('[pesquisa]').length) {
 						$('[pesquisa]').submit();
-					}
-
+					}*/
 					atualizaItem(url_target, atualizar_para, atualizar_de);
 					$("#add_item").modal("hide");
 					e.stopPropagation();
@@ -687,7 +687,6 @@ function modalLoadAdd(url, atualizar_para, atualizar_de)
 					if (errorThrown == 'Forbidden') {
 						alert('Acesso negado. Consulte o responsável pelas permissões no sistema.');
 					};
-					//console.debug('erro do brunaos');
 				}
 			});
 			e.preventDefault(); //STOP default action

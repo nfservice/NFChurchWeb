@@ -65,6 +65,7 @@ class MembrosController extends SecretariaAppController {
 			$estados = $this->Membro->Estado->find('list', array('fields' => array('codibge', 'nome')));
 			$profissoes = $this->Membro->Profissao->find('list', array('fields' => array('id', 'descricao')));
 			$cargos = $this->Membro->Cargo->find('list', array('fields' => array('id', 'nome')));
+			$this->Membro->all = true;
 			$parentes = $this->Membro->find('list', array('fields' => array('id', 'nome')));
 			$this->loadModel('Secretaria.Tiporelacionamento');
 			$relacionamentos = $this->Tiporelacionamento->find('list', array('fields' => array('id', 'descricao')));
@@ -140,6 +141,7 @@ class MembrosController extends SecretariaAppController {
 			$estados = $this->Membro->Estado->find('list', array('fields' => array('codibge', 'nome')));
 			$profissoes = $this->Membro->Profissao->find('list', array('fields' => array('id', 'nome')));
 			$cargos = $this->Membro->Cargo->find('list', array('fields' => array('id', 'nome')));
+			$this->Membro->all = true;
 			$parentes = $this->Membro->find('list', array('fields' => array('id', 'nome')));
 			$relacionamentos = $this->Tiporelacionamento->find('list', array('fields' => array('id', 'descricao')));
 			$escolaridades = $this->Membro->Escolaridade->find('list', array('fields' => array('id', 'descricao')));
@@ -177,5 +179,30 @@ class MembrosController extends SecretariaAppController {
 			$status = $this->Membro->Relacionamento->delete($id);
 		}
 		return $status;
+	}
+
+	public function delete($id = null)
+	{
+		$this->autoRender = false;
+		//verificando metodo de requisição
+		if (!$this->request->is('post'))
+		{
+			json_encode('Metodo Não Permitido');
+		}
+		//verificando se este $id existe
+		$this->Membro->id = $id;
+		if (!$this->Membro->exists())
+		{
+			json_encode('Membro inexistente!');
+		}
+		//excluindo usuário
+		if ($this->Membro->delete())
+		{
+			json_encode('Membro Deletado');
+		}
+		else
+		{
+			json_encode('O Membro não pôde ser deletado');
+		}
 	}
 }

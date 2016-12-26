@@ -28,6 +28,7 @@
 				<thead>
 					<tr>
 						<!-- CAMPO QUE CHECA TODOS OS CHECKBOX -->
+						<th><input type="checkbox" onclick="MarcarTodos('tableData', this.checked);"></th>
 						<th>Nome</th>
 						<th>E-mail</th>
 						<th>RG</th>
@@ -38,6 +39,7 @@
 				<tbody>
 					<?php foreach ($membros as $membro) { ?>
 					<tr class="tr-visitantes-click" id="<?php echo 'dados_' . $membro['Membro']['id']; ?>">
+						<td><input type="checkbox" value="<?php echo $membro['Membro']['id']; ?>"></td>
 						<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['nome']; ?></td>
 						<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['email']; ?></td>
 						<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['rg']; ?></td>
@@ -51,13 +53,11 @@
 	</section>
 </div>
 
-<script>
-	$(document).ready(function(){
-		$('[data-target=#confirmacaoExclusao]').attr('disabled', 'disabled');
-	});
-</script>
 
 <?php 
 	// modal de edit dos cadastros
 	echo $this->element('modal/modalEdit');
+	
+	// modal de confirmação de exclusão dos cadastros
+	echo $this->element('modal/modalExcluir');
 ?>
