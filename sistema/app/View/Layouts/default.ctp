@@ -11,6 +11,8 @@
     <?php 
         //array com os cores css
     echo $this->Html->css(array(
+        'select2_4-0-3',
+        'select2-bootstrap',
         'bootstrap', 
         'assets/jquery-ui/jquery-ui-1.10.1.custom.min', 
         'bootstrap-reset', 
@@ -21,7 +23,7 @@
         'style',
         'style-responsive.css',
         'assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css',
-        'select2',
+        //'select2',
         'multi-select',
         'nfchurch'
         ));
@@ -432,7 +434,8 @@
         'gritter/gritter.js',
         'pace.js', 
         'jquery.form.js',
-        'select2',
+        //'select2',
+        'select2_4-0-3',
         'select-init',
         'bootstrap-switch.js',
         '../css/assets/jquery-multi-select/js/jquery.multi-select.js',

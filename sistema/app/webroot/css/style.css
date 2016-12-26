@@ -5319,3 +5319,7 @@ div.tagsinput span.tag {
 .de-sub li a {
     padding-left: 65px !important;
 }
+
+.combobox {
+    width: 100% !important;
+}
