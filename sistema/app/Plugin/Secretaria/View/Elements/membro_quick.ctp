@@ -4,6 +4,10 @@
         $fromOptions['class'] = 'desable-form formModal';
     }
 ?>
+<?php
+    echo $this->Form->input('Relacionamento.X.membro2_id', array('label' => 'Parente', 'empty' => 'Selecione', 'class' => 'form-control', 'placeholder' => 'Nome Parente', 'div' => array('class' => 'form-group col-md-6'), 'type' => 'text'));
+    echo $this->Form->input('Relacionamento.X.tiporelacionamento_id', array('label' => 'Tipo:', 'placeholder' => 'Relacionamento', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-3'), 'type' => 'text'));
+?>
 <?php echo $this->Form->create('Membro', $fromOptions); ?>
     <?php if (strpos($this->request->params['action'], 'edit') !== false) { ?>
         <div class="col-md-12">
@@ -32,15 +36,23 @@
         ?>
     </div>
     <?php
-        echo $this->Form->input('estadocivil', array('label' => 'Estado Civil' ,'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4'), 'options' => array('0' => 'Solteiro', '1' => 'Casado', '2' => 'Viuvo', '3' => 'Desquitado'))); 
-
+        echo $this->Form->input('estadocivil', array('label' => 'Estado Civil' ,'class' => 'form-control select2', 'div' => array('class' => 'form-group col-md-4'), 'options' => array('0' => 'Solteiro(a)', '1' => 'Casado(a)', '2' => 'Viuvo(a)', '3' => 'Divorciado(a)', '4' => 'Separado(a)', '5' => 'Companheiro(a)')));
         echo $this->Form->input('rg', array('label' => 'RG' ,'placeholder' => '00.000.000-0', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4')));
         echo $this->Form->input('cpf', array('label' => 'CPF' ,'placeholder' => '000.000.000-00', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4')));
 
         echo $this->Form->input('fone', array('label' => 'Telefone', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4')));
         echo $this->Form->input('cel', array('label' => 'Celular', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4')));
 
-        echo $this->Form->input('escolaridade_id', array('label' => 'Escolaridade' ,'class' => 'form-control', 'div' => array('class' => 'form-group col-md-8'), 'options' => $escolaridades)); 
+
+        $esc = !empty($this->request->data['Membro']['escolaridade_id']) ? $this->request->data['Membro']['escolaridade_id'] : null;
+        echo $this->Form->input('escolaridade_id', array('label' => 'Escolaridade' ,'class' => 'form-control', 'div' => array('class' => 'form-group col-md-7'), 'type' => 'text', 'value' => !empty($escolaridades[$esc]) ? $esc.', '.$escolaridades[$esc] : ''));
+    ?>
+        <div class="form-group col-md-1">
+            <a href="javascript:;" class="form-control btn btn-primary btns" onclick="modalLoadAdd('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "escolaridades", "action" => "add")); ?>', 'autocomplete', 'autocomplete');" data-toggle="tooltip" data-placement="top" title="Adicionar Escolaridade" style="margin-top:22px;" role="button">
+                <i class="fa fa-plus"></i>
+            </a>
+        </div>
+    <?php
         echo $this->Form->input('tipo', array('type' => 'hidden', 'value' => '0'));
         echo $this->Form->input('Endereco.cep', array('type' => 'text', 'label' => 'Cep:', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-2')));
         echo $this->Form->input('Endereco.logradouro', array('type' => 'text', 'label' => 'Logradouro', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
@@ -48,7 +60,7 @@
         echo $this->Form->input('Endereco.bairro', array('type' => 'text', 'label' => 'Bairro', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-3')));
         echo $this->Form->input('Endereco.complemento', array('type' => 'text', 'label' => 'Complemento:', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-2')));
         echo $this->Form->input('Endereco.cidade', array('type' => 'text', 'label' => 'Cidade', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
-        echo $this->Form->input('Endereco.estado_id', array('label' => 'Estado', 'options' => $estados, 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-4')));
+        echo $this->Form->input('Endereco.estado_id', array('label' => 'Estado', 'options' => $estados, 'class' => 'form-control select2', 'div' => array('class' => 'form-group col-md-4')));
     ?> 
     <div id="parente" class="row">
         <?php
@@ -58,29 +70,26 @@
                     <div id="<?php echo $i ?>" class="col-md-12">
                     <?php 
                         echo $this->Form->input('Relacionamento.'.$i.'.id', array('type' => 'hidden', 'value' => $relacionamento['id']));
-                        echo $this->Form->input('Relacionamento.'.$i.'.membro2_id', array('label' => 'Parente', 'empty' => 'Selecione', 'class' => 'form-control', 'placeholder' => 'Nome Parente', 'div' => array('class' => 'form-group col-md-6'), 'options' => $parentes, 'default' => $relacionamento['membro2_id']));
+                        echo $this->Form->input('Relacionamento.'.$i.'.membro2_id', array('label' => 'Parente', 'empty' => 'Selecione', 'class' => 'membro form-control', 'placeholder' => 'Nome Parente', 'div' => array('class' => 'form-group col-md-6'), 'type' => 'text', 'value' => $relacionamento['membro2_id'].','.$relacionamento['Membro']['nome']));
                         
                         ?>
                         <div class="form-group col-md-1">
                             <a href="javascript:;" class="form-control btn btn-primary btns" onclick="modalLoadAdd('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "tiporelacionamentos", "action" => "add")); ?>', 'autocomplete', 'autocomplete');" data-toggle="tooltip" data-placement="top" title="Adicionar Parente" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a>
                         </div>
-                        <?php echo $this->Form->input('Relacionamento.'.$i.'.tiporelacionamento_id', array('label' => 'Tipo:', 'empty' => 'Relacionamento', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-3'), 'options' => $relacionamentos, 'default' => $relacionamento['tiporelacionamento_id'])); ?>
+                        <?php echo $this->Form->input('Relacionamento.'.$i.'.tiporelacionamento_id', array('label' => 'Tipo:', 'placeholder' => 'Relacionamento', 'class' => 'tiporelacionamento form-control', 'div' => array('class' => 'form-group col-md-3'), 'type' => 'text', 'value' => $relacionamento['tiporelacionamento_id'].','.$relacionamentos[$relacionamento['tiporelacionamento_id']])); ?>
                         <div class="form-group col-md-1">
                             <a href="javascript:;" class="form-control btn btn-primary btns" onclick="modalLoadAdd('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "tiporelacionamentos", "action" => "add")); ?>', 'Relacionamento<?php echo $i ?>TiporelacionamentoId', 'Relacionamento<?php echo $i ?>TiporelacionamentoId');" data-toggle="tooltip" data-placement="top" title="Adicionar Tipo de Relacionamento" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a>
                         </div>
-                        <?php if ($i !== 0) { ?>
-                            <div class="form-group col-md-1">
-                                <a href="javascript:;" class="form-control btn btn-danger btns" onclick="apagaRelacionamento('Relacionamento<?php echo $i; ?>Id', '<?php echo $i; ?>', '<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'membros', 'action' => 'desvincular')); ?>');" data-toggle="tooltip" data-placement="top" title="Remover Parente" style="margin-top:22px;" role="button"><i class="fa fa-trash-o"></i></a>
-                            </div>
-                        <?php }
-                        $i++;
-                    ?>
+                        <div class="form-group col-md-1">
+                            <a href="javascript:;" class="form-control btn btn-danger btns" onclick="apagaRelacionamento('Relacionamento<?php echo $i; ?>Id', '<?php echo $i; ?>', '<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'membros', 'action' => 'desvincular')); ?>');" data-toggle="tooltip" data-placement="top" title="Remover Parente" style="margin-top:22px;" role="button"><i class="fa fa-trash-o"></i></a>
+                        </div>
+                        <?php $i++; ?>
                     </div>
             <?php }
             } else {
                 echo '<div id="0" class="col-md-12">';
                     echo $this->Form->input('Relacionamento.0.membro_id', array('type' => 'hidden'));
-                    echo $this->Form->input('Relacionamento.0.membro2_id', array('label' => 'Parente', 'empty' => 'Selecione', 'class' => 'form-control', 'placeholder' => 'Nome Parente', 'div' => array('class' => 'form-group col-md-6'), 'options' => $parentes));
+                    echo $this->Form->input('Relacionamento.0.membro2_id', array('label' => 'Parente', 'empty' => 'Selecione', 'class' => 'membro form-control', 'placeholder' => 'Nome Parente', 'div' => array('class' => 'form-group col-md-6'), 'type' => 'text'));
                     ?>
                     <div class="col-md-1 form-group">
                         <a href="javascript:;" class="form-control btn btn-primary" onclick="modalLoadAdd('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "visitantes", "action" => "add")); ?>', 'Relacionamento0Membro2Id', 'Relacionamento0Membro2Id');" data-toggle="tooltip" data-placement="top" title="Adicionar Parente" style="margin-top:22px;" role="button">
@@ -88,10 +97,13 @@
                         </a>
                     </div>
                     <?php
-                        echo $this->Form->input('Relacionamento.0.tiporelacionamento_id', array('label' => 'Tipo:', 'empty' => 'Relacionamento', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-3'), 'options' => $relacionamentos));
+                        echo $this->Form->input('Relacionamento.0.tiporelacionamento_id', array('label' => 'Tipo:', 'placeholder' => 'Relacionamento', 'class' => 'tiporelacionamento form-control', 'div' => array('class' => 'form-group col-md-3'), 'type' => 'text'));
                     ?>
                     <div class="form-group col-md-1">
                         <a href="javascript:;" class="form-control btn btn-primary btns" onclick="modalLoadAdd('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "tiporelacionamentos", "action" => "add")); ?>', 'Relacionamento0TiporelacionamentoId', 'Relacionamento0TiporelacionamentoId');" data-toggle="tooltip" data-placement="top" title="Adicionar Tipo de Relacionamento" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <a href="javascript:;" class="form-control btn btn-danger btns" onclick="apagaRelacionamento('Relacionamento0Id', '0', '<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'membros', 'action' => 'desvincular')); ?>');" data-toggle="tooltip" data-placement="top" title="Remover Parente" style="margin-top:22px;" role="button"><i class="fa fa-trash-o"></i></a>
                     </div>
                 </div>
             <?php } ?>
@@ -103,7 +115,7 @@
         </div>
       
         <?php
-            echo $this->Form->input('profissao_id', array('label' => 'Profissão', 'empty' => 'Selecione', 'id' => 'autocomplete', 'class' => 'form-control', 'options' => $profissoes, 'div' => array('class' => 'form-group col-md-5')));
+            echo $this->Form->input('profissao_id', array('label' => 'Profissão', 'empty' => 'Selecione', 'id' => 'autocomplete', 'class' => 'form-control select2', 'options' => $profissoes, 'div' => array('class' => 'form-group col-md-5')));
         ?>
         <div class="form-group col-md-1">
             <a href="javascript:;" class="form-control btn btn-primary btns" onclick="modalLoadAdd('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "profissaos", "action" => "add")); ?>', 'autocomplete', 'autocomplete');" data-toggle="tooltip" data-placement="top" title="Adicionar Profissão" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a>
@@ -159,3 +171,24 @@
         }
     ?>
 <?php echo $this->Form->end(); ?>
+<?php echo $this->Html->script(['membros']) ?>
+<script type="text/javascript">
+    var action = '<?php echo $this->request->params['action'] ?>';
+    var cont = '<?php echo !empty($this->request->data['Relacionamento']) ? count($this->request->data['Relacionamento']) : 0 ?>';
+    function addParente(callback){
+        cont++;
+        membro = $('#RelacionamentoXMembro2Id').parent().clone().html();
+        membro = membro.replaceAll('RelacionamentoXMembro2Id','Relacionamento'+cont+'Membro2Id').replaceAll('data[Relacionamento][X][membro2_id]','data[Relacionamento]['+cont+'][membro2_id]');
+        relacionamento = $('#RelacionamentoXTiporelacionamentoId').parent().clone().html();
+        relacionamento = relacionamento.replaceAll('RelacionamentoXTiporelacionamentoId','Relacionamento'+cont+'TiporelacionamentoId').replaceAll('data[Relacionamento][X][tiporelacionamento_id]','data[Relacionamento]['+ cont+'][tiporelacionamento_id]');
+        $('#parente').append('<div id="'+cont+'" class="col-md-12"><input type="hidden" name="data[Relacionamento]['+cont+'][membro_id]" id="Relacionamento'+cont+'PessoaId" value="<?php echo !empty($this->request->data['Membro']['id']) ? $this->request->data['Membro']['id'] : null ?>"><div class="form-group col-md-6">'+membro+'</div><div class="col-md-1 form-group"><a href="javascript:;" class="form-control btn btn-primary" onclick="modalLoadAdd(\'<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "visitantes", "action" => "add")); ?>\', \'Relacionamento'+cont+'Membro2Id\', \'Relacionamento0Membro2Id\');" data-toggle="tooltip" data-placement="top" title="Adicionar Parente" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a></div><div class="form-group col-md-3">'+relacionamento+'</div><div class="form-group col-md-1"><a href="javascript:;" class="form-control btn btn-primary btns" onclick="modalLoadAdd(\'<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "tiporelacionamentos", "action" => "add")); ?>\', \'Relacionamento'+cont+'TiporelacionamentoId\', \'Relacionamento'+cont+'TiporelacionamentoId\');" data-toggle="tooltip" data-placement="top" title="Adicionar Tipo de Relacionamento" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a></div><div class="col-md-1" style="margin-top: 22px !important"><a href="javascript:;" onclick="removeParente('+cont+')" class="btn btn-danger form-control"><i class="fa fa-trash-o"></i></a></div></div>');
+
+        $('#Relacionamento'+cont+'Membro2Id').addClass('membro').parent().show();
+        $('#Relacionamento'+cont+'TiporelacionamentoId').addClass('tiporelacionamento').parent().show();
+
+        addSelect2Multi('#Relacionamento'+cont+'Membro2Id', '#Relacionamento'+cont+'TiporelacionamentoId');
+    }
+    $(document).ready(function(){
+        $('.select2').select2();
+    });
+</script>
