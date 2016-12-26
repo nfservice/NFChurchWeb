@@ -453,6 +453,8 @@
 ?>
 
 <script>
+    var commonurl = '<?php echo $this->Html->url('/')?>';
+    
     $(document).ready(function(){
         setTimeout(function(){
             Pace.stop();

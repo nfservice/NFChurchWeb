@@ -1,24 +1,150 @@
-var action = '<?php echo $this->request->params['action'] ?>';
-    var cont = '<?php echo !empty($this->request->data['Relacionamento']) ? count($this->request->data['Relacionamento']) : 0 ?>';
-    function addParente(callback){
-        $('select').select2('destroy');
-        cont++;
-        membro = $('#Relacionamento0Membro2Id').parent().clone().html();
-        membro = membro.replaceAll('Relacionamento0Membro2Id','Relacionamento'+cont+'Membro2Id').replaceAll('data[Relacionamento][0][membro2_id]','data[Relacionamento]['+ cont+'][membro2_id]');
-        relacionamento = $('#Relacionamento0TiporelacionamentoId').parent().clone().html();
-        relacionamento = relacionamento.replaceAll('Relacionamento0TiporelacionamentoId','Relacionamento'+cont+'TiporelacionamentoId').replaceAll('data[Relacionamento][0][tiporelacionamento_id]','data[Relacionamento]['+ cont+'][tiporelacionamento_id]');
-        $('#parente').append('<div id="'+cont+'" class="col-md-12"><input type="hidden" name="data[Relacionamento]['+cont+'][membro_id]" id="Relacionamento'+cont+'PessoaId" value="<?php echo !empty($this->request->data['Membro']['id']) ? $this->request->data['Membro']['id'] : null ?>"><div class="form-group col-md-6">'+membro+'</div><div class="col-md-1 form-group"><a href="javascript:;" class="form-control btn btn-primary" onclick="modalLoadAdd(\'<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "visitantes", "action" => "add")); ?>\', \'Relacionamento'+cont+'Membro2Id\', \'Relacionamento0Membro2Id\');" data-toggle="tooltip" data-placement="top" title="Adicionar Parente" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a></div><div class="form-group col-md-3">'+relacionamento+'</div><div class="form-group col-md-1"><a href="javascript:;" class="form-control btn btn-primary btns" onclick="modalLoadAdd(\'<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "tiporelacionamentos", "action" => "add")); ?>\', \'Relacionamento'+cont+'TiporelacionamentoId\', \'Relacionamento'+cont+'TiporelacionamentoId\');" data-toggle="tooltip" data-placement="top" title="Adicionar Tipo de Relacionamento" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a></div><div class="col-md-1" style="margin-top: 22px !important"><a href="javascript:;" onclick="removeParente('+cont+')" class="btn btn-danger form-control"><i class="fa fa-trash-o"></i></a></div></div>');
+function addToolTip() {
+    $('[data-toggle="tooltip"]').tooltip();
+}
 
-        if (callback) {
-            callback();
+function addSelect2Multi(membro, tiporelacionamento){
+    if (!membro) {
+        membro = '.membro';
+    }
+    if (!tiporelacionamento) {
+        tiporelacionamento = '.tiporelacionamento';
+    }
+    $(tiporelacionamento).select2({
+        placeholder: 'Relacionamento',
+        allowClear: true,
+        minimumInputLength: 1,
+        ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+            url: commonurl+"secretaria/tiporelacionamentos/selectAjax",
+            dataType: 'json',
+            method: 'GET',
+            quietMillis: 250,
+            data: function (term) {
+                return {
+                    q: term, // search term
+                };
+            },
+            results: function (data) {
+                return { results: data.items };
+            },
+            processResults: function (data, page) {
+                // parse the results into the format expected by Select2.
+                // since we are using custom formatting functions we do not need to
+                // alter the remote JSON data
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        },
+        minimumInputLength: 1,
+        formatNoMatches: function(term) {
+            /* customize the no matches output */
+            return 'Sem resultados.';
+        },
+        escapeMarkup: function (m) { return m; }, // we do not want to escape markup since we are displaying html in results
+        initSelection: function(element, callback) {
+            var data = {};
+            $(element).each(function () {
+                var value = this.value.split(",");
+                data = {id: value[0], text: value[1]};
+            });
+            callback(data);
         }
-    }
-
-    function addToolTip() {
-        $('[data-toggle="tooltip"]').tooltip();
-        $('select').select2();
-    }
-
-    $(document).ready(function(){
-        addToolTip();
     });
+
+    $(membro).select2({
+        placeholder: 'Nome Parente',
+        allowClear: true,
+        minimumInputLength: 1,
+        ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+            url: commonurl+"secretaria/membros/selectAjax",
+            dataType: 'json',
+            method: 'GET',
+            quietMillis: 250,
+            cache: true,
+            data: function (term) {
+                return {
+                    q: term, // search term
+                };
+            },
+            results: function (data) {
+                return { results: data.items };
+            },
+            processResults: function (data, page) {
+                // parse the results into the format expected by Select2.
+                // since we are using custom formatting functions we do not need to
+                // alter the remote JSON data
+                return {
+                    results: data
+                };
+            }
+        },
+        minimumInputLength: 1,
+        formatNoMatches: function(term) {
+            /* customize the no matches output */
+            return 'Sem resultados.';
+        },
+        escapeMarkup: function (m) { return m; }, // we do not want to escape markup since we are displaying html in results
+        initSelection: function(element, callback) {
+            var data = {};
+            $(element).each(function () {
+                var value = this.value.split(",");
+                data = {id: value[0], text: value[1]};
+            });
+            callback(data);
+        }
+    });
+}
+
+function addSelect2Ajax(){
+    $('#MembroEscolaridadeId').select2({
+        placeholder: 'Escolaridade',
+        allowClear: true,
+        //minimumInputLength: 1,
+        ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+            url: commonurl+"secretaria/escolaridades/selectAjax",
+            dataType: 'json',
+            method: 'GET',
+            quietMillis: 250,
+            data: function (term) {
+                return {
+                    q: term, // search term
+                };
+            },
+            results: function (data) {
+                return { results: data.items };
+            },
+            processResults: function (data, page) {
+                // parse the results into the format expected by Select2.
+                // since we are using custom formatting functions we do not need to
+                // alter the remote JSON data
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        },
+        minimumInputLength: 1,
+        formatNoMatches: function(term) {
+            /* customize the no matches output */
+            return 'Sem resultados.';
+        },
+        escapeMarkup: function (m) { return m; }, // we do not want to escape markup since we are displaying html in results
+        initSelection: function(element, callback) {
+            var data = {};
+            $(element).each(function () {
+                var value = this.value.split(",");
+                data = {id: value[0], text: value[1]};
+            });
+            callback(data);
+        }
+    });
+}
+
+$(document).ready(function(){
+    $('#RelacionamentoXMembro2Id').parent().hide();
+    $('#RelacionamentoXTiporelacionamentoId').parent().hide();
+    addToolTip();
+    addSelect2Ajax();
+    addSelect2Multi();
+});
