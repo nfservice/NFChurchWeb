@@ -91,7 +91,7 @@
                         </div>
 
                         <div class="caption header" style="top: 52%" data-animate="slideAppearRightToLeft" data-delay="500" data-length="300">
-                            <a href="cadastro" class="btn btn-lg btn-success"><i class="fa fa-check"></i> Faça seu cadastro e use gratuitamente.</a>
+                            <a href="#" data-toggle="modal" data-target="#modalCadastro" class="btn btn-lg btn-success"><i class="fa fa-check"></i> Faça seu cadastro e use gratuitamente.</a>
                         </div>
                         <!--<div class="caption img-html5" data-animate="slideAppearLeftToRight" data-delay="200">
                             <img src="img/html5.png">
@@ -112,7 +112,7 @@
                         </div>
 
                         <div class="caption header" style="top: 72%; left: 6%; " data-animate="slideAppearRightToLeft" data-delay="500" data-length="300">
-                            <a href="cadastro" class="btn btn-lg btn-success"><i class="fa fa-check"></i> Faça seu cadastro e use gratuitamente.</a>
+                            <a href="#" data-toggle="modal" data-target="#modalCadastro" class="btn btn-lg btn-success"><i class="fa fa-check"></i> Faça seu cadastro e use gratuitamente.</a>
                         </div>
                     </div>
                 </li>
