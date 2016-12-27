@@ -140,11 +140,3 @@ function addSelect2Ajax(){
         }
     });
 }
-
-$(document).ready(function(){
-    $('#RelacionamentoXMembro2Id').parent().hide();
-    $('#RelacionamentoXTiporelacionamentoId').parent().hide();
-    addToolTip();
-    addSelect2Ajax();
-    addSelect2Multi();
-});

@@ -1,5 +1,11 @@
 <script type="text/javascript">
 	var urlApagaRegChecked = '<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "membros", "action" => "delete")); ?>';
+	$(document).ready(function(){
+		$('#myModal').on('hidden.bs.modal', function () {
+		  // do something…
+		  $(this).children().children().children('div[class="modal-body"]').empty()
+		});
+	})
 </script>
 <?php echo $this->Html->script('index'); ?>
 <div class="col-md-12">		 

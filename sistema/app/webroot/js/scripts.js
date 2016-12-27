@@ -699,9 +699,6 @@ function modalLoadAdd(url, atualizar_para, atualizar_de)
 
 function atualizaItem(target, atualizar_para, atualizar_de)
 {
-	console.log(atualizar_para);
-	console.log(atualizar_de);
-	console.log(target);
 	$("#"+atualizar_para).load(target+"  #"+atualizar_de+" option");
 }
 

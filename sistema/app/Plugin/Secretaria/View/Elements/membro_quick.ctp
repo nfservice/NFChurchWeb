@@ -189,6 +189,11 @@
         addSelect2Multi('#Relacionamento'+cont+'Membro2Id', '#Relacionamento'+cont+'TiporelacionamentoId');
     }
     $(document).ready(function(){
+        $('#RelacionamentoXMembro2Id').parent().hide();
+        $('#RelacionamentoXTiporelacionamentoId').parent().hide();
         $('.select2').select2();
+        addToolTip();
+        addSelect2Ajax();
+        addSelect2Multi();
     });
 </script>
