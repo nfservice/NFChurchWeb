@@ -32,13 +32,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($visitantes as $visitante) { ?>
-					<tr class="tr-visitantes-click" id="<?php echo 'dados_' . $visitante['Visitante']['id']; ?>">
-						<td><input type="checkbox" value="<?php echo $visitante['Visitante']['id']; ?>"></td>
-						<td class="btnModal" onclick="modalLoad('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['nome']; ?></td>
-						<td class="btnModal" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['fone']; ?></td>
-						<td class="btnModal" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['email']; ?></td>
-					</tr>
+					<?php if (!empty($visitantes)) {
+						foreach ($visitantes as $visitante) { ?>
+							<tr class="tr-visitantes-click" id="<?php echo 'dados_' . $visitante['Visitante']['id']; ?>">
+								<td><input type="checkbox" value="<?php echo $visitante['Visitante']['id']; ?>"></td>
+								<td class="btnModal" onclick="modalLoad('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['nome']; ?></td>
+								<td class="btnModal" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['fone']; ?></td>
+								<td class="btnModal" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['email']; ?></td>
+							</tr>
+						<?php }
+					} else { ?>
+						<tr>
+							<td cellspacing="100%" cellpadding="100%" colspan="4" align="center">
+								<?php echo "Você ainda não cadastrou nenhum Visitante!"; ?>
+							</td>
+						</tr>
 					<?php } ?>
 				</tbody>
 			</table>

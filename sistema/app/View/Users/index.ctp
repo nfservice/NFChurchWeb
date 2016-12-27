@@ -30,13 +30,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($users as $user) { ?>
-					<tr class="tr-visitantes-click"  id="<?php echo 'dados_' . $user['User']['id']; ?>">
-						<td><input type="checkbox" value="<?php echo $user['User']['id']; ?>"></td>
-						<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $user['User']['id'])); ?>');"><?php echo $user['User']['nome']; ?></td>
-						<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $user['User']['id'])); ?>');"><?php echo $user['User']['username']; ?></td>
-						<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $user['User']['id'])); ?>');"><?php echo $user['User']['telefone']; ?></td>
-					</tr>
+					<?php if (!empty($users)) {
+						foreach ($users as $user) { ?>
+							<tr class="tr-visitantes-click"  id="<?php echo 'dados_' . $user['User']['id']; ?>">
+								<td><input type="checkbox" value="<?php echo $user['User']['id']; ?>"></td>
+								<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $user['User']['id'])); ?>');"><?php echo $user['User']['nome']; ?></td>
+								<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $user['User']['id'])); ?>');"><?php echo $user['User']['username']; ?></td>
+								<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $user['User']['id'])); ?>');"><?php echo $user['User']['telefone']; ?></td>
+							</tr>
+						<?php }
+					} else { ?>
+						<tr>
+							<td cellspacing="100%" cellpadding="100%" colspan="4" align="center">
+								<?php echo "Você ainda não cadastrou nenhum Usuário!"; ?>
+							</td>
+						</tr>
 					<?php } ?>
 				</tbody>
 			</table>

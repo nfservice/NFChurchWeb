@@ -43,15 +43,23 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($membros as $membro) { ?>
-					<tr class="tr-visitantes-click" id="<?php echo 'dados_' . $membro['Membro']['id']; ?>">
-						<td><input type="checkbox" value="<?php echo $membro['Membro']['id']; ?>"></td>
-						<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['nome']; ?></td>
-						<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['email']; ?></td>
-						<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['rg']; ?></td>
-						<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['cpf']; ?></td>
-						<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['fone']; ?></td>
-					</tr>
+					<?php if (!empty($membros)) {
+						foreach ($membros as $membro) { ?>
+							<tr class="tr-visitantes-click" id="<?php echo 'dados_' . $membro['Membro']['id']; ?>">
+								<td><input type="checkbox" value="<?php echo $membro['Membro']['id']; ?>"></td>
+								<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['nome']; ?></td>
+								<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['email']; ?></td>
+								<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['rg']; ?></td>
+								<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['cpf']; ?></td>
+								<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['fone']; ?></td>
+							</tr>
+						<?php }
+					} else { ?>
+						<tr>
+							<td cellspacing="100%" cellpadding="100%" colspan="6" align="center">
+								<?php echo "Você ainda não cadastrou nenhum Membro!"; ?>
+							</td>
+						</tr>
 					<?php } ?>
 				</tbody>
 			</table>

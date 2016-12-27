@@ -48,7 +48,7 @@
 					}
 				} else { ?>
 					<tr>
-						<td cellspacing="100%" cellpadding="100%" colspan="3" align="center">
+						<td cellspacing="100%" cellpadding="100%" colspan="4" align="center">
 							<?php echo "Você ainda não cadastrou nenhum Bem!"; ?>
 						</td>
 					</tr>
