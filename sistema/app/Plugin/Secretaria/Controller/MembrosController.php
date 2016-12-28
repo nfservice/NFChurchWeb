@@ -70,6 +70,8 @@ class MembrosController extends SecretariaAppController {
 			$this->loadModel('Secretaria.Tiporelacionamento');
 			$relacionamentos = $this->Tiporelacionamento->find('list', array('fields' => array('id', 'descricao')));
 			$escolaridades = $this->Membro->Escolaridade->find('list', array('fields' => array('id', 'descricao')));
+			$denominacaos = $this->Membro->Denominacao->find('list', array('fields' => array('id', 'nome')));
+			$this->set('denominacaos', $denominacaos);
 			$this->set('escolaridades', $escolaridades);
 			$this->set('relacionamentos', $relacionamentos);
 			$this->set('parentes', $parentes);
@@ -146,6 +148,7 @@ class MembrosController extends SecretariaAppController {
 			$parentes = $this->Membro->find('list', array('fields' => array('id', 'nome')));
 			$relacionamentos = $this->Tiporelacionamento->find('list', array('fields' => array('id', 'descricao')));
 			$escolaridades = $this->Membro->Escolaridade->find('list', array('fields' => array('id', 'descricao')));
+			$denominacaos = $this->Membro->Denominacao->find('list', array('fields' => array('id', 'nome')));
 			/*
 			Fim Finds em banco de dados
 			**/
@@ -153,6 +156,7 @@ class MembrosController extends SecretariaAppController {
 			/*
 			Setando Variáveis para a view
 			**/
+			$this->set('denominacaos', $denominacaos);
 			$this->set('cargos', $cargos);
 			$this->set('estados', $estados);
 			$this->set('profissoes', $profissoes);

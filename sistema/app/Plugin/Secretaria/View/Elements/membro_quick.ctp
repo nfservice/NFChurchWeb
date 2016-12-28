@@ -137,7 +137,13 @@
             echo $this->Form->input('igrejabatismo', array('label' => 'Igreja Batismo', 'class' => 'form-control', 'placeholder' => 'Nome da igreja que foi batizado', 'div' => array('class' => 'form-group col-md-5')));
             echo $this->Form->input('pastorbatismo', array('label' => 'Pastor que Batizou', 'class' => 'form-control', 'placeholder' => 'Nome do Pastor que batizou', 'div' => array('class' => 'form-group col-md-5')));
 
-            echo $this->Form->input('ultimaigreja', array('label' => 'Ultima Igreja que frequentou', 'class' => 'form-control', 'placeholder' => 'Nome da Igreja que Frequentou', 'div' => array('class' => 'form-group', 'style' => 'padding-right: 15px; padding-left: 15px;')));
+            $den = !empty($this->request->data['Membro']['denominacao_id']) ? $this->request->data['Membro']['denominacao_id'] : null;
+            echo $this->Form->input('denominacao_id', array('label' => 'Ultima Igreja que frequentou', 'class' => 'form-control', 'placeholder' => 'Nome da Igreja que Frequentou', 'div' => array('class' => 'form-group col-md-11'), 'type' => 'text', 'value' => !empty($denominacaos[$den]) ? $den.', '.$denominacaos[$den] : ''));
+            ?>
+            <div class="form-group col-md-1">
+                <a href="javascript:;" class="form-control btn btn-primary btns" onclick="modalLoadAdd('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "denominacaos", "action" => "add")); ?>', 'autocomplete', 'autocomplete');" data-toggle="tooltip" data-placement="top" title="Adicionar Denominação" style="margin-top:22px;" role="button"><i class="fa fa-plus"></i></a>
+            </div>
+            <?php
             
             if (!empty($this->request->data['Movimentacaoata'])) {
                 $i = 0;
