@@ -26,7 +26,17 @@
         echo $this->Form->input('datamembro', array('type' => 'text', 'label' => 'Tornou-se Membro em:' ,'class' => 'form-control datepicker', 'div' => array('class' => 'form-group col-md-3'), 'data-date-format' => 'dd/mm/yyyy')); 
         echo $this->Form->input('nome', array('label' => 'Nome do Membro' ,'placeholder' => 'Nome do Membro', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
 
-        echo $this->Form->input('email', array('label' => 'Email Pessoal' ,'placeholder' => 'Entre com seu email', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-9')));
+        echo $this->Form->input('email', array('label' => 'Email Pessoal' ,'placeholder' => 'Entre com seu email', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
+
+        $carg = !empty($this->request->data['Membro']['cargo_id']) ? $this->request->data['Membro']['cargo_id'] : null;
+        echo $this->Form->input('cargo_id', array('label' => 'Cargo', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-2'), 'type' => 'text', 'value' => !empty($cargos[$carg]) ? $carg.', '.$cargos[$carg] : ''));
+        ?>
+        <div class="form-group col-md-1">
+            <a href="javascript:;" class="form-control btn btn-primary btns" onclick="modalLoadAdd('<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "cargos", "action" => "add")); ?>', 'autocomplete', 'autocomplete');" data-toggle="tooltip" data-placement="top" title="Adicionar Cargo" style="margin-top:22px;" role="button">
+                <i class="fa fa-plus"></i>
+            </a>
+        </div>
+        <?php
         echo $this->Form->input('sexo', array('label' => 'Sexo' ,'class' => 'form-control', 'div' => array('class' => 'form-group col-md-3'), 'options' => array('0' => 'Selecione', '1' => 'Masculino', '2' => 'Feminino')));
     ?>
     <div class="nascimento">
@@ -138,6 +148,8 @@
             }            
 
             echo $this->Form->input('igrejasanteriores', array('label' => 'Igrejas que já frequentou', 'class' => 'form-control', 'placeholder' => 'Nome das igrejas que já frequentou (pulando linhas)', 'div' => array('class' => 'form-group col-md-12')));
+
+            echo $this->Form->input('motivodesligamento', array('label' => 'Motivo de Desligamento', 'class' => 'form-control', 'placeholder' => 'Motivo de desligamento (pulando linhas)', 'div' => array('class' => 'form-group col-md-12')));
         ?>
       <div class="modal fade over-hidden" id="confirmar" tabindex="-1" data-keyboard="false" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -195,5 +207,11 @@
         addToolTip();
         addSelect2Ajax();
         addSelect2Multi();
+        $('#MembroAtivo').on('change', function(){
+            $('#MembroMotivodesligamento').parent().hide();
+            if (this.value == 0) {
+                $('#MembroMotivodesligamento').parent().show();
+            }
+        }).change();
     });
 </script>
