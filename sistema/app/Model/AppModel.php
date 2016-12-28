@@ -58,4 +58,14 @@ class AppModel extends Model {
 	    }
 	    return true;
 	}
+
+	public function selectAjax($model, $conditions){
+		return $this->find(
+			'all',
+			[
+				'conditions' => $conditions,
+				'fields' => ['id', 'name', 'text'],
+			]
+		);
+	}
 }

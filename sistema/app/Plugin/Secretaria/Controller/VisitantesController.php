@@ -91,8 +91,9 @@
 
 				$data_nasc = explode(' ', $data_nasc);
 				$data_nasc = explode('-', $data_nasc[0]);
-
-				$this->request->data['Visitante']['datanascimento'] = $data_nasc[2]."/".$data_nasc[1]."/".$data_nasc[0];
+				if (!empty($this->request->data['Visitante']['datanascimento'])) {
+					$this->request->data['Visitante']['datanascimento'] = $data_nasc[2]."/".$data_nasc[1]."/".$data_nasc[0];
+				}
 
 				$this->loadModel('Estado');
 				$estados = $this->Estado->find('list', array('fields' => array('codibge', 'sigla')));

@@ -74,4 +74,24 @@ class PagesController extends AppController {
 			throw new NotFoundException();
 		}
 	}
+
+	public function selectAjax() {
+		$this->autoRender = false;
+		$model = $this->request->query['m'];
+
+
+		$conditions = [];
+		if (!empty($this->request->query['q'])) {
+			$conditions[$model.'.'.$this->request->query['f'].' LIKE'] = '%'.$this->request->query['q'].'%';
+		}
+
+		$this->loadModel($model);
+		$this->{$model}->virtualFields = ['name' => $this->request->query['f'], 'text' => $this->request->query['f']];
+
+		$response = $this->{$model}->selectAjax($model, $conditions);
+		
+		$response = Set::extract('/'.$model.'/.', $response);
+		
+		return json_encode(['items' => $response]);
+	}
 }

@@ -59,21 +59,4 @@ class EscolaridadesController extends SecretariaAppController{
 			echo 'Nenhum Registro selecionado para Deletar';
 		}
 	}
-	public function selectAjax() {
-		$this->autoRender = false;
-		$conditions = [];
-		$this->Escolaridade->virtualFields = ['name' => 'descricao', 'text' => 'descricao'];
-		if (!empty($this->request->query['q'])) {
-			$conditions['Escolaridade.descricao LIKE'] = '%'.$this->request->query['q'].'%';
-		}
-		$escolaridades = $this->Escolaridade->find(
-			'all',
-			[
-				'conditions' => $conditions,
-				'fields' => ['id', 'name', 'text'],
-			]
-		);
-		$escolaridades = Set::extract('/Escolaridade/.', $escolaridades);
-		return json_encode(['items' => $escolaridades]);
-	}
 }

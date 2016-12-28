@@ -205,24 +205,4 @@ class MembrosController extends SecretariaAppController {
 			json_encode('O Membro não pôde ser deletado');
 		}
 	}
-
-	public function selectAjax() {
-		$this->autoRender = false;
-		$conditions = [];
-		$this->Membro->virtualFields = ['name' => 'nome', 'text' => 'nome'];
-		$this->Membro->all = true;
-		$this->Membro->recursive = -1;
-		if (!empty($this->request->query['q'])) {
-			$conditions['Membro.nome LIKE'] = '%'.$this->request->query['q'].'%';
-		}
-		$membros = $this->Membro->find(
-			'all',
-			[
-				'conditions' => $conditions,
-				'fields' => ['id', 'name', 'text'],
-			]
-		);
-		$membros = Set::extract('/Membro/.', $membros);
-		return json_encode(['items' => $membros]);
-	}
 }
