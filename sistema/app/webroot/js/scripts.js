@@ -455,7 +455,7 @@ function ajaxload(url, dont)
 				
 			},
 			error: function(data){
-				alert('Acesso negado. Consulte o responsável pelas permissões no sistema');
+				$(".wrapper").html('<h1>Acesso negado. Consulte o responsável pelas permissões no sistema.</h1>');
 			}
 		});
 	});
