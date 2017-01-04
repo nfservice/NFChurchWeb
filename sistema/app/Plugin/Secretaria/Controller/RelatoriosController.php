@@ -24,13 +24,13 @@
 					$conditions['Membro.nome LIKE'] = '%'.$this->request->data['Relatorio']['nome'].'%';
 				}
 				if (!empty($this->request->data['Relatorio']['sexo']) || $this->request->data['Relatorio']['sexo'] === '0') {
-					$conditions['Membro.sexo'] = $this->request->data['Relatorio']['sexo'];
+					$conditions['Membro.sexo'] = (int)$this->request->data['Relatorio']['sexo'];
 				}
 				if (!empty($this->request->data['Relatorio']['tipo'])) {
 					$conditions['Membro.tipo'] = $this->request->data['Relatorio']['tipo'];
 				}
-				if (!empty($this->request->data['Relatorio']['estadocivil'])) {
-					$conditions['Membro.estadocivil'] = $this->request->data['Relatorio']['estadocivil'];
+				if (!empty($this->request->data['Relatorio']['estadocivil']) || $this->request->data['Relatorio']['estadocivil'] === '0') {
+					$conditions['Membro.estadocivil'] = (int)$this->request->data['Relatorio']['estadocivil'];
 				}
 				if (!empty($this->request->data['Relatorio']['pastorbatismo'])) {
 					$conditions['Membro.pastorbatismo'] = $this->request->data['pastorbatismo'];

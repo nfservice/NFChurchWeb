@@ -11,7 +11,7 @@
 				echo $this->Form->input('nome', array('class' => 'form-control', 'label' => 'Nome:', 'div' => array('class' => 'form-group col-md-5')));
 				echo $this->Form->input('sexo', array('class' => 'form-control', 'label' => 'Sexo:', 'options' => array('' => 'Selecione', '1' => 'Masculino', '2' => 'Feminino'), 'div' => array('class' => 'form-group col-md-2')));
 				echo $this->Form->input('tipo', array('class' => 'form-control', 'label' => 'Tipo:', 'options' => array('' => 'Selecione', '1' => 'Membro', '2' => 'Visitante'), 'div' => array('class' => 'form-group col-md-2')));
-				echo $this->Form->input('estadocivil', array('class' => 'form-control', 'label' => 'Estado Civil:', 'options' => array('' => 'Selecione', '0' => 'Solteiro', '1' => 'Casado', '2' => 'Viúvo', '3' => 'Desquitado'), 'div' => array('class' => 'form-group col-md-4')));
+				echo $this->Form->input('estadocivil', array('class' => 'form-control', 'label' => 'Estado Civil:', 'options' => array('' => 'Selecione', '0' => 'Solteiro(a)', '1' => 'Casado(a)', '2' => 'Viuvo(a)', '3' => 'Divorciado(a)', '4' => 'Separado(a)', '5' => 'Companheiro(a)'), 'div' => array('class' => 'form-group col-md-4')));
 				echo $this->Form->input('pastorbatismo', array('class' => 'form-control', 'label' => 'Pastor que Batizou:', 'div' => array('class' => 'form-group col-md-4')));
 				echo $this->Form->input('escolaridade', array('class' => 'form-control', 'label' => 'Escolaridade:', 'options' => $escolaridades, 'empty' => 'Nenhuma', 'div' => array('class' => 'form-group col-md-4')));
 				echo $this->Form->input('Gerar Relatório', array('type' => 'submit', 'label' => false, 'class' => 'btn btn-success form-control', 'div' => array('class' => 'form-group col-md-4'), 'id' => 'salvar_dados')); 
