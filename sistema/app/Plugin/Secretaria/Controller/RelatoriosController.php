@@ -18,7 +18,7 @@
 					);
 
 				if (!empty($this->request->data['Relatorio']['datamembro'])) {
-					$conditions['Membro.datamembro'] = $this->request->data['Relatorio']['datamembro'];
+					$conditions['Membro.datamembro'] = implode('-', array_reverse(explode('/', $this->request->data['Relatorio']['datamembro'])));
 				}
 				if (!empty($this->request->data['Relatorio']['nome'])) {
 					$conditions['Membro.nome LIKE'] = '%'.$this->request->data['Relatorio']['nome'].'%';
@@ -33,8 +33,12 @@
 					$conditions['Membro.estadocivil'] = (int)$this->request->data['Relatorio']['estadocivil'];
 				}
 				if (!empty($this->request->data['Relatorio']['pastorbatismo'])) {
-					$conditions['Membro.pastorbatismo'] = $this->request->data['pastorbatismo'];
+					$conditions['Membro.pastorbatismo LIKE'] = '%'.$this->request->data['Relatorio']['pastorbatismo'].'%';
 				}
+				if (!empty($this->request->data['Relatorio']['escolaridade']) || $this->request->data['Relatorio']['escolaridade'] === '0') {
+					$conditions['Membro.escolaridade'] = (int)$this->request->data['Relatorio']['escolaridade'];
+				}
+				
 				$membros = $this->Membro->find(
 					'all',
 					[
