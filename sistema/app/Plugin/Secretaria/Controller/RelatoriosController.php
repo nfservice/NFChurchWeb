@@ -36,9 +36,9 @@
 					$conditions['Membro.pastorbatismo LIKE'] = '%'.$this->request->data['Relatorio']['pastorbatismo'].'%';
 				}
 				if (!empty($this->request->data['Relatorio']['escolaridade']) || $this->request->data['Relatorio']['escolaridade'] === '0') {
-					$conditions['Membro.escolaridade'] = (int)$this->request->data['Relatorio']['escolaridade'];
+					$conditions['Membro.escolaridade_id'] = (int)$this->request->data['Relatorio']['escolaridade'];
 				}
-				
+
 				$membros = $this->Membro->find(
 					'all',
 					[
