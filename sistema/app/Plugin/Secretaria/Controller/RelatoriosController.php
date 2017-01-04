@@ -35,7 +35,13 @@
 				if (!empty($this->request->data['Relatorio']['pastorbatismo'])) {
 					$conditions['Membro.pastorbatismo'] = $this->request->data['pastorbatismo'];
 				}
-				$membros = $this->Membro->find('all', array('conditions' => array($conditions)));
+				$membros = $this->Membro->find(
+					'all',
+					[
+						'conditions' => array($conditions),
+						'order' => 'Membro.nome'
+					]
+				);
 
 				$this->layout = 'pdf'; //this will use the pdf.ctp layout
 				$pdf = new NFPDF();
