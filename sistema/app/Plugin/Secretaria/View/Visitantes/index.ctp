@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	var urlApagaRegChecked = '<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "visitantes", "action" => "delete")); ?>';
+	var urlTornarMembroRegChecked = '<?php echo $this->Html->url(array("plugin" => "secretaria", "controller" => "visitantes", "action" => "tornarMembro")); ?>';
 </script>
 <?php echo $this->Html->script('index'); ?>
 
@@ -37,8 +38,8 @@
 							<tr class="tr-visitantes-click" id="<?php echo 'dados_' . $visitante['Visitante']['id']; ?>">
 								<td><input type="checkbox" value="<?php echo $visitante['Visitante']['id']; ?>"></td>
 								<td class="btnModal" onclick="modalLoad('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['nome']; ?></td>
-								<td class="btnModal" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['fone']; ?></td>
-								<td class="btnModal" onclick="ajaxload('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['email']; ?></td>
+								<td class="btnModal" onclick="modalLoad('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['fone']; ?></td>
+								<td class="btnModal" onclick="modalLoad('<?php echo $this->Html->url(array('plugin' => 'secretaria', 'controller' => 'visitantes', 'action' => 'edit', $visitante['Visitante']['id'])); ?>');"><?php echo $visitante['Visitante']['email']; ?></td>
 							</tr>
 						<?php }
 					} else { ?>
@@ -60,4 +61,7 @@
 
 	// modal de confirmação de exclusão dos cadastros
 	echo $this->element('modal/modalExcluir');
+
+	// modal de confirmação de exclusão dos cadastros
+	echo $this->element('modal/modalTornar');
 ?>

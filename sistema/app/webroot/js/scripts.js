@@ -20,6 +20,19 @@ $(function() {
 		});   
 	});
 
+	$("#tornar").on('click', function() {
+		$("#confirmacaoTornar").modal();
+		var countremov = $('input[type="checkbox"]:checked').length-1;
+		$('input[type="checkbox"]:checked').each(function(i){
+			tornaRegistrosChecked($(this).val());
+
+			if (i == countremov) {
+				$("#modalapagar").html('Alterações realizadas com sucesso!');
+				$("#confirmacaoTornar").modal("hide");
+			}
+		});   
+	});
+
 	$("form[pesquisa]").on('submit', function(e)
 		{
 			var postData = $(this).serializeArray();
@@ -46,6 +59,12 @@ $(function() {
 	$("#confirmacaoExclusao").on('show.bs.modal', function(e){
 		if (!$('input[type="checkbox"]:checked').length) {
 			alert('Selecione o item que deseja excluir.');
+			e.preventDefault();
+		}
+	});
+	$("#confirmacaoTornar").on('show.bs.modal', function(e){
+		if (!$('input[type="checkbox"]:checked').length) {
+			alert('Selecione o visitante que deseja tornar membro.');
 			e.preventDefault();
 		}
 	})

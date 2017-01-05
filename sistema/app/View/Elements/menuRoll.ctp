@@ -4,9 +4,18 @@
 			
 			<!-- form -->
 			<?php echo $this->Form->create(array('Pesquisa' ,'action' => 'index', 'role' => 'form')); ?>
-			<div class="form-group col-md-4">
-				<a class="btn btn-success form-control btnModal" onclick="modalLoad('<?php echo $this->Html->url(array("action" => "add")); ?>');"><i class="fa fa-plus"></i> Adicionar</a>
-			</div>
+			<?php if ($this->request->params['controller'] == 'visitantes'){ ?>
+				<div class="form-group col-md-2">
+					<a class="btn btn-success form-control btnModal" onclick="modalLoad('<?php echo $this->Html->url(array("action" => "add")); ?>');"><i class="fa fa-plus"></i> Adicionar</a>
+				</div>
+				<div class="form-group col-md-2">
+					<a href="javascript:;" class="btn btn-warning form-control" data-toggle="modal" data-target="#confirmacaoTornar"><i class="fa fa-trash-o"></i> Tornar Membro</a>
+				</div>
+			<?php } else { ?>
+				<div class="form-group col-md-4">
+					<a class="btn btn-success form-control btnModal" onclick="modalLoad('<?php echo $this->Html->url(array("action" => "add")); ?>');"><i class="fa fa-plus"></i> Adicionar</a>
+				</div>
+			<?php } ?>
 			<div class="form-group col-md-2">
 				<a href="javascript:;" class="btn btn-danger form-control" data-toggle="modal" data-target="#confirmacaoExclusao"><i class="fa fa-trash-o"></i> Apagar</a>
 			</div>

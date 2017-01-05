@@ -45,7 +45,6 @@
 
 				$this->request->data['Visitante']['latitude'] = $lat;
 				$this->request->data['Visitante']['longitude'] = $long;
-
 				if ($this->Visitante->saveAll($this->request->data)) {
 					$this->Session->setFlash('Visitante cadastrado com sucesso!');
 					//$this->redirect(array('action' => 'index'));
@@ -89,6 +88,10 @@
 
 				$data_nasc = $this->request->data['Visitante']['datanascimento'];
 
+				$tipo = ['Membro' => '1', 'Visitante' => '2'];
+
+				$this->request->data['Visitante']['tipo'] = $tipo[$this->request->data['Visitante']['tipo']];
+
 				$data_nasc = explode(' ', $data_nasc);
 				$data_nasc = explode('-', $data_nasc[0]);
 				if (!empty($this->request->data['Visitante']['datanascimento'])) {
@@ -129,5 +132,26 @@
 			}
 			$this->Session->setFlash(__('O Visitante não pôde ser deletado.'));
 			$this->redirect(array('action' => 'index'));
+		}
+
+		public function tornarMembro($id = null)
+		{
+			$this->autoRender = false;
+			//verificando metodo de requisição
+			if (!$this->request->is('post'))
+			{
+				json_encode('Metodo Não Permitido');
+			}
+			//verificando se este $id existe
+			$this->Visitante->id = $id;
+			if (!$this->Visitante->exists())
+			{
+				json_encode('Visitante inexistente!');
+			}
+			if ($this->Visitante->save(['id' => $id, 'tipo' => '1'])) {
+				json_encode('Visitante Alterado');
+			} else {
+				json_encode('O Visitante não pôde ser alterado');
+			}
 		}
 	}

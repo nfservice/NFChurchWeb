@@ -9,3 +9,15 @@ function apagaRegistrosChecked(valor) {
         }
     });
 }
+
+function tornaRegistrosChecked(valor) {
+	$.ajax(
+    {
+        url : urlTornarMembroRegChecked+'/'+valor,
+        type: "POST",
+        success:function(data, textStatus, jqXHR) 
+        {
+            $("#dados_"+valor).remove();
+        }
+    });
+}
