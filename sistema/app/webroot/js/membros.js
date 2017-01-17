@@ -145,7 +145,7 @@ function addSelect2Ajax(){
             callback(data);
         }
     });
-    $('#MembroCargoId').select2({
+    $('input[id$="CargoId"]:not(input[id="MembroCargoXCargoId"])').select2({
         placeholder: 'Cargo',
         allowClear: true,
         //minimumInputLength: 1,

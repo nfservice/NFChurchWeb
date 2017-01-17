@@ -16,7 +16,8 @@ class Membro extends SecretariaAppModel {
 
 	public $hasMany = array(
 		'Secretaria.Relacionamento', 
-		'Secretaria.Movimentacaoata'
+		'Secretaria.Movimentacaoata',
+		'Secretaria.MembroCargo'
 	);
 
 	public function beforeFind($queryData){

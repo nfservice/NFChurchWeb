@@ -744,6 +744,25 @@ function apagaRelacionamento(campo, div, url) {
 	});
 }
 
+function apagaMembroCargo(campo, div, url) {
+	var valor = $("#"+campo).val();
+
+	$.ajax(
+	{
+		url : url+'/'+valor,
+		type: "POST",
+		data : {id: valor},
+		success:function(data, textStatus, jqXHR) 
+		{
+			$("#cargo-"+div).remove();
+		},
+		error: function(jqXHR, textStatus, errorThrown)
+		{
+			console.debug('get error');
+		}
+	});
+}
+
 function addMasks() {
 	$('input[name*=telefone], input[name*=celular], input[name*=fone], input[name*=cel]').mask('(99) 9999-9999?9');
 	$('input[name*=cpf]').mask('999.999.999-99');

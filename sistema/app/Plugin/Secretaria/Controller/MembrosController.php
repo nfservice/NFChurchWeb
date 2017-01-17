@@ -187,6 +187,15 @@ class MembrosController extends SecretariaAppController {
 		return $status;
 	}
 
+	public function removeMembroCargo($id = null){
+		$status = false;
+		$this->autoRender = false;
+		if (!empty($id)) {
+			$status = $this->Membro->MembroCargo->delete($id);
+		}
+		return $status;
+	}
+
 	public function delete($id = null)
 	{
 		$this->autoRender = false;
