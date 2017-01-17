@@ -3,6 +3,7 @@
 
 <?php
     echo $this->Form->create(array('User', 'role' => 'form', 'class' => 'formModal'));
+    echo $this->Form->input('church_id', array('type' => 'hidden', 'value' => $this->Session->read('choosed')));
     echo $this->Form->input('nome', array('type' => 'text', 'label' => 'Nome Completo:', 'class' => 'form-control', 'placeholder' => 'Nome Completo', 'div' => array('class' => 'form-group col-md-6'), 'required'));
     echo $this->Form->input('username', array('type' => 'text', 'label' => 'Seu E-mail:', 'class' => 'form-control', 'type' => 'email', 'placeholder' => 'Digite seu E-mail', 'div' => array('class' => 'form-group col-md-6'), 'required')); 
     echo $this->Form->input('password', array('type' => 'password', 'class' => 'form-control', 'label' => 'Sua Senha:', 'placeholder' => 'Digite sua senha:', 'div' => array('class' => 'form-group col-md-3'), 'required'));
