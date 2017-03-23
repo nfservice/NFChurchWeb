@@ -45,7 +45,8 @@
 				<tbody>
 					<?php if (!empty($membros)) {
 						foreach ($membros as $membro) { ?>
-							<tr class="tr-visitantes-click" id="<?php echo 'dados_' . $membro['Membro']['id']; ?>">
+							<?php $cor = ($membro['Membro']['ativo'] != 1) ? '#FA8564' : '#767676' ?>
+							<tr class="tr-visitantes-click" id="<?php echo 'dados_' . $membro['Membro']['id']; ?>" style="color: <?php echo $cor ?>">
 								<td><input type="checkbox" value="<?php echo $membro['Membro']['id']; ?>"></td>
 								<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['nome']; ?></td>
 								<td onclick="modalLoad('<?php echo $this->Html->url(array('action' => 'edit', $membro['Membro']['id'])); ?>');"><?php echo $membro['Membro']['email']; ?></td>

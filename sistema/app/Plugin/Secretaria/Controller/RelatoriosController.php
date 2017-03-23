@@ -15,7 +15,8 @@
 
 				$conditions = array(
 					'Membro.church_id' => $this->Session->read('choosed'),
-					);
+					'Membro.ativo' => '1',
+				);
 
 				if (!empty($this->request->data['Relatorio']['datamembro'])) {
 					$conditions['Membro.datamembro'] = implode('-', array_reverse(explode('/', $this->request->data['Relatorio']['datamembro'])));
@@ -37,6 +38,9 @@
 				}
 				if (!empty($this->request->data['Relatorio']['escolaridade']) || $this->request->data['Relatorio']['escolaridade'] === '0') {
 					$conditions['Membro.escolaridade_id'] = (int)$this->request->data['Relatorio']['escolaridade'];
+				}
+				if (!empty($this->request->data['Relatorio']['aniversariantes'])) {
+					$conditions['MONTH(Membro.datanascimento)'] = explode('/', $this->request->data['Relatorio']['aniversariantes'])[0];
 				}
 
 				$membros = $this->Membro->find(

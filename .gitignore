@@ -4,13 +4,14 @@
 /sistema/app/Config/database.php
 /app/tmp
 /sistema/app/tmp
+sistema/app/tmp/cache/*
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
 /vendors
 /build
 /dist
 /tags
-app/
+#app/
 sistema/app/tmp/cache
 
 # OS generated files #
