@@ -88,7 +88,8 @@ class AppController extends Controller {
 			'login',
 			'logout',
 			'selectAjax',
-			'tornarMembro'
+			'tornarMembro',
+			'load_events'
 		);
 
 		$controllerAllow = array(
