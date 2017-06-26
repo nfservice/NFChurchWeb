@@ -242,6 +242,8 @@
         $('#Relacionamento'+cont+'TiporelacionamentoId').addClass('tiporelacionamento').parent().show();
 
         addSelect2Ajax();
+        callback();
+        addSelect2Multi('#Relacionamento'+cont+'Membro2Id', '#Relacionamento'+cont+'TiporelacionamentoId');
     }
 
     function addMembroCargo(callback){
