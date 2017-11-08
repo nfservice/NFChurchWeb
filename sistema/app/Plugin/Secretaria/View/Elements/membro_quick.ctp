@@ -104,6 +104,7 @@
         echo $this->Form->input('Endereco.complemento', array('type' => 'text', 'label' => 'Complemento:', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-2')));
         echo $this->Form->input('Endereco.cidade', array('type' => 'text', 'label' => 'Cidade', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-6')));
         echo $this->Form->input('Endereco.estado_id', array('label' => 'Estado', 'options' => $estados, 'class' => 'form-control select2', 'div' => array('class' => 'form-group col-md-4')));
+        echo $this->Form->input('parentes', ['type' => 'textarea', 'class' => 'form-control', 'div' => ['class' => 'form-group col-md-11']]);
     ?> 
     <div id="parente" class="row">
         <?php
