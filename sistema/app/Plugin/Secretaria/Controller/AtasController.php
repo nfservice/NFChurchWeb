@@ -31,10 +31,18 @@
 
 				$this->request->data['AtaArquivo'] = array();
 				foreach ($this->request->data['Ata']['files'] as $key => $file) {
-					$this->request->data['AtaArquivo'][$key] = array(
-						'nome' => $file['name'],
-						'dataupload' => date('Y-m-d')
-					);
+					if (!empty($file['name'])) {
+						$this->request->data['AtaArquivo'][$key] = array(
+							'nome' => $file['name'],
+							'dataupload' => date('Y-m-d')
+						);
+					}
+				}
+
+				foreach ($this->request->data['Movimentacaoata'] as $key => $value) {
+					if (empty($value['membro_id']) || empty($value['cargo_id'])) {
+						unset($this->request->data['Movimentacaoata'][$key]);
+					}
 				}
 
 				if ($this->Ata->saveAll($this->request->data)) {

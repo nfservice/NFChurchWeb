@@ -10,12 +10,14 @@
 	echo $this->Form->input('data', array('label' => 'Data: ', 'type' => 'text', 'class' => 'form-control', 'div' => array('class' => 'form-group col-md-12')));
 	?>
 	<div class="col-md-12 form-group">
-		<h4>Arquivos da Ata:</h4>
 		<?php
-		foreach ($this->request->data['AtaArquivo'] as $key => $file) {
-			echo $this->Html->link($file['nome'], array('action' => 'download', $file['id'], $this->request->data['Ata']['id'].'-'.$key), array('download', 'class' => 'btn btn-success'));
-			echo '<br/><br />';
-			//$html->link('pdf', $this->webroot('files'.DS.'ata'.DS.$this->Session->read('choosed').DS.$file['id']);
+		if (!empty($this->request->data['AtaArquivo'])) {
+			echo '<h4>Arquivos da Ata:</h4>';
+			foreach ($this->request->data['AtaArquivo'] as $key => $file) {
+				echo $this->Html->link($file['nome'], array('action' => 'download', $file['id'], $this->request->data['Ata']['id'].'-'.$key), array('download', 'class' => 'btn btn-success'));
+				echo '<br/><br />';
+				//$html->link('pdf', $this->webroot('files'.DS.'ata'.DS.$this->Session->read('choosed').DS.$file['id']);
+			}
 		}
 		$i = 0;
 		echo '<div id="all">';
